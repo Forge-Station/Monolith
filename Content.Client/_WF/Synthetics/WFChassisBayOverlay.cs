@@ -58,8 +58,7 @@ public sealed class WFChassisBayOverlay : Overlay
     {
         var handle = args.ScreenHandle;
         var control = args.ViewportControl as Control;
-        var screen = WolfmedSyntheticHudLayout.Screen(args.ViewportBounds,
-            control?.GlobalPixelPosition ?? Vector2i.Zero);
+        var screen = WolfmedSyntheticHudLayout.Screen(args);
         if (screen.Width < 160f || screen.Height < 80f)
             return;
 

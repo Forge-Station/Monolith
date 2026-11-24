@@ -24,6 +24,10 @@ public sealed partial class WFChassisComponent : Component
     /// <summary>Speed multiplier while the bay is open and the plating is loose.</summary>
     [DataField]
     public float BayOpenSpeed = 0.8f;
+
+    /// <summary>When the panel will next allow a reboot.</summary>
+    [DataField]
+    public TimeSpan NextReboot;
 }
 
 /// <summary>

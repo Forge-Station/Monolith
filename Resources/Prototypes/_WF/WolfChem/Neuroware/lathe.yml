@@ -1,0 +1,10 @@
+# Blank data sticks print at the autolathe (ToolsStatic), a sheet of steel and one of plastic each.
+- type: latheRecipe
+  id: WFNeurowareStick
+  result: WFNeurowareStick
+  categories:
+  - Tools
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 100

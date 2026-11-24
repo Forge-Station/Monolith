@@ -119,12 +119,17 @@ public sealed partial class WolfmedSyntheticHudOverlaySystem : EntitySystem
         var tier = WolfmedSyntheticHudLineSystem.Tier(depth, hud.Integrity);
         var strain = WolfmedSyntheticHudLineSystem.Strain(depth, hud.Integrity);
 
+        // Neuroware: a running program shows its faults even on an undamaged chassis.
+        var neuroware = WFNeurowareIntensity(local);
+        if (neuroware > 0f && tier < WolfmedSyntheticTier.Moderate)
+            tier = WolfmedSyntheticTier.Moderate;
+
         _hud.Scale = _scale;
         BuildRows(hud, frameTime);
         BuildSystem(hud, tier);
         UpdateBanner(hud, tier, dead, standby, downed, consciousness);
         UpdateDeath(hud, dead, frameTime);
-        UpdateMotion(tier, strain, standby, frameTime);
+        UpdateMotion(tier, strain, standby, frameTime, neuroware);
 
         // Playtest 3 (IPC): a healthy chassis sees nothing; the idle "::" glyph read as four stray dots.
         var (system, diagnostics) = WolfmedSyntheticHudLayout.Visible(tier, standby, dead, _hud.Rows.Count);
@@ -337,7 +342,7 @@ public sealed partial class WolfmedSyntheticHudOverlaySystem : EntitySystem
     }
 
     /// <summary>The edge tint, the jitter and the torn slice. Reduced motion keeps the tint and drops the rest.</summary>
-    private void UpdateMotion(WolfmedSyntheticTier tier, float strain, bool standby, float frameTime)
+    private void UpdateMotion(WolfmedSyntheticTier tier, float strain, bool standby, float frameTime, float neuroware = 0f)
     {
         var pulse = 0.5f + 0.5f * MathF.Sin(_time * 2.4f);
         var tint = tier switch
@@ -347,9 +352,14 @@ public sealed partial class WolfmedSyntheticHudOverlaySystem : EntitySystem
             _ => 0f,
         };
 
+        // Neuroware: a strong program tears the screen as heavy damage does. The rim stays for damage; the program's own
+        // shader carries its colour.
+        var tearing = tier == WolfmedSyntheticTier.Heavy || neuroware >= WFNeurowareGlitchAt;
+        strain = MathF.Max(strain, neuroware);
+
         Approach(ref _screen.Tint, standby ? 0f : tint, frameTime);
 
-        if (_reducedMotion || tier != WolfmedSyntheticTier.Heavy || standby)
+        if (_reducedMotion || !tearing || standby)
         {
             _screen.Glitch = 0f;
             _hud.Jitter = 0f;

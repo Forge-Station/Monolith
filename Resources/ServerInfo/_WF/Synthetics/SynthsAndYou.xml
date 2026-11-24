@@ -133,7 +133,7 @@ So you know what you are looking at. Every synthetic has a [bold]chassis panel[/
 
 [bold]Disconnect a component.[/bold] Once the bay is open, the synth can pull its own parts from the panel.
 
-[bold]Reboot.[/bold] The chassis goes down for four seconds and spends a tenth of its charge. It comes back with its sensor load cleared and any lockup gone. A synth that is aching from a stack of old readings will use this.
+[bold]Reboot.[/bold] The chassis goes down for four seconds and spends a tenth of its charge. It comes back with its sensor load cleared and any lockup gone. A synth that is aching from a stack of old readings will use this. A reboot also kills any [bold]neuroware[/bold] running on the core, the synthetic's drugs; the Narcotics and Neuroware page covers them.
 
 [bold]Overclock.[/bold] The servos run 25% faster and burn about three times their normal draw on top. They heat up as they go, and as they heat they throw sparks, then short out limbs, then cook the torso. It cuts out on its own at 15% charge or when the torso overheats, and it will not start on low power. Expect a synth that has overclocked for a while to need a welder, a cable coil and a cold room.
 

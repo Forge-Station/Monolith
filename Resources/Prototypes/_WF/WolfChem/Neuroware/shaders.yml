@@ -1,0 +1,5 @@
+# How a running program looks through a synthetic's optics (WFIntoxicationOverlay draws it for a neuroware host).
+- type: shader
+  id: WFNeuroware
+  kind: source
+  path: "/Textures/_WF/WolfChem/Neuroware/Shaders/neuroware.swsl"

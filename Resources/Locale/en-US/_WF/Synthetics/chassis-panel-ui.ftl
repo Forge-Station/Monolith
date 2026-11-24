@@ -84,7 +84,7 @@ wf-chassis-ui-tip-detach = Releases the limb's coupling so it comes off in one p
 wf-chassis-ui-tip-disconnect = Pulls the component out of the chassis. Needs the bay open. A vital one asks you to confirm.
 wf-chassis-ui-tip-bay-open = Opens the torso plating. Takes 3 seconds, 6 on yourself. Components can be pulled and seated by hand, but the chassis is slower and its components are exposed while it is open.
 wf-chassis-ui-tip-bay-close = Shuts the torso plating. Takes 3 seconds, 6 on yourself. Speed returns to normal and the components are covered again.
-wf-chassis-ui-tip-reboot = Restarts the chassis. It is down for 4 seconds and uses 10% of the charge, and the sensor load and lockups are cleared. Click twice to confirm.
+wf-chassis-ui-tip-reboot = Restarts the chassis. It is down for 4 seconds and uses 10% of the charge, and the sensor load and lockups are cleared. Once every 2 minutes. Click twice to confirm.
 wf-chassis-ui-tip-overclock-off = Runs the servos 25% faster for 3 times the drain. The chassis heats, throws sparks and short circuits as it does, and cuts out at 15% charge or when the torso overheats.
 wf-chassis-ui-tip-overclock-on = Overclock is running: 25% faster, 3 times the drain. Click to stop it and let the chassis cool.
 

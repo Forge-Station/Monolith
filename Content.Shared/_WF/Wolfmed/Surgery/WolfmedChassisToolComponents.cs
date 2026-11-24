@@ -58,3 +58,7 @@ public sealed partial class WolfmedHullWeldComponent : Component, ISurgeryToolCo
     [DataField]
     public float Speed { get; set; } = 1f;
 }
+
+/// <summary>A chassis service panel is unbolted. Added by the first step of a component repair, taken off by the weld.</summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class WolfmedServicePanelOpenComponent : Component;

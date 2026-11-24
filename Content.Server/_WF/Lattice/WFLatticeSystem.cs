@@ -185,6 +185,9 @@ public sealed partial class WFLatticeSystem : EntitySystem
         return BandOf(point, out _)?.Yield ?? 1f;
     }
 
+    /// <summary>Expected exotic shards per vein at this location.</summary>
+    public float ExoticAt(MapCoordinates point) => BandOf(point, out _)?.Exotic ?? 0f;
+
     /// <summary>
     /// Drops the exotic matter a rock of this many veins holds, if the band where it broke has any: at the rock, or at
     /// <paramref name="dropAt"/> when the loot goes straight to a ship drill.
@@ -304,6 +307,9 @@ public sealed partial class WFLatticeSystem : EntitySystem
             var rate = WFLatticeMath.DriftRate(band, depth);
             if (rate > 0f && TryComp<WFLatticeShelterComponent>(carrier, out var shelter))
                 rate *= 1f - Math.Clamp(shelter.Shelter, 0f, 1f);
+
+            if (rate > 0f)
+                rate *= GainMultiplier(aboard);
 
             drift.Drift = Math.Clamp(drift.Drift + rate * seconds, 0f, profile.DriftMax);
             var level = (int) (drift.Drift / WFDriftComponent.LevelStep);

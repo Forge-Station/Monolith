@@ -1,0 +1,219 @@
+# Street drugs. Each one's high lives in its wgDrugProfile (profiles.yml); the reagent only doses it, so the
+# neuroware twin and the reagent stay identical. Effects that need reagent args, such as sedation, stay here.
+# The high follows the units left in the blood, so metabolismRate sets how long it lasts. At
+# 0.01 a 2.5 u line stays about 4 minutes; crack and the combat drugs clear at 0.02.
+# pricePerUnit is street value at full grade; pricing scales it by the grade.
+
+- type: reagent
+  id: WFCocaAlkaloid
+  name: wf-reagent-name-coca-alkaloid
+  group: Narcotics
+  desc: wf-reagent-desc-coca-alkaloid
+  physicalDesc: reagent-physical-desc-pungent
+  flavor: bitter
+  color: "#7a8f4a"
+  pricePerUnit: 8
+  metabolisms:
+    Narcotic:
+      effects:
+      - !type:WFDose
+        profile: WFCocaine
+        perUnit: 0.2
+
+- type: reagent
+  id: WFCocaine
+  name: wf-reagent-name-cocaine
+  group: Narcotics
+  desc: wf-reagent-desc-cocaine
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#f4f4f0"
+  pricePerUnit: 1000
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.01
+      effects:
+      - !type:WFDose
+        profile: WFCocaine
+        perUnit: 1
+
+- type: reagent
+  id: WFCrack
+  name: wf-reagent-name-crack
+  group: Narcotics
+  desc: wf-reagent-desc-crack
+  physicalDesc: reagent-physical-desc-crystalline
+  flavor: bitter
+  color: "#e8dcc0"
+  pricePerUnit: 1300
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.02
+      effects:
+      - !type:WFDose
+        profile: WFCrack
+        perUnit: 1
+
+- type: reagent
+  id: WFOpium
+  name: wf-reagent-name-opium
+  group: Narcotics
+  desc: wf-reagent-desc-opium
+  physicalDesc: reagent-physical-desc-sticky
+  flavor: bitter
+  color: "#4a2a14"
+  pricePerUnit: 250
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.01
+      effects:
+      - !type:WFDose
+        profile: WFOpium
+        perUnit: 1
+
+- type: reagent
+  id: WFHeroin
+  name: wf-reagent-name-heroin
+  group: Narcotics
+  desc: wf-reagent-desc-heroin
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#c9b79c"
+  pricePerUnit: 630
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.01
+      effects:
+      - !type:WFDose
+        profile: WFHeroin
+        perUnit: 1
+      # Sedation follows the units in the blood, so the overdose is Wolfmed's sedation airloss and Naloxone reverses
+      # it. 0.045 a graded, tolerance-blunted unit puts the airloss threshold (0.6) at level 13.3, just under the
+      # overdose tier. The relief itself is on the profile.
+      - !type:WFSedation
+        profile: WFHeroin
+        sedationPerUnit: 0.045
+
+- type: reagent
+  id: WFRedlineBase
+  name: wf-reagent-name-redline-base
+  group: Narcotics
+  desc: wf-reagent-desc-redline-base
+  physicalDesc: reagent-physical-desc-oily
+  flavor: bitter
+  color: "#7a1d1d"
+  pricePerUnit: 40
+
+- type: reagent
+  id: WFRedline
+  name: wf-reagent-name-redline
+  group: Narcotics
+  desc: wf-reagent-desc-redline
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: bitter
+  color: "#e0202a"
+  pricePerUnit: 770
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.02
+      effects:
+      - !type:WFDose
+        profile: WFRedline
+        perUnit: 1
+
+- type: reagent
+  id: WFAnvilBase
+  name: wf-reagent-name-anvil-base
+  group: Narcotics
+  desc: wf-reagent-desc-anvil-base
+  physicalDesc: reagent-physical-desc-metallic
+  flavor: metallic
+  color: "#5b6470"
+  pricePerUnit: 40
+
+- type: reagent
+  id: WFAnvil
+  name: wf-reagent-name-anvil
+  group: Narcotics
+  desc: wf-reagent-desc-anvil
+  physicalDesc: reagent-physical-desc-ferrous
+  flavor: metallic
+  color: "#38404a"
+  pricePerUnit: 770
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.02
+      effects:
+      - !type:WFDose
+        profile: WFAnvil
+        perUnit: 1
+
+- type: reagent
+  id: WFLatticeResidue
+  name: wf-reagent-name-lattice-residue
+  group: Toxins
+  desc: wf-reagent-desc-lattice-residue
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: metallic
+  color: "#b040e0"
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Radiation: 0.5
+
+- type: reagent
+  id: WFChorusBase
+  name: wf-reagent-name-chorus-base
+  group: Narcotics
+  desc: wf-reagent-desc-chorus-base
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#7d4fb8"
+  pricePerUnit: 50
+
+- type: reagent
+  id: WFChorus
+  name: wf-reagent-name-chorus
+  group: Narcotics
+  desc: wf-reagent-desc-chorus
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: chalky
+  color: "#c79cff"
+  pricePerUnit: 1050
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.01
+      effects:
+      - !type:WFDose
+        profile: WFChorus
+        perUnit: 1
+
+- type: reagent
+  id: WFHaloBase
+  name: wf-reagent-name-halo-base
+  group: Narcotics
+  desc: wf-reagent-desc-halo-base
+  physicalDesc: reagent-physical-desc-syrupy
+  flavor: sweet
+  color: "#d9b86a"
+  pricePerUnit: 40
+
+- type: reagent
+  id: WFHalo
+  name: wf-reagent-name-halo
+  group: Narcotics
+  desc: wf-reagent-desc-halo
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: sweet
+  color: "#ffe28a"
+  pricePerUnit: 740
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.01
+      effects:
+      - !type:WFDose
+        profile: WFHalo
+        perUnit: 1

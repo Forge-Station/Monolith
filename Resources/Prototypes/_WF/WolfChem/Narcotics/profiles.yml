@@ -1,0 +1,540 @@
+# Drug profiles. Level is in effective units (units x grade x perUnit). The first tier is the light phase, the last
+# the overdose, and any between are heavy; the screen look and a popup mark each step.
+# A street drug's level follows the units in the blood (its reagent has a WFDose), so the reagent's
+# metabolismRate sets how long the high lasts, and overdoseHalfLife flushes the blood above the overdose tier faster.
+# Level fed directly, by a neuroware program, decays by decay, which matches the reagent's metabolismRate so the twin
+# lasts as long as the drug.
+# neuroware.amount is the level one full load of the twin delivers (8 unless set): about a vial where the drug comes
+# in one, and enough to reach the heavy tier where it has no rush to carry it there.
+# rushGain is the peak of a fresh dose: extra level per level added to the blood, halving every rushHalfLife (45 s),
+# so one line hits heavy for a moment and settles. It never reaches the overdose tier; only the blood does.
+# Numbers are starting values to tune in playtests.
+
+# Cocaine: a short social stimulant.
+- type: wfDrugProfile
+  id: WFCocaine
+  family: Stimulant
+  decay: 0.01
+  rushGain: 3
+  overdoseHalfLife: 120
+  dependenceGain: 0.015
+  tiers:
+  - min: 1
+    speed: 1.1
+    overlay: 0.35
+    effects:
+    - !type:TakeStaminaDamage
+      amount: -2
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 10
+      identifier: WFCocaine
+    - !type:PopupMessage
+      probability: 0.05
+      messages: [ wf-drug-popup-cocaine-1, wf-drug-popup-cocaine-2, wf-drug-popup-cocaine-3 ]
+  - min: 8
+    speed: 1.1
+    overlay: 0.6
+    effects:
+    - !type:TakeStaminaDamage
+      amount: -2
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 10
+      identifier: WFCocaine
+    - !type:PopupMessage
+      probability: 0.08
+      visualType: SmallCaution
+      messages: [ wf-drug-popup-anxious-1, wf-drug-popup-anxious-2 ]
+  - min: 16
+    overlay: 0.9
+    effects:
+    # A fine, fast tremor: the engine's smallest jitter.
+    - !type:Jitter
+      amplitude: 1
+      frequency: 10
+    - !type:WFStrainHeart
+      amount: 0.1
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 1
+  crash:
+    after: 30
+    duration: 45
+    perSecondAbove: 0.25
+    speed: 0.9
+    statusEffects:
+    - key: Drowsiness
+      component: Drowsiness
+    stamina: 1
+  neuroware:
+    program: wf-neuroware-whiteline
+    banner: wf-neuroware-whiteline-banner
+    faults: [ wf-neuroware-whiteline-fault-1, wf-neuroware-whiteline-fault-2 ]
+
+# Crack: cocaine's high, stronger and a third as long, with three times the pull.
+- type: wfDrugProfile
+  id: WFCrack
+  family: Stimulant
+  decay: 0.02
+  rushGain: 2
+  overdoseHalfLife: 120
+  dependenceGain: 0.045
+  tiers:
+  - min: 1
+    speed: 1.15
+    overlay: 0.45
+    effects:
+    - !type:TakeStaminaDamage
+      amount: -3
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 15
+      identifier: WFCrack
+    - !type:PopupMessage
+      probability: 0.05
+      messages: [ wf-drug-popup-cocaine-1, wf-drug-popup-cocaine-2, wf-drug-popup-cocaine-3 ]
+  - min: 6
+    speed: 1.15
+    overlay: 0.7
+    effects:
+    - !type:TakeStaminaDamage
+      amount: -3
+    - !type:PopupMessage
+      probability: 0.1
+      visualType: SmallCaution
+      messages: [ wf-drug-popup-anxious-1, wf-drug-popup-anxious-2 ]
+  - min: 12
+    overlay: 1
+    effects:
+    # A fine, fast tremor: the engine's smallest jitter.
+    - !type:Jitter
+      amplitude: 1
+      frequency: 10
+    - !type:WFStrainHeart
+      amount: 0.15
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 1.5
+  crash:
+    after: 15
+    duration: 60
+    perSecondAbove: 0.5
+    speed: 0.85
+    overlay: 0.7
+    statusEffects:
+    - key: Drowsiness
+      component: Drowsiness
+    stamina: 2
+  neuroware:
+    program: wf-neuroware-whiteline
+    banner: wf-neuroware-whiteline-banner
+    faults: [ wf-neuroware-whiteline-fault-1, wf-neuroware-whiteline-fault-2 ]
+
+# Opium: a slow, social downer.
+- type: wfDrugProfile
+  id: WFOpium
+  family: Opioid
+  decay: 0.01
+  rushGain: 1.5
+  overdoseHalfLife: 120
+  dependenceGain: 0.01
+  tiers:
+  - min: 1
+    speed: 0.95
+    overlay: 0.35
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 25
+      identifier: WFOpium
+    - !type:PopupMessage
+      probability: 0.04
+      messages: [ wf-drug-popup-calm-1, wf-drug-popup-calm-2, wf-drug-popup-calm-3 ]
+  - min: 10
+    speed: 0.9
+    overlay: 0.6
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 35
+      identifier: WFOpium
+  - min: 20
+    speed: 0.8
+    overlay: 0.9
+    statusEffects:
+    - key: Drowsiness
+      component: Drowsiness
+    effects:
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 1
+  crash:
+    after: 60
+    duration: 45
+    speed: 0.95
+    effects:
+    - !type:PopupMessage
+      probability: 0.04
+      messages: [ wf-drug-popup-comedown-1, wf-drug-popup-comedown-2 ]
+  neuroware:
+    program: wf-neuroware-null-loop
+    banner: wf-neuroware-null-loop-banner
+    faults: [ wf-neuroware-null-loop-fault-1, wf-neuroware-null-loop-fault-2 ]
+
+# Heroin: the hard downer. Its sedation sits on the reagent, since it follows the units in the blood; the relief and
+# the nod are on the profile, so they last the whole high. Only the overdose puts you to sleep.
+- type: wfDrugProfile
+  id: WFHeroin
+  family: Opioid
+  decay: 0.01
+  rushGain: 3
+  overdoseHalfLife: 120
+  dependenceGain: 0.03
+  tiers:
+  - min: 1
+    speed: 0.85
+    overlay: 0.5
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Strong
+      strength: 70
+      identifier: WFHeroinHigh
+    - !type:PopupMessage
+      probability: 0.05
+      messages: [ wf-drug-popup-euphoria-1, wf-drug-popup-euphoria-2, wf-drug-popup-euphoria-3 ]
+  - min: 8
+    speed: 0.75
+    overlay: 0.75
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Strong
+      strength: 70
+      identifier: WFHeroinHigh
+  - min: 14
+    speed: 0.7
+    overlay: 1
+    statusEffects:
+    - key: Drowsiness
+      component: Drowsiness
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Strong
+      strength: 70
+      identifier: WFHeroinHigh
+    - !type:GenericStatusEffect
+      probability: 0.15
+      key: ForcedSleep
+      component: ForcedSleeping
+      time: 4
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 1
+  crash:
+    after: 30
+    duration: 90
+    perSecondAbove: 0.3
+    speed: 0.9
+    stamina: 1
+    effects:
+    - !type:PopupMessage
+      probability: 0.04
+      messages: [ wf-drug-popup-comedown-1, wf-drug-popup-comedown-2 ]
+  neuroware:
+    program: wf-neuroware-null-loop
+    banner: wf-neuroware-null-loop-banner
+    faults: [ wf-neuroware-null-loop-fault-1, wf-neuroware-null-loop-fault-2 ]
+
+# Crystal: the speed and the heavy dose's stun, stamina-crit and slowdown resistance are here, so tolerance blunts
+# them and the Burst twin has them; Desoxyephedrine keeps its damage, jitter and pain relief. Meth clears at 0.01
+# (the heart removes one group's amount), so a 5 u shard lasts about eight minutes.
+- type: wfDrugProfile
+  id: WFCrystal
+  family: Stimulant
+  decay: 0.01
+  overdoseHalfLife: 120
+  dependenceGain: 0.02
+  tiers:
+  - min: 1
+    speed: 1.25
+    overlay: 0.4
+  - min: 8
+    speed: 1.25
+    overlay: 0.6
+    traits: [ StunResistance, StaminaCritResistance, IgnoreDamageSlowdown ]
+  - min: 15
+    speed: 1.25
+    overlay: 0.8
+    traits: [ StunResistance, StaminaCritResistance, IgnoreDamageSlowdown ]
+  crash:
+    after: 60
+    duration: 120
+    perSecondAbove: 0.5
+    speed: 0.8
+    overlay: 0.7
+    statusEffects:
+    - key: Drowsiness
+      component: Drowsiness
+    stamina: 2
+  neuroware:
+    amount: 10
+    program: wf-neuroware-burst
+    banner: wf-neuroware-burst-banner
+    faults: [ wf-neuroware-burst-fault-1, wf-neuroware-burst-fault-2 ]
+
+# Redline: offence. A light dose gives part of the speed; the full speed and stun resistance need a heavy one. Every
+# second high strains the heart; when it ends the body collapses once, then drags for a minute plus half the time high.
+- type: wfDrugProfile
+  id: WFRedline
+  family: Combat
+  decay: 0.02
+  overdoseHalfLife: 120
+  dependenceGain: 0.02
+  tiers:
+  - min: 1
+    speed: 1.15
+    overlay: 0.6
+    traits: [ IgnoreDamageSlowdown ]
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Stimulant
+      identifier: WFRedline
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 60
+      identifier: WFRedlineRelief
+    - !type:WFStrainHeart
+      amount: 0.02
+    - !type:Jitter
+      amplitude: 3
+  - min: 7
+    speed: 1.3
+    overlay: 0.75
+    traits: [ StunResistance, IgnoreDamageSlowdown ]
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Stimulant
+      identifier: WFRedline
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 60
+      identifier: WFRedlineRelief
+    - !type:WFStrainHeart
+      amount: 0.05
+    - !type:Jitter
+      amplitude: 5
+  - min: 12
+    speed: 1.3
+    overlay: 0.9
+    traits: [ StunResistance, IgnoreDamageSlowdown ]
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Stimulant
+      identifier: WFRedline
+    - !type:WFStrainHeart
+      amount: 0.5
+    - !type:Jitter
+  crash:
+    after: 5
+    duration: 60
+    perSecondAbove: 0.5
+    maxDuration: 180
+    speed: 0.5
+    overlay: 0.8
+    collapse: 10
+    stamina: 5
+    staminaCap: 0.8
+  neuroware:
+    amount: 10
+    program: wf-neuroware-redline
+    banner: wf-neuroware-redline-banner
+    faults: [ wf-neuroware-redline-fault-1, wf-neuroware-redline-fault-2 ]
+
+# Anvil: endurance. It holds off damage and hides the user's own readout; the damage comes back during the crash,
+# which grows with the time spent high. Stamina-crit resistance needs a heavy dose.
+- type: wfDrugProfile
+  id: WFAnvil
+  family: Combat
+  decay: 0.02
+  overdoseHalfLife: 120
+  dependenceGain: 0.02
+  tiers:
+  - min: 1
+    speed: 0.85
+    overlay: 0.5
+    traits: [ Damper, HideDamage ]
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Stimulant
+      identifier: WFAnvil
+  - min: 7
+    speed: 0.85
+    overlay: 0.7
+    traits: [ Damper, StaminaCritResistance, HideDamage ]
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Stimulant
+      identifier: WFAnvil
+  - min: 12
+    speed: 0.85
+    overlay: 0.9
+    traits: [ Damper, StaminaCritResistance, HideDamage ]
+    effects:
+    - !type:WFStrainHeart
+      amount: 0.15
+    - !type:HealthChange
+      damage:
+        types:
+          Poison: 1
+  crash:
+    after: 5
+    duration: 45
+    perSecondAbove: 0.25
+    maxDuration: 120
+    speed: 0.9
+    overlay: 0.6
+  neuroware:
+    amount: 10
+    program: wf-neuroware-damper
+    banner: wf-neuroware-damper-banner
+    faults: [ wf-neuroware-damper-fault-1, wf-neuroware-damper-fault-2 ]
+
+# Chorus: Lattice hallucinations that deepen with the tier, and a sense for exotic matter that reaches further with it.
+- type: wfDrugProfile
+  id: WFChorus
+  family: Psychedelic
+  decay: 0.01
+  rushGain: 2
+  overdoseHalfLife: 120
+  dependenceGain: 0.005
+  tiers:
+  - min: 1
+    overlay: 0.4
+    hallucinationChance: 0.05
+    hallucinations: [ Whisper, Blip, Sound ]
+    traits: [ ExoticSense ]
+  - min: 6
+    overlay: 0.65
+    hallucinationChance: 0.08
+    hallucinations: [ Whisper, Blip, Sound, Glimpse, Phantom ]
+    traits: [ ExoticSense ]
+  - min: 12
+    overlay: 0.9
+    hallucinationChance: 0.12
+    hallucinations: [ Glimpse, Phantom, Radio, Blip, Pulse ]
+    traits: [ ExoticSense ]
+    statusEffects:
+    - key: Stutter
+      component: ScrambledAccent
+    effects:
+    - !type:Drunk
+      boozePower: 2
+      slurSpeech: false
+    - !type:GenericStatusEffect
+      probability: 0.05
+      key: Pacified
+      component: Pacified
+      time: 5
+  neuroware:
+    amount: 10
+    program: wf-neuroware-choir
+    banner: wf-neuroware-choir-banner
+    faults: [ wf-neuroware-choir-fault-1, wf-neuroware-choir-fault-2 ]
+
+# Halo: warmth and closeness, paid for in body heat and a sad come-down.
+- type: wfDrugProfile
+  id: WFHalo
+  family: Empathogen
+  decay: 0.01
+  rushGain: 2
+  overdoseHalfLife: 120
+  dependenceGain: 0.01
+  tiers:
+  - min: 1
+    overlay: 0.45
+    effects:
+    - !type:WolfmedPainRelief
+      tier: Weak
+      strength: 10
+      identifier: WFHalo
+    - !type:AdjustTemperature
+      amount: 400
+    - !type:PopupMessage
+      probability: 0.05
+      messages: [ wf-drug-popup-halo-1, wf-drug-popup-halo-2, wf-drug-popup-halo-3 ]
+    - !type:Emote
+      probability: 0.02
+      emote: Laugh
+      showInChat: true
+  - min: 10
+    overlay: 0.75
+    effects:
+    - !type:AdjustTemperature
+      amount: 1000
+    - !type:PopupMessage
+      probability: 0.06
+      messages: [ wf-drug-popup-halo-1, wf-drug-popup-halo-2, wf-drug-popup-halo-3 ]
+    - !type:Emote
+      probability: 0.03
+      emote: Laugh
+      showInChat: true
+  - min: 18
+    overlay: 1
+    effects:
+    - !type:AdjustTemperature
+      amount: 4000
+  crash:
+    after: 60
+    duration: 60
+    perSecondAbove: 0.2
+    overlay: 0.6
+    stamina: 1
+    effects:
+    - !type:PopupMessage
+      probability: 0.06
+      messages: [ wf-drug-popup-halo-crash-1, wf-drug-popup-halo-crash-2, wf-drug-popup-halo-crash-3 ]
+  neuroware:
+    amount: 10
+    program: wf-neuroware-halo
+    banner: wf-neuroware-halo-banner
+    faults: [ wf-neuroware-halo-fault-1, wf-neuroware-halo-fault-2 ]
+
+# Cannabis (THC and hash): the reagent keeps its own effects; the profile adds the overlay and the twin. It is legal,
+# and so is its twin, Idle.
+- type: wfDrugProfile
+  id: WFCannabis
+  family: Cannabinoid
+  legal: true
+  decay: 0.02
+  overdoseHalfLife: 120
+  dependenceGain: 0.003
+  tiers:
+  - min: 1
+    overlay: 0.35
+  - min: 8
+    overlay: 0.55
+  - min: 15
+    overlay: 0.7
+    speed: 0.9
+  neuroware:
+    amount: 14
+    program: wf-neuroware-idle
+    banner: wf-neuroware-idle-banner
+    faults: [ wf-neuroware-idle-fault-1, wf-neuroware-idle-fault-2 ]
+
+# Nicotine: a habit with a small lift.
+- type: wfDrugProfile
+  id: WFNicotine
+  family: Nicotine
+  decay: 0.01
+  overdoseHalfLife: 120
+  dependenceGain: 0.01
+  tiers:
+  - min: 1
+    effects:
+    - !type:TakeStaminaDamage
+      amount: -0.5

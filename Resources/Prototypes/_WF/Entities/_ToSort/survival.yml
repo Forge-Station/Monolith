@@ -21,9 +21,8 @@
     - id: WFWolfmedHydraulicFluidPack
     - id: CableApcStack10
     - id: Flare
-    #- id: SignalFlareGreen
-    #- id: SignalFlareWhite
-    - id: Flare
+    - id: SignalFlareGreen
+    - id: SignalFlareWhite
     - id: WeaponFlareGun
     - id: CrowbarPocket
     - id: HandHeldMassScanner
@@ -39,12 +38,12 @@
       - RadarConsole
       - LightBehaviour
       - PowerCell
-      - CablePlacer
       - DrainableSolution
       tags:
       - SurvivalBox
-      #- SignalFlareLaunchable
-      #- SignalFlareLauncher
+      - CableCoil # CablePlacer is server-only, so the client would predict a refusal
+      - SignalFlareLaunchable
+      - SignalFlareLauncher
   - type: Sprite
     layers:
     - state: internals

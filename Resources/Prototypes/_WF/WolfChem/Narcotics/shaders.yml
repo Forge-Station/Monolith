@@ -1,0 +1,9 @@
+- type: shader
+  id: WFIntoxication
+  kind: source
+  path: "/Textures/_WF/WolfChem/Narcotics/Shaders/intoxication.swsl"
+
+- type: shader
+  id: WFIntoxicationTrail
+  kind: source
+  path: "/Textures/_WF/WolfChem/Narcotics/Shaders/intoxication_trail.swsl"

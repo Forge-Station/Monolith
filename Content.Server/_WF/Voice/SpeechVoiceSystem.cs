@@ -281,11 +281,28 @@ public sealed partial class SpeechVoiceSystem : EntitySystem
     {
         if (!line.VoiceResolved)
         {
-            line.Voice = MaskedVoice(speaker);
+            line.Voice = Modified(speaker, MaskedVoice(speaker));
             line.VoiceResolved = true;
         }
 
         return line.Voice;
+    }
+
+    /// <summary>The voice after <see cref="SpeechVoiceModifyEvent"/>, or the given one when nothing changed it.</summary>
+    private SpeechVoice? Modified(EntityUid speaker, SpeechVoice? voice)
+    {
+        var current = voice;
+        if (current == null)
+        {
+            if (!TryComp<SpeechVoiceComponent>(speaker, out var own))
+                return null;
+
+            current = own.Voice;
+        }
+
+        var ev = new SpeechVoiceModifyEvent(current.Clone());
+        RaiseLocalEvent(speaker, ref ev);
+        return ev.Changed ? ev.Voice.Clamped() : voice;
     }
 
     /// <summary>The named character's own voice if one exists, else a voice made from the mask's name.</summary>

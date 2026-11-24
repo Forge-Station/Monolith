@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._WF.Wolfmed.Hud;
+using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 
 namespace Content.Client._WF.Wolfmed.Overlays;
 
@@ -42,6 +44,15 @@ public static class WolfmedSyntheticHudLayout
     public const float MinScale = 0.6f;
 
     public const float MaxScale = 2.5f;
+
+    /// <summary>The visible viewport in this engine's viewport-local overlay coordinates.</summary>
+    public static UIBox2 Screen(in OverlayDrawArgs args)
+    {
+        var control = args.ViewportControl as Control;
+        var visible = control == null ? args.ViewportBounds
+            : args.ViewportBounds.Intersection(control.GlobalPixelRect) ?? args.ViewportBounds;
+        return Screen(visible, control?.GlobalPixelPosition ?? Vector2.Zero);
+    }
 
     /// <summary>The viewport in the coordinates a screen-space overlay actually draws in.</summary>
     // ViewportBounds is in global physical pixels but the draw handle is already translated to the viewport's

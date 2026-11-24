@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made for Wolfgate",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "body"
+        },
+        {
+            "name": "plug"
+        },
+        {
+            "name": "label"
+        },
+        {
+            "name": "tape"
+        },
+        {
+            "name": "led",
+            "delays": [
+                [
+                    0.9,
+                    0.3
+                ]
+            ]
+        }
+    ]
+}

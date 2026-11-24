@@ -28,7 +28,7 @@ namespace Content.Server._WF.Wolfmed.Hud;
 /// for one body, pushed instead of pulled, because the client can see neither the wound entities nor the
 /// bloodstream. Rebuilt twice a second and dirtied only when something actually moved.
 /// </summary>
-public sealed class WolfmedSyntheticHudSystem : EntitySystem
+public sealed partial class WolfmedSyntheticHudSystem : EntitySystem
 {
     /// <summary>Fluid fraction below which the readout calls it out.</summary>
     public const float LowFluid = 0.7f;
@@ -223,6 +223,10 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
                 AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.RadSaturated);
         }
 
+        // Neuroware: other modules add their own lines.
+        var collect = new WolfmedSyntheticHudCollectEvent(found);
+        RaiseLocalEvent(hud.Owner, ref collect);
+
         var faults = Order(hud.Comp.Faults, found);
         var advice = faults.Count > 0 ? faults[0].Advice : string.Empty;
         var power = _charge.TryGetSiliconBattery(hud.Owner, out var battery) && battery.MaxCharge > 0f
@@ -392,3 +396,7 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
 
     private static bool Near(float left, float right) => MathF.Abs(left - right) < 0.005f;
 }
+
+/// <summary>Raised on a mechanical body while its readout is rebuilt, so other modules can add fault lines.</summary>
+[ByRefEvent]
+public readonly record struct WolfmedSyntheticHudCollectEvent(List<WolfmedSyntheticFault> Faults);

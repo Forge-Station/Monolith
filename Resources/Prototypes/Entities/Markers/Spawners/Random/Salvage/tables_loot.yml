@@ -124,6 +124,10 @@
       amount: !type:RangeNumberSelector
         range: 3, 5
     - id: TreasureDatadiskEncrypted
+    # WOLFGATE(WolfChem) START: neuroware sticks turn up in salvage treasure
+    - !type:NestedSelector
+      tableId: WFNeurowareStickLoot
+    # WOLFGATE END
     - !type:GroupSelector
       children:
       - id: TreasureCDDrive

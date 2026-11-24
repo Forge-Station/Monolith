@@ -1,0 +1,4 @@
+# What a synthetic chassis metabolises: only reagents that eat machinery. WFChassisFilterSystem flushes the rest.
+- type: metabolismGroup
+  id: WFContaminant
+  name: metabolism-group-wf-contaminant

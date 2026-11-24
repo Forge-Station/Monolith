@@ -1,0 +1,23 @@
+- type: listing
+  id: WFUplinkNeurowareRedline
+  productEntity: WFNeurowareStickRedline
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkChemicals
+
+- type: listing
+  id: WFUplinkNeurowareDamper
+  productEntity: WFNeurowareStickDamper
+  cost:
+    Telecrystal: 4
+  categories:
+  - UplinkChemicals
+
+- type: listing
+  id: WFUplinkNeurowareChoir
+  productEntity: WFNeurowareStickChoir
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkChemicals

@@ -1,0 +1,7 @@
+# Street drugs a fence takes as payment.
+- type: Tag
+  id: WFNarcotic
+
+# Solid drugs a baggie holds.
+- type: Tag
+  id: WFBaggable

@@ -1,3 +1,4 @@
+using Content.Shared._WF.Biotype;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -35,6 +36,7 @@ namespace Content.Shared.Humanoid;
 /// </summary>
 public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 {
+    [Dependency] private SharedWFBiotypeSystem _biotype = default!;
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private INetManager _netManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
@@ -504,6 +506,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
             _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(profile.Appearance.Width, profile.Appearance.Height), appearance);
         }
 
+        _biotype.Apply(uid, profile, humanoid); // WOLFGATE(Biotype): rebuild the body before augments and profile-load handlers run.
         ApplyAugments(uid, profile, humanoid); // WOLFGATE(Augments): swaps in the augmented parts and draws their styles
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent { Profile = profile }); // Shitmed Change, WOLFGATE - pass profile
         Dirty(uid, humanoid);

@@ -10,6 +10,7 @@ wf-chassis-link-done-target = { CAPITALIZE(THE($user)) } is linked into your cha
 wf-chassis-isolate-done = Servos and sensors in { THE($part) } cut.
 wf-chassis-restore-done = { CAPITALIZE(THE($part)) } is back online.
 wf-chassis-isolate-refuse = That part can't be isolated.
+wf-chassis-isolate-refuse-cuffed = The cuffs hold that limb. It can't be isolated.
 wf-chassis-restore-low-power = { CAPITALIZE(THE($part)) } stays dark until power returns.
 
 wf-chassis-detach-done = { CAPITALIZE(THE($part)) } comes off { THE($target) } in one piece.
@@ -20,6 +21,7 @@ wf-chassis-reboot-start = { CAPITALIZE(THE($target)) } locks up and reboots.
 wf-chassis-reboot-done = Reboot complete. Sensor load cleared.
 wf-chassis-reboot-refuse-shutdown = A shut-down chassis can't reboot.
 wf-chassis-reboot-refuse-busy = Already rebooting.
+wf-chassis-reboot-refuse-cooldown = The chassis can't reboot again for { $seconds } seconds.
 
 wf-chassis-overclock-on = Servos overclocked.
 wf-chassis-overclock-off = Servos back at rating.

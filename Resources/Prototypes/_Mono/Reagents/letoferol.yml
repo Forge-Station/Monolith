@@ -8,6 +8,42 @@
   color: "#a84387"
   worksOnTheDead: true
   metabolisms:
+    # WOLFGATE(Synthetics) START: a synthetic chassis takes it too, shorting out while flesh grows over the frame
+    WFContaminant:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          max: 15
+        damage:
+          types:
+            Shock: 0.3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          types:
+            Shock: 1.5
+      - !type:Polymorph
+        prototype: LetoferolMutation
+        conditions:
+        - !type:ChimeraTurnReady
+        - !type:ReagentThreshold
+          min: 15
+        - !type:HasTag
+          tag: Chimera
+          invert: true
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 4
+        type: Local
+        visualType: MediumCaution
+        messages: [ "wf-synth-contaminant-1", "wf-synth-contaminant-2", "wf-synth-contaminant-3" ]
+        probability: 0.2
+    # WOLFGATE END
     Poison:
       metabolismRate: 0.2
       effects:
@@ -77,6 +113,42 @@
     maxOnTileWhitelist:
       tags: [ ChimeraFloor ]
   metabolisms:
+    # WOLFGATE(Synthetics) START: a synthetic chassis takes it too, shorting out while flesh grows over the frame
+    WFContaminant:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          max: 20
+        damage:
+          types:
+            Shock: 0.3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          types:
+            Shock: 1
+      - !type:Polymorph
+        prototype: LetoferolMutationNatural
+        conditions:
+        - !type:ChimeraTurnReady
+        - !type:ReagentThreshold
+          min: 20
+        - !type:HasTag
+          tag: Chimera
+          invert: true
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 4
+        type: Local
+        visualType: MediumCaution
+        messages: [ "wf-synth-contaminant-1", "wf-synth-contaminant-2", "wf-synth-contaminant-3" ]
+        probability: 0.2
+    # WOLFGATE END
     Poison:
       metabolismRate: 0.2
       effects:

@@ -21,7 +21,8 @@
   # and TryModifyBloodLevel spills BloodReagent - so an IPC leaks its fluid, not blood. SolutionContainerManager
   # is not declared: BloodstreamSystem's EnsureSolution EnsureComp's it. No circulatoryStream:
   # IpcBodyPartProfile stays on the primary Organic stream, exactly as Onyx's does (P5-D3).
-  # chemicalMaxVolume: 0 (U16) because an IPC has no metabolizer - OrganIPCPump's Metabolizer block is
+  # bloodlossThreshold: 0.5
+    chemicalMaxVolume: 30 (U16) because an IPC has no metabolizer - OrganIPCPump's Metabolizer block is
   # commented out (_EinsteinEngines/Body/Organs/ipc.yml) - so a 250u chemical solution would be a trap.
   # InjectableSolution is deliberately NOT added; Onyx gets it by parenting MobBloodstream
   # (Entities/Mobs/base.yml), Wolfgate does not, and nothing can metabolise what is injected.
@@ -32,7 +33,8 @@
     bloodReagent: WFWolfmedHydraulicFluid # WOLFGATE(Wolfmed): playtest 3 IPC 2: was Oil, lamp oil a lit welder set alight in its own puddle
     bloodMaxVolume: 250
     bloodRefreshAmount: 0.5 # WOLFGATE(Synthetics): slow hydraulic regeneration, as the synthetic biotype overlay
-    chemicalMaxVolume: 0
+    bloodlossThreshold: 0.5
+    chemicalMaxVolume: 30
     # WOLFGATE(Wolfmed): fluid loss deals an IPC no damage.
     # An IPC never takes Airloss-group damage: Bloodloss reads as oxygen loss on the analyzer, and it does not
     # breathe. WFSiliconWolfmed no longer accepts Bloodloss either.
@@ -54,9 +56,11 @@
     speaks:
     - TauCetiBasic
     - RobotTalk
+    - Machine
     understands:
     - TauCetiBasic
     - RobotTalk
+    - Machine
   - type: HarpySinger
   - type: Instrument
     allowPercussion: true
@@ -192,6 +196,10 @@
   - type: EmitBuzzWhileDamaged
   - type: CanHostGuardian
   - type: WeldingHealable
+  - type: WFChassisFilter
+  - type: DamagedSiliconAccent
+    damageAtStartCorruption: 40
+    maxDamageCorruption: 0.35
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
   #Forge-Change-start

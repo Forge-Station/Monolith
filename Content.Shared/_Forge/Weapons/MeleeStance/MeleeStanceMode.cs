@@ -84,6 +84,9 @@ public sealed partial class MeleeStanceMode
     [DataField]
     public float? HeavyPartDamageMultiplier;
 
+    [DataField]
+    public float? FireStacks;    
+
     /// <summary>
     /// Hides melee stats from examine.
     /// </summary>

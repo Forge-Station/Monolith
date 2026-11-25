@@ -1,10 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared.Actions;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
@@ -16,27 +14,24 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Sprite;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._Forge.Weapons.MeleeStance;
 
-/// <summary>
-/// Handles <see cref="MeleeStanceComponent"/>: grants the switch action and applies stance stats.
-/// Visuals (world sprite, transition animation) are handled on the client by MeleeStanceVisualsSystem.
-/// </summary>
 public sealed partial class MeleeStanceSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IComponentFactory _factory = default!;
-    [Dependency] private ActionContainerSystem _actionContainer = default!;
-    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedItemSystem _item = default!;
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -45,19 +40,15 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         SubscribeLocalEvent<MeleeStanceComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MeleeStanceComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<MeleeStanceComponent, AfterAutoHandleStateEvent>(OnAfterState);
-        SubscribeLocalEvent<MeleeStanceComponent, GetItemActionsEvent>(OnGetItemActions);
-        SubscribeLocalEvent<MeleeStanceComponent, MeleeStanceSwitchActionEvent>(OnSwitchAction);
         SubscribeLocalEvent<MeleeStanceComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<MeleeStanceComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MeleeStanceComponent, ItemWieldedEvent>(OnWielded, after: [typeof(SharedWieldableSystem)]);
         SubscribeLocalEvent<MeleeStanceComponent, ItemUnwieldedEvent>(OnUnwielded, after: [typeof(SharedWieldableSystem)]);
+
     }
 
     #region Public API
 
-    /// <summary>
-    /// Tries to get the currently active stance.
-    /// </summary>
     public bool TryGetMode(Entity<MeleeStanceComponent?> ent, [NotNullWhen(true)] out MeleeStanceMode? mode)
     {
         mode = null;
@@ -71,9 +62,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Switches to the next stance (wraps around).
-    /// </summary>
     public bool TryCycle(Entity<MeleeStanceComponent?> ent, EntityUid? user)
     {
         if (!Resolve(ent, ref ent.Comp) || ent.Comp.Modes.Count < 2)
@@ -82,9 +70,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         return TrySetMode(ent, (ent.Comp.CurrentMode + 1) % ent.Comp.Modes.Count, user);
     }
 
-    /// <summary>
-    /// Switches to a specific stance.
-    /// </summary>
     public bool TrySetMode(Entity<MeleeStanceComponent?> ent, int index, EntityUid? user)
     {
         if (!Resolve(ent, ref ent.Comp))
@@ -110,8 +95,7 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         if (comp.ShowPopup && user != null)
         {
             _popup.PopupClient(Loc.GetString("melee-stance-switched", ("stance", Loc.GetString(mode.Name))),
-                ent.Owner,
-                user.Value);
+                ent.Owner, user.Value);
         }
 
         if (comp.AttackDelayOnSwitch > TimeSpan.Zero && TryComp<MeleeWeaponComponent>(ent.Owner, out var melee))
@@ -133,8 +117,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
 
     private void OnMapInit(Entity<MeleeStanceComponent> ent, ref MapInitEvent args)
     {
-        _actionContainer.EnsureAction(ent, ref ent.Comp.ActionEntity, ent.Comp.Action);
-
         if (ent.Comp.Modes.Count == 0)
         {
             Log.Error($"{ToPrettyString(ent)} has {nameof(MeleeStanceComponent)} without any modes!");
@@ -147,9 +129,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         ApplyMode(ent, null);
     }
 
-    /// <summary>
-    /// Client-side: entities that came from the server never get MapInit, so apply non-networked stats here.
-    /// </summary>
     private void OnStartup(Entity<MeleeStanceComponent> ent, ref ComponentStartup args)
     {
         if (_net.IsClient)
@@ -159,28 +138,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
     private void OnAfterState(Entity<MeleeStanceComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         SyncFromState(ent);
-    }
-
-    private void OnGetItemActions(Entity<MeleeStanceComponent> ent, ref GetItemActionsEvent args)
-    {
-        if (ent.Comp.RequireInHand && !args.InHands)
-            return;
-
-        if (ent.Comp.Modes.Count < 2)
-            return;
-
-        args.AddAction(ref ent.Comp.ActionEntity, ent.Comp.Action);
-    }
-
-    private void OnSwitchAction(Entity<MeleeStanceComponent> ent, ref MeleeStanceSwitchActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        if (ent.Comp.RequireInHand && !_hands.IsHolding(args.Performer, ent))
-            return;
-
-        args.Handled = TryCycle(ent.AsNullable(), args.Performer);
     }
 
     private void OnUseInHand(Entity<MeleeStanceComponent> ent, ref UseInHandEvent args)
@@ -221,9 +178,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
 
     #region Applying
 
-    /// <summary>
-    /// Re-applies the stance received from the server state if it differs from what we have locally.
-    /// </summary>
     private void SyncFromState(Entity<MeleeStanceComponent> ent)
     {
         if (ent.Comp.AppliedMode == ent.Comp.CurrentMode)
@@ -247,7 +201,7 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         ApplyStamina(ent, mode);
         ApplyItem(ent, mode);
         ApplyLight(ent, mode);
-        ApplyAction(ent, mode);
+        ApplySprite(ent, previous, mode);
         ApplyComponents(ent, previous, mode);
 
         ent.Comp.AppliedMode = ent.Comp.CurrentMode;
@@ -255,6 +209,8 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         var ev = new MeleeStanceChangedEvent(previous, ent.Comp.CurrentMode, user);
         RaiseLocalEvent(ent, ref ev);
     }
+
+
 
     private void ApplyMelee(EntityUid uid, MeleeStanceMode mode)
     {
@@ -283,6 +239,7 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         melee.Animation = mode.Animation ?? proto.Animation;
         melee.WideAnimation = mode.WideAnimation ?? proto.WideAnimation;
         melee.WideAnimationRotation = mode.WideAnimationRotation ?? proto.WideAnimationRotation;
+        melee.FireStacks = mode.FireStacks ?? proto.FireStacks;
 
         Dirty(uid, melee);
     }
@@ -295,37 +252,28 @@ public sealed partial class MeleeStanceSystem : EntitySystem
                 Log.Warning($"{ToPrettyString(uid)} has a reflecting stance but no {nameof(ReflectComponent)}.");
             return;
         }
-
         var proto = GetPrototypeComp<ReflectComponent>(uid) ?? reflect;
-
         reflect.ReflectProb = mode.ReflectProb ?? proto.ReflectProb;
         reflect.Spread = mode.ReflectSpread ?? proto.Spread;
         reflect.SoundOnReflect = mode.SoundOnReflect ?? proto.SoundOnReflect;
         reflect.DamageOnReflectModifier = mode.DamageOnReflectModifier ?? proto.DamageOnReflectModifier;
-
+        
         if (mode.Reflects != null)
         {
             var flags = ReflectType.None;
-            foreach (var type in mode.Reflects)
-            {
-                flags |= type;
-            }
-
+            foreach (var type in mode.Reflects) flags |= type;
             reflect.Reflects = flags;
         }
         else
         {
             reflect.Reflects = proto.Reflects;
         }
-
         Dirty(uid, reflect);
     }
 
     private void ApplyStamina(EntityUid uid, MeleeStanceMode mode)
     {
-        if (!TryComp<StaminaDamageOnHitComponent>(uid, out var stamina))
-            return;
-
+        if (!TryComp<StaminaDamageOnHitComponent>(uid, out var stamina)) return;
         var proto = GetPrototypeComp<StaminaDamageOnHitComponent>(uid) ?? stamina;
         stamina.Damage = mode.StaminaDamage ?? proto.Damage;
     }
@@ -342,8 +290,7 @@ public sealed partial class MeleeStanceSystem : EntitySystem
 
         ApplyHeldPrefix(ent, mode);
 
-        if (TryComp<ClothingComponent>(ent, out var clothing)
-            && ent.Comp.Modes.Any(m => m.EquippedPrefix != null))
+        if (TryComp<ClothingComponent>(ent, out var clothing) && ent.Comp.Modes.Any(m => m.EquippedPrefix != null))
         {
             _clothing.SetEquippedPrefix(ent, mode.EquippedPrefix, clothing);
         }
@@ -351,14 +298,12 @@ public sealed partial class MeleeStanceSystem : EntitySystem
 
     private void ApplyHeldPrefix(Entity<MeleeStanceComponent> ent, MeleeStanceMode mode)
     {
-        if (!TryComp<ItemComponent>(ent, out var item))
-            return;
+        if (!TryComp<ItemComponent>(ent, out var item)) return;
 
         var wielded = TryComp<WieldableComponent>(ent, out var wieldable) && wieldable.Wielded;
 
         if (wielded)
         {
-            // Keep the Wieldable prefix unless the stance has its own wielded sprites.
             if (mode.WieldedHeldPrefix != null)
                 _item.SetHeldPrefix(ent, mode.WieldedHeldPrefix, component: item);
             return;
@@ -371,51 +316,71 @@ public sealed partial class MeleeStanceSystem : EntitySystem
     private void ApplyLight(EntityUid uid, MeleeStanceMode mode)
     {
         SharedPointLightComponent? light = null;
-        if (!_light.ResolveLight(uid, ref light))
-            return;
+        if (!_light.ResolveLight(uid, ref light)) return;
 
-        if (mode.LightColor != null)
-            _light.SetColor(uid, mode.LightColor.Value, light);
-
-        if (mode.LightRadius != null)
-            _light.SetRadius(uid, mode.LightRadius.Value, light);
-
-        if (mode.LightEnergy != null)
-            _light.SetEnergy(uid, mode.LightEnergy.Value, light);
-
-        if (mode.LightEnabled != null)
-            _light.SetEnabled(uid, mode.LightEnabled.Value, light);
+        if (mode.LightColor != null) _light.SetColor(uid, mode.LightColor.Value, light);
+        if (mode.LightRadius != null) _light.SetRadius(uid, mode.LightRadius.Value, light);
+        if (mode.LightEnergy != null) _light.SetEnergy(uid, mode.LightEnergy.Value, light);
+        if (mode.LightEnabled != null) _light.SetEnabled(uid, mode.LightEnabled.Value, light);
     }
 
-    private void ApplyAction(Entity<MeleeStanceComponent> ent, MeleeStanceMode mode)
+
+    private void ApplySprite(Entity<MeleeStanceComponent> ent, int? previous, MeleeStanceMode mode)
     {
-        if (ent.Comp.ActionEntity is not { } actionId)
+        if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        if (!_actions.TryGetActionData(actionId, out var action, false))
-            return;
-
-        // Highlight the action while in any non-default stance.
-        _actions.SetToggled(actionId, ent.Comp.CurrentMode != 0);
-
-        if (mode.ActionIcon != null && action.Icon != mode.ActionIcon)
+        var targetLayer = ent.Comp.SpriteLayer;
+        if (!sprite.LayerMapTryGet(targetLayer, out var layerIndex))
         {
-            action.Icon = mode.ActionIcon;
-            Dirty(actionId, action);
+
+            if (sprite.AllLayers.Count > 0)
+                layerIndex = 0;
+            else
+                return;
+        }
+
+
+        if (!string.IsNullOrEmpty(mode.TransitionState) && mode.TransitionTime > 0)
+        {
+            _sprite.LayerSetRsiState((ent, sprite), layerIndex, mode.TransitionState);
+            
+            Timer.Spawn(TimeSpan.FromSeconds(mode.TransitionTime), () =>
+            {
+                if (Exists(ent) && TryComp<SpriteComponent>(ent, out var s))
+                {
+                    
+                    if (TryComp<MeleeStanceComponent>(ent, out var c) && c.CurrentMode == ent.Comp.CurrentMode)
+                    {
+                        _sprite.LayerSetRsiState((ent, s), layerIndex, mode.State ?? "icon");
+                    }
+                }
+            });
+        }
+        else
+        {
+
+            _sprite.LayerSetRsiState((ent, sprite), layerIndex, mode.State ?? "icon");
+        }
+
+
+        if (mode.Layers.Count > 0)
+        {
+            _sprite.LayerSetData((ent, sprite), layerIndex, new PrototypeLayerData
+            {
+                State = mode.State,
+                RsiPath = mode.Layers.ContainsKey("sprite") ? mode.Layers["sprite"].RsiPath : null,
+                Visible = mode.Layers.ContainsKey("visible") ? mode.Layers["visible"].Visible : true,
+                Shader = mode.Layers.ContainsKey("shader") ? mode.Layers["shader"].Shader : null,
+            });
         }
     }
 
     private void ApplyComponents(Entity<MeleeStanceComponent> ent, int? previous, MeleeStanceMode mode)
     {
-        // Component add/remove is server-authoritative, the result is networked to clients.
-        if (_net.IsClient)
-            return;
+        if (_net.IsClient) return;
 
-        if (previous is { } prev
-            && prev != ent.Comp.CurrentMode
-            && prev >= 0
-            && prev < ent.Comp.Modes.Count
-            && ent.Comp.Modes[prev].Components is { } oldComps)
+        if (previous is { } prev && prev != ent.Comp.CurrentMode && prev >= 0 && prev < ent.Comp.Modes.Count && ent.Comp.Modes[prev].Components is { } oldComps)
         {
             EntityManager.RemoveComponents(ent, oldComps);
         }
@@ -424,16 +389,11 @@ public sealed partial class MeleeStanceSystem : EntitySystem
             EntityManager.AddComponents(ent, mode.Components);
     }
 
-    /// <summary>
-    /// Gets a component as defined in the entity's prototype (read-only!). Used as the "base" for stance values.
-    /// </summary>
     private T? GetPrototypeComp<T>(EntityUid uid) where T : class, IComponent, new()
     {
         var proto = MetaData(uid).EntityPrototype;
-        if (proto == null)
-            return null;
-
-        return proto.TryComp<T>(out var comp, _factory) ? comp : null;
+        if (proto == null) return null;
+        return proto.TryGetComponent<T>(_factory, out var comp) ? comp : null;
     }
 
     #endregion

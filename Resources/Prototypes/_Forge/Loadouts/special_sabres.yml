@@ -2,9 +2,8 @@
   id: SpecialSabreTsf
   name: loadout-special-sabre-tsf
   price: 0
-  storage:
-    belt: 
-    - SeniorOfficerSheathFilled
+  equipment:
+    belt: SeniorOfficerSheathFilled
 
 - type: loadoutGroup
   id: SpecialSabreTsf
@@ -18,9 +17,8 @@
   id: SpecialSabreSiv
   name: loadout-special-sabre-siv
   price: 0
-  storage:
-    belt:
-    - AstraCardinalSheath
+  equipment:
+    belt: AstraCardinalSheathFilled
 
 - type: loadoutGroup
   id: SpecialSabreSiv
@@ -34,9 +32,8 @@
   id: SpecialSabreVkr
   name: loadout-special-sabre-vkr
   price: 0
-  storage:
-    belt:
-    - BrigadeCommanderSheath
+  equipment:
+    belt: BrigadeCommanderSheathFilled
 
 - type: loadoutGroup
   id: SpecialSabreVkr

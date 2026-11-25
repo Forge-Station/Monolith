@@ -3,8 +3,8 @@
   name: loadout-special-sabre-tsf
   price: 0
   storage:
-    belt:
-    - MeleeSiniorOfficer
+    belt: 
+    - SeniorOfficerSheathFilled
 
 - type: loadoutGroup
   id: SpecialSabreTsf
@@ -12,7 +12,7 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - SeniorOfficerSheath
+  - SpecialSabreTsf
 
 - type: loadout
   id: SpecialSabreSiv

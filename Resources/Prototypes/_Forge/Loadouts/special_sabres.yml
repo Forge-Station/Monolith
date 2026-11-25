@@ -1,0 +1,47 @@
+- type: loadout
+  id: SpecialSabreTsf
+  name: loadout-special-sabre-tsf
+  price: 0
+  storage:
+    belt:
+    - MeleeSiniorOfficer
+
+- type: loadoutGroup
+  id: SpecialSabreTsf
+  name: loadout-group-special-sabre-tsf
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SeniorOfficerSheath
+
+- type: loadout
+  id: SpecialSabreSiv
+  name: loadout-special-sabre-siv
+  price: 0
+  storage:
+    belt:
+    - AstraCardinalSheath
+
+- type: loadoutGroup
+  id: SpecialSabreSiv
+  name: loadout-group-special-sabre-siv
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SpecialSabreSiv
+
+- type: loadout
+  id: SpecialSabreVkr
+  name: loadout-special-sabre-vkr
+  price: 0
+  storage:
+    belt:
+    - BrigadeCommanderSheath
+
+- type: loadoutGroup
+  id: SpecialSabreVkr
+  name: loadout-group-special-sabre-vkr
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - SpecialSabreVkr

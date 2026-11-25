@@ -1,9 +1,14 @@
 melee-stance-switched = Стойка: { $stance }
 melee-stance-examine = Текущая стойка: [color=yellow]{ $stance }[/color].
 
-# Пример (MeleeStanceExampleBlade)
-melee-stance-example-defensive = Защитная
-melee-stance-example-defensive-desc = Клинок уплотнён в щит: отражает энергетические и обычные снаряды, но бьёт слабо.
-melee-stance-example-balanced = Сбалансированная
-melee-stance-example-offensive = Атакующая
-melee-stance-example-offensive-desc = Клинок раскалён до предела: огромный урон и скорость, никаких отражений.
+loadout-group-special-sabre-tsf = Специальная сабля ТСФ
+loadout-special-sabre-tsf = ножны сабли Старшего Офицера
+loadout-group-special-sabre-siv = Специальная сабля СИВ
+loadout-special-sabre-siv = ножны сабли Астра-Кардинала СИВ
+loadout-group-special-sabre-vkr = Специальная сабля ВКР
+loadout-special-sabre-vkr = ножны сабли Бригадного Командира
+
+melee-stance-siv-fire = Пламенная стойка
+melee-stance-base-siv = Обычная стойка
+melee-stance-vkr-defender = Защитная стойка
+melee-stance-base-vkr = Обычная стойка

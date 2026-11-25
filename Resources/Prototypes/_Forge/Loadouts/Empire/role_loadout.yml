@@ -116,6 +116,7 @@
   - EmpireFirearm
   - EmpireMag
   - FactionArmorPlates
+  - SpecialSabreSiv
   canCustomizeName: true
 
 # region Arbiter

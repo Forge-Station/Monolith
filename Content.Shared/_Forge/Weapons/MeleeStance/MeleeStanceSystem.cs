@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
@@ -14,9 +15,7 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Sprite;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._Forge.Weapons.MeleeStance;
 
@@ -31,7 +30,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
-    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -44,7 +42,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         SubscribeLocalEvent<MeleeStanceComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MeleeStanceComponent, ItemWieldedEvent>(OnWielded, after: [typeof(SharedWieldableSystem)]);
         SubscribeLocalEvent<MeleeStanceComponent, ItemUnwieldedEvent>(OnUnwielded, after: [typeof(SharedWieldableSystem)]);
-
     }
 
     #region Public API
@@ -201,7 +198,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         ApplyStamina(ent, mode);
         ApplyItem(ent, mode);
         ApplyLight(ent, mode);
-        ApplySprite(ent, previous, mode);
         ApplyComponents(ent, previous, mode);
 
         ent.Comp.AppliedMode = ent.Comp.CurrentMode;
@@ -209,8 +205,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         var ev = new MeleeStanceChangedEvent(previous, ent.Comp.CurrentMode, user);
         RaiseLocalEvent(ent, ref ev);
     }
-
-
 
     private void ApplyMelee(EntityUid uid, MeleeStanceMode mode)
     {
@@ -239,7 +233,6 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         melee.Animation = mode.Animation ?? proto.Animation;
         melee.WideAnimation = mode.WideAnimation ?? proto.WideAnimation;
         melee.WideAnimationRotation = mode.WideAnimationRotation ?? proto.WideAnimationRotation;
-        melee.FireStacks = mode.FireStacks ?? proto.FireStacks;
 
         Dirty(uid, melee);
     }
@@ -252,28 +245,33 @@ public sealed partial class MeleeStanceSystem : EntitySystem
                 Log.Warning($"{ToPrettyString(uid)} has a reflecting stance but no {nameof(ReflectComponent)}.");
             return;
         }
+
         var proto = GetPrototypeComp<ReflectComponent>(uid) ?? reflect;
         reflect.ReflectProb = mode.ReflectProb ?? proto.ReflectProb;
         reflect.Spread = mode.ReflectSpread ?? proto.Spread;
         reflect.SoundOnReflect = mode.SoundOnReflect ?? proto.SoundOnReflect;
         reflect.DamageOnReflectModifier = mode.DamageOnReflectModifier ?? proto.DamageOnReflectModifier;
-        
+
         if (mode.Reflects != null)
         {
             var flags = ReflectType.None;
-            foreach (var type in mode.Reflects) flags |= type;
+            foreach (var type in mode.Reflects)
+                flags |= type;
             reflect.Reflects = flags;
         }
         else
         {
             reflect.Reflects = proto.Reflects;
         }
+
         Dirty(uid, reflect);
     }
 
     private void ApplyStamina(EntityUid uid, MeleeStanceMode mode)
     {
-        if (!TryComp<StaminaDamageOnHitComponent>(uid, out var stamina)) return;
+        if (!TryComp<StaminaDamageOnHitComponent>(uid, out var stamina))
+            return;
+
         var proto = GetPrototypeComp<StaminaDamageOnHitComponent>(uid) ?? stamina;
         stamina.Damage = mode.StaminaDamage ?? proto.Damage;
     }
@@ -291,14 +289,13 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         ApplyHeldPrefix(ent, mode);
 
         if (TryComp<ClothingComponent>(ent, out var clothing) && ent.Comp.Modes.Any(m => m.EquippedPrefix != null))
-        {
             _clothing.SetEquippedPrefix(ent, mode.EquippedPrefix, clothing);
-        }
     }
 
     private void ApplyHeldPrefix(Entity<MeleeStanceComponent> ent, MeleeStanceMode mode)
     {
-        if (!TryComp<ItemComponent>(ent, out var item)) return;
+        if (!TryComp<ItemComponent>(ent, out var item))
+            return;
 
         var wielded = TryComp<WieldableComponent>(ent, out var wieldable) && wieldable.Wielded;
 
@@ -316,7 +313,8 @@ public sealed partial class MeleeStanceSystem : EntitySystem
     private void ApplyLight(EntityUid uid, MeleeStanceMode mode)
     {
         SharedPointLightComponent? light = null;
-        if (!_light.ResolveLight(uid, ref light)) return;
+        if (!_light.ResolveLight(uid, ref light))
+            return;
 
         if (mode.LightColor != null) _light.SetColor(uid, mode.LightColor.Value, light);
         if (mode.LightRadius != null) _light.SetRadius(uid, mode.LightRadius.Value, light);
@@ -324,63 +322,16 @@ public sealed partial class MeleeStanceSystem : EntitySystem
         if (mode.LightEnabled != null) _light.SetEnabled(uid, mode.LightEnabled.Value, light);
     }
 
-
-    private void ApplySprite(Entity<MeleeStanceComponent> ent, int? previous, MeleeStanceMode mode)
-    {
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
-            return;
-
-        var targetLayer = ent.Comp.SpriteLayer;
-        if (!sprite.LayerMapTryGet(targetLayer, out var layerIndex))
-        {
-
-            if (sprite.AllLayers.Count > 0)
-                layerIndex = 0;
-            else
-                return;
-        }
-
-
-        if (!string.IsNullOrEmpty(mode.TransitionState) && mode.TransitionTime > 0)
-        {
-            _sprite.LayerSetRsiState((ent, sprite), layerIndex, mode.TransitionState);
-            
-            Timer.Spawn(TimeSpan.FromSeconds(mode.TransitionTime), () =>
-            {
-                if (Exists(ent) && TryComp<SpriteComponent>(ent, out var s))
-                {
-                    
-                    if (TryComp<MeleeStanceComponent>(ent, out var c) && c.CurrentMode == ent.Comp.CurrentMode)
-                    {
-                        _sprite.LayerSetRsiState((ent, s), layerIndex, mode.State ?? "icon");
-                    }
-                }
-            });
-        }
-        else
-        {
-
-            _sprite.LayerSetRsiState((ent, sprite), layerIndex, mode.State ?? "icon");
-        }
-
-
-        if (mode.Layers.Count > 0)
-        {
-            _sprite.LayerSetData((ent, sprite), layerIndex, new PrototypeLayerData
-            {
-                State = mode.State,
-                RsiPath = mode.Layers.ContainsKey("sprite") ? mode.Layers["sprite"].RsiPath : null,
-                Visible = mode.Layers.ContainsKey("visible") ? mode.Layers["visible"].Visible : true,
-                Shader = mode.Layers.ContainsKey("shader") ? mode.Layers["shader"].Shader : null,
-            });
-        }
-    }
-
     private void ApplyComponents(Entity<MeleeStanceComponent> ent, int? previous, MeleeStanceMode mode)
     {
-        if (_net.IsClient) return;
+        if (_net.IsClient)
+            return;
 
-        if (previous is { } prev && prev != ent.Comp.CurrentMode && prev >= 0 && prev < ent.Comp.Modes.Count && ent.Comp.Modes[prev].Components is { } oldComps)
+        if (previous is { } prev &&
+            prev != ent.Comp.CurrentMode &&
+            prev >= 0 &&
+            prev < ent.Comp.Modes.Count &&
+            ent.Comp.Modes[prev].Components is { } oldComps)
         {
             EntityManager.RemoveComponents(ent, oldComps);
         }
@@ -392,8 +343,10 @@ public sealed partial class MeleeStanceSystem : EntitySystem
     private T? GetPrototypeComp<T>(EntityUid uid) where T : class, IComponent, new()
     {
         var proto = MetaData(uid).EntityPrototype;
-        if (proto == null) return null;
-        return proto.TryGetComponent<T>(_factory, out var comp) ? comp : null;
+        if (proto == null)
+            return null;
+
+        return proto.TryGetComponent<T>(out var comp, _factory) ? comp : null;
     }
 
     #endregion

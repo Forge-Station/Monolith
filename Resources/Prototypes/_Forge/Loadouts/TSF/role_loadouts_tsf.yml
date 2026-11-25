@@ -80,6 +80,7 @@
   - TsfmcFirearm
   - TsfmcMag
   - FactionArmorPlates
+  - SpecialSabreTsf
   canCustomizeName: true
 
 - type: roleLoadout

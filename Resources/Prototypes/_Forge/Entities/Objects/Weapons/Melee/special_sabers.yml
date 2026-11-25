@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseItem
-  id: MeleeSiniorOfficer
-  name: Sabre of Sioner Officer
-  description: Wow
+  id: MeleeSeniorOfficer
+  name: Сабля Старшего офицера
+  description: Высокотехнологическая сабля, используемая Старшими офицерами Транс-Солнечной Федерации. Обладает встроенной функцией двойного прыжка. Одобрена и призведена в центральных мирах Транс-Солнечной Федерации, под чётким взором Зимнего Солнцестояния.
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Melee/sword_tsf.rsi
@@ -12,6 +12,9 @@
       visible: true
       shader: unshaded
       map: [ "blade" ]
+  - type: Tag
+    tags:
+    - SeniorOfficerSabre
   - type: Item
     size: Normal
     sprite: _Forge/Objects/Weapons/Melee/sword_tsf.rsi
@@ -42,16 +45,30 @@
     requireItemActivation: true
   - type: ActionGrant
     actions:
-    - ActionGravityJump
+    - ActionDoubleGravityJump
   - type: ItemActionGrant
     actions:
-    - ActionGravityJump
+    - ActionDoubleGravityJump
+
+- type: entity
+  id: ActionDoubleGravityJump
+  name: Double Jump
+  description: Jump twice before the ability goes on cooldown.
+  components:
+  - type: InstantAction
+    useDelay: 16
+    charges: 2
+    renewCharges: true
+    icon:
+      sprite: Interface/Actions/jump.rsi
+      state: icon
+    event: !type:GravityJumpEvent {}
 
 - type: entity
   parent: BaseItem
   id: MeleeAstraCardinal
-  name: Sabre of Astra-Cardinal
-  description: Wow
+  name: Сабля Астра-Кардинала
+  description: Высокотехнологическая сабля, используемая Астра-Карндиналом. Имеет две стойки боя - стандартную и огненную. Одобрена Инквизицией Его величества, и по слухам, одобрена членами Императорской Династии.
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Melee/sword_siv.rsi
@@ -61,9 +78,12 @@
       visible: false
       shader: unshaded
       map: [ "blade" ]
+  - type: Tag
+    tags:
+    - AstraCardinalSabre
   - type: Item
     size: Normal
-    sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
+    sprite: _Forge/Objects/Weapons/Melee/sword_siv.rsi
   - type: PointLight
     radius: 2
     energy: 2
@@ -93,7 +113,6 @@
       path: /Audio/Weapons/ebladeon.ogg
     modes:
     - name: melee-stance-siv-fire
-      state: icon-unshaded
       fireStacks: 1.2
       damage:
         types:
@@ -104,9 +123,12 @@
       canWideSwing: true
       reflectProb: .1
       size: Normal
+      state: icon
       layers:
         blade:
+          state: icon-unshaded
           visible: true
+          shader: unshaded
           color: "#FFB300"
       lightColor: "#FFB300"
       lightRadius: 3
@@ -116,6 +138,9 @@
         malus: 0.6
     - name: melee-stance-base-siv
       state: icon
+      layers:
+        blade:
+          visible: false
       fireStacks: 0
       damage:
         types:
@@ -124,8 +149,226 @@
           Structural: 100
       attackRate: 1.5
       canWideSwing: true
+      reflectProb: .1
+      lightEnabled: false
+
+- type: entity
+  parent: BaseItem
+  id: MeleeBrigadeCommander
+  name: сабля Бригадного Командира
+  description: Высокотехнологическая сабля Бригадного Командира, используемая в боевых действиях. Имеет две стойки боя - стандартную и защитную. Одобрена Верховным Адмиралтейством Восставших Колоний Ренегатов. Олицитворяет надёжность и стойкость Восставших колоний.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/sword_vkr.rsi
+    layers:
+    - state: icon
+    - state: icon-unshaded
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: Tag
+    tags:
+    - BrigadeCommanderSabre
+  - type: Item
+    size: Normal
+    sprite: _Forge/Objects/Weapons/Melee/sword_vkr.rsi
+  - type: PointLight
+    radius: 2
+    energy: 2
+    color: white
+    enabled: false
+  - type: MeleeWeapon
+    heavyStaminaCost: 2.5
+    attackRate: 1.5
+    damage:
+      types:
+        Heat: 10
+        Slash: 50
+        Structural: 100
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    wideAnimationRotation: -135
+  - type: Reflect
+    reflectProb: .1
+    spread: 90
+  - type: StaminaDamageOnHit
+    damage: 0
+  - type: Appearance
+  - type: MeleeStance
+    currentMode: 1
+    attackDelayOnSwitch: 0.5
+    switchSound:
+      path: /Audio/Weapons/ebladeon.ogg
+    modes:
+    - name: melee-stance-vkr-defender
+      fireStacks: 1.2
+      damage:
+        types:
+          Heat: 5
+          Slash: 25
+          Structural: 100
+      attackRate: 0.8
+      canWideSwing: true
+      reflectProb: 1
+      reflects:
+      - Energy
+      damageOnReflectModifier: 1.1
+      size: Normal
+      state: icon
+      layers:
+        blade:
+          state: icon-unshaded
+          visible: true
+          shader: unshaded
+          color: "#800080"
+      lightColor: "#800080"
+      lightRadius: 3
+      lightEnabled: true
+      components:
+      - type: DisarmMalus
+        malus: 0.6
+    - name: melee-stance-base-vkr
+      state: icon
       layers:
         blade:
           visible: false
-          color: "#ffffff"
+      fireStacks: 0
+      damage:
+        types:
+          Heat: 10
+          Slash: 50
+          Structural: 100
+      attackRate: 1.5
+      canWideSwing: true
+      reflectProb: .1
       lightEnabled: false
+
+- type: Tag
+  id: SeniorOfficerSabre
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: SeniorOfficerSheath
+  name: ножны сабли Старшего офицера
+  description: Ножны для сабли Старшего офицера.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/sheath_tsf.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Melee/sheath_tsf.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Сабля
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - SeniorOfficerSabre
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - SeniorOfficerSabre
+  - type: Appearance
+
+- type: entity
+  id: SeniorOfficerSheathFilled
+  parent: SeniorOfficerSheath
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - MeleeSeniorOfficer
+
+
+- type: Tag
+  id: AstraCardinalSabre
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: AstraCardinalSheath
+  name: ножны сабли Астра-Кардинала
+  description: Ножны для сабли Астры-Кардинала.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/sheath_siv.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Melee/sheath_siv.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Сабля
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - AstraCardinalSabre
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - AstraCardinalSabre
+  - type: Appearance
+
+- type: entity
+  id: AstraCardinalSheathFilled
+  parent: AstraCardinalSheath
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - MeleeAstraCardinal
+
+- type: Tag
+  id: BrigadeCommanderSabre
+
+- type: entity
+  parent: [ClothingBeltBase, ClothingSlotBase]
+  id: BrigadeCommanderSheath
+  name: ножны сабли Бригадного командира
+  description: Ножны для сабли Бригадного командира.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/sheath_vkr.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Melee/sheath_vkr.rsi
+  - type: ItemSlots
+    slots:
+      item:
+        name: Сабля
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/Items/sheath.ogg
+        ejectSound: /Audio/Items/unsheath.ogg
+        whitelist:
+          tags:
+          - BrigadeCommanderSabre
+  - type: ItemMapper
+    mapLayers:
+      sheath-sabre:
+        whitelist:
+          tags:
+          - BrigadeCommanderSabre
+  - type: Appearance
+
+- type: entity
+  id: BrigadeCommanderSheathFilled
+  parent: BrigadeCommanderSheath
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - MeleeBrigadeCommander

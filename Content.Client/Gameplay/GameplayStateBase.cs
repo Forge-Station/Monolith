@@ -217,21 +217,26 @@ namespace Content.Client.Gameplay
             if (args.Viewport is IViewportControl vp && kArgs.PointerLocation.IsValid)
             {
                 var mousePosWorld = vp.PixelToMap(kArgs.PointerLocation.Position);
+                var mapSystem = _entitySystemManager.GetEntitySystem<SharedMapSystem>();
 
-                if (vp is ScalingViewport svp)
+                // Forge-Change: right after aghost or a teleport the new eye is still on nullspace
+                // until its transform arrives. ToCoordinates logs a stack trace for that map.
+                if (mapSystem.TryGetMap(mousePosWorld.MapId, out _))
                 {
-                    entityToClick = GetClickedEntity(mousePosWorld, svp.Eye);
+                    if (vp is ScalingViewport svp)
+                        entityToClick = GetClickedEntity(mousePosWorld, svp.Eye);
+                    else
+                        entityToClick = GetClickedEntity(mousePosWorld);
+
+                    var transformSystem = _entitySystemManager.GetEntitySystem<SharedTransformSystem>();
+                    coordinates = mapSystem.TryFindGridAt(mousePosWorld, out var uid, out _)
+                        ? mapSystem.MapToGrid(uid, mousePosWorld)
+                        : transformSystem.ToCoordinates(mousePosWorld);
                 }
                 else
                 {
-                    entityToClick = GetClickedEntity(mousePosWorld);
+                    coordinates = EntityCoordinates.Invalid;
                 }
-                var transformSystem = _entitySystemManager.GetEntitySystem<SharedTransformSystem>();
-                var mapSystem = _entitySystemManager.GetEntitySystem<SharedMapSystem>();
-
-                coordinates = mapSystem.TryFindGridAt(mousePosWorld, out var uid, out _) ?
-                    mapSystem.MapToGrid(uid, mousePosWorld) :
-                    transformSystem.ToCoordinates(mousePosWorld);
             }
             else
             {

@@ -30,7 +30,7 @@
           data: 3
 
       - tag: GygaxCentralControlModule
-        name: gygax central control module
+        name: construction-required-gygax-central-control-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "mainboard"
@@ -47,7 +47,7 @@
           data: 5
 
       - tag: GygaxPeripheralsControlModule
-        name: gygax peripherals control module
+        name: construction-required-gygax-peripherals-control-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: id_mod
@@ -64,7 +64,7 @@
           data: 7
 
       - tag: GygaxTargetingControlModule
-        name: gygax weapon control and targeting module
+        name: construction-required-gygax-weapon-control-and-targeting-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: mcontroller
@@ -81,7 +81,7 @@
           data: 9
 
       - tag: CapacitorStockPart
-        name: capacitor
+        name: construction-required-capacitor # Forge-change
         icon:
           sprite: Objects/Misc/stock_parts.rsi
           state: capacitor
@@ -98,7 +98,7 @@
           data: 11
 
       - component: PowerCell
-        name: power cell
+        name: construction-required-power-cell # Forge-change
         store: battery-container
         icon:
           sprite: Objects/Power/power_cells.rsi
@@ -137,7 +137,7 @@
           data: 18
 
       - tag: MechAirTank
-        name: exosuit air tank
+        name: construction-required-exosuit-air-tank # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: mecha_air_tank
@@ -146,7 +146,7 @@
         doAfter: 1
 
       - tag: MechThruster
-        name: exosuit thruster
+        name: construction-required-exosuit-thruster # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: mecha_bin
@@ -155,7 +155,7 @@
         doAfter: 1
 
       - tag: GygaxArmor
-        name: gygax armor plates
+        name: construction-required-gygax-armor-plates # Forge-change
         icon:
           sprite: "_Goobstation/Objects/Specific/Mech/gygax_construction.rsi"
           state: gygax_armor
@@ -180,7 +180,7 @@
     - to: tsfgygax
       steps:
       - tag: MechIFFTSF
-        name: TSF Mech IFF
+        name: construction-required-tsf-mech-iff # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: tesla
@@ -190,7 +190,7 @@
     - to: pdvgygax
       steps:
       - tag: MechIFFPDV
-        name: PDV Mech IFF
+        name: construction-required-pdv-mech-iff # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: tesla

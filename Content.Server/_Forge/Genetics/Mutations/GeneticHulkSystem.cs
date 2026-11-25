@@ -3,9 +3,9 @@ using Content.Shared.Humanoid;
 
 namespace Content.Server._Forge.Genetics.Mutations;
 
-public sealed class GeneticHulkSystem : EntitySystem
+public sealed partial class GeneticHulkSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
 
     public override void Initialize()
     {

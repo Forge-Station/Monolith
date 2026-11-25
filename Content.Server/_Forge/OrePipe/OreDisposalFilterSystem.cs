@@ -14,11 +14,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.OrePipe;
 
-public sealed class OreDisposalFilterSystem : EntitySystem
+public sealed partial class OreDisposalFilterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {

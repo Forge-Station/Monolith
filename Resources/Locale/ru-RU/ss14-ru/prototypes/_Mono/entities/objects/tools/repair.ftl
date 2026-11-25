@@ -6,6 +6,7 @@ ent-ShipRepairDeviceEmpty = разряженное УРК
 ent-ShipRepairDeviceRecharging = перезаряжающееся УРК
     .desc = Устройство ремонта корабля, способное восстанавливать разрушенные секции кораблей. Вмещает 300 зарядов и медленно перезаряжается.
 ent-ShipRepairDeviceAdmin = административное УРК
+    .desc = { ent-ShipRepairDeviceBase.desc }
 ent-ShipRepairDeviceRedacted = перезаряжающееся УРК
     .desc = Таинственное ремонтное устройство, способное ремонтировать корабли АДС.
 ent-ShipRepairDeviceAmmo = ремонтная материя для УРК

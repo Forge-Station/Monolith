@@ -138,9 +138,14 @@ public sealed partial class ExplosionSystem
             // has the explosion finished processing?
             if (_activeExplosion.FinishedProcessing)
             {
-                var comp = EnsureComp<TimedDespawnComponent>(_activeExplosion.VisualEnt);
-                comp.Lifetime = _cfg.GetCVar(CCVars.ExplosionPersistence);
-                _appearance.SetData(_activeExplosion.VisualEnt, ExplosionAppearanceData.Progress, int.MaxValue);
+                // The visual can already be gone if its map or tile was deleted while the explosion was processing.
+                if (Exists(_activeExplosion.VisualEnt))
+                {
+                    var comp = EnsureComp<TimedDespawnComponent>(_activeExplosion.VisualEnt);
+                    comp.Lifetime = _cfg.GetCVar(CCVars.ExplosionPersistence);
+                    _appearance.SetData(_activeExplosion.VisualEnt, ExplosionAppearanceData.Progress, int.MaxValue);
+                }
+
                 _activeExplosion = null;
             }
 #if EXCEPTION_TOLERANCE
@@ -163,7 +168,8 @@ public sealed partial class ExplosionSystem
         // we have finished processing our tiles. Is there still an ongoing explosion?
         if (_activeExplosion != null)
         {
-            _appearance.SetData(_activeExplosion.VisualEnt, ExplosionAppearanceData.Progress, _activeExplosion.CurrentIteration + 1);
+            if (Exists(_activeExplosion.VisualEnt))
+                _appearance.SetData(_activeExplosion.VisualEnt, ExplosionAppearanceData.Progress, _activeExplosion.CurrentIteration + 1);
             return;
         }
 
@@ -502,7 +508,6 @@ public sealed partial class ExplosionSystem
                 dir,
                 physics,
                 xform,
-                _projectileQuery,
                 throwForce);
         }
     }
@@ -548,6 +553,9 @@ public sealed partial class ExplosionSystem
                 break;
 
             tileDef = newDef;
+
+            if (newDef.Indestructible)
+                break;
         }
 
         if (tileDef.TileId == tileRef.Tile.TypeId)

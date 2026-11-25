@@ -4,9 +4,9 @@ using Robust.Shared.Audio;
 
 namespace Content.Server.CartridgeLoader.Cartridges;
 
-public sealed class AgroScanCartridgeSystem : EntitySystem
+public sealed partial class AgroScanCartridgeSystem : EntitySystem
 {
-    [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoader = default!;
+    [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
 
     public override void Initialize()
     {

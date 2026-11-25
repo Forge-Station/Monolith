@@ -8,6 +8,8 @@ using Content.Shared.Fluids;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -41,7 +43,7 @@ public sealed partial class AbsorbentSystem : SharedAbsorbentSystem
         SubscribeLocalEvent<AbsorbentComponent, ComponentInit>(OnAbsorbentInit);
         SubscribeLocalEvent<AbsorbentComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<AbsorbentComponent, UserActivateInWorldEvent>(OnActivateInWorld);
-        SubscribeLocalEvent<AbsorbentComponent, SolutionContainerChangedEvent>(OnAbsorbentSolutionChange);
+        SubscribeLocalEvent<AbsorbentComponent, SolutionChangedEvent>(OnAbsorbentSolutionChange);
     }
 
     private void OnAbsorbentInit(EntityUid uid, AbsorbentComponent component, ComponentInit args)
@@ -50,7 +52,7 @@ public sealed partial class AbsorbentSystem : SharedAbsorbentSystem
         UpdateAbsorbent(uid, component);
     }
 
-    private void OnAbsorbentSolutionChange(EntityUid uid, AbsorbentComponent component, ref SolutionContainerChangedEvent args)
+    private void OnAbsorbentSolutionChange(EntityUid uid, AbsorbentComponent component, ref SolutionChangedEvent args)
     {
         UpdateAbsorbent(uid, component);
     }

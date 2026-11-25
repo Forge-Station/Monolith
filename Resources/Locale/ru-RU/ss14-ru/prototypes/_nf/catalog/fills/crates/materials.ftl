@@ -8,3 +8,4 @@ ent-CrateMaterialsBasic10Filled = { ent-CrateGenericSteel }
     .desc = { ent-CrateGenericSteel.desc }
 ent-CrateMaterialsBasicFilled = { ent-CrateGenericSteel }
     .desc = { ent-CrateGenericSteel.desc }
+    .suffix = Заполненный, Базовые материалы

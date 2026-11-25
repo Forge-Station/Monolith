@@ -1,1 +1,70 @@
-{"version": 1, "size": {"x": 32, "y": 32}, "license": "CC0-1.0", "copyright": "Created by EmoGarbage404 (github) for Space Station 14", "states": [{"name": "meat0", "directions": 4}, {"name": "meat1", "directions": 4}, {"name": "meat2", "directions": 4}, {"name": "meat3", "directions": 4}, {"name": "meat4", "directions": 4}, {"name": "meat5", "directions": 4}, {"name": "meat6", "directions": 4}, {"name": "meat7", "directions": 4}, {"name": "full"}]}
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "By AftrLite (GitHub). Based on the anywall format by 20nypercent and rye-rice (GitHub).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "full"
+        },
+        {
+            "name": "wall0",
+            "directions": 4
+        },
+        {
+            "name": "wall1",
+            "directions": 4
+        },
+        {
+            "name": "wall2",
+            "directions": 4
+        },
+        {
+            "name": "wall3",
+            "directions": 4
+        },
+        {
+            "name": "wall4",
+            "directions": 4
+        },
+        {
+            "name": "wall5",
+            "directions": 4
+        },
+        {
+            "name": "wall6",
+            "directions": 4
+        },
+        {
+            "name": "wall7",
+            "directions": 4
+        },
+        {
+            "name": "wall8",
+            "directions": 4
+        },
+        {
+            "name": "wall9",
+            "directions": 4
+        },
+        {
+            "name": "wall10",
+            "directions": 4
+        },
+        {
+            "name": "wall11",
+            "directions": 4
+        },
+        {
+            "name": "wall12",
+            "directions": 4
+        },
+        {
+            "name": "wall13",
+            "directions": 4
+        }
+    ]
+}

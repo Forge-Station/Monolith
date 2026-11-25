@@ -36,7 +36,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportPlatformSystem : EntitySystem
+public sealed partial class BoardingTeleportPlatformSystem : EntitySystem
 {
     private const int WarmupPulseSteps = 3;
 
@@ -51,25 +51,24 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
     private readonly Dictionary<EntityUid, PendingReturnConfirm> _pendingReturnConfirmByUser = new();
 
-    [Dependency] private readonly BoardingTeleportConsoleSystem _console = default!;
-    [Dependency] private readonly BoardingTeleportLockSystem _lock = default!;
-    [Dependency] private readonly DeviceListSystem _deviceList = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly StunSystem _stun = default!;
-    [Dependency] private readonly BodySystem _body = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly ActorSystem _actors = default!;
-    [Dependency] private readonly EuiManager _euis = default!;
-    [Dependency] private readonly SharedScaleVisualsSystem _scaleVisuals = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private BoardingTeleportConsoleSystem _console = default!;
+    [Dependency] private BoardingTeleportLockSystem _lock = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private StunSystem _stun = default!;
+    [Dependency] private BodySystem _body = default!;
+    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private ActorSystem _actors = default!;
+    [Dependency] private EuiManager _euis = default!;
+    [Dependency] private SharedScaleVisualsSystem _scaleVisuals = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {
@@ -1086,16 +1085,6 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
     private bool TryResolveSignalUser(SignalReceivedEvent args, out EntityUid user)
     {
-        if (args.Data?.TryGetValue(BoardingTeleportRemoteSystem.UserPayloadKey, out var rawUser) == true &&
-            rawUser is NetEntity netUser &&
-            TryGetEntity(netUser, out var payloadUser) &&
-            payloadUser is { } resolvedUser &&
-            HasComp<MobStateComponent>(resolvedUser))
-        {
-            user = resolvedUser;
-            return true;
-        }
-
         if (args.Trigger is { } trigger && TryGetSignalUser(trigger, out user))
             return true;
 

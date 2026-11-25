@@ -1,0 +1,69 @@
+- type: entity
+  parent: BaseComputer
+  id: HoloComputerForerunner
+  name: ancient holocomputer
+  description: Used to do something.. This computer is a relic of a bygone era.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers_forerunner.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: holocomputer
+    - map: ["computerLayerScreen"]
+      state: holoscreen
+  - type: SignalSwitch
+    onPort: Pressed
+    offPort: Pressed
+    statusPort: Pressed
+  - type: DisableToolUse
+    prying: True
+  - type: PowerSwitch
+
+
+
+#Frame and computers with different screens in forerunner style
+
+#Decoration
+- type: entity
+  parent: BaseComputer
+  id: BaseComputerForerunner
+  name: ancient computer
+  description: An ancient device. Old, battered, scratched up, but it makes such a pleasant sound when it starts up.
+  suffix: Forge, Forerunner
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: forerunner_computer
+    - map: ["computerLayerKeyboard"]
+      state: forerunner_keyboard_off
+    - map: ["computerLayerScreen"]
+      state: forerunner_screen
+    - map: ["computerLayerKeys"]
+      state: forerunner_keyboard
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerForerunnerError
+  name: ancient computer
+  description: An ancient device. Great secrets lie hidden behind this error.
+  suffix: Forge, Forerunner, Error
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: forerunner_computer
+    - map: ["computerLayerKeyboard"]
+      state: forerunner_keyboard_off_error
+    - map: ["computerLayerScreen"]
+      state: forerunner_screen_error
+    - map: ["computerLayerKeys"]
+      state: forerunner_keyboard_error
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open

@@ -313,9 +313,10 @@ public sealed partial class TTSSystem : EntitySystem
             } listener)
             return;
 
-        var ttsEvent = CanUnderstandLanguage(listener, language.ID)
-        ? new PlayTTSEvent(fullSoundData, GetNetEntity(source), ifWhisper, isRadio)
-        : new PlayTTSEvent(obfSoundData, GetNetEntity(source), ifWhisper, isRadio);
+        // Forge-Change: the speaker can be deleted while TTS is generating. GetNetEntity logs a resolve error for that.
+        NetEntity? sourceNet = TryGetNetEntity(source, out var resolved) ? resolved : null;
+        var soundData = CanUnderstandLanguage(listener, language.ID) ? fullSoundData : obfSoundData;
+        var ttsEvent = new PlayTTSEvent(soundData, sourceNet, ifWhisper, isRadio);
 
         RaiseNetworkEvent(ttsEvent, session);
     }

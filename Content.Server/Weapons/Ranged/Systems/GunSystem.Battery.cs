@@ -105,7 +105,7 @@ public sealed partial class GunSystem
     {
         if (component is ProjectileBatteryAmmoProviderComponent battery)
         {
-            if (ProtoManager.Index<EntityPrototype>(battery.Prototype).Components
+            if (ProtoMan.Index<EntityPrototype>(battery.Prototype).Components
                 .TryGetValue(Factory.GetComponentName<ProjectileComponent>(), out var projectile))
             {
                 var p = (ProjectileComponent)projectile.Component;
@@ -121,7 +121,7 @@ public sealed partial class GunSystem
 
         if (component is HitscanBatteryAmmoProviderComponent hitscan)
         {
-            var dmg = ProtoManager.Index(hitscan.HitscanEntityProto);
+            var dmg = ProtoMan.Index(hitscan.HitscanEntityProto);
             if (!dmg.TryGetComponent<HitscanBasicDamageComponent>(out var basicDamageComp, Factory))
                 return null;
 

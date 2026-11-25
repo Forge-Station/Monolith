@@ -129,7 +129,7 @@
       - !type:SnapToGrid { }
       steps:
       - tag: SandMaterial
-        name: desert sand
+        name: construction-required-desert-sand # Forge-change
         icon:
           sprite: _Mono/Objects/Misc/desert_sand.rsi
           state: icon

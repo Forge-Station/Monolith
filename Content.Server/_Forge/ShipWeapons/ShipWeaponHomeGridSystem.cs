@@ -3,9 +3,9 @@ using Content.Shared.Examine;
 
 namespace Content.Server._Forge.ShipWeapons;
 
-public sealed class ShipWeaponHomeGridSystem : EntitySystem
+public sealed partial class ShipWeaponHomeGridSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

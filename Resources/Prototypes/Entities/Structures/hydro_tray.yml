@@ -125,7 +125,7 @@
     receiveFrequencyId: BasicDevice
     prefix: device-address-prefix-hydroponics
     examinableAddress: true
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: PirateBountyItem # Frontier
     id: HydroponicsTray # Frontier
   #<Forge>

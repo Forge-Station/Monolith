@@ -64,7 +64,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: DroneControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 100000 # keep same as sleep range
   - type: ShipRepairable
     repairTime: 12
@@ -103,7 +103,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     transmitFrequencyId: DroneControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 100000
   - type: DeviceList
   - type: ShipRepairable

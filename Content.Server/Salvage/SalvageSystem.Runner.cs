@@ -27,7 +27,7 @@ public sealed partial class SalvageSystem
      */
 
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     private void InitializeRunner()
     {
         SubscribeLocalEvent<FTLRequestEvent>(OnFTLRequest);

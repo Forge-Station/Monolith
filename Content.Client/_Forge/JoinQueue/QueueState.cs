@@ -7,10 +7,10 @@ using Robust.Shared.Player;
 
 namespace Content.Client._Forge.JoinQueue;
 
-public sealed class QueueState : State
+public sealed partial class QueueState : State
 {
-    [Dependency] private readonly IUserInterfaceManager _userInterface = default!;
-    [Dependency] private readonly IClientConsoleHost _console = default!;
+    [Dependency] private IUserInterfaceManager _userInterface = default!;
+    [Dependency] private IClientConsoleHost _console = default!;
 
 
     private const string JoinSoundPath = "/Audio/Effects/newplayerping.ogg";

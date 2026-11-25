@@ -25,7 +25,7 @@ namespace Content.Server.GameTicking.Commands
                 return;
             }
 
-            var ticker = _e.System<GameTicker>();
+            var ticker = _e.System<ServerGameTicker>();
             ticker.ToggleReady(player, bool.Parse(args[0]));
         }
     }

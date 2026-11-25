@@ -222,11 +222,11 @@
   - type: UserInterface
     interfaces:
       enum.NetworkConfiguratorUiKey.List:
-        type: NetworkConfiguratorBoundUserInterface
+        type: NetworkConfiguratorListBoundUserInterface
       enum.NetworkConfiguratorUiKey.Configure:
         type: NetworkConfiguratorBoundUserInterface
       enum.NetworkConfiguratorUiKey.Link:
-        type: NetworkConfiguratorBoundUserInterface
+        type: NetworkConfiguratorLinkBoundUserInterface
   - type: Tag
     tags:
     - Multitool
@@ -285,11 +285,11 @@
   - type: UserInterface
     interfaces:
       enum.NetworkConfiguratorUiKey.List:
-        type: NetworkConfiguratorBoundUserInterface
+        type: NetworkConfiguratorListBoundUserInterface
       enum.NetworkConfiguratorUiKey.Configure:
         type: NetworkConfiguratorBoundUserInterface
       enum.NetworkConfiguratorUiKey.Link:
-        type: NetworkConfiguratorBoundUserInterface
+        type: NetworkConfiguratorLinkBoundUserInterface
   - type: StaticPrice
     price: 28 # Frontier 56<28
   - type: GuideHelp
@@ -368,6 +368,45 @@
     - WindowDirectional
     - WindowReinforcedDirectional
     - ReinforcedWindow
+    # Forge-Change-Start
+    - ReinforcedWindowDiagonal
+    - WindowDiagonal
+    - ShuttleWindow
+    - ShuttleWindowDiagonal
+    - ShuttleWindowUranDiagonal
+    - ShuttleWindowUran
+    - ReinforcedUraniumWindowDiagonal
+    - ReinforcedUraniumWindow
+    - UraniumWindow
+    - UraniumWindowDiagonal
+    - ShuttleWindowPlasma
+    - ShuttleWindowPlasmaDiagonal
+    - UraniumReinforcedWindowDirectional
+    - UraniumWindowDirectional
+    - WindoorSecureUranium
+    - WindoorUranium
+    - PlasmaReinforcedWindowDirectional
+    - PlasmaWindowDirectional
+    - WindoorSecurePlasma
+    - WindoorPlasma
+    - ReinforcedPlasmaWindow
+    - ReinforcedPlasmaWindowDiagonal
+    - WindoorSecure
+    - Windoor
+    - PlasmaWindowDiagonal
+    - PlasmaWindow
+    - WallShuttle
+    - WallShuttleDiagonal
+    - GrilleDiagonal
+    - WallMining
+    - WallMiningDiagonal
+    - AirAlarm
+    - ShuttersNormal
+    - PlasticFlapsAirtightClear
+    - BlastDoor
+    - WallSolidDiagonal
+    - WallReinforcedDiagonal
+    # Forge-Change-End
     - Airlock
     - AirlockGlass
     - Firelock

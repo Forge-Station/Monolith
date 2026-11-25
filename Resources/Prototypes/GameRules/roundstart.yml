@@ -8,6 +8,13 @@
       max: 10      # Mono
 
 - type: entity
+  id: BaseSilentGameRule
+  abstract: true
+  components:
+  - type: GameRule
+    silent: true
+
+- type: entity
   parent: BaseGameRule
   id: RespawnDeadRule
   components:

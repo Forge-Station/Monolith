@@ -1,5 +1,6 @@
 using Content.Goobstation.Shared.StationRadio.Components;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Components;
 
 namespace Content.Shared._Forge.StationRadio;
 

@@ -255,54 +255,6 @@
 
 - type: entity
   parent: BaseWeaponShotgunTurret
-  id: WeaponTurretCCShotgun
-  name: Colossus shotgun turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCShotgunPackingGraph
-    node: WeaponTurretCCShotgunPacked
-
-- type: entity
-  parent: BaseWeaponSniperTurret
-  id: WeaponTurretCCSniper
-  name: Colossus sniper turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCSniperPackingGraph
-    node: WeaponTurretCCSniperPacked
-
-- type: entity
-  parent: BaseWeaponMachinegunTurret
-  id: WeaponTurretCCMachinegun
-  name: Colossus machine gun turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCMachinegunPackingGraph
-    node: WeaponTurretCCMachinegunPacked
-
-- type: entity
-  parent: BaseWeaponShotgunTurret
   id: WeaponTurretUSSPShotgun
   name: USSP shotgun turret
   suffix: USSP

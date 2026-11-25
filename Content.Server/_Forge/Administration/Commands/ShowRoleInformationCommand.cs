@@ -11,9 +11,8 @@ namespace Content.Server._Forge.Administration.Commands;
 [AdminCommand(AdminFlags.Moderator)]
 public sealed partial class ShowRoleInformationCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     public string Command => "openroleinformation";
     public string Description => Loc.GetString("show-role-information-command-description");

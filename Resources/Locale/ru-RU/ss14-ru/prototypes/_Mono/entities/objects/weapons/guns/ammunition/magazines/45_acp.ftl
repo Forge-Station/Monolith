@@ -1,7 +1,7 @@
 ent-BaseMagazine45_ACP = пистолетный магазин (.45 ACP FMJ)
 ent-Magazine45_ACPPistolFMJ = { ent-BaseMagazine45_ACP }
 ent-Magazine45_ACPPistolEmpty = пистолетный магазин (.45 ACP)
-    .desc = " "
+    .desc = { "" }
     .suffix= пустой
 ent-Magazine45_ACPPistolHP = пистолетный магазин (.45 ACP экспансивные)
 ent-Magazine45_ACPPistolPractice = пистолетный магазин (.45 ACP учебные)
@@ -19,7 +19,7 @@ ent-Magazine45_ACPSubMachineGunUranium = магазин ПП (.45 ACP урано
 
 ent-Magazine45_ACPSubMachineGunFMJ = магазин ПП (.45 ACP FMJ)
 ent-Magazine45_ACPSubMachineGunEmpty = магазин ПП (.45 ACP)
-    .desc = " "
+    .desc = { "" }
     .suffix= пустой
 ent-Magazine45_ACPSubMachineGunEmp = магазин ПП (.45 ACP ЭМИ)
 ent-Magazine45_ACPSubMachineGunHP = магазин ПП (.45 ACP экспансивные)
@@ -28,7 +28,13 @@ ent-Magazine45_ACPSubMachineGunRubber = магазин ПП (.45 ACP резин�
 
 ent-Magazine45_ACPPistolHighCapacityFMJ = большой пистолетный магазин (.45 ACP резиновые)
 ent-Magazine45_ACPPistolHighCapacityEmpty =  большой пистолетный магазин (.45 ACP резиновые)
-    .desc = " "
+    .desc = { "" }
     .suffix= пустой
 ent-Magazine45_ACPPistolHighCapacityPractice = большой пистолетный магазин (.45 ACP учебные)
 ent-Magazine45_ACPPistolHighCapacityRubber = большой пистолетный магазин (.45 ACP резиновые)
+
+ent-Magazine45_ACPSubMachineGunTopMountedFMJ = магазин (.45 ACP, оболочечные)
+
+ent-Magazine45_ACPSubMachineGunTopMountedEmpty = магазин (.45 ACP)
+    .desc = { ent-BaseItem.desc }
+    .suffix = Пустой

@@ -130,7 +130,7 @@
     sprite: _Forge/Objects/Tools/Contractor/contractor_welder.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 1000
@@ -140,7 +140,7 @@
     radius: 1.5
     color: lightblue
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
       - ReagentId: WeldingFuel

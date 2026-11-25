@@ -159,7 +159,7 @@
     sendBroadcastAttemptEvent: true
     prefix: device-address-prefix-console
   - type: DeviceNetworkRequiresPower
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
 
   # UI
   - type: ActivatableUI

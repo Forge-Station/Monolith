@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._NF.SectorServices;
 using Content.Server.Administration;
 using Content.Server.Station.Systems;
@@ -24,7 +24,7 @@ namespace Content.Server.AlertLevel.Commands
             {
                 // Frontier: sector-wide alerts
                 levelNames = GetSectorLevelNames();
-                // var stationUid = _entitySystems.GetEntitySystem<StationSystem>().GetOwningStation(player.AttachedEntity.Value);
+                // var stationUid = _entitySystems.GetEntitySystem<ServerStationSystem>().GetOwningStation(player.AttachedEntity.Value);
                 // if (stationUid != null)
                 // {
                 //     levelNames = GetStationLevelNames(stationUid.Value);
@@ -64,7 +64,7 @@ namespace Content.Server.AlertLevel.Commands
                 return;
             }
 
-            var stationUid = _entitySystems.GetEntitySystem<StationSystem>().GetOwningStation(player.AttachedEntity.Value);
+            var stationUid = _entitySystems.GetEntitySystem<ServerStationSystem>().GetOwningStation(player.AttachedEntity.Value);
             if (stationUid == null)
             {
                 shell.WriteLine(LocalizationManager.GetString("cmd-setalertlevel-invalid-grid"));

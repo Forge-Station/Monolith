@@ -22,13 +22,13 @@
         - to: ClothingOuterEVASuitGoblinNode
           steps:
             - tag: ClothingRobesGoblin
-              name: goblin traditional robes
+              name: construction-required-goblin-traditional-robes # Forge-change
               icon:
                 sprite: _NF/Clothing/OuterClothing/Coats/goblin_robes.rsi
                 state: icon
               doAfter: 10
             - tag: SuitEVA
-              name: EVA suit
+              name: construction-required-eva-suit # Forge-change
               icon:
                 sprite: Clothing/OuterClothing/Suits/eva.rsi
                 state: icon

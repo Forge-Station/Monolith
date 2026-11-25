@@ -65,10 +65,10 @@
     sprite: Objects/Tools/lighters.rsi
   - type: UseDelay
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 8
@@ -127,7 +127,7 @@
         cheap_icon_base: Rainbow
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 4
@@ -193,7 +193,7 @@
           False: { visible: true }
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 12

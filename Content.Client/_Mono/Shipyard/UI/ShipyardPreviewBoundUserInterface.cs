@@ -3,7 +3,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client._Mono.Shipyard.UI;
 
-public sealed class ShipyardPreviewBoundUserInterface : BoundUserInterface
+public sealed partial class ShipyardPreviewBoundUserInterface : BoundUserInterface
 {
     private ShipyardPreviewMenu? _menu;
     [Dependency] private ShipyardPreviewSystem _preview = default!;

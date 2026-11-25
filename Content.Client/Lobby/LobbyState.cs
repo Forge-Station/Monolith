@@ -1,7 +1,7 @@
 using Content.Client._NF.LateJoin;
 using Content.Client.Audio;
 using Content.Client.Eui;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
 using Content.Client.UserInterface.Systems.Chat;

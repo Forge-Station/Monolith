@@ -14,7 +14,6 @@ namespace Content.Shared.Item;
 
 public abstract partial class SharedItemSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private   SharedHandsSystem _handsSystem = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
 
@@ -128,7 +127,7 @@ public abstract partial class SharedItemSystem : EntitySystem
 
     public ItemSizePrototype GetSizePrototype(ProtoId<ItemSizePrototype> id)
     {
-        return _prototype.Index(id);
+        return ProtoMan.Index(id);
     }
 
     /// <summary>

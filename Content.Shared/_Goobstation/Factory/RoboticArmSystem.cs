@@ -3,6 +3,7 @@ using Content.Shared._Goobstation.Factory.Slots;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Item;
 using Content.Shared.Maps;
@@ -26,7 +27,7 @@ public sealed partial class RoboticArmSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
-    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TurfSystem _turf = default!;
@@ -211,14 +212,14 @@ public sealed partial class RoboticArmSystem : EntitySystem
             // only 1 machine
             if (GetOutputMachine(ent) != null)
             {
-                args.Cancel();
+                args.Cancelled = true;
                 return;
             }
 
             // make sure the port is for an automation slot
             if (!_automation.HasSlot(args.Sink, args.SinkPort, input: true))
             {
-                args.Cancel();
+                args.Cancelled = true;
                 return;
             }
         }
@@ -227,14 +228,14 @@ public sealed partial class RoboticArmSystem : EntitySystem
             // only 1 machine
             if (GetInputMachine(ent) != null)
             {
-                args.Cancel();
+                args.Cancelled = true;
                 return;
             }
 
             // make sure the port is for an automation slot
             if (!_automation.HasSlot(args.Source, args.SourcePort, input: false))
             {
-                args.Cancel();
+                args.Cancelled = true;
                 return;
             }
         }

@@ -78,7 +78,7 @@ public sealed partial class ObjectsTab : Control
         switch (selection)
         {
             case ObjectsTabSelection.Stations:
-                entities.AddRange(_entityManager.EntitySysManager.GetEntitySystem<StationSystem>().GetStationNames());
+                entities.AddRange(_entityManager.EntitySysManager.GetEntitySystem<ClientStationSystem>().GetStationNames());
                 break;
             case ObjectsTabSelection.Grids:
             {

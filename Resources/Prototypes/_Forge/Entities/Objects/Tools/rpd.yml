@@ -40,6 +40,7 @@
     - RadiatorBend
     - CanisterPort
     - FilterGas
+    - AirAlarmRPD # Forge-Change
     - Deconstruct
   - type: LimitedCharges
     maxCharges: 45

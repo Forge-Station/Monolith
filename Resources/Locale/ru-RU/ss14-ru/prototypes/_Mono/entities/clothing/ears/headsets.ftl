@@ -1,12 +1,12 @@
-ent-ClothingHeadsetAltTsfmc = полноразмерная гарнитура TSFMC
+ent-ClothingHeadsetAltTsfmc = полноразмерная гарнитура ТСФ
     .desc = Модифицированный модульный интерком, надеваемый на голову. Принимает ключи шифрования.
-ent-ClothingHeadsetAltTsfmcCommander = полноразмерная командная гарнитура MARSOC TSFMC
+ent-ClothingHeadsetAltTsfmcCommander = полноразмерная командная гарнитура ТСФ
     .desc = { ent-ClothingHeadsetAltTsfmc.desc }
-ent-ClothingHeadsetTsfmc = гарнитура TSFMC
+ent-ClothingHeadsetTsfmc = гарнитура ТСФ
     .desc = { ent-ClothingHeadsetAltTsfmc.desc }
-ent-ClothingHeadsetAltTsfmcMarsoc = полноразмерная гарнитура MARSOC TSFMC
+ent-ClothingHeadsetAltTsfmcMarsoc = полноразмерная гарнитура MARSOC ТСФ
     .desc = { ent-ClothingHeadsetAltTsfmc.desc }
-ent-ClothingHeadsetAltTsfmcMarsocFtl = TSFMC MARSOC command over-ear headset
+ent-ClothingHeadsetAltTsfmcMarsocFtl = полноразмерная командная гарнитура MARSOC ТСФ
     .desc = { ent-ClothingHeadsetAltTsfmc.desc }
 ent-ClothingHeadsetUSSPCommand = командная гарнитур СССП
     .desc = Модульная гарнитура для высшего состава USSP. Принимает стандартные ключи шифрования, по умолчанию — канал тактической связи USSP. На стратегическом канале только помехи.
@@ -15,3 +15,9 @@ ent-ClothingHeadsetUSSP = гарнитура СССП
 ent-ClothingHeadsetAltVanguardCommand = полноразмерная командная гарнитура «Авангард»
 ent-ClothingHeadsetAltCentComSR = { ent-ClothingHeadsetAltCentCom }
     .desc = { ent-ClothingHeadsetAltCentCom.desc }
+
+ent-ClothingHeadsetMieyo = гарнитура ММС
+    .desc = Стандартная гарнитура сотрудников ММС. Принимает обычные ключи шифрования и оснащена ключом корпоративной связи.
+
+ent-ClothingHeadsetMieyoCorpsec = гарнитура корпоративной охраны ММС
+    .desc = Стандартная гарнитура корпоративной охраны ММС. Принимает обычные ключи шифрования и оснащена ключом корпоративной связи.

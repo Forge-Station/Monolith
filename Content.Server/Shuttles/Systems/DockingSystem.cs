@@ -245,16 +245,18 @@ namespace Content.Server.Shuttles.Systems
             if (TryComp<PhysicsComponent>(gridA, out var bodyA) &&
                 TryComp<PhysicsComponent>(gridB, out var bodyB))
             {
+                // Flush ports share an edge. Polygon skin makes that edge overlap, and a
+                // soft weld cannot hold the pose against the contact solver: the shuttle
+                // oscillates and never sits on the port. A critically damped spring with
+                // collision disabled pulls the last fraction of a tile in and stays there.
                 SharedJointSystem.LinearStiffness(
-                    0.5f, // Mono: 2 -> 0.5
-                    2f, // Mono: 0.7 -> 2
+                    2f,
+                    1f,
                     bodyA.FixturesMass,
                     bodyB.FixturesMass,
                     out var stiffness,
                     out var damping);
 
-                // These need playing around with
-                // Could also potentially have collideconnected false and stiffness 0 but it was a bit more suss???
                 WeldJoint joint;
 
                 // Pre-existing joint so use that.
@@ -277,7 +279,7 @@ namespace Content.Server.Shuttles.Systems
                 joint.LocalAnchorA = anchorA;
                 joint.LocalAnchorB = anchorB;
                 joint.ReferenceAngle = (float)(_transform.GetWorldRotation(gridBXform) - _transform.GetWorldRotation(gridAXform));
-                joint.CollideConnected = true;
+                joint.CollideConnected = false;
                 joint.Stiffness = stiffness;
                 joint.Damping = damping;
 
@@ -398,6 +400,7 @@ namespace Content.Server.Shuttles.Systems
                     // Make sure the undocked shuttle maintains the same FTL state
                     // This allows the undocked shuttle to complete its FTL journey
                     // Set no LinkedShuttle so it will be processed independently
+                    CopyFtlDestination(shuttleFtlComp, mainFTLShuttle); // Forge-Change
                     shuttleFtlComp.LinkedShuttle = null;
                     Dirty(shuttleUid.Value, shuttleFtlComp);
                 }
@@ -408,10 +411,28 @@ namespace Content.Server.Shuttles.Systems
                     // Make sure the undocked shuttle maintains the same FTL state
                     // This allows the undocked shuttle to complete its FTL journey
                     // Set no LinkedShuttle so it will be processed independently
+                    CopyFtlDestination(otherFtlComp, mainFTLShuttle); // Forge-Change
                     otherFtlComp.LinkedShuttle = null;
                     Dirty(otherShuttleUid.Value, otherFtlComp);
                 }
             }
+        }
+
+        /// <summary>
+        /// Forge-Change: a docked shuttle does not own the jump. Give it the main shuttle's destination
+        /// before it is processed on its own, so arrival does not target entity 0.
+        /// </summary>
+        private void CopyFtlDestination(FTLComponent docked, EntityUid mainShuttle)
+        {
+            if (docked.TargetCoordinates.IsValid(EntityManager))
+                return;
+
+            if (!TryComp(mainShuttle, out FTLComponent? main))
+                return;
+
+            docked.TargetCoordinates = main.TargetCoordinates;
+            if (docked.StateTime.End <= TimeSpan.Zero)
+                docked.StateTime = main.StateTime;
         }
 
         private void OnUndock(EntityUid dockUid)

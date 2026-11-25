@@ -1,3 +1,4 @@
+using Content.Shared.Station.Components;
 using System.Globalization;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
@@ -44,8 +45,8 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private ServerInventorySystem _inventory = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private StationSystem _station = default!;
-    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationSystem _station = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
     [Dependency] private StationRecordsSystem _stationRecords = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;

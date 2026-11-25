@@ -87,7 +87,9 @@ public sealed partial class InjectorSystem : SharedInjectorSystem
             return;
 
         //Make sure we have the attacking entity
-        if (args.Target is not { Valid: true } target || !HasComp<SolutionContainerManagerComponent>(entity))
+        // SolutionContainerManager is converted to SolutionManager on MapInit (solutions refactor).
+        if (args.Target is not { Valid: true } target
+            || (!HasComp<SolutionManagerComponent>(entity) && !HasComp<SolutionContainerManagerComponent>(entity)))
             return;
 
         // Is the target a mob? If yes, use a do-after to give them time to respond.

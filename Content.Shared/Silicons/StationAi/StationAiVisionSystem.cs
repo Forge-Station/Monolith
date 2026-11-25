@@ -19,14 +19,14 @@ public sealed partial class StationAiVisionSystem : EntitySystem
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private SharedTransformSystem _xforms = default!;
 
+    [Dependency] private readonly EntityQuery<OccluderComponent> _occluderQuery = default!;
+
     private SeedJob _seedJob;
     private ViewJob _job;
 
     private readonly HashSet<Entity<OccluderComponent>> _occluders = new();
     private readonly HashSet<Entity<StationAiVisionComponent>> _seeds = new();
     private readonly HashSet<Vector2i> _viewportTiles = new();
-
-    private EntityQuery<OccluderComponent> _occluderQuery;
 
     // Dummy set
     private readonly HashSet<Vector2i> _singleTiles = new();
@@ -43,8 +43,6 @@ public sealed partial class StationAiVisionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        _occluderQuery = GetEntityQuery<OccluderComponent>();
 
         _seedJob = new()
         {

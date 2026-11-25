@@ -121435,7 +121435,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Bridge
-      destinationAddress: Bridge
   - uid: 13529
     components:
     - type: Transform
@@ -121443,7 +121442,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Head of personnel
-      destinationAddress: Head of personnel
   - uid: 18187
     components:
     - type: Transform
@@ -121451,7 +121449,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Medbay
-      destinationAddress: Medbay
   - uid: 19439
     components:
     - type: Transform
@@ -121459,7 +121456,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Cargo
-      destinationAddress: Cargo
   - uid: 19867
     components:
     - type: Transform
@@ -121467,7 +121463,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Library
-      destinationAddress: Library
   - uid: 21011
     components:
     - type: Transform
@@ -121475,7 +121470,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Science
-      destinationAddress: Science
   - uid: 26764
     components:
     - type: Transform
@@ -121483,7 +121477,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Security
-      destinationAddress: Security
   - uid: 26952
     components:
     - type: Transform
@@ -121491,7 +121484,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Theater
-      destinationAddress: Theater
   - uid: 26957
     components:
     - type: Transform
@@ -121499,7 +121491,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Chapel
-      destinationAddress: Chapel
   - uid: 27030
     components:
     - type: Transform
@@ -121507,7 +121498,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Service
-      destinationAddress: Service
   - uid: 28642
     components:
     - type: Transform
@@ -121515,7 +121505,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Court
-      destinationAddress: Court
   - uid: 30247
     components:
     - type: Transform
@@ -121523,7 +121512,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Chief engineer
-      destinationAddress: Chief engineer
   - uid: 30277
     components:
     - type: Transform
@@ -121531,7 +121519,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Research director
-      destinationAddress: Research director
   - uid: 32398
     components:
     - type: Transform
@@ -121539,7 +121526,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: 'Conference room '
-      destinationAddress: 'Conference room '
   - uid: 33817
     components:
     - type: Transform
@@ -121547,7 +121533,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Lawyer
-      destinationAddress: Lawyer
   - uid: 33876
     components:
     - type: Transform
@@ -121555,7 +121540,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Warden
-      destinationAddress: Warden
   - uid: 35922
     components:
     - type: Transform
@@ -121563,7 +121547,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Head of security
-      destinationAddress: Head of security
   - uid: 37596
     components:
     - type: Transform
@@ -121571,7 +121554,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Quartermaster
-      destinationAddress: Quartermaster
   - uid: 37598
     components:
     - type: Transform
@@ -121579,7 +121561,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Engineering
-      destinationAddress: Engineering
   - uid: 37599
     components:
     - type: Transform
@@ -121587,7 +121568,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Chief medical officer
-      destinationAddress: Chief medical officer
   - uid: 37603
     components:
     - type: Transform
@@ -121595,7 +121575,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Theater
-      destinationAddress: Theater
   - uid: 37604
     components:
     - type: Transform
@@ -121603,7 +121582,6 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Detective
-      destinationAddress: Detective
 - proto: FaxMachineCaptain
   entities:
   - uid: 13494
@@ -121612,7 +121590,6 @@ entities:
       pos: 34.5,73.5
       parent: 1
     - type: FaxMachine
-      destinationAddress: Captain's office
 - proto: FenceMetalBroken
   entities:
   - uid: 33533

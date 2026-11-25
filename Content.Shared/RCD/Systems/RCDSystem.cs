@@ -54,7 +54,6 @@ public partial class RCDSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tags = default!;
@@ -70,6 +69,7 @@ public partial class RCDSystem : EntitySystem
     private readonly ProtoId<RCDPrototype> _deconstructTileProto = "DeconstructTile";
     private readonly ProtoId<RCDPrototype> _deconstructLatticeProto = "DeconstructLattice";
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window"; // Forge-Change
 
     private HashSet<EntityUid> _intersectingEntities = new();
     private readonly List<EntityUid> _rpdDeconstructCandidates = new();
@@ -118,7 +118,7 @@ public partial class RCDSystem : EntitySystem
         if (!component.AvailablePrototypes.Contains(args.ProtoId))
             return;
 
-        if (!_protoManager.HasIndex(args.ProtoId))
+        if (!ProtoMan.HasIndex(args.ProtoId))
             return;
 
         // Set the current RCD prototype to the one supplied
@@ -146,7 +146,7 @@ public partial class RCDSystem : EntitySystem
             var name = Loc.GetString(component.CachedPrototype.SetName);
 
             if (component.CachedPrototype.Prototype != null &&
-                _protoManager.TryIndex(component.CachedPrototype.Prototype, out var proto))
+                ProtoMan.TryIndex(component.CachedPrototype.Prototype, out var proto))
                 name = proto.Name;
 
             msg = Loc.GetString("rcd-component-examine-build-details", ("name", name));
@@ -235,7 +235,7 @@ public partial class RCDSystem : EntitySystem
                     var deconstructedTile = _mapSystem.GetTileRef(mapGridData.Value.GridUid, mapGridData.Value.Component, mapGridData.Value.Location);
                     var protoName = !_turf.IsSpace(deconstructedTile) ? _deconstructTileProto : _deconstructLatticeProto;
 
-                    if (_protoManager.TryIndex(protoName, out var deconProto))
+                    if (ProtoMan.TryIndex(protoName, out var deconProto))
                     {
                         cost = deconProto.Cost;
                         delay = deconProto.Delay;
@@ -282,6 +282,7 @@ public partial class RCDSystem : EntitySystem
         var doAfterTarget = isRpdDeconstruct ? null : deconstructTarget;
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay*component.DelayMultiplier, ev, uid, target: doAfterTarget, used: uid) // Mono - add delay multiplier.
         {
+            NeedHand = true,
             BreakOnDamage = true,
             BreakOnHandChange = true,
             BreakOnMove = true,
@@ -545,8 +546,11 @@ public partial class RCDSystem : EntitySystem
 
         foreach (var ent in _intersectingEntities)
         {
-            if (isWindow && HasComp<SharedCanBuildWindowOnTopComponent>(ent))
+            // Forge-Change-Start
+            // Allow build windows on grill or window
+            if (isWindow && (HasComp<SharedCanBuildWindowOnTopComponent>(ent) || _tags.HasTag(ent, WindowTag)))
                 continue;
+            // Forge-Change-End
 
             if (isCatwalk && _tags.HasTag(ent, CatwalkTag))
             {
@@ -693,6 +697,11 @@ public partial class RCDSystem : EntitySystem
                 if (string.IsNullOrEmpty(proto))
                     return;
 
+                // Forge-Change-Start
+                // If build window, delete old window
+                if (component.CachedPrototype.ConstructionRules.Contains(RcdConstructionRule.IsWindow))
+                    DeleteWindowAtTile(mapGridData);
+                // Forge-Change-End
                 var entityCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
                 var ent = Spawn(proto, entityCoords);
 
@@ -787,10 +796,24 @@ public partial class RCDSystem : EntitySystem
     public void UpdateCachedPrototype(EntityUid uid, RCDComponent component)
     {
         if (component.ProtoId.Id != component.CachedPrototype?.ID)
-            component.CachedPrototype = _protoManager.Index(component.ProtoId);
+            component.CachedPrototype = ProtoMan.Index(component.ProtoId);
 
         SanitizeRpdConstructionEntity(uid, component);
     }
+    // Forge-Change-Start
+    // Deleting old window before create new one
+    private void DeleteWindowAtTile(MapGridData mapGridData)
+    {
+        _intersectingEntities.Clear();
+        _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
+
+        foreach (var entity in _intersectingEntities)
+        {
+            if (_tags.HasTag(entity, WindowTag))
+                QueueDel(entity);
+        }
+    }
+    // Forge-Change-End
 
     #region Forge-Change
 
@@ -840,7 +863,7 @@ public partial class RCDSystem : EntitySystem
         if (component.CachedPrototype.Prototype == null)
             return false;
 
-        if (!_protoManager.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
+        if (!ProtoMan.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
             || !baseProto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory)
             || layers.AlternativePrototypes.Count == 0)
         {
@@ -1031,7 +1054,7 @@ public partial class RCDSystem : EntitySystem
     public bool UsesRpdPipeAlternativePrototypes(string? prototypeId)
     {
         if (string.IsNullOrEmpty(prototypeId)
-            || !_protoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
+            || !ProtoMan.TryIndex<EntityPrototype>(prototypeId, out var proto))
         {
             return false;
         }
@@ -1046,7 +1069,7 @@ public partial class RCDSystem : EntitySystem
     public bool UsesRpdLogisticsPipeLayer(string? prototypeId)
     {
         if (string.IsNullOrEmpty(prototypeId)
-            || !_protoManager.TryIndex<EntityPrototype>(prototypeId, out var proto))
+            || !ProtoMan.TryIndex<EntityPrototype>(prototypeId, out var proto))
         {
             return false;
         }
@@ -1076,7 +1099,7 @@ public partial class RCDSystem : EntitySystem
             return true;
         }
 
-        if (!_protoManager.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
+        if (!ProtoMan.TryIndex<EntityPrototype>(component.CachedPrototype.Prototype, out var baseProto)
             || !baseProto.TryGetComponent<AtmosPipeLayersComponent>(out var layers, EntityManager.ComponentFactory))
         {
             return false;

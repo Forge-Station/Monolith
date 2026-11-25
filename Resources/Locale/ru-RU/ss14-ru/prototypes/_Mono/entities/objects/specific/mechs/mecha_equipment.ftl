@@ -1,5 +1,10 @@
-ent-LightMechMountEquipment = лёгкаяMechMountEquipment
-ent-MediumMechMountEquipment = средняяMechMountEquipment
-ent-HeavyMechMountEquipment = HeavyMechMountEquipment
-ent-EWARMechMountEquipment = EWARMechMountEquipment
-ent-IFFMechMountEquipment = IFFMechMountEquipment
+ent-LightMechMountEquipment = оборудование для лёгкого крепления меха
+ent-MediumMechMountEquipment = оборудование для среднего крепления меха
+ent-HeavyMechMountEquipment = оборудование для тяжёлого крепления меха
+ent-EWARMechMountEquipment = оборудование для крепления РЭБ меха
+ent-IFFMechMountEquipment = оборудование для крепления системы опознавания меха
+
+ent-MechIFFTSF = система опознавания меха ТСФ
+    .desc = Установите перед окончательной сваркой стандартного меха, чтобы получить синюю метку на радаре и синюю окраску.
+ent-MechIFFPDV = система опознавания меха СИВ
+    .desc = Установите перед окончательной сваркой стандартного меха, чтобы получить жёлтую метку на радаре и светло-коричневую окраску.

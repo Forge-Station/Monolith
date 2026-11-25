@@ -110,7 +110,7 @@ public sealed partial class StoreStructuredSystem : EntitySystem
     private void OnRefillableSolutionChanged(
         EntityUid uid,
         RefillableSolutionComponent comp,
-        ref SolutionContainerChangedEvent args
+        ref SolutionChangedEvent args
     )
     {
         if (_storesByWatchedRoot.Count == 0)

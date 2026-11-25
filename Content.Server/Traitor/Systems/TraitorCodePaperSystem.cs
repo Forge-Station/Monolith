@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Rules.Components;
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
@@ -7,14 +8,15 @@ using Content.Server.Traitor.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.Codewords;
 using Content.Shared.Paper;
 
 namespace Content.Server.Traitor.Systems;
 
 public sealed partial class TraitorCodePaperSystem : EntitySystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private TraitorRuleSystem _traitorRuleSystem = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
+    [Dependency] private CodewordSystem _codewords = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private PaperSystem _paper = default!;
 
@@ -57,14 +59,14 @@ public sealed partial class TraitorCodePaperSystem : EntitySystem
             {
                 if (TryComp(ruleEnt, out TraitorRuleComponent? traitorComp))
                 {
-                    codeList.AddRange(traitorComp.Codewords.ToList());
+                    codeList.AddRange(_codewords.GetCodewords(traitorComp.CodewordFactionPrototypeId));
                 }
             }
         }
         if (codeList.Count == 0)
         {
             if (component.FakeCodewords)
-                codeList = _traitorRuleSystem.GenerateTraitorCodewords(new TraitorRuleComponent()).ToList();
+                codeList = _codewords.GetCodewords(new TraitorRuleComponent().CodewordFactionPrototypeId).ToList();
             else
                 codeList = [Loc.GetString("traitor-codes-none")];
         }

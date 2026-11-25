@@ -10,7 +10,7 @@
         icon:
           sprite: Clothing/OuterClothing/Hardsuits/spatio.rsi
           state: icon
-        name: spationaut hardsuit
+        name: construction-required-spationaut-hardsuit # Forge-change
         doAfter: 10
       - material: Durathread
         amount: 5

@@ -554,9 +554,8 @@ public sealed partial class CEIconSmoothSystem : EntitySystem
 
             // Check vanilla IconSmooth entities (cross-matching via AdditionalKeys).
             if (vanillaQuery.TryGetComponent(entity, out var vanilla)
-                && vanilla.SmoothKey != null
-                && (vanilla.SmoothKey == smooth.SmoothKey
-                    || smooth.AdditionalKeys.Contains(vanilla.SmoothKey))
+                && (vanilla.Key == smooth.SmoothKey
+                    || smooth.AdditionalKeys.Contains(vanilla.Key))
                 && vanilla.Enabled)
             {
                 return true;

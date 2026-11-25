@@ -121,29 +121,26 @@ public sealed partial class SharedPersonalShieldSystem : EntitySystem
                 continue;
             }
 
-            var running = (!_itemToggleQuery.TryComp(uid, out var toggle) || toggle.Activated)
-                          && TryDrawPower(ent, frameTime);
-
+            var running = (!_itemToggleQuery.TryComp(uid, out var toggle) || toggle.Activated) && TryDrawPower(ent, frameTime);
             var step = frameTime / MathF.Max(cfg.SpinupTime, 0.01f);
 
-            if (running)
-            {
-                shield.Runtime.Form = MathF.Min(shield.Runtime.Form + step, 1f);
+            // Forge-Change-Start
+            if (shield.Runtime.Offline <= 0f)
+                shield.Runtime.Charge = MathF.Min(shield.Runtime.Charge + cfg.RegenRate * frameTime, cfg.MaxCharge);
 
-                shield.Runtime.Charge = shield.Runtime.Form < 1f
-                    ? cfg.MaxCharge * shield.Runtime.Form
-                    : MathF.Min(shield.Runtime.Charge + cfg.RegenRate * frameTime, cfg.MaxCharge);
+            if (shield.Runtime.WasFracture)
+            {
+                shield.Runtime.WasFracture = false;
+                shield.Runtime.Charge = cfg.MaxCharge * cfg.ChargeAfterFracture;
             }
+
+            if (running)
+                shield.Runtime.Form = MathF.Min(shield.Runtime.Form + step, 1f);
             else if (shield.Runtime.Form >= 1f)
-            {
                 shield.Runtime.Shatter = float.Epsilon;
-                shield.Runtime.Charge = 0f;
-            }
             else if (shield.Runtime.Form > 0f)
-            {
                 shield.Runtime.Form = MathF.Max(shield.Runtime.Form - step, 0f);
-                shield.Runtime.Charge = cfg.MaxCharge * shield.Runtime.Form;
-            }
+            // Forge-Change-End
 
             DirtyIfChanged(ent, before);
         }
@@ -158,11 +155,12 @@ public sealed partial class SharedPersonalShieldSystem : EntitySystem
     }
 
     // Oops!
-    public void Fracture(Entity<PersonalShieldComponent> ent)
+    private void Fracture(Entity<PersonalShieldComponent> ent) // Forge-Change
     {
         ent.Comp.Runtime.Shatter = float.Epsilon;
         ent.Comp.Runtime.Charge = 0f;
         ent.Comp.Runtime.Offline = ent.Comp.Shield.BreakCooldown;
+        ent.Comp.Runtime.WasFracture = true; // Forge-Change
         Dirty(ent, ent.Comp);
         _toggle.TryDeactivate(ent.Owner);
     }

@@ -33,168 +33,168 @@ ent-ChemicalBarrelExplosiveFilled = { ent-ChemicalBarrelExplosiveEmpty }
 ent-LabelWeldingFuel = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelCarbon = { ent-BaseBarrel }
+ent-ChemicalBarrelCarbon = бочка углерода
     .desc = { ent-BaseBarrel.desc }
     .suffix = Углерод
 
 ent-LabelCarbon = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelIodine = { ent-BaseBarrel }
+ent-ChemicalBarrelIodine = бочка йода
     .desc = { ent-BaseBarrel.desc }
     .suffix = Йод
 
 ent-LabelIodine = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelFluorine = { ent-BaseBarrel }
+ent-ChemicalBarrelFluorine = бочка фтора
     .desc = { ent-BaseBarrel.desc }
     .suffix = Фтор
 
 ent-LabelFluorine = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelChlorine = { ent-BaseBarrel }
+ent-ChemicalBarrelChlorine = бочка хлора
     .desc = { ent-BaseBarrel.desc }
     .suffix = Хлор
 
 ent-LabelChlorine = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelAluminium = { ent-BaseBarrel }
+ent-ChemicalBarrelAluminium = бочка алюминия
     .desc = { ent-BaseBarrel.desc }
     .suffix = Алюминий
 
 ent-LabelAluminium = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelPhosphorus = { ent-BaseBarrel }
+ent-ChemicalBarrelPhosphorus = бочка фосфора
     .desc = { ent-BaseBarrel.desc }
     .suffix = Фосфор
 
 ent-LabelPhosphorus = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSulfur = { ent-BaseBarrel }
+ent-ChemicalBarrelSulfur = бочка серы
     .desc = { ent-BaseBarrel.desc }
     .suffix = Сера
 
 ent-LabelSulfur = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSilicon = { ent-BaseBarrel }
+ent-ChemicalBarrelSilicon = бочка кремния
     .desc = { ent-BaseBarrel.desc }
     .suffix = Кремний
 
 ent-LabelSilicon = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelHydrogen = { ent-BaseBarrel }
+ent-ChemicalBarrelHydrogen = бочка водорода
     .desc = { ent-BaseBarrel.desc }
     .suffix = Водород
 
 ent-LabelHydrogen = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelLithium = { ent-BaseBarrel }
+ent-ChemicalBarrelLithium = бочка лития
     .desc = { ent-BaseBarrel.desc }
     .suffix = Литий
 
 ent-LabelLithium = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSodium = { ent-BaseBarrel }
+ent-ChemicalBarrelSodium = бочка натрия
     .desc = { ent-BaseBarrel.desc }
     .suffix = Натрий
 
 ent-LabelSodium = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelPotassium = { ent-BaseBarrel }
+ent-ChemicalBarrelPotassium = бочка калия
     .desc = { ent-BaseBarrel.desc }
     .suffix = Калий
 
 ent-LabelPotassium = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelRadium = { ent-BaseBarrel }
+ent-ChemicalBarrelRadium = бочка радия
     .desc = { ent-BaseBarrel.desc }
     .suffix = Радий
 
 ent-LabelRadium = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelIron = { ent-BaseBarrel }
+ent-ChemicalBarrelIron = бочка железа
     .desc = { ent-BaseBarrel.desc }
     .suffix = Железо
 
 ent-LabelIron = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelCopper = { ent-BaseBarrel }
+ent-ChemicalBarrelCopper = бочка меди
     .desc = { ent-BaseBarrel.desc }
     .suffix = Медь
 
 ent-LabelCopper = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelGold = { ent-BaseBarrel }
+ent-ChemicalBarrelGold = бочка золота
     .desc = { ent-BaseBarrel.desc }
     .suffix = Золото
 
 ent-LabelGold = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelMercury = { ent-BaseBarrel }
+ent-ChemicalBarrelMercury = бочка ртути
     .desc = { ent-BaseBarrel.desc }
     .suffix = Ртуть
 
 ent-LabelMercury = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSilver = { ent-BaseBarrel }
+ent-ChemicalBarrelSilver = бочка серебра
     .desc = { ent-BaseBarrel.desc }
     .suffix = Серебро
 
 ent-LabelSilver = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelEthanol = { ent-BaseBarrel }
+ent-ChemicalBarrelEthanol = бочка этанола
     .desc = { ent-BaseBarrel.desc }
     .suffix = Этанол
 
 ent-LabelEthanol = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSugar = { ent-BaseBarrel }
+ent-ChemicalBarrelSugar = бочка сахара
     .desc = { ent-BaseBarrel.desc }
     .suffix = Сахар
 
 ent-LabelSugar = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelNitrogen = { ent-BaseBarrel }
+ent-ChemicalBarrelNitrogen = бочка азота
     .desc = { ent-BaseBarrel.desc }
     .suffix = Азот
 
 ent-LabelNitrogen = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelOxygen = { ent-BaseBarrel }
+ent-ChemicalBarrelOxygen = бочка кислорода
     .desc = { ent-BaseBarrel.desc }
     .suffix = Кислород
 
 ent-LabelOxygen = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelOil = { ent-BaseBarrel }
+ent-ChemicalBarrelOil = бочка масла
     .desc = { ent-BaseBarrel.desc }
     .suffix = Масло
 
 ent-LabelOil = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelDiethylamine = { ent-BaseBarrel }
+ent-ChemicalBarrelDiethylamine = бочка диэтиламина
     .desc = { ent-BaseBarrel.desc }
     .suffix = Диэтиламин
 
@@ -243,7 +243,7 @@ ent-ChemicalBarrelSpaceLube = { ent-BaseBarrel }
 ent-LabelSpaceLube = { ent-Paper }
     .desc = { ent-Paper.desc }
 
-ent-ChemicalBarrelSpaceCleaner = { ent-BaseBarrel }
+ent-ChemicalBarrelSpaceCleaner = бочка космического очистителя
     .desc = { ent-BaseBarrel.desc }
     .suffix = Космический очиститель
 

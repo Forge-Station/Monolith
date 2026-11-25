@@ -9,17 +9,17 @@
             - material: Bluespace
               amount: 1
             - tag: CrayonRed
-              name: red crayon
+              name: construction-required-red-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: red
             - tag: CrayonGreen
-              name: green crayon
+              name: construction-required-green-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: green
             - tag: CrayonBlue
-              name: blue crayon
+              name: construction-required-blue-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: blue

@@ -119,15 +119,13 @@
       FloorBrassFilled: &floorBrass
         - prob: 4 # Intentional blank.
         # Walls
-        - id: ClockworkGirder
+        - id: Girder
           prob: 0.3
-        - id: WallClock
+        - id: WallBrass
           prob: 0.3
-        - id: ClockworkWindow
+        - id: Window
           prob: 0.2
-        - id: PinionAirlock
-          prob: 0.01
-        - id: WindoorClockwork
+        - id: Windoor
           prob: 0.005
         # Floor loot
         - id: SalvageSpawnerScrapBrass75
@@ -185,9 +183,9 @@
       FloorBrassReebe:
         - prob: 1 # Intentional blank.
         # Walls
-        - id: ClockworkGrille
+        - id: Grille
           prob: 0.75
-        - id: ClockworkGrilleBroken
+        - id: GrilleBroken
           prob: 0.25
   - type: IFF
     color: "#E1C16E"

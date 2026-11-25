@@ -16,6 +16,10 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
+    // Completion and cancellation events can start another do-after or delete an entity.
+    // Either one mutates the ActiveDoAfter component dictionary, which this query enumerates.
+    private readonly List<EntityUid> _activeDoAfters = new();
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -24,11 +28,25 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         var xformQuery = GetEntityQuery<TransformComponent>();
         var handsQuery = GetEntityQuery<HandsComponent>();
 
+        _activeDoAfters.Clear();
         var enumerator = EntityQueryEnumerator<ActiveDoAfterComponent, DoAfterComponent>();
-        while (enumerator.MoveNext(out var uid, out var active, out var comp))
+        while (enumerator.MoveNext(out var uid, out _, out _))
+            _activeDoAfters.Add(uid);
+        enumerator.Dispose();
+
+        foreach (var uid in _activeDoAfters)
         {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            if (!TryComp(uid, out ActiveDoAfterComponent? active) ||
+                !TryComp(uid, out DoAfterComponent? comp))
+                continue;
+
             Update(uid, active, comp, time, xformQuery, handsQuery);
         }
+
+        _activeDoAfters.Clear();
     }
 
     protected void Update(

@@ -10,9 +10,9 @@ using static Robust.Shared.Maths.Color;
 
 namespace Content.Client._Forge.Botany.PlantHealth;
 
-public sealed class ShowPlantHealthBarsSystem : EquipmentHudSystem<ShowPlantHealthBarsComponent>
+public sealed partial class ShowPlantHealthBarsSystem : EquipmentHudSystem<ShowPlantHealthBarsComponent>
 {
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
+    [Dependency] private IOverlayManager _overlayMan = default!;
 
     private PlantHealthBarOverlay _overlay = default!;
 

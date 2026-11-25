@@ -16,7 +16,6 @@ namespace Content.Shared.Fluids;
 
 public abstract partial class SharedPuddleSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
 
@@ -83,7 +82,7 @@ public abstract partial class SharedPuddleSystem : EntitySystem
 
         var reagentId = solution.GetPrimaryReagentId();
         if (!string.IsNullOrWhiteSpace(reagentId?.Prototype)
-            && _prototypeManager.TryIndex(reagentId.Value.Prototype, out ReagentPrototype? proto))
+            && ProtoMan.TryIndex(reagentId.Value.Prototype, out ReagentPrototype? proto))
         {
             args.Sound = proto.FootstepSound;
         }

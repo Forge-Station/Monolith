@@ -81,13 +81,12 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    key: walls
-    mode: NoSprite
+    key: doors
   - type: DoorSignalControl
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: DeviceLinkSink
     ports:
@@ -109,6 +108,10 @@
   - type: ShipRepairable
     repairTime: 3
     repairCost: 6
+  - type: PlacementReplacement
+    key: shutters
+  - type: StructureAligner
+  - type: StructureAlignerPylon
 
 - type: entity
   id: ShuttersNormal
@@ -120,6 +123,12 @@
     node: Shutters
     containers:
     - board
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   id: ShuttersNormalOpen
@@ -215,7 +224,7 @@
   components:
   - type: Sprite
     sprite: Structures/Doors/Shutters/shutters.rsi
-    state: frame
+    state: assembly
   - type: Construction
     graph: Shutters
     node: frame1

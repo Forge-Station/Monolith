@@ -16,18 +16,18 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.BsEnergy;
 
-public sealed class BsReceiverEnergySystem : EntitySystem
+public sealed partial class BsReceiverEnergySystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly BsTransmitterEnergySystem _bsTransmitterEnergySystem = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private BsTransmitterEnergySystem _bsTransmitterEnergySystem = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     private readonly Dictionary<NetEntity, UpdateTransmitterStateData> _cachedTransmittersData = new();
     private const float UpdateInterval = BsEnergySettings.UpdateInterval;

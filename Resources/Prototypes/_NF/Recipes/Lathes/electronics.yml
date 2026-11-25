@@ -144,3 +144,20 @@
   materials:
      Steel: 350
      Glass: 350
+# Forge-Change-Start
+
+- type: latheRecipe
+  id: AtmosMonitoringComputerCircuitboard
+  parent: BaseGoldCircuitboardRecipe
+  result: AtmosMonitoringComputerCircuitboard
+
+- type: latheRecipe
+  id: AlertsComputerCircuitboard
+  parent: BaseGoldCircuitboardRecipe
+  result: AlertsComputerCircuitboard
+
+- type: latheRecipe
+  id: PowerComputerCircuitboard
+  parent: BaseGoldCircuitboardRecipe
+  result: PowerComputerCircuitboard
+# Forge-Change-End

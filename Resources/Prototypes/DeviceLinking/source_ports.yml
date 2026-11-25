@@ -46,6 +46,11 @@
   defaultLinks: [ DoorBolt ]
 
 - type: sourcePort
+  id: DoorBoltStatus
+  name: signal-port-name-doorboltstatus
+  description: signal-port-description-doorboltstatus
+
+- type: sourcePort
   id: DockStatus
   name: signal-port-name-dockstatus
   description: signal-port-description-dockstatus
@@ -60,14 +65,14 @@
   id: CloningPodSender
   name: signal-port-name-pod-receiver
   description: signal-port-description-pod-sender
+  defaultLinks: [ CloningPodReceiver ]
 
 - type: sourcePort
   id: MedicalScannerSender
   name: signal-port-name-med-scanner-sender
   description: signal-port-description-med-scanner-sender
+  defaultLinks: [ MedicalScannerReceiver ]
 
-# New Frontiers - Genetics - DNA modifier scanner link
-# This code is licensed under AGPLv3. See LICENSE
 - type: sourcePort
   id: GeneticsScannerSender
   name: signal-port-name-genetics-scanner-sender
@@ -79,7 +84,6 @@
   name: signal-port-name-genetics-server-sender
   description: signal-port-description-genetics-server-sender
   defaultLinks: [ GeneticsServerReceiver ]
-# End of modified code
 
 - type: sourcePort
   id: ArtifactAnalyzerSender

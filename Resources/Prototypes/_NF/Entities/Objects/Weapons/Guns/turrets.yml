@@ -22,6 +22,7 @@
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
       params:
         variation: 0.125
+    Sabotageable: false # Forge-Change
   - type: ProjectileBatteryAmmoProvider
     proto: BulletDisablerStaminaOnly
     fireCost: 10
@@ -95,6 +96,7 @@
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
       params:
         variation: 0.125
+    Sabotageable: false # Forge-Change
   - type: HitscanBatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 10

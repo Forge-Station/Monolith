@@ -200,7 +200,16 @@ public partial class RCDSystem : EntitySystem
             }
         }
 
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.User, rpdConstructionEntity: rpdConstructionEntity))
+        /// Forge-Change-Start
+        if (!IsRCDOperationStillValid(
+                uid,
+                component,
+                mapGridData.Value,
+                deconstructTarget,
+                args.User,
+                rpdConstructionEntity: rpdConstructionEntity,
+                direction: component.ConstructionDirection))
+        /// Forge-Change-End
             return;
 
         if (!_net.IsServer)
@@ -320,8 +329,17 @@ public partial class RCDSystem : EntitySystem
         }
 
         var deconstructTarget = GetRpdDeconstructTargetFromDoAfter(args.Event);
+        /// Forge-Change-Start
 
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.Event.User, rpdConstructionEntity: args.Event.ConstructionEntity))
+        if (!IsRCDOperationStillValid(
+                uid,
+                component,
+                mapGridData.Value,
+                deconstructTarget,
+                args.Event.User,
+                rpdConstructionEntity: args.Event.ConstructionEntity,
+                direction: args.Event.Direction))
+        /// Forge-Change-End
             args.Cancel();
     }
 
@@ -343,7 +361,16 @@ public partial class RCDSystem : EntitySystem
         var deconstructTarget = GetRpdDeconstructTargetFromDoAfter(args);
 
         // Ensure the RCD operation is still valid
-        if (!IsRCDOperationStillValid(uid, component, mapGridData.Value, deconstructTarget, args.User, rpdConstructionEntity: args.ConstructionEntity))
+        /// Forge-Change-Start
+        if (!IsRCDOperationStillValid(
+                uid,
+                component,
+                mapGridData.Value,
+                deconstructTarget,
+                args.User,
+                rpdConstructionEntity: args.ConstructionEntity,
+                direction: args.Direction))
+        /// Forge-Change-End
             return;
 
         // Finalize the operation
@@ -423,7 +450,17 @@ public partial class RCDSystem : EntitySystem
 
     #region Entity construction/deconstruction rule checks
 
-    public bool IsRCDOperationStillValid(EntityUid uid, RCDComponent component, MapGridData mapGridData, EntityUid? target, EntityUid user, bool popMsgs = true, string? rpdConstructionEntity = null)
+    /// Forge-Change-Start
+    public bool IsRCDOperationStillValid(
+        EntityUid uid,
+        RCDComponent component,
+        MapGridData mapGridData,
+        EntityUid? target,
+        EntityUid user,
+        bool popMsgs = true,
+        string? rpdConstructionEntity = null,
+        Direction? direction = null)
+    /// Forge-Change-End
     {
         // Update cached prototype if required
         UpdateCachedPrototype(uid, component);
@@ -458,7 +495,7 @@ public partial class RCDSystem : EntitySystem
         if (!unobstructed)
             return false;
 
-        // Forge-Change
+        /// Forge-Change
         if (component.IsRpd
             && component.CachedPrototype.Mode == RcdMode.ConstructObject
             && rpdConstructionEntity != null
@@ -471,17 +508,39 @@ public partial class RCDSystem : EntitySystem
         }
 
         // Return whether the operation location is valid
+        /// Forge-Change-Start
         switch (component.CachedPrototype.Mode)
         {
-            case RcdMode.ConstructTile: return IsConstructionLocationValid(uid, component, mapGridData, user, popMsgs);
-            case RcdMode.ConstructObject: return IsConstructionLocationValid(uid, component, mapGridData, user, popMsgs);
+            case RcdMode.ConstructTile:
+                return IsConstructionLocationValid(uid, component, mapGridData, user, component.ConstructionDirection, popMsgs);
+            case RcdMode.ConstructObject:
+                return IsConstructionLocationValid(
+                    uid,
+                    component,
+                    mapGridData,
+                    user,
+                    direction ?? component.ConstructionDirection,
+                    popMsgs,
+                    rpdConstructionEntity,
+                    target);
+        /// Forge-Change-End
             case RcdMode.Deconstruct: return IsDeconstructionStillValid(uid, component, mapGridData, target, user, popMsgs);
         }
 
         return false;
     }
 
-    private bool IsConstructionLocationValid(EntityUid uid, RCDComponent component, MapGridData mapGridData, EntityUid user, bool popMsgs = true)
+    /// Forge-Change-Start
+    private bool IsConstructionLocationValid(
+        EntityUid uid,
+        RCDComponent component,
+        MapGridData mapGridData,
+        EntityUid user,
+        Direction direction,
+        bool popMsgs = true,
+        string? rpdConstructionEntity = null,
+        EntityUid? target = null)
+    /// Forge-Change-End
     {
         // Check rule: Must build on empty tile
         if (component.CachedPrototype.ConstructionRules.Contains(RcdConstructionRule.MustBuildOnEmptyTile) && !mapGridData.Tile.Tile.IsEmpty)
@@ -543,10 +602,38 @@ public partial class RCDSystem : EntitySystem
 
         _intersectingEntities.Clear();
         _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
+        /// Forge-Change-Start
+
+        var constructionEntityPrototype = GetRpdSpawnPrototype(component, rpdConstructionEntity);
 
         foreach (var ent in _intersectingEntities)
         {
-            // Forge-Change-Start
+            if (isWindow
+                && ent == target
+                && _tags.HasTag(ent, WindowTag)
+                && !IsDirectionalWindow(ent)
+                && IsEntityOnGridTile(ent, mapGridData))
+            {
+                continue;
+            }
+
+            if (isWindow && component.CachedPrototype.AllowMultiDirection && IsDirectionalWindow(ent))
+                continue;
+
+            if (constructionEntityPrototype != null && MetaData(ent).EntityPrototype?.ID == constructionEntityPrototype)
+            {
+                if (component.CachedPrototype.AllowMultiDirection
+                    && Transform(ent).LocalRotation.GetCardinalDir() != direction)
+                {
+                    continue;
+                }
+
+                if (popMsgs)
+                    _popup.PopupClient(Loc.GetString("rcd-component-cannot-build-identical-entity"), uid, user);
+
+                return false;
+            }
+
             // Allow build windows on grill or window
             if (isWindow && (HasComp<SharedCanBuildWindowOnTopComponent>(ent) || _tags.HasTag(ent, WindowTag)))
                 continue;
@@ -575,7 +662,7 @@ public partial class RCDSystem : EntitySystem
 
                     // Collision was detected
                     if (popMsgs)
-                        _popup.PopupClient(Loc.GetString("rcd-component-cannot-build-on-occupied-tile-message"), uid, user);
+                        _popup.PopupEntity(Loc.GetString("rcd-component-cannot-build-on-occupied-tile-message"), uid, user); /// Forge-Change
 
                     return false;
                 }
@@ -697,11 +784,10 @@ public partial class RCDSystem : EntitySystem
                 if (string.IsNullOrEmpty(proto))
                     return;
 
-                // Forge-Change-Start
-                // If build window, delete old window
+                /// Forge-Change-Start
                 if (component.CachedPrototype.ConstructionRules.Contains(RcdConstructionRule.IsWindow))
-                    DeleteWindowAtTile(mapGridData);
-                // Forge-Change-End
+                    DeleteWindowAtTile(component, mapGridData, direction, target);
+                /// Forge-Change-End
                 var entityCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
                 var ent = Spawn(proto, entityCoords);
 
@@ -728,7 +814,7 @@ public partial class RCDSystem : EntitySystem
                         _transform.AnchorEntity(ent, xform);
                 }
 
-                // Forge-Change: logistics only — pipes encode layer via alt prototypes; SetPipeLayer resets connectors to center
+                /// Forge-Change: logistics only — pipes encode layer via alt prototypes; SetPipeLayer resets connectors to center
                 if (component.IsRpd
                     && UsesRpdLogisticsPipeLayer(component.CachedPrototype.Prototype)
                     && TryComp<AtmosPipeLayersComponent>(ent, out var pipeLayers))
@@ -800,20 +886,49 @@ public partial class RCDSystem : EntitySystem
 
         SanitizeRpdConstructionEntity(uid, component);
     }
-    // Forge-Change-Start
-    // Deleting old window before create new one
-    private void DeleteWindowAtTile(MapGridData mapGridData)
+    /// Forge-Change-Start
+    // Replace the clicked full window and directional windows facing the placement direction.
+    private void DeleteWindowAtTile(
+        RCDComponent component,
+        MapGridData mapGridData,
+        Direction direction,
+        EntityUid? target)
     {
+        if (target is { } clicked
+            && _tags.HasTag(clicked, WindowTag)
+            && !IsDirectionalWindow(clicked)
+            && IsEntityOnGridTile(clicked, mapGridData))
+        {
+            QueueDel(clicked);
+        }
+
+        if (!component.CachedPrototype.AllowMultiDirection
+            || component.CachedPrototype.Rotation != RcdRotation.User)
+        {
+            return;
+        }
+
         _intersectingEntities.Clear();
         _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
 
         foreach (var entity in _intersectingEntities)
         {
-            if (_tags.HasTag(entity, WindowTag))
+            if (IsDirectionalWindow(entity)
+                && IsEntityOnGridTile(entity, mapGridData)
+                && Transform(entity).LocalRotation.GetCardinalDir() == direction)
+            {
                 QueueDel(entity);
+            }
         }
     }
-    // Forge-Change-End
+
+    private bool IsDirectionalWindow(EntityUid entity)
+    {
+        return MetaData(entity).EntityPrototype is { } prototype
+            && ProtoMan.EnumerateAllParents<EntityPrototype>(prototype.ID, includeSelf: true)
+                .Any(parent => parent.id == "WindowDirectional");
+    }
+    /// Forge-Change-End
 
     #region Forge-Change
 

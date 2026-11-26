@@ -977,6 +977,7 @@
   delay: 1
   collisionMask: Impassable
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  allowMultiDirection: true # Forge-Change
   rules:
     - IsWindow
   rotation: User
@@ -1006,6 +1007,7 @@
   delay: 2
   collisionMask: Impassable
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  allowMultiDirection: true # Forge-Change
   rules:
     - IsWindow
   rotation: User
@@ -1223,6 +1225,7 @@
   delay: 2
   collisionMask: Impassable
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  allowMultiDirection: true
   rules:
     - IsWindow
   rotation: User
@@ -1239,6 +1242,7 @@
   delay: 2
   collisionMask: Impassable
   collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  allowMultiDirection: true # Forge-Change
   rules:
     - IsWindow
   rotation: User

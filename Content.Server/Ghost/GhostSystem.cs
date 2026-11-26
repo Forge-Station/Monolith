@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Linq;
 using System.Numerics;
 using Content.Server._Forge.Sponsor; // Forge-Change
@@ -8,6 +9,8 @@ using Content.Server.Cargo.Systems; // Frontier
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
+using Content.Server.Ghost.Roles;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
@@ -69,7 +72,7 @@ namespace Content.Server.Ghost
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private SharedMindSystem _mind = default!;
-        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private ServerGameTicker _gameTicker = default!;
         [Dependency] private DamageableSystem _damageable = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
         [Dependency] private IRobustRandom _random = default!;
@@ -79,6 +82,7 @@ namespace Content.Server.Ghost
         [Dependency] private GhostSpriteStateSystem _ghostState = default!;
         [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
         [Dependency] private PlayerRateLimitManager _rateLimit = default!; // Forge-Change
+        [Dependency] private GhostRoleSystem _ghostRoles = default!; // Forge-Change
 
         private const string InvalidGhostRequestRateLimitKey = "GhostInvalidRequests"; // Forge-Change
 
@@ -86,6 +90,7 @@ namespace Content.Server.Ghost
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
+        private static readonly ProtoId<TagPrototype> StationAiTag = "StationAi"; // Forge-Change
 
         public override void Initialize()
         {
@@ -124,7 +129,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, PriceCalculationEvent>(OnPriceCalculation); // Frontier
 
-            SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
+            SubscribeLocalEvent<RoundEndTextAppendEvent>((ref RoundEndTextAppendEvent _) => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
             SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
@@ -404,12 +409,27 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetLocationWarps(bool isAdmin) // Frontier: add isAdmin
         {
+            var warps = new List<(EntityUid Uid, WarpPointComponent Warp)>();
+            var publicLocations = new HashSet<string>();
             var allQuery = AllEntityQuery<WarpPointComponent>();
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
                 if (warp.AdminOnly && !isAdmin) // Frontier: skip admin-only warp points if not an admin
                     continue; // Frontier
+
+                warps.Add((uid, warp));
+                if (!warp.AdminOnly && !string.IsNullOrEmpty(warp.Location))
+                    publicLocations.Add(warp.Location);
+            }
+
+            foreach (var (uid, warp) in warps)
+            {
+                // Admin marker on the same POI is renamed to the station, so it shows up as a second identical teleport.
+                if (warp.AdminOnly
+                    && !string.IsNullOrEmpty(warp.Location)
+                    && publicLocations.Contains(warp.Location))
+                    continue;
 
                 yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
             }
@@ -610,11 +630,11 @@ namespace Content.Server.Ghost
                     else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
                         ghost = Spawn(sponsorGhost, spawnPosition.Value);
                     else
-                        ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                        ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
                 else
                 {
-                    ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                    ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
 
                 if (!HasComp<GhostComponent>(ghost))
@@ -685,8 +705,8 @@ namespace Content.Server.Ghost
             // Only the default observer prototypes may be recolored.
             if (TryComp<MetaDataComponent>(ghostEntity, out var meta)
                 && meta.EntityPrototype != null
-                && meta.EntityPrototype.ID != GameTicker.ObserverPrototypeName
-                && meta.EntityPrototype.ID != GameTicker.AdminObserverPrototypeName)
+                && meta.EntityPrototype.ID != ServerGameTicker.ObserverPrototypeName
+                && meta.EntityPrototype.ID != ServerGameTicker.AdminObserverPrototypeName)
                 return;
 
             if (!_preferencesManager.TryGetCachedPreferences(session.UserId, out var prefs))
@@ -777,6 +797,18 @@ namespace Content.Server.Ghost
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
             var canReturn = canReturnGlobal && _mind.IsCharacterDeadPhysically(mind);
 
+            // Forge-Change: an AI brain has no MobState and is otherwise treated as dead.
+            // Ghosting from an occupied core must remove its mind so the takeover role can reopen.
+            GhostRoleComponent? stationAiRole = null;
+            var ownedEntity = mind.OwnedEntity ?? playerEntity; // Forge - change: also release an AI visiting a borg.
+            var stationAiBrain = ownedEntity != null &&
+                                 _tag.HasTag(ownedEntity.Value, StationAiTag) &&
+                                 TryComp(ownedEntity.Value, out stationAiRole)
+                ? ownedEntity
+                : null;
+            if (stationAiBrain != null)
+                canReturn = false;
+
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&
                 canReturnGlobal &&
                 TryComp(playerEntity, out MobStateComponent? mobState))
@@ -810,6 +842,13 @@ namespace Content.Server.Ghost
 
             if (ghost == null)
                 return false;
+
+            // Forge-Change: the takeover MindRemovedMessage is unreliable for station AI brains on this fork.
+            if (stationAiBrain is { } brain && stationAiRole?.ReregisterOnGhost == true)
+            {
+                EnsureComp<GhostTakeoverAvailableComponent>(brain);
+                _ghostRoles.ReregisterGhostRole((brain, stationAiRole));
+            }
 
             return true;
         }

@@ -51,8 +51,8 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private ClimbSystem _climb = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private EuiManager _euiManager = null!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private InteractionSystem _interaction = default!;
@@ -66,8 +66,8 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
     [Dependency] private JobSystem _jobs = default!;
-    [Dependency] private StationJobsSystem _stationJobs = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     private readonly Dictionary<NetUserId, StoredBody?> _storedBodies = new();
     private EntityUid? _storageMap;
@@ -97,9 +97,8 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
     {
         if (Deleted(_storageMap))
         {
-            var map = _mapManager.CreateMap();
-            _storageMap = _mapManager.GetMapEntityId(map);
-            _mapManager.SetMapPaused(map, true);
+            _storageMap = _mapManager.CreateMap();
+            _mapManager.SetPaused(_storageMap.Value, true);
         }
 
         return _storageMap.Value;

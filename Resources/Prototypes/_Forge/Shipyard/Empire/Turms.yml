@@ -1,7 +1,7 @@
 - type: vessel
   id: Turms
   parent: BaseVessel
-  name: ESP Турмс
+  name: ESP «Турмс»
   description: Маневренный боевой шаттл средне-малого размера. Вооружен двумя установками типа "Гидра"
   price: 35500
   category: Small

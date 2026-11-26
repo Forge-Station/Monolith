@@ -38,7 +38,7 @@ using Content.Shared.Stacks; // Frontier
 using Content.Server.Stack;
 using Content.Server._Forge.Shuttles.Systems;
 using Content.Server._Mono.VendingMachine;
-using Content.Shared._Forge.CCVar;
+using Content.Shared._Forge.CCVars;
 using Content.Shared._Mono.Traits.Physical;
 using Robust.Shared.Containers; // Frontier
 
@@ -99,7 +99,7 @@ namespace Content.Server.VendingMachines
 
             foreach (var entry in component.Inventory.Values)
             {
-                if (!PrototypeManager.TryIndex<EntityPrototype>(entry.ID, out var proto))
+                if (!ProtoMan.TryIndex<EntityPrototype>(entry.ID, out var proto))
                 {
                     Log.Error($"Unable to find entity prototype {entry.ID} on {ToPrettyString(uid)} vending.");
                     continue;
@@ -412,7 +412,7 @@ namespace Content.Server.VendingMachines
                         }
 
                         // Forge-Change: route POI sales tax to the local treasury, on top of sector tax.
-                        var poiTaxRate = _cfgManager.GetCVar(ForgeCVars.PoiCaptureSalesTaxRate);
+                        var poiTaxRate = _cfgManager.GetCVar(ForgeCCVars.PoiCaptureSalesTaxRate);
                         if (poiTaxRate > 0f)
                         {
                             var poiTax = (int)Math.Floor(totalPrice * poiTaxRate);
@@ -673,11 +673,11 @@ namespace Content.Server.VendingMachines
             foreach (var vendingInventory in component.CanRestock)
             {
                 double total = 0;
-                if (PrototypeManager.TryIndex(vendingInventory, out VendingMachineInventoryPrototype? inventoryPrototype))
+                if (ProtoMan.TryIndex(vendingInventory, out VendingMachineInventoryPrototype? inventoryPrototype))
                 {
                     foreach (var (item, amount) in inventoryPrototype.StartingInventory)
                     {
-                        if (PrototypeManager.TryIndex(item, out EntityPrototype? entity))
+                        if (ProtoMan.TryIndex(item, out EntityPrototype? entity))
                             total += _pricing.GetEstimatedPrice(entity) * amount;
                     }
                 }

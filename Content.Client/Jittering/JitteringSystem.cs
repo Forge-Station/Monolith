@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._CE.ZLevels.Core.Components; // Mono
 using Content.Shared.Jittering;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -10,6 +11,7 @@ namespace Content.Client.Jittering
     {
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
+        [Dependency] private SpriteSystem _sprite = default!;
 
         private readonly float[] _sign = { -1, 1 };
         private readonly string _jitterAnimationKey = "jittering";
@@ -30,7 +32,9 @@ namespace Content.Client.Jittering
 
             var animationPlayer = EnsureComp<AnimationPlayerComponent>(uid);
 
-            jittering.StartOffset = sprite.Offset;
+            jittering.StartOffset = TryComp(uid, out CEZPhysicsComponent? zPhys)
+                ? zPhys.SpriteOffsetDefault
+                : sprite.Offset;
             _animationPlayer.Play(uid, animationPlayer, GetAnimation(jittering, sprite), _jitterAnimationKey);
         }
 
@@ -40,12 +44,12 @@ namespace Content.Client.Jittering
                 _animationPlayer.Stop(uid, animationPlayer, _jitterAnimationKey);
 
             if (TryComp(uid, out SpriteComponent? sprite))
-                sprite.Offset = jittering.StartOffset;
+                _sprite.SetOffset((uid, sprite), jittering.StartOffset);
         }
 
         private void OnAnimationCompleted(EntityUid uid, JitteringComponent jittering, AnimationCompletedEvent args)
         {
-            if(args.Key != _jitterAnimationKey)
+            if (args.Key != _jitterAnimationKey)
                 return;
 
             if (!args.Finished)
@@ -58,8 +62,9 @@ namespace Content.Client.Jittering
 
         private Animation GetAnimation(JitteringComponent jittering, SpriteComponent sprite)
         {
+            var previousJitter = jittering.LastJitter; // Mono
             var amplitude = MathF.Min(4f, jittering.Amplitude / 100f + 1f) / 10f;
-            var offset = new Vector2(_random.NextFloat(amplitude/4f, amplitude),
+            var offset = new Vector2(_random.NextFloat(amplitude / 4f, amplitude),
                 _random.NextFloat(amplitude / 4f, amplitude / 3f));
 
             offset.X *= _random.Pick(_sign);
@@ -94,7 +99,7 @@ namespace Content.Client.Jittering
                         Property = nameof(SpriteComponent.Offset),
                         KeyFrames =
                         {
-                            new AnimationTrackProperty.KeyFrame(sprite.Offset, 0f),
+                            new AnimationTrackProperty.KeyFrame(jittering.StartOffset + previousJitter, 0f),
                             new AnimationTrackProperty.KeyFrame(jittering.StartOffset + offset, length),
                         }
                     }

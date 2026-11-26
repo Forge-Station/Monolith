@@ -3,6 +3,8 @@ using Content.Server.Atmos.Components;
 using Content.Server.Maps;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Atmos.Piping.Components;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -75,9 +77,18 @@ public partial class AtmosphereSystem
         return Atmospherics.CellVolume * mapGrid.TileSize * tiles;
     }
 
-    public readonly record struct AirtightData(AtmosDirection BlockedDirections, bool NoAirWhenBlocked,
-        bool FixVacuum);
-
+    /// <summary>
+    /// Updates the <see cref="AirtightData"/> for a <see cref="TileAtmosphere"/>
+    /// immediately.
+    /// </summary>
+    /// <remarks>This method is extremely important if you are doing something in Atmospherics
+    /// that is time-sensitive! <see cref="AirtightData"/> is cached and invalidated on
+    /// a cycle, so airtight changes performed during or after an invalidation will
+    /// not take effect until the next Atmospherics tick!</remarks>
+    /// <param name="uid">The entity the grid is on.</param>
+    /// <param name="atmos">The <see cref="GridAtmosphereComponent"/> the tile is on.</param>
+    /// <param name="grid">The <see cref="MapGridComponent"/> the tile is on.</param>
+    /// <param name="tile">The <see cref="TileAtmosphere"/> to update.</param>
     private void UpdateAirtightData(EntityUid uid, GridAtmosphereComponent atmos, MapGridComponent grid, TileAtmosphere tile)
     {
         var oldBlocked = tile.AirtightData.BlockedDirections;

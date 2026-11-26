@@ -7,13 +7,13 @@
     - to: icon
       steps:
       - tag: GlassShard
-        name: a glass shard
+        name: construction-required-glass-shard # Forge-change
         icon:
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
         doAfter: 1
       - tag: BrimFlatcapGrey
-        name: a grey flatcap
+        name: construction-required-grey-flatcap # Forge-change
         icon:
           sprite: Clothing/Head/Hats/greyflatcap.rsi
           state: icon
@@ -29,13 +29,13 @@
     - to: icon
       steps:
       - tag: GlassShard
-        name: a glass shard
+        name: construction-required-glass-shard # Forge-change
         icon:
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
         doAfter: 1
       - tag: BrimFlatcapBrown
-        name: a brown flatcap
+        name: construction-required-brown-flatcap # Forge-change
         icon:
           sprite: Clothing/Head/Hats/brownflatcap.rsi
           state: icon

@@ -5,7 +5,7 @@
   parent: BaseVesselAntag
   name: NCS Drakon
   description: A fast brawler with heavy armor and ballistic armaments.
-  price: 85290
+  price: 112753
   category: Medium
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
@@ -28,11 +28,12 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Drakon USSP{1}'
+          mapNameTemplate: 'Drakon MIL{1}' # Forge-change: Ussp to MIL
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

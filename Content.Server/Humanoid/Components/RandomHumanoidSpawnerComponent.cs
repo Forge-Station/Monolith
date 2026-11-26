@@ -1,6 +1,6 @@
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Humanoid.Components;
 
@@ -11,7 +11,7 @@ namespace Content.Server.Humanoid.Components;
 [RegisterComponent, EntityCategory("Spawner")]
 public sealed partial class RandomHumanoidSpawnerComponent : Component
 {
-    [DataField("settings", customTypeSerializer: typeof(PrototypeIdSerializer<RandomHumanoidSettingsPrototype>))]
+    [DataField("settings", customTypeSerializer: typeof(ProtoId<RandomHumanoidSettingsPrototype>))]
     public string? SettingsPrototypeId;
 
     // Frontier: entity to use (e.g. in storage fills)

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal, ShowMedicalIcons, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHelmetHardsuitMercenaryWarlord
   name: WL-01 helmet
   description: A heavy headgear piece accompanying the Warlord suit, it offers flash inmunity aswell mass scanner support.
@@ -25,19 +25,21 @@
     radius: 8
     energy: 3
     color: "#e24242"
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: DetectionRangeMultiplier
-    infraredMultiplier: 0.5
-    visualMultiplier: 0.75
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  #- type: RadarConsole
+  #  followEntity: true
+  #  noRotate: true
+  #- type: DetectionRangeMultiplier
+  #  infraredMultiplier: 0.5
+  #  visualMultiplier: 0.75
+  #- type: ActivatableUI
+  #  key: enum.RadarConsoleUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.RadarConsoleUiKey.Key:
+  #      type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: HideLayerClothing
     slots:
     - Hair
@@ -47,7 +49,7 @@
 
 #SCAF Helmet
 - type: entity
-  parent: NFClothingHeadHardsuitWithLightBase
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision2Normal] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
   id: ClothingHeadHelmetHardsuitScaf
   name: scaf hardsuit helmet
   description: A robust, strong helmet. On the inside smells of pent up anger.
@@ -66,7 +68,7 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.8
+        Piercing: 0.9 # Forge-change 0.8-> 0.9
   - type: PointLight
     radius: 8 # 7->8 Mono
     energy: 3 # 2->3 Mono

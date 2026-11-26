@@ -1,9 +1,12 @@
+using Content.Server._Forge.CloakingShuttle; // Forge-Change - Cloaking
+using Content.Shared.Station.Components;
 using Content.Server._Mono.Ships.Systems;
 using Content.Server._Mono.Shuttles.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Systems;
+using Content.Shared._Forge.ShipyardService.Components; // Forge-Change
 using Content.Shared._NF.Shuttles.Events; // Frontier
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
@@ -17,6 +20,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Power;
 using Content.Shared.Shuttles.UI.MapObjects;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Collections;
 using Robust.Shared.GameStates;
@@ -27,6 +32,9 @@ using Content.Shared.Access.Systems; // Frontier
 using Content.Shared.Construction.Components; // Frontier
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Components;
+using Content.Server._NF.Shuttles.Components;
+using Content.Server._NF.Station.Components;
+using Content.Shared._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
 using Content.Shared._Mono.Ships.Components;
@@ -46,20 +54,25 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private TagSystem _tags = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedContentEyeSystem _eyeSystem = default!;
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private RadioSystem _radioSystem = default!;
-    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
     [Dependency] private ILogManager _log = default!;
     [Dependency] private CrewedShuttleSystem _crewedShuttle = default!;
 
     private ISawmill _sawmill = default!;
 
     private static readonly TimeSpan ShuttleBuiThrottleInterval = TimeSpan.FromSeconds(0.15);
-    private readonly Dictionary<EntityUid, (TimeSpan At, FTLState Ftl, ShuttleBioScanStatus Bio, int DockPorts)> _shuttleBuiLastPush = new();
+    private readonly Dictionary<EntityUid, (TimeSpan At,
+        FTLState Ftl,
+        ShuttleBioScanStatus Bio,
+        ShuttleCloakingStatus Cloak,
+        ShuttleConsoleMapScreenMode MapScreenMode,
+        int DockPorts)> _shuttleBuiLastPush = new();
 
     private EntityQuery<MetaDataComponent> _metaQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -91,6 +104,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             subs.Event<ShuttleConsoleFTLBeaconMessage>(OnBeaconFTLMessage);
             subs.Event<ShuttleConsoleFTLPositionMessage>(OnPositionFTLMessage);
             subs.Event<ShuttleConsoleBioScanPositionMessage>(OnBioScanPositionMessage); // Forge-Change - BioScan
+            subs.Event<MapToggleModShuttleMessage>(OnMapToggleModShuttleMessage); // Forge-Change - Cloaking
             subs.Event<ToggleFTLLockRequestMessage>(OnToggleFTLLock);
             subs.Event<BoundUIClosedEvent>(OnConsoleUIClose);
         });
@@ -111,11 +125,32 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         SubscribeLocalEvent<FTLDestinationComponent, ComponentStartup>(OnFtlDestStartup);
         SubscribeLocalEvent<FTLDestinationComponent, ComponentShutdown>(OnFtlDestShutdown);
 
+        SubscribeLocalEvent<CloakingShuttleComponent, CloakingShuttleStateChangedEvent>(OnCloakingChanged); // Forge-Change - Cloaking
+
         InitializeFTL();
         InitializeBioScan(); // Forge-Change - BioScan
 
         InitializeNFDrone(); // Frontier: add our drone subscriptions
     }
+
+    // Forge-Change-start - Cloaking
+    private void OnMapToggleModShuttleMessage(EntityUid uid, ShuttleConsoleComponent component, MapToggleModShuttleMessage args)
+    {
+        component.MapScreenMode = component.MapScreenMode switch
+        {
+            ShuttleConsoleMapScreenMode.BioScan => ShuttleConsoleMapScreenMode.Cloaking,
+            _ => ShuttleConsoleMapScreenMode.BioScan,
+        };
+
+        DockingInterfaceState? dockState = null;
+        UpdateState(uid, ref dockState);
+    }
+
+    private void OnCloakingChanged(EntityUid gridUid, CloakingShuttleComponent component, CloakingShuttleStateChangedEvent args)
+    {
+        RefreshShuttleConsoles(gridUid);
+    }
+    // Forge-Change-end - Cloaking
 
     private void OnFtlDestStartup(EntityUid uid, FTLDestinationComponent component, ComponentStartup args)
     {
@@ -383,6 +418,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 HighlightedRadarColor = comp.HighlightedRadarColor, // Frontier
                 DockType = comp.DockType, // Frontier
                 ReceiveOnly = comp.ReceiveOnly, // Frontier
+                ShipyardService = HasComp<ShipyardDockComponent>(uid), // Forge-Change
             };
 
             gridDocks.Add(state);
@@ -432,6 +468,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 default, // Forge-Change - BioScan
                 ShuttleBioScanStatus.None, // Forge-Change - BioScan
                 false, // Forge-Change - BioScan
+                default, // Forge-Change - Cloaking
+                default, // Forge-Change - Cloaking
+                ShuttleCloakingStatus.None, // Forge-Change - Cloaking
+                ShuttleConsoleMapScreenMode.BioScan, // Forge-Change - Cloaking
                 includeBeaconExclusionLists: includeMapLists);
         }
 
@@ -439,13 +479,21 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             _shuttleBuiLastPush.TryGetValue(consoleUid, out var prev) &&
             prev.Ftl == mapState.FTLState &&
             prev.Bio == mapState.BioScanStatus &&
+            prev.Cloak == mapState.CloakingStatus &&
+            prev.MapScreenMode == mapState.MapScreenMapScreenMode &&
             prev.DockPorts == CountDockPorts(dockState) &&
             _timing.CurTime - prev.At < ShuttleBuiThrottleInterval)
         {
             return;
         }
 
-        _shuttleBuiLastPush[consoleUid] = (_timing.CurTime, mapState.FTLState, mapState.BioScanStatus, CountDockPorts(dockState));
+        _shuttleBuiLastPush[consoleUid] = (
+            _timing.CurTime,
+            mapState.FTLState,
+            mapState.BioScanStatus,
+            mapState.CloakingStatus,
+            mapState.MapScreenMapScreenMode,
+            CountDockPorts(dockState));
 
         _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState));
     }
@@ -515,6 +563,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     private void OnConsoleShutdown(EntityUid uid, ShuttleConsoleComponent component, ComponentShutdown args)
     {
         ClearPilots(component);
+        _shuttleBuiLastPush.Remove(uid); // Forge-Change: BUI throttle cache leaked deleted consoles
     }
 
     public void AddPilot(EntityUid uid, EntityUid entity, ShuttleConsoleComponent component)
@@ -640,6 +689,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         StartEndTime bioScanTime = default; // Forge-Change - BioScan
         var bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
         var bioScanAvailable = false; // Forge-Change - BioScan
+        StartEndTime cloakingTimeActive = default; // Forge-Change - Cloaking
+        StartEndTime cloakingTimeCooldown = default; // Forge-Change - Cloaking
+        var cloakingState = ShuttleCloakingStatus.None; // Forge-Change - Cloaking
+        var mapScreenMode = ShuttleConsoleMapScreenMode.BioScan; // Forge-Change - Cloaking
 
         if (Resolve(shuttle, ref shuttle.Comp, false) && shuttle.Comp.LifeStage < ComponentLifeStage.Stopped)
         {
@@ -668,7 +721,17 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             bioScanTime = console.BioScanTime;
             bioScanStatus = console.BioScanStatus;
             bioScanAvailable = CanUseBioScan((consoleUid, console), shuttle.Owner);
+            mapScreenMode = console.MapScreenMode;
         }
+
+        // Forge-Change-start - Cloaking
+        if (TryComp<CloakingShuttleComponent>(Transform(consoleUid).GridUid, out var cloakingShuttleComponent))
+        {
+            cloakingTimeActive = cloakingShuttleComponent.TimeActive;
+            cloakingTimeCooldown = cloakingShuttleComponent.TimeCooldown;
+            cloakingState = cloakingShuttleComponent.Status;
+        }
+        // Forge-Change-end - Cloaking
 
         return new ShuttleMapInterfaceState(
             ftlState,
@@ -678,6 +741,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             bioScanTime,
             bioScanStatus,
             bioScanAvailable,
+            cloakingTimeActive, // Forge-Change - Cloaking
+            cloakingTimeCooldown, // Forge-Change - Cloaking
+            cloakingState, // Forge-Change - Cloaking
+            mapScreenMode, // Forge-Change - Cloaking
             includeBeaconExclusionLists);
         // Forge-Change-end - BioScan
     }
@@ -702,6 +769,18 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         if (owningStation == null)
             return;
 
+        // Outposts (Центральный аванпост and the other late-join stations) are not ships.
+        // Every grid still gets ShuttleComponent, and these maps place shuttle/traffic consoles
+        // on that grid. A brownout, or a split-off chunk whose console never gets power again,
+        // used to save every slot and then set it to 0 — including unlimited (-1) jobs.
+        // The saved counts live on whichever grid lost power, so the outpost stays at 0 slots
+        // until someone edits them by hand.
+        if (IsOutpostStation(owningStation.Value, gridUid))
+        {
+            ReleaseOutpostJobSlots(owningStation.Value);
+            return;
+        }
+
         // Check if the grid has any powered shuttle consoles
         var hasPoweredConsole = HasPoweredShuttleConsole(gridUid);
 
@@ -714,6 +793,39 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         {
             // Has powered console
             RestoreJobSlots(gridUid, owningStation.Value);
+        }
+    }
+
+    /// <summary>
+    /// Late-join stations and anchored outposts. Helm power on these grids is not
+    /// "the ship is dead", so it must not close their job slots.
+    /// </summary>
+    private bool IsOutpostStation(EntityUid station, EntityUid gridUid)
+    {
+        if (HasComp<ExtraStationInformationComponent>(station))
+            return true;
+
+        if (HasComp<ForceAnchorComponent>(gridUid))
+            return true;
+
+        // A split-off chunk does not copy ForceAnchor, but the station's main grid still has it.
+        var largest = _station.GetLargestGrid(station);
+        return largest != null && HasComp<ForceAnchorComponent>(largest.Value);
+    }
+
+    /// <summary>
+    /// Puts back slots that an earlier power loss already closed, then leaves them alone.
+    /// The saved copy may sit on a split-off grid, not on the console that just changed.
+    /// </summary>
+    private void ReleaseOutpostJobSlots(EntityUid station)
+    {
+        var query = EntityQueryEnumerator<ShuttleConsoleJobSlotsComponent>();
+        while (query.MoveNext(out var grid, out var jobSlots))
+        {
+            if (jobSlots.SavedJobSlots.Count == 0 || jobSlots.OwningStation != station)
+                continue;
+
+            RestoreJobSlots(grid, station);
         }
     }
 

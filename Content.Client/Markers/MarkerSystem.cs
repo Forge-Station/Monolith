@@ -3,8 +3,10 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Client.Markers;
 
-public sealed class MarkerSystem : EntitySystem
+public sealed partial class MarkerSystem : EntitySystem
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     private bool _markersVisible;
 
     public bool MarkersVisible
@@ -33,7 +35,7 @@ public sealed class MarkerSystem : EntitySystem
     {
         if (EntityManager.TryGetComponent(uid, out SpriteComponent? sprite))
         {
-            sprite.Visible = MarkersVisible;
+            _sprite.SetVisible((uid, sprite), MarkersVisible);
         }
     }
 

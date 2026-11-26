@@ -12,7 +12,7 @@ using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -162,7 +162,7 @@ namespace Content.Server.Administration.Commands
                 }
 
                 // Equip the target with the job loadout
-                var stationSpawning = entityManager.System<SharedStationSpawningSystem>();
+                var stationSpawning = entityManager.System<StationSpawningSystem>();
                 stationSpawning.EquipRoleLoadout(target, roleLoadout, jobProto);
             }
 

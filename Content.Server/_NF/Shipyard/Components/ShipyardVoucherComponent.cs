@@ -14,6 +14,10 @@ public sealed partial class ShipyardVoucherComponent : Component
     [DataField]
     public uint RedemptionsLeft = 1;
 
+    // Forge-change: tracks original redemption count for unused voucher material reclaim.
+    [DataField]
+    public uint InitialRedemptions;
+
     /// <summary>
     ///  If true, card will be destroyed when no redemptions are left. Checked at time of sale.
     /// </summary>

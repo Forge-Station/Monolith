@@ -1,5 +1,5 @@
 // Forge-Change
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SecApartment;

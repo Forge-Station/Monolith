@@ -24,13 +24,20 @@
   # Light
   - ClothingOuterHardsuitRI14
   - ClothingOuterHardsuitRI14m
+  - ClothingOuterHardsuitRI14i
   # Battle
   - ClothingOuterHardsuitRI22
+  - ClothingOuterHardsuitRI22i
   # Heavy
   - ClothingOuterHardsuitHV7
+  - ClothingOuterHardsuitHV7i
   # HV
+  - ClothingOuterHardsuitHV2
+  - ClothingOuterHardsuitHV2Inq
   - ClothingOuterHardsuitHVMilitant
-  - ClothingOuterHardsuitHVStealh
+  - ClothingOuterHardsuitHVReflectElite
+  - ClothingOuterHardsuitHVStealth
+  - ClothingOuterHardsuitRI32m
 
 - type: latheRecipePack
   id: WeaponEmpirePack
@@ -50,7 +57,19 @@
   - WeaponSubMachineGunWt550Rogue
   - WeaponSubMachineGunAtreidesRogue
   - WeaponShotgunBulldogRogue
-  - WeaponSniperHristovRogue
-  - AmmoBox145x114mm
-  - AmmoBox145x114mmBig
   - ADTWeaponMeleePrasatChainsword
+  - AmmoBoxShenzhenBig
+  - WeaponAMRShenzhenTSF
+  - WeaponEnergyRifleUnion
+  - WeaponEnergyLMGHeavion
+  - WeaponEnergyShotgunKiller
+  - MagazinePowerUnion
+  - MagazinePowerUnionOverpressure
+  - MagazinePowerUnionXRay
+  - MagazinePowerUnionOverpressureXRay
+  - MagazinePowerUnionDisabler
+  - MagazinePowerUnionOverpressureDisabler
+  - MagazinePowerHeavion
+  - MagazinePowerShotgun
+  - WeaponRifleSeraphim
+  - WeaponRifleSong

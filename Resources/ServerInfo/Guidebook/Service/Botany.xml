@@ -63,12 +63,107 @@ Plants treated with [color=cyan]unstable mutagen[/color] will experience random 
 
 The more unstable mutagen you use, the more mutations you will get. Since many genes are vital to a plant's survival, most mutations will cause a plant to die.
 
+Rare mutations can make a plant [color=yellow]exude gas when it ripens[/color] (rarer gases are much less likely), [color=yellow]demand a specific atmosphere[/color], [color=red]emit radiation[/color], or even [color=red]grab nearby people[/color]. If vines seize you, use the Tear free action.
+
+<Box>
+<GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
+<GuideEntityEmbed Entity="PlantAnalyzer"/>
+<GuideEntityEmbed Entity="ClothingEyesGlassesBotany"/>
+<GuideEntityEmbed Entity="ComputerHydroponics"/>
+</Box>
+
+The [color=cyan]plant analyzer[/color] (or an AgroScan PDA cartridge) shows genes, mutations, reagents, and tray status. The window stays open in an inactive hand or pocket. [color=cyan]Print label[/color] stamps a short tag (potency, reagents, mutations) onto a scanned [color=yellow]seed packet[/color].
+
+[color=cyan]Botanical analyzer glasses[/color] overlay a health bar plus status squares: [color=#4aa8ff]blue[/color] low water, [color=#7dce4a]green[/color] weeds, [color=#e8d050]yellow[/color] harvest, [color=#f0c040]gold[/color] radiation.
+
+Link trays to a [color=cyan]hydroponics console[/color] with a network configurator. Filter the list by [color=yellow]harvest / low water / radiation / carnivorous[/color]. The [color=cyan]Journal[/color] tab stores a named line (name + genes), prints a seed packet, or writes a [color=cyan]cultivar disk[/color].
+
+## Tray light
+Each tray has three modes: [color=lightgreen]ambient[/color], [color=yellow]day[/color], and [color=cyan]shade[/color]. Cycle with alt-click on the tray or from the console.
+
+Normal crops are fine under station lighting. If a line "wants sun", switch the tray to [color=yellow]day[/color] or it will wilt. Shade-lovers want [color=cyan]shade[/color]. Light-hungry cultivars and [color=lightgreen]photozyme[/color] barely matter until the tray is on Day.
+
+## Woody plants
+A [color=lightgreen]ligneous[/color] plant will not come off with bare hands — you need a knife or clippers. In return, harvest drops [color=cyan]cloth tinted to that cultivar[/color], not a grey rag: one or two sheets, more if potency is high. Textile will thank you.
+
+High potency also drops [color=cyan]juice[/color] (a glass of the plant's reagents) and [color=cyan]dried produce[/color] in the same color. Aloe (dermaline) or antirad (hyronalin) lines at about 45+ potency drop [color=cyan]salve[/color] and [color=cyan]tea[/color] with no chemist required.
+
+## What mutagen actually rolls
+Unstable mutagen spins several wheels at once. More mutagen in the tray means more hits. Gases are a separate lottery: oxygen and nitrogen almost always, [color=yellow]Frezon[/color] only if you are very lucky (or unlucky).
+
+This is what you will see on the tray, not the internal names. Common stuff first, all-shift hunts at the bottom.
+
+### Common
+- [color=#88cc88]Unviable[/color]: the bush dies on its own in a few cycles. Yank it, don't wait.
+- [color=#88cc88]New juice[/color]: produce gains an extra reagent. Unique phytochemicals still will not appear until the plant already has the matching mutation or climate (see the list below).
+
+### Occasional
+- [color=#88cc88]Slippery[/color]: fruit is a banana peel. Harmless, funny for security.
+- [color=#88cc88]Ligneous[/color]: needs a sharp tool, drops cloth.
+- [color=#88cc88]Screaming[/color]: it yells when harvested. Embarrassing, not lethal.
+- [color=#88cc88]Light shift[/color]: the plant starts preferring brighter or darker trays. Without this, Day/Shade and photozyme barely do anything.
+
+### Rare
+- [color=#88cc88]Exudes gas[/color]: a ripe plant dumps gas into the room. Usually boring; sometimes plasma, tritium, or Frezon — call atmos, don't be a hero.
+- [color=#88cc88]Breathes gas[/color]: the tray needs a specific gas or the plant sickens. You can tune a room to keep a line alive.
+- [color=#88cc88]CO₂ filter[/color]: eats carbon dioxide and only that. Park it in a stuffy cabin — a living scrubber with no surprises.
+- [color=#e85858]Carnivorous vines[/color]: they grab whoever stands too close. If you get caught, use Tear free. Keep interns away. This old type is still in the pool.
+- [color=#88cc88]Pest-eater[/color]: a different carnivorous kind — it eats weeds and bugs in the tray and leaves people alone. A useful bush, not a trap.
+
+### Very rare
+- [color=#88cc88]Antirad fruit[/color]: hyronalin in the produce, the bush itself does not glow. A medkit from the garden.
+- [color=#e85858]Radioactive[/color]: the plant irradiates the tray. Standing next to it hurts, but you can distill radbloom extract. Hunt it on purpose.
+
+### Extra niches
+- [color=#88cc88]Drought-tolerant[/color]: barely drinks. Fewer bucket trips.
+- [color=#88cc88]Nitrogen fixer[/color]: barely needs fertilizer.
+- [color=#88cc88]Shade-adapted[/color]: wants the tray on Shade.
+- [color=#88cc88]Sun-lover[/color]: wants Day. Pairs with photozyme.
+- [color=#88cc88]Perennial[/color]: grows back after harvest instead of dying.
+- [color=#88cc88]Pest ward[/color]: bugs almost never take hold.
+- [color=#88cc88]Thin air[/color]: tolerates low pressure.
+- [color=#88cc88]Oxygen bloom[/color]: exhales oxygen. A living vent for a cabin.
+- [color=#88cc88]Aloe[/color]: dermaline in the fruit — a salve from the garden.
+- [color=#88cc88]Bitter antidote[/color]: dylovene in the fruit.
+
+A loaded swab also works on a [color=cyan]seed packet[/color]: poke the packet, the line grafts, no tray needed.
+
+[color=cyan]Gene stabilizer[/color] from NutriMax locks a line. Mutagen will not scramble that plant afterwards; swab grafting still works.
+
+Trays can be [color=cyan]renamed from the console[/color] (`wheat-rad-3`), otherwise the list is just HYD-xxxx. Cargo pays more for bred packets: potency, mutations, and rare juices.
+
+<Box>
+<GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
+<GuideEntityEmbed Entity="BotanyCultivarDisk"/>
+</Box>
+
+## Unique phytochemicals
+These reagents only show up in produce when the plant already has matching mutations or growing conditions:
+
+- [color=lightgreen]Phyto-aether[/color]: potency 50+
+- [color=lightgreen]Lignin resin[/color]: ligneous plants
+- [color=lightgreen]Cryo-chlorophyll[/color]: very cold ideal temperature
+- [color=lightgreen]Photozyme[/color]: high light requirement
+- [color=lightgreen]Necrotoxin sap[/color]: kudzu mutation
+- [color=lightgreen]Radbloom extract[/color]: radioactive plants
+- [color=lightgreen]Vine ichor[/color]: carnivorous vines
+- [color=lightgreen]Atmophyte[/color]: plants that consume or exude gas
+
+A sterile swab can be printed from the biogenerator.
+
 <Box>
 <GuideEntityEmbed Entity="UnstableMutagenChemistryBottle"/>
 </Box>
 
 ## Cross-Pollination
-You can use a [color=cyan]sterile swab[/color] to transfer pollen from one plant to another. Plants that are cross-pollinated have a chance to transfer traits. Be careful re-using swabs; pollen is sticky!
+A [color=cyan]sterile swab[/color] is not a "scramble everything and lose the seeds" lottery.
+
+- From a living plant the swab picks up [color=yellow]that line's pollen[/color] (examine the swab to see whose).
+- On an empty tray the pollen sprouts — a [color=lightgreen]new plant of the same line[/color].
+- On another living plant it [color=lightgreen]grafts[/color]: the host keeps its species, while mutations, juices, and gases from the pollen move over. Crossing no longer makes the hybrid seedless by itself.
+- On a [color=cyan]seed packet[/color] the same graft applies: poke the packet, the line takes. No tray required.
+
+Pollen stays on the swab until you collect a different line. You cannot swab a dead plant.
 
 <Box>
 <GuideEntityEmbed Entity="BoxMouthSwab"/>

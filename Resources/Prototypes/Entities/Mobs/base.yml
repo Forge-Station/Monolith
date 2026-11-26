@@ -10,6 +10,7 @@
     drawdepth: Mobs
   - type: MobCollision
   - type: GravityAffected
+  - type: CEZPhysics # CrystallEdge
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -67,6 +68,10 @@
   id: MobDamageable
   abstract: true
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: MeatBulletImpact
   - type: Damageable
     damageContainer: Biological
   - type: Destructible
@@ -238,7 +243,7 @@
   id: MobBloodstream
   abstract: true
   components:
-  - type: SolutionContainerManager
+  - type: SolutionManager
   - type: InjectableSolution
     solution: chemicals
   - type: Bloodstream

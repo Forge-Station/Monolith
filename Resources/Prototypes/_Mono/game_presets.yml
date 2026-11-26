@@ -14,11 +14,11 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoRogueTSF
@@ -31,11 +31,11 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoRogueUSSP
@@ -48,11 +48,11 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoTSFUSSP
@@ -65,11 +65,11 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoADS
@@ -82,7 +82,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -96,6 +96,7 @@
   - ForgeAsakimSTCShuttleSpawnerScheduler
   # Forge-Change-end
 
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoChimera
@@ -108,12 +109,12 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerScheduler
   - MonoMonolithicEventsScheduler
-
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 - type: gamePreset
   id: MonoMixed
@@ -126,7 +127,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow
@@ -135,6 +136,7 @@
   - ForgeAISTCShuttleSpawnerSchedulerTier3Slow # Forge-Change
   - MonoAsakimSTCShuttleSpawnerSchedulerSlow
   - MonoMonolithicEventsScheduler
+  #- PortstrikeAnnounceRuleRandom35To45 #Forge-Change нам это пока не надо
 
 #- type: gamePreset
 #  id: MonoAllAtOnce
@@ -166,4 +168,4 @@
   - NFAdventure
   - Hyperwar
   - RoundEndRuleHour3
-  - PortstrikeAnnounceRuleMinute90
+  #- PortstrikeAnnounceRuleHour2 #Forge-Change нам это пока не надо

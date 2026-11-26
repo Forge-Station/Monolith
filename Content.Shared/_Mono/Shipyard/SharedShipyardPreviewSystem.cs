@@ -9,7 +9,7 @@ namespace Content.Shared._Mono.Shipyard;
 
 public abstract class SharedShipyardPreviewSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedMindSystem _mind = default!;
 

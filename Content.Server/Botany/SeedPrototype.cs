@@ -5,8 +5,8 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
+
 using Robust.Shared.Utility;
 
 namespace Content.Server.Botany;
@@ -81,7 +81,7 @@ public partial struct SeedChemQuantity
 
 // TODO reduce the number of friends to a reasonable level. Requires ECS-ing things like plant holder component.
 [Virtual, DataDefinition]
-[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem))]
+[Access(typeof(BotanySystem), typeof(PlantHolderSystem), typeof(SeedExtractorSystem), typeof(PlantHolderComponent), typeof(EntityEffect), typeof(MutationSystem), typeof(Content.Server._Forge.Botany.PlantGrab.PlantGrabSystem), typeof(Content.Server.EntityEffects.Effects.PlantGasMutationHelpers), typeof(Content.Server._Forge.Botany.HydroponicsConsole.HydroponicsConsoleSystem))]
 public partial class SeedData
 {
     #region Tracking
@@ -130,13 +130,13 @@ public partial class SeedData
     /// <summary>
     ///     The entity prototype that is spawned when this type of seed is extracted from produce using a seed extractor.
     /// </summary>
-    [DataField("packetPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("packetPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string PacketPrototype = "SeedBase";
 
     /// <summary>
     ///     The entity prototype this seed spawns when it gets harvested.
     /// </summary>
-    [DataField("productPrototypes", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+    [DataField("productPrototypes", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public List<string> ProductPrototypes = new();
 
     [DataField] public Dictionary<string, SeedChemQuantity> Chemicals = new();
@@ -183,6 +183,23 @@ public partial class SeedData
     [DataField] public HarvestType HarvestRepeat = HarvestType.NoRepeat;
 
     [DataField] public float Potency = 1f;
+
+    /// <summary>
+    ///     Forge: if greater than zero, harvesting always yields exactly this many
+    ///     produce entities — the count is taken directly from this field,
+    ///     ignoring <see cref="Yield"/>, yieldMod (fertilizers, tray bonuses)
+    ///     and mutations. Zero (default) disables the override: the harvest
+    ///     count falls back to the regular <see cref="Yield"/>-based calculation.
+    /// </summary>
+    [DataField] public int FixedSingleYield = 0; // Forge-Change
+
+    /// <summary>
+    ///     chance (0..1) that harvest actually spawns produce.
+    ///     1 = always (default), 0.5 = 50% chance, 0 = never.
+    ///     checked for each product.
+    /// </summary>
+    [DataField]
+    public float HarvestChance = 1f; // Forge-Change
 
     /// <summary>
     ///     If true, cannot be harvested for seeds. Balances hybrids and
@@ -248,10 +265,53 @@ public partial class SeedData
 
     [DataField("screaming")] public bool CanScream;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))] public string KudzuPrototype = "WeakKudzu";
 
     [DataField] public bool TurnIntoKudzu;
     [DataField] public string? SplatPrototype { get; set; }
+
+    /// <summary>
+    ///     If true, the growing plant emits ionizing radiation.
+    /// </summary>
+    [DataField] public bool Radioactive;
+
+    /// <summary>
+    ///     Radiation intensity applied to the hydroponics tray while this plant is alive.
+    /// </summary>
+    [DataField] public float RadiationIntensity = 1.25f;
+
+    /// <summary>
+    ///     If true, the mature plant periodically seizes nearby mobs and damages them.
+    /// </summary>
+    [DataField] public bool CarnivorousGrab;
+
+    /// <summary>
+    ///     If true, the plant eats weeds and pests instead of damaging itself on them.
+    ///     Separate from <see cref="CarnivorousGrab"/> — grab vines still grab people.
+    /// </summary>
+    [DataField] public bool CarnivorousPestEater;
+
+    /// <summary>
+    ///     If true, mutagen and mutation-level reagents no longer scramble this line.
+    /// </summary>
+    [DataField] public bool GeneLocked;
+
+    // Forge-Change-start
+    /// <summary>
+    ///     Trait ids that were present when the genome was locked with gene stabilizer.
+    /// </summary>
+    [DataField] public List<string> PinnedTraits = new();
+
+    /// <summary>
+    ///     Printed cultivar lines cannot be archived back into the hydroponics journal.
+    /// </summary>
+    [DataField] public bool CultivarJournalLocked;
+    // Forge-Change-end
+
+    /// <summary>
+    ///     Range in tiles used when checking for grab victims.
+    /// </summary>
+    [DataField] public float GrabRange = 1.5f;
 
     #endregion
 
@@ -263,7 +323,7 @@ public partial class SeedData
     /// <summary>
     ///     The seed prototypes this seed may mutate into when prompted to.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<SeedPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<SeedPrototype>))]
     public List<string> MutationPrototypes = new();
 
     public SeedData Clone()
@@ -298,6 +358,8 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            FixedSingleYield = FixedSingleYield, // Forge-Change
+            HarvestChance = HarvestChance, // Forge-Change
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,
@@ -318,6 +380,16 @@ public partial class SeedData
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
             SplatPrototype = SplatPrototype,
+            Radioactive = Radioactive,
+            RadiationIntensity = RadiationIntensity,
+            CarnivorousGrab = CarnivorousGrab,
+            CarnivorousPestEater = CarnivorousPestEater,
+            GeneLocked = GeneLocked,
+            // Forge-Change-start
+            PinnedTraits = new List<string>(PinnedTraits),
+            CultivarJournalLocked = CultivarJournalLocked,
+            // Forge-Change-end
+            GrabRange = GrabRange,
             Mutations = new List<RandomPlantMutation>(),
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.
@@ -363,6 +435,8 @@ public partial class SeedData
 
             Endurance = Endurance,
             Yield = Yield,
+            FixedSingleYield = other.FixedSingleYield, // Forge-Change
+            HarvestChance = other.HarvestChance, // Forge-Change
             Lifespan = Lifespan,
             Maturation = Maturation,
             Production = Production,
@@ -384,6 +458,16 @@ public partial class SeedData
             PlantIconState = other.PlantIconState,
             CanScream = CanScream,
             TurnIntoKudzu = TurnIntoKudzu,
+            Radioactive = Radioactive,
+            RadiationIntensity = RadiationIntensity,
+            CarnivorousGrab = CarnivorousGrab,
+            CarnivorousPestEater = CarnivorousPestEater,
+            GeneLocked = GeneLocked,
+            // Forge-Change-start
+            PinnedTraits = new List<string>(PinnedTraits),
+            CultivarJournalLocked = CultivarJournalLocked,
+            // Forge-Change-end
+            GrabRange = GrabRange,
             SplatPrototype = other.SplatPrototype,
 
             // Newly cloned seed is unique. No need to unnecessarily clone if repeatedly modified.

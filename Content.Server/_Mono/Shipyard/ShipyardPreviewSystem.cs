@@ -42,19 +42,28 @@ public sealed class ShipyardPreviewSystem : SharedShipyardPreviewSystem
 
     private void OnPreview(Entity<ShipyardConsoleComponent> ev, ref ShipyardConsolePreviewMessage evMsg)
     {
+        EnsureMap();
         CachePreviewMap();
+
+        if (_previewMap == MapId.Nullspace)
+            return;
 
         TryPreviewEntity(evMsg.Actor);
     }
 
     private void EnsureMap()
     {
+        CachePreviewMap();
+        if (_previewMap != MapId.Nullspace && _map.MapExists(_previewMap))
+            return;
+
         var mapUid = _map.CreateMap();
         var pMap = EnsureComp<PreviewMapComponent>(mapUid);
 
         _meta.SetEntityName(mapUid, "Shuttle preview map.");
 
         Dirty(mapUid, pMap);
+        CachePreviewMap();
     }
 
     private void OnDispose(ShipyardPreviewExitMessage ev)

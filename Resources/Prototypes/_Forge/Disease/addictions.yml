@@ -4,7 +4,7 @@
   name: syndrome-stimulant-addiction
   organ: Brain
   interval: 16
-  severityDecay: 0.03
+  severityDecay: 0.06
   flareDelay: 640
   stages:
     - minSeverity: 0
@@ -35,6 +35,7 @@
     - minSeverity: 45
       symptoms:
         - !type:MovespeedSymptom
+          flareOnly: true
           walkModifier: 0.80
           sprintModifier: 0.80
           key: StimulantAddiction
@@ -64,14 +65,14 @@
             - !type:GenericStatusEffect
               key: Stutter
               component: StutteringAccent
-              time: 8
+              time: 6
               type: Add
     # region Stage 3
     - minSeverity: 70
       symptoms:
         - !type:MovespeedSymptom
-          walkModifier: 0.65
-          sprintModifier: 0.65
+          walkModifier: 0.8
+          sprintModifier: 0.8
           key: StimulantAddiction
           time: 16
         - !type:EntityEffectList # name: random
@@ -131,7 +132,7 @@
   name: syndrome-opioid-addiction
   organ: Brain
   interval: 14
-  severityDecay: 0.025
+  severityDecay: 0.09
   flareDelay: 660
   stages:
     - minSeverity: 0
@@ -158,8 +159,9 @@
     - minSeverity: 45
       symptoms:
         - !type:MovespeedSymptom
-          walkModifier: 0.75
-          sprintModifier: 0.75
+          flareOnly: true
+          walkModifier: 0.8
+          sprintModifier: 0.8
           key: OpioidAddiction
           time: 10
         - !type:EntityEffectList # name: random staff
@@ -202,8 +204,8 @@
     - minSeverity: 75
       symptoms:
         - !type:MovespeedSymptom
-          walkModifier: 0.60
-          sprintModifier: 0.60
+          walkModifier: 0.8
+          sprintModifier: 0.8
           key: OpioidAddiction
           time: 14
         - !type:EntityEffectList # name: random bullshit go
@@ -251,7 +253,7 @@
   name: syndrome-sedative-addiction
   organ: Brain
   interval: 16
-  severityDecay: 0.02
+  severityDecay: 0.07
   flareDelay: 860
   stages:
     - minSeverity: 0
@@ -278,6 +280,7 @@
     - minSeverity: 45
       symptoms:
         - !type:MovespeedSymptom
+          flareOnly: true
           walkModifier: 0.88
           sprintModifier: 0.88
           key: SedativeAddiction
@@ -314,8 +317,8 @@
     - minSeverity: 75
       symptoms:
         - !type:MovespeedSymptom
-          walkModifier: 0.72
-          sprintModifier: 0.72
+          walkModifier: 0.85
+          sprintModifier: 0.85
           key: SedativeAddiction
           time: 10.0
         - !type:EntityEffectList # name: random
@@ -383,9 +386,9 @@
   id: NicotineAddiction
   name: syndrome-nicotine-addiction
   organ: Body
-  interval: 20
-  severityDecay: 0.001
-  flareDelay: 360
+  interval: 30
+  severityDecay: 0.002
+  flareDelay: 420
   stages:
     - minSeverity: 0
     # region Stage 1
@@ -403,7 +406,7 @@
               visualType: Medium
               probability: 0.5
     # region Stage 2
-    - minSeverity: 50
+    - minSeverity: 60
       symptoms:
         - !type:EntityEffectList # name: *Cough*... Ah, the sweet taste of bad decisions.
           effects:
@@ -420,7 +423,7 @@
               probability: 0.03
             - !type:Emote
               emote: Cough
-              probability: 0.4
+              probability: 0.2
             - !type:PopupMessage
               type: Local
               messages:
@@ -429,7 +432,7 @@
               visualType: MediumCaution
               probability: 0.45
     # region Stage 3
-    - minSeverity: 80
+    - minSeverity: 90
       symptoms:
         - !type:EntityEffectList # name: *Cough*... Ah, the sweet taste of bad decisions.
           effects:

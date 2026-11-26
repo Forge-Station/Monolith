@@ -342,6 +342,12 @@ reagent-effect-guidebook-reset-narcolepsy =
         *[other] temporarily stave
     } off narcolepsy
 
+reagent-effect-guidebook-lactozitium-reaction =
+    { $chance ->
+        [1] Triggers
+        *[other] trigger
+    } farting, vomiting, and burping in Lactozit-intolerant metabolisms
+
 reagent-effect-guidebook-wash-cream-pie-reaction =
     { $chance ->
         [1] Washes
@@ -441,3 +447,19 @@ reagent-effect-guidebook-add-to-chemicals =
         [1] to
         *[-1] from
     } the solution
+
+reagent-effect-guidebook-stamina-damage =
+    { $chance ->
+        [1] Deals
+       *[other] Deal
+    } { NATURALFIXED($amount, 2) } stamina damage
+reagent-effect-guidebook-stamina-crit =
+    { $chance ->
+        [1] Causes
+       *[other] Cause
+    } complete stamina exhaustion
+reagent-effect-guidebook-absorb-reagent =
+    { $chance ->
+        [1] Seeps
+       *[other] Seep
+    } into the bloodstream

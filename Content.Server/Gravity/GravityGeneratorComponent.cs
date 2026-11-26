@@ -1,6 +1,6 @@
 using Content.Shared.Gravity;
 using Content.Shared.Construction.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Gravity
 {
@@ -16,5 +16,11 @@ namespace Content.Server.Gravity
         /// </summary>
         [ViewVariables]
         public bool GravityActive { get; set; } = false;
+
+        /// <summary>
+        /// pzn: maximum grid mass (= tiles / ShuttleSystem.TileDensityMultiplier because robustdevs lazy as fuck) that this gravgen can take on planetmaps
+        /// </summary>
+        [DataField]
+        public float MaxHandledMass;
     }
 }

@@ -4,11 +4,11 @@
   parent: [Clothing, ContentsExplosionResistanceBase]
   id: ClothingModsuitHMELightSuit
   name: HME light hardsuit "Preserver" control unit
-  description: light-HME-modsuit-desc 
+  description: light-HME-modsuit-desc
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Back/Modsuits/hme_lightmod.rsi
+    sprite: _Forge/Clothing/Back/Modsuits/hme_lightmod.rsi
     layers:
     - state: control
     - state: control-sealed
@@ -94,11 +94,11 @@
   parent: [Clothing, ContentsExplosionResistanceBase]
   id: ClothingModsuitHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" control unit
-  description: heavy-HME-modsuit-desc 
+  description: heavy-HME-modsuit-desc
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Back/Modsuits/hme_heavymod.rsi
+    sprite: _Forge/Clothing/Back/Modsuits/hme_heavymod.rsi
     layers:
     - state: control
     - state: control-sealed
@@ -193,10 +193,10 @@
   components:
   - type: Appearance
   - type: Icon
-    sprite: Forge/Clothing/Back/Modsuits/omnissiamod.rsi
+    sprite: _Forge/Clothing/Back/Modsuits/omnissiamod.rsi
     state: control
   - type: Sprite
-    sprite: Forge/Clothing/Back/Modsuits/omnissiamod.rsi
+    sprite: _Forge/Clothing/Back/Modsuits/omnissiamod.rsi
     layers:
     - state: control
     - state: control-sealed

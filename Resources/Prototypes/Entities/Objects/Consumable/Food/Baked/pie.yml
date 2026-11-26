@@ -24,6 +24,8 @@
           Quantity: 5
         - ReagentId: Flavorol
           Quantity: 11
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 2             # Forge-change
   - type: Food #All pies here made with a pie tin; unless you're some kind of savage, you're probably not destroying this when you eat or slice the pie!
     trash:
     - FoodPlateTin
@@ -57,6 +59,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 2
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.5           # Forge-change
   - type: Tag
     tags:
     - Pie
@@ -487,6 +491,8 @@
           Quantity: 4
         - ReagentId: Flavorol
           Quantity: 6
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 4             # Forge-change
 # Tastes like pie, mushrooms.
 
 - type: entity
@@ -560,4 +566,6 @@
           Quantity: 2
         - ReagentId: Flavorol
           Quantity: 15
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.5           # Forge-change
 # Tastes like tart, dark chocolate.

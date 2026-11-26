@@ -40,7 +40,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     [Dependency] private RottingSystem _rot = default!;
     [Dependency] private BlindableSystem _blindableSystem = default!;
 
-    private readonly List<EntProtoId> _surgeries = new();
+    //private readonly List<EntProtoId> _surgeries = new();
 
     public override void Initialize()
     {
@@ -54,14 +54,14 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
         SubscribeLocalEvent<SurgeryDamageChangeEffectComponent, SurgeryStepDamageChangeEvent>(OnSurgeryDamageChange);
         SubscribeLocalEvent<SurgeryStepEmoteEffectComponent, SurgeryStepEvent>(OnStepScreamComplete);
         SubscribeLocalEvent<SurgeryStepSpawnEffectComponent, SurgeryStepEvent>(OnStepSpawnComplete);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        LoadPrototypes();
+        //SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        //LoadPrototypes();
     }
 
     protected override void RefreshUI(EntityUid body)
     {
         var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
-        foreach (var surgery in _surgeries)
+        foreach (var surgery in AllSurgeries)
         {
             if (GetSingleton(surgery) is not { } surgeryEnt)
                 continue;
@@ -174,19 +174,19 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     private void OnStepSpawnComplete(Entity<SurgeryStepSpawnEffectComponent> ent, ref SurgeryStepEvent args) =>
         SpawnAtPosition(ent.Comp.Entity, Transform(args.Body).Coordinates);
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (!args.WasModified<EntityPrototype>())
-            return;
+    // private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    // {
+    //     if (!args.WasModified<EntityPrototype>())
+    //         return;
 
-        LoadPrototypes();
-    }
+    //     LoadPrototypes();
+    // }
 
-    private void LoadPrototypes()
-    {
-        _surgeries.Clear();
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
-            if (entity.HasComponent<SurgeryComponent>())
-                _surgeries.Add(new EntProtoId(entity.ID));
-    }
+    // private void LoadPrototypes()
+    // {
+    //     _surgeries.Clear();
+    //     foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+    //         if (entity.HasComponent<SurgeryComponent>())
+    //             _surgeries.Add(new EntProtoId(entity.ID));
+    // }
 }

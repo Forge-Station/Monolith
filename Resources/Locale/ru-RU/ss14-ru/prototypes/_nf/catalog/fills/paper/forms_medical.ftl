@@ -1,18 +1,200 @@
 ent-BoxFolderMedicalDoctor = папка врача
-    .desc = Папка, наполненная шаблонами медицинских документов.
+    .desc = Папка с шаблонами медицинских документов.
     .suffix = Формы
-ent-PaperWrittenMedicalFormPatientInfo = Медицинская карта пациента
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenMedicalFormPrescription = Медицинский рецепт
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenMedicalFormHealthInsurance = Договор медицинского страхования
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenMedicalFormServiceInvoice = Счет за медицинские услуги
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
 
-ent-PaperWrittenMedicalFormReceiptInvoice = medical patient record
-ent-PaperWrittenMedicalFormRelease = medical patient record
+ent-PaperWrittenMedicalFormPatientInfo = медицинская карта пациента
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormPatientInfo = [color=#2EA5E6]◥[bold]N[/bold]◣ [bold]Стандарты медицинских подрядчиков[/bold][/color]
+        { "[" }color=#2EA5E6]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Медицинская карта пациента[/head]
+         
+        { "[" }head=3]Сведения о пациенте[/head]
+            { "[" }bold]Имя:[/bold]
+            { "[" }bold]Вид:[/bold]
+            { "[" }bold]Род занятий:[/bold]
+         
+        { "[" }head=3]Сведения о специалисте[/head]
+            { "[" }bold]Имя:[/bold]
+            { "[" }bold]IFF судна:[/bold]
+            { "[" }bold]Время смены на момент прибытия:[/bold]
+         
+        { "[" }head=3]Полученные повреждения[/head]
+            { "[" }bold]Механические повреждения:[/bold]
+            Ушибы: 0
+            Порезы: 0
+            Колотые раны: 0
+         
+            { "[" }bold]Термические повреждения:[/bold]
+            Ожоги: 0
+            Электротравмы: 0
+            Обморожения: 0
+            Химические ожоги: 0
+         
+            { "[" }bold]Токсические повреждения:[/bold]
+            Отравление: 0
+            Облучение: 0
+         
+            { "[" }bold]Генетические повреждения:[/bold]
+            Клеточные: 0
+         
+            { "[" }bold]Повреждения от удушья:[/bold]
+            Кровопотеря: 0
+            Недостаток воздуха: 0
+         
+        { "[" }head=3]Проведённое лечение[/head]
+            { "[" }bold]Средства наружного применения:[/bold]
+            Наборы от ушибов: 0
+            Тюбики мази: 0
+            Марля: 0
+            Пакеты крови: 0
+            Хирургические нити: 0
+            Регенеративная сетка: 0
+         
+            { "[" }bold]Введённые препараты:[/bold]
+            { "[" }bullet/] Препарат, доза: XX ед.
+            { "[" }bullet/] Препарат, доза: XX ед.
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати медицинского специалиста.[/color]
+
+ent-PaperWrittenMedicalFormPrescription = медицинский рецепт
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormPrescription = [color=#52B4E9]◥[bold]N[/bold]◣ [bold]Стандарты медицинских подрядчиков[/bold][/color]
+        { "[" }color=#52B4E9]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Медицинский рецепт[/head]
+         
+        { "[" }head=3]Сведения о пациенте[/head]
+            { "[" }bold]Имя:[/bold]
+            { "[" }bold]Вид:[/bold]
+            { "[" }bold]Род занятий:[/bold]
+            { "[" }bold]IFF судна:[/bold]
+         
+        { "[" }head=3]Назначение[/head]
+            { "[" }bullet/] ПРЕПАРАТ, доза: XX ед.
+            { "[" }bullet/] ПРЕПАРАТ, доза: XX ед.
+         
+            { "[" }bold]УКАЖИТЕ ЗДЕСЬ ОСОБЫЕ ПРЕДПИСАНИЯ.[/bold]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати медицинского специалиста.[/color]
+
+ent-PaperWrittenMedicalFormHealthInsurance = договор медицинского страхования
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormHealthInsurance = [color=#2EA5E6]◥[bold]N[/bold]◣ [bold]Стандарты медицинских подрядчиков[/bold][/color]
+        { "[" }color=#2EA5E6]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Договор медицинского страхования[/head]
+         
+        { "[" }head=3]Сведения о страхователе[/head]
+            { "[" }bold]Имя:[/bold]
+            { "[" }bold]Вид:[/bold]
+            { "[" }bold]Род занятий:[/bold]
+            { "[" }bold]IFF судна:[/bold]
+         
+        { "[" }head=3]Страховое покрытие[/head]
+            { "[" }bold]Медицинское покрытие:[/bold]
+            \[  ] Лечение: покрытие до $5,000. Страховая премия $2,000.
+            \[  ] Реанимация: покрытие до $10,000. Страховая премия $2,000.
+            \[  ] Клонирование: покрытие до $25,000. Страховая премия $5,000.
+         
+            { "[" }bold]Дополнительное покрытие:[/bold]
+            \[  ] Буксировка: покрытие до $10,000, только для малых судов. Страховая премия $2,000.
+            \[  ] Буксировка: покрытие до $20,000, только для малых и средних судов. Страховая премия $4,000.
+         
+        { "[" }head=3]Общая страховая премия[/head]
+            { "[" }bold]$XX,XXX[/bold]
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати медицинского специалиста.[/color]
+
+ent-PaperWrittenMedicalFormServiceInvoice = счёт за медицинские услуги
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormServiceInvoice = [color=#2EA5E6]◥[bold]N[/bold]◣ [bold]Стандарты медицинских подрядчиков[/bold][/color]
+        { "[" }color=#2EA5E6]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Счёт за медицинские услуги[/head]
+         
+        { "[" }head=3]Сведения о пациенте[/head]
+              { "[" }bold]Имя:[/bold]
+              { "[" }bold]Вид:[/bold]
+              { "[" }bold]Род занятий:[/bold]
+         
+        { "[" }head=3]Сведения о специалисте[/head]
+              { "[" }bold]Имя:[/bold]
+              { "[" }bold]IFF судна:[/bold]
+              { "[" }bold]Время смены:[/bold]
+         
+        { "[" }head=3]Расчёт[/head]
+          $XX,XXX - лечение
+          $XX,XXX - реанимация
+          $XX,XXX - клонирование
+          $XX,XXX - буксировка
+        - $XX,XXX - страховое покрытие лечения
+        - $XX,XXX - страховое покрытие реанимации
+        - $XX,XXX - страховое покрытие клонирования
+        - $XX,XXX - страховое покрытие буксировки
+        ____________
+        $XXX,XXX - итого
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати медицинского специалиста.[/color]
+
+ent-PaperWrittenMedicalFormReceiptInvoice = ведомость оплаты медицинского вызова
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormReceiptInvoice = [color=#33ccff]◥[bold]N[/bold]◣ [bold]Расчётный отдел Директора TTI[/bold][/color]
+        { "[" }color=#33ccff]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Оплата медицинского вызова[/head]
+         
+        { "[" }head=3]Сведения о подрядчике[/head]
+              { "[" }bold]Имя:[/bold]
+              { "[" }bold]Вид:[/bold]
+              { "[" }bold]Род занятий:[/bold]
+         
+        { "[" }head=3]Описание оказанных услуг[/head]
+         
+        { "[" }head=3]Стоимость услуг[/head]
+            Доставка по медицинскому заказу: $0
+            Доставка материалов: $0
+            Медицинские услуги: $0
+            Прочее: $0
+         
+        { "[" }bold]Общая стоимость: $XXX,XXX[/bold]
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати Директора TTI. Эта форма не является договором. Размер вознаграждения за оказанные услуги определяется Директором TTI.[/color]
+
+ent-PaperWrittenMedicalFormRelease = медицинская выписка
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenMedicalFormRelease = [color=#33ccff]◥[bold]N[/bold]◣ [bold]Расчётный отдел Директора TTI[/bold][/color]
+        { "[" }color=#33ccff]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Медицинская выписка[/head]
+         
+        { "[" }head=3]Сведения о пациенте[/head]
+              { "[" }bold]Имя:[/bold]
+              { "[" }bold]Вид:[/bold]
+              { "[" }bold]Род занятий:[/bold]
+         
+        { "[" }head=3]Сведения о специалисте[/head]
+              { "[" }bold]Имя:[/bold]
+              { "[" }bold]IFF судна:[/bold]
+              { "[" }bold]Время смены:[/bold]
+         
+        { "[" }head=3]Оказанные услуги[/head]
+         
+         
+         
+        { "[" }head=3]Примечания[/head]
+         
+         
+         
+        { "[" }head=3]Я, нижеподписавшийся, подтверждаю правильность перечня оказанных услуг и согласен на выписку.[/head]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма признаётся только при наличии подписи и печати Директора TTI. Эта форма не является договором. Размер вознаграждения за оказанные услуги определяется Директором TTI.[/color]

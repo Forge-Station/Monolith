@@ -16,14 +16,14 @@
         store: part-container
 
       - component: Flash
-        name: flash
+        name: construction-required-flash # Forge-change
         store: part-container
         icon:
           sprite: Objects/Weapons/Melee/flash.rsi
           state: flash
 
       - component: Flash
-        name: second flash
+        name: construction-required-second-flash # Forge-change
         store: part-container
         icon:
           sprite: Objects/Weapons/Melee/flash.rsi
@@ -38,7 +38,7 @@
     - to: pdvcyborg
       steps:
       - tag: BorgIFFPDV
-        name: PDV Cyborg Intrinsics
+        name: construction-required-pdv-cyborg-intrinsics # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: tesla
@@ -48,7 +48,7 @@
     - to: tsfcyborg
       steps:
       - tag: BorgIFFTSF
-        name: TSF Cyborg Intrinsics
+        name: construction-required-tsf-cyborg-intrinsics # Forge-change
         icon:
           sprite: Objects/Specific/Mech/mecha_equipment.rsi
           state: tesla
@@ -93,7 +93,7 @@
           - !type:EntityAnchored {}
         steps:
          - tag: AICoreElectronics
-           name: ai core electronics board
+           name: construction-required-ai-core-electronics-board # Forge-change
            icon:
              sprite: Objects/Misc/module.rsi
              state: blank_mod
@@ -124,7 +124,7 @@
         - !type:EntityAnchored {}
        steps:
        - tag: Posibrain
-         name: postrionic brain
+         name: construction-required-postrionic-brain # Forge-change
          icon:
            sprite: Objects/Specific/Robotics/mmi.rsi
            state: posibrain

@@ -7,25 +7,25 @@
     - to: WeaponHFKatana
       steps:
       - tag: Katana
-        name: a katana
+        name: construction-required-katana # Forge-change
         icon:
           sprite: Objects/Weapons/Melee/katana.rsi
           state: icon
         doAfter: 1
       - tag: Igniter
-        name: igniter
+        name: construction-required-igniter # Forge-change
         icon:
           sprite: Objects/Devices/igniter.rsi
           state: icon
         doAfter: 1
       - tag: SmallAIChip
-        name: a super-compact AI chip
+        name: construction-required-super-compact-ai-chip # Forge-change
         icon:
           sprite: Objects/Misc/potatoai_chip.rsi
           state: icon
         doAfter: 1
       - tag: AdvancedLaserPistol
-        name: an advanced laser pistol
+        name: construction-required-advanced-laser-pistol # Forge-change
         icon:
           sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
           state: icon

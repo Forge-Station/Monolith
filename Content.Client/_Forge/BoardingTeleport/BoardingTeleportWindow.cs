@@ -12,11 +12,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportWindow : FancyWindow
+public sealed partial class BoardingTeleportWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly BoardingTeleportBoundUserInterface _owner;
     private readonly BoxContainer _sectorPage;
@@ -434,6 +434,10 @@ public sealed class BoardingTeleportWindow : FancyWindow
             parts.Add(Loc.GetString("boarding-teleport-window-lock-degrade",
                 ("scatter", $"{state.LockScatterPenalty:0.00}"),
                 ("risk", $"{state.LockRiskPenalty:0}")));
+
+        if (state.ShieldPierceRiskPercent > 0.05f)
+            parts.Add(Loc.GetString("boarding-teleport-window-shield-pierce",
+                ("risk", $"{state.ShieldPierceRiskPercent:0}")));
 
         return string.Join(" | ", parts);
     }

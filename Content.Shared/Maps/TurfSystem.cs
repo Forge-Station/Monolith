@@ -14,12 +14,12 @@ namespace Content.Shared.Maps;
 /// </summary>
 public sealed partial class TurfSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private ITileDefinitionManager _tileDefinitions = default!;
 
+    [Dependency] private readonly EntityQuery<FixturesComponent> _fixtureQuery = default!;
 
     /// <summary>
     /// Attempts to get the turf at or under some given coordinates or null if no such turf exists.
@@ -32,7 +32,7 @@ public sealed partial class TurfSystem : EntitySystem
             return null;
 
         var pos = _transform.ToMapCoordinates(coordinates);
-        if (!_mapManager.TryFindGridAt(pos, out var gridUid, out var gridComp))
+        if (!_mapSystem.TryFindGridAt(pos, out var gridUid, out var gridComp))
             return null;
 
         if (!_mapSystem.TryGetTileRef(gridUid, gridComp, coordinates, out var tile))
@@ -77,8 +77,7 @@ public sealed partial class TurfSystem : EntitySystem
         if (!Resolve(gridUid, ref grid, ref gridXform))
             return false;
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var (gridPos, gridRot, matrix) = _transform.GetWorldPositionRotationMatrix(gridXform, xformQuery);
+        var (gridPos, gridRot, matrix) = _transform.GetWorldPositionRotationMatrix(gridXform);
 
         var size = grid.TileSize;
         var localPos = new Vector2(indices.X * size + (size / 2f), indices.Y * size + (size / 2f));
@@ -90,14 +89,13 @@ public sealed partial class TurfSystem : EntitySystem
         tileAabb = tileAabb.Translated(localPos);
 
         var intersectionArea = 0f;
-        var fixtureQuery = GetEntityQuery<FixturesComponent>();
         foreach (var ent in _entityLookup.GetEntitiesIntersecting(gridUid, worldBox, LookupFlags.Dynamic | LookupFlags.Static))
         {
-            if (!fixtureQuery.TryGetComponent(ent, out var fixtures))
+            if (!_fixtureQuery.TryGetComponent(ent, out var fixtures))
                 continue;
 
             // get grid local coordinates
-            var (pos, rot) = _transform.GetWorldPositionRotation(xformQuery.GetComponent(ent), xformQuery);
+            var (pos, rot) = _transform.GetWorldPositionRotation(ent);
             rot -= gridRot;
             pos = (-gridRot).RotateVec(pos - gridPos);
 

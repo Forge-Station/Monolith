@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
+using Content.Client.Sprite;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.Server.GameTicking;
@@ -27,20 +28,10 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
 
     protected override async Task Initialize()
     {
-        await base.Initialize();
-
-        // Prevent info log spam in some tests (particularly SpawnAndDeleteAllEntitiesOnDifferentMaps)
-        Server.System<SharedMapSystem>().Log.Level = LogLevel.Warning;
-        Client.EntMan.EntitySysManager.SystemLoaded += (_, e) =>
-        {
-            if (e.System is SharedMapSystem map)
-                map.Log.Level = LogLevel.Warning;
-        };
-
         var settings = (PoolSettings)Settings;
         if (!settings.DummyTicker)
         {
-            var gameTicker = Server.System<GameTicker>();
+            var gameTicker = Server.System<ServerGameTicker>();
             await Server.WaitPost(() => gameTicker.RestartRound());
         }
     }
@@ -97,7 +88,17 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
         {
             IoCManager.Resolve<IModLoader>().SetModuleBaseCallbacks(new ClientModuleTestingCallbacks
                 {
-                    ClientBeforeIoC = () => IoCManager.Register<IParallaxManager, DummyParallaxManager>(true)
+                    ClientBeforeIoC = () =>
+                    {
+                        IoCManager.Register<IParallaxManager, DummyParallaxManager>(true);
+                        // Before the engine decodes every RSI into one retained pool.
+                        TestClientHooks.LimitImagePool();
+                    },
+                    ClientPostInit = () =>
+                    {
+                        SpriteTreeGuardSystem.Repair = TestClientHooks.OnFrame;
+                        TestClientHooks.ReleaseImageMemory();
+                    },
                 });
         };
         return opts;

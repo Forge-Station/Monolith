@@ -1,5 +1,4 @@
 using Content.Shared.APC;
-using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 
 namespace Content.Client.Power.APC;
@@ -13,9 +12,10 @@ public sealed partial class ApcVisualizerSystem : VisualizerSystem<ApcVisualsCom
         if (args.Sprite == null)
             return;
 
-        // get the mapped layer index of the first lock layer and the first channel layer
-        var lockIndicatorOverlayStart = args.Sprite.LayerMapGet(ApcVisualLayers.InterfaceLock);
-        var channelIndicatorOverlayStart = args.Sprite.LayerMapGet(ApcVisualLayers.Equipment);
+        // Incomplete sprites (e.g. map/prototype overrides that wipe layer maps) must not crash the client.
+        if (!args.Sprite.LayerMapTryGet(ApcVisualLayers.InterfaceLock, out var lockIndicatorOverlayStart)
+            || !args.Sprite.LayerMapTryGet(ApcVisualLayers.Equipment, out var channelIndicatorOverlayStart))
+            return;
 
         // Handle APC screen overlay:
         if(!AppearanceSystem.TryGetData<ApcChargeState>(uid, ApcVisuals.ChargeState, out var chargeState, args.Component))
@@ -23,7 +23,8 @@ public sealed partial class ApcVisualizerSystem : VisualizerSystem<ApcVisualsCom
 
         if (chargeState >= 0 && chargeState < ApcChargeState.NumStates)
         {
-            args.Sprite.LayerSetState(ApcVisualLayers.ChargeState, $"{comp.ScreenPrefix}-{comp.ScreenSuffixes[(sbyte)chargeState]}");
+            if (args.Sprite.LayerMapTryGet(ApcVisualLayers.ChargeState, out _))
+                args.Sprite.LayerSetState(ApcVisualLayers.ChargeState, $"{comp.ScreenPrefix}-{comp.ScreenSuffixes[(sbyte)chargeState]}");
 
             // LockState does nothing currently. The backend doesn't exist.
             if (AppearanceSystem.TryGetData<byte>(uid, ApcVisuals.LockState, out var lockStates, args.Component))
@@ -57,7 +58,8 @@ public sealed partial class ApcVisualizerSystem : VisualizerSystem<ApcVisualsCom
         else
         {
             /// Overrides all of the lock and channel indicators.
-            args.Sprite.LayerSetState(ApcVisualLayers.ChargeState, comp.EmaggedScreenState);
+            if (args.Sprite.LayerMapTryGet(ApcVisualLayers.ChargeState, out _))
+                args.Sprite.LayerSetState(ApcVisualLayers.ChargeState, comp.EmaggedScreenState);
             for(var i = 0; i < comp.LockIndicators; ++i)
             {
                 var layer = ((byte)lockIndicatorOverlayStart + i);

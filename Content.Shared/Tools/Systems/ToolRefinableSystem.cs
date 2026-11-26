@@ -1,4 +1,5 @@
 using Content.Shared.Construction;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
 using Content.Shared.Storage;
 using Content.Shared.Tools.Components;
@@ -16,7 +17,7 @@ public sealed partial class ToolRefinablSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<ToolRefinableComponent, WelderRefineDoAfterEvent>(OnDoAfter);
     }
 

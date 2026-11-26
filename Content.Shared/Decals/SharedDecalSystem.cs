@@ -11,8 +11,7 @@ namespace Content.Shared.Decals
 {
     public abstract partial class SharedDecalSystem : EntitySystem
     {
-        [Dependency] protected IPrototypeManager PrototypeManager = default!;
-        [Dependency] protected IMapManager MapManager = default!;
+        [Dependency] protected SharedMapSystem MapManager = default!;
 
         protected bool PvsEnabled;
         private readonly object _decalPrototypeNetLock = new();
@@ -124,7 +123,7 @@ namespace Content.Shared.Decals
                 _decalNetToProto = new List<string>();
                 var ids = new List<string>();
 
-                foreach (var proto in PrototypeManager.EnumeratePrototypes<DecalPrototype>())
+                foreach (var proto in ProtoMan.EnumeratePrototypes<DecalPrototype>())
                 {
                     ids.Add(proto.ID);
                 }

@@ -1,4 +1,5 @@
 using Content.Server.Power.EntitySystems; // Mono
+using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared._Mono.Ships;
@@ -17,7 +18,6 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleConsoleSystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 
     private readonly List<ShuttleBeaconObject> _beaconCache = new();

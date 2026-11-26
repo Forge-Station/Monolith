@@ -58,3 +58,33 @@
   id: ContractorUplinkPointless
   name: store-category-pointless
   priority: 11
+
+# region TTI
+
+- type: storeCategory
+  id: UplinkTTIUtility
+  name: store-category-ttiutility
+
+- type: storeCategory
+  id: UplinkTTIEquip
+  name: store-category-ttiequip
+
+- type: storeCategory
+  id: UplinkTTIWeapons
+  name: store-category-ttiweapons
+
+- type: storeCategory
+  id: UplinkTTIAmmo
+  name: store-category-ttiammo
+
+- type: storeCategory
+  id: UplinkTTIBundles
+  name: store-category-ttibundles
+
+- type: storeCategory
+  id: UplinkTTIBlueprints
+  name: store-category-ttiblueprints
+
+- type: storeCategory
+  id: UplinkTTIMed
+  name: store-category-ttimed

@@ -3,6 +3,7 @@ using Content.Shared.Dataset;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.PDA;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -22,8 +23,12 @@ public sealed partial class RandomSentienceRule : StationEventSystem<RandomSenti
         var query = EntityQueryEnumerator<SentienceTargetComponent, TransformComponent>();
         while (query.MoveNext(out var targetUid, out var target, out var xform))
         {
-            var owningStation = StationSystem.GetOwningStation(targetUid, xform);
+            var owningStation = ServerStationSystem.GetOwningStation(targetUid, xform);
             if (!owningStation.HasValue || !stations.Contains(owningStation.Value)) // Mono change: multiple stations
+                continue;
+
+            // Forge-Change: PDAs are not allowed to become ghost roles.
+            if (HasComp<PdaComponent>(targetUid))
                 continue;
 
             targetList.Add((targetUid, target));

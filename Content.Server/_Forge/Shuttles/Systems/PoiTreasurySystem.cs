@@ -3,7 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Stack;
-using Content.Shared._Forge.CCVar;
+using Content.Shared._Forge.CCVars;
 using Content.Shared.Database;
 using Content.Shared.Item;
 using Content.Shared.Movement.Pulling.Events;
@@ -31,19 +31,19 @@ namespace Content.Server._Forge.Shuttles.Systems;
 /// anyone may open and view, but only the current capture leader can withdraw,
 /// and players never insert directly (deposits come from the system only).
 /// </summary>
-public sealed class PoiTreasurySystem : EntitySystem
+public sealed partial class PoiTreasurySystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly EntityTableSystem _entityTable = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EntityTableSystem _entityTable = default!;
 
     public override void Initialize()
     {
@@ -68,7 +68,7 @@ public sealed class PoiTreasurySystem : EntitySystem
     private TimeSpan GetRewardInterval(PoiTreasuryComponent comp)
     {
         var minutes = comp.RewardIntervalMinutes
-                      ?? _cfg.GetCVar(ForgeCVars.PoiCaptureRewardIntervalMinutes);
+                      ?? _cfg.GetCVar(ForgeCCVars.PoiCaptureRewardIntervalMinutes);
         return TimeSpan.FromMinutes(Math.Max(0.1f, minutes));
     }
 
@@ -161,8 +161,10 @@ public sealed class PoiTreasurySystem : EntitySystem
         if (IsLeaderOnGrid(container.Owner, args.User))
             return;
 
-        _popup.PopupEntity(Loc.GetString("poi-treasury-withdraw-denied"), args.Item, args.User, PopupType.SmallCaution);
         args.Cancel();
+
+        if (args.ShowPopup)
+            _popup.PopupEntity(Loc.GetString("poi-treasury-withdraw-denied"), args.Item, args.User, PopupType.SmallCaution);
     }
 
     private bool IsLeaderOnGrid(EntityUid treasury, EntityUid user)

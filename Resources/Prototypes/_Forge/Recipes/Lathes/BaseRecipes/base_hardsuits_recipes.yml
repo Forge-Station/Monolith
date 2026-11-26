@@ -1,0 +1,450 @@
+# Here are the base recipes for hardsuits (only for combat ones at the moment)
+
+# Forge Base recipe for universal hardsuits
+
+## Tier 1 - civilian
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1CivilianRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Steel: 4000
+    Glass: 1500
+    Plastic: 3000
+    Silver: 200
+    Gold: 200
+
+## Tier 2 - civilian
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2CivilianRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 4000
+    Glass: 2000
+    Plastic: 3000
+    Silver: 500
+    Gold: 500
+    Plasteel: 5000
+    Durathread: 2500
+
+## Tier 1 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Steel: 4800
+    Glass: 1800
+    Plastic: 3600
+    Silver: 240
+    Gold: 240
+
+## Tier 2 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 4800
+    Glass: 2400
+    Plastic: 3600
+    Silver: 600
+    Gold: 600
+    Plasteel: 6000
+    Durathread: 3000
+
+## Tier 1 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT1FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Steel: 5760
+    Glass: 2160
+    Plastic: 4320
+    Silver: 288
+    Gold: 288
+
+## Tier 2 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalSuitT2FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 5760
+    Glass: 2880
+    Plastic: 4320
+    Silver: 720
+    Gold: 720
+    Plasteel: 7200
+    Durathread: 3600
+
+# Forge Base recipe for universal lightweight hardsuits
+
+## Tier 1 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalLightSuitT1CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Steel: 3500
+    Glass: 1750
+    Plastic: 4000
+    Silver: 500
+    Gold: 500
+    Durathread: 1250
+
+## Tier 2 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalLightSuitT2CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 4500
+    Glass: 1750
+    Plastic: 3000
+    Silver: 1500
+    Gold: 1500
+    Plasteel: 3000
+    Durathread: 3750
+    Copper: 1000
+    Diamond: 200
+
+## Tier 3 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalLightSuitT3CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3500
+    Glass: 2000
+    Plastic: 3500
+    Silver: 1500
+    Gold: 1500
+    Plasteel: 3000
+    Durathread: 5000
+    Copper: 1000
+    Diamond: 200
+    UraniumFissile: 25
+    Plastitanium: 1500
+
+## Tier 1 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalLightSuitT1FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 10
+  materials:
+    Steel: 4200
+    Glass: 2100
+    Plastic: 4800
+    Silver: 600
+    Gold: 600
+    Durathread: 1500
+
+## Tier 3 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeUniversalLightSuitT3FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 4200
+    Glass: 2400
+    Plastic: 4200
+    Silver: 1800
+    Gold: 1800
+    Plasteel: 3600
+    Durathread: 6000
+    Copper: 1200
+    Diamond: 240
+    UraniumFissile: 30
+    Plastitanium: 1800
+
+# Forge Base recipe for lightweight juggernaut hardsuits
+
+## Tier 2 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeLightJuggernautT2CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 4000
+    Glass: 1500
+    Plastic: 2000
+    Silver: 1000
+    Gold: 1000
+    Plasteel: 8000
+    Durathread: 1500
+    Copper: 500
+    Diamond: 200
+
+## Tier 2 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeLightJuggernautT2FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 15
+  materials:
+    Steel: 4800
+    Glass: 1800
+    Plastic: 2400
+    Silver: 1200
+    Gold: 1200
+    Plasteel: 9600
+    Durathread: 1800
+    Copper: 600
+    Diamond: 240
+
+# Forge Base recipe for heavy juggernaut hardsuits
+
+## Tier 3 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeHeavyJuggernautT3CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3500
+    Glass: 2000
+    Plastic: 2000
+    Silver: 1000
+    Gold: 1000
+    Plasteel: 10000
+    Durathread: 3500
+    Copper: 1500
+    Diamond: 400
+    UraniumFissile: 125
+    Plastitanium: 3000
+
+## Tier 3 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeHeavyJuggernautT3FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 4200
+    Glass: 2400
+    Plastic: 2400
+    Silver: 1200
+    Gold: 1200
+    Plasteel: 12000
+    Durathread: 4200
+    Copper: 1800
+    Diamond: 480
+    UraniumFissile: 150
+    Plastitanium: 3600
+
+# Forge Base recipe for stealth hardsuits
+
+## Tier 3 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeStealthSuitT3CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3500
+    Glass: 2000
+    Plastic: 3500
+    Silver: 2500
+    Gold: 2500
+    Plasteel: 5000
+    Durathread: 4000
+    Copper: 2000
+    Diamond: 300
+    UraniumFissile: 100
+    Plastitanium: 500
+
+## Tier 3 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeStealthSuitT3FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 4200
+    Glass: 2400
+    Plastic: 4200
+    Silver: 3000
+    Gold: 3000
+    Plasteel: 6000
+    Durathread: 4800
+    Copper: 2400
+    Diamond: 360
+    UraniumFissile: 120
+    Plastitanium: 600
+
+# Forge Base recipe for reflective hardsuits
+
+## Tier 3 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeReflectSuitT3CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3500
+    Glass: 2000
+    Plastic: 2000
+    Silver: 2500
+    Gold: 2500
+    Plasteel: 6000
+    Durathread: 8000
+    Copper: 3000
+    Diamond: 500
+    UraniumFissile: 125
+    Plastitanium: 2000
+
+## Tier 3 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeReflectSuitT3FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 4200
+    Glass: 2400
+    Plastic: 2400
+    Silver: 3000
+    Gold: 3000
+    Plasteel: 7200
+    Durathread: 9600
+    Copper: 3600
+    Diamond: 600
+    UraniumFissile: 150
+    Plastitanium: 2400
+
+# Forge Base recipe for energy shield hardsuits
+
+## Tier 3 - company
+- type: latheRecipe
+  abstract: true
+  id: ForgeEnergyShieldSuitT3CompanyRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3000
+    Glass: 2000
+    Plastic: 4000
+    Silver: 2500
+    Gold: 2500
+    Plasteel: 1500
+    Durathread: 4500
+    Copper: 2500
+    Diamond: 250
+    UraniumFissile: 175
+
+## Tier 3 - faction
+- type: latheRecipe
+  abstract: true
+  id: ForgeEnergyShieldSuitT3FactionRecipe
+  parent: NFBaseEVASuitRecipe
+  categories:
+  - EVASuits
+  - CombatEva
+  - ArmorNF
+  completetime: 20
+  materials:
+    Steel: 3600
+    Glass: 2400
+    Plastic: 4800
+    Silver: 3000
+    Gold: 3000
+    Plasteel: 1800
+    Durathread: 5400
+    Copper: 3000
+    Diamond: 300
+    UraniumFissile: 210

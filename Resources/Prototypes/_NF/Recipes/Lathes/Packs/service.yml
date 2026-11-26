@@ -25,8 +25,15 @@
   recipes:
   - ServiceSelectiveDropper # Frontier
   - PlantAnalyzer # Frontier
+  - ClothingEyesGlassesBotany
+  - AgroScanCartridge
+  - BotanyCultivarDisk
   - JanicartFlatpack # Frontier
   - PlantBagOfHolding # Delta-V
+  - StationRadioReceiverHandheldRecipe #Forge-Change
+  - StationRadioServerPortableRecipe #Forge-Change
+  - StationRadioRigPortableRecipe #Forge-Change
+  - VinylPlayerPortableRecipe #Forge-Change
 
 - type: latheRecipePack
   id: NFServiceBoardsStatic
@@ -45,3 +52,4 @@
   - SodaDispenserMachineCircuitboard
   - BiogeneratorMachineCircuitboard
   - DeepFryerMachineCircuitboard
+  - HydroponicsConsoleCircuitboard

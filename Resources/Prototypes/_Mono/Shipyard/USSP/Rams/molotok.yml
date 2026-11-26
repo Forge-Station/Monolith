@@ -7,7 +7,7 @@
   purchasable: false # voucher only
   category: Large
   group: Custom
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/Ledokol/Attachments/molotok.yml
   guidebookPage: Null
 
@@ -21,7 +21,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Molotok USSP Ram{1}'
+          mapNameTemplate: 'Molotok MIL Ram{1}' # Forge-change: Ussp to MIL
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

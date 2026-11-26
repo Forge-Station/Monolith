@@ -272,12 +272,15 @@ namespace Content.Server.Atmos.EntitySystems
                 }
             }
 
-            if (!(temperatureDelta > Atmospherics.MinimumTemperatureToMove) &&
+            // Pressure difference uses the absolute temperature gap. The returned delta is
+            // ((n1 * T1) - (n2 * T2)) * R / V, not T1*n1 minus (T2*n2*R/V).
+            if (!(absTemperatureDelta > Atmospherics.MinimumTemperatureToMove) &&
                 !(MathF.Abs(movedMoles) > Atmospherics.MinimumMolesDeltaToMove)) return 0f;
             var moles = receiver.TotalMoles;
             var theirMoles = sharer.TotalMoles;
 
-            return (tileReceiver.AirArchived.Temperature * (moles + movedMoles)) - (tileSharer.AirArchived.Temperature * (theirMoles - movedMoles)) * Atmospherics.R / receiver.Volume;
+            return (tileReceiver.AirArchived.Temperature * (moles + movedMoles) -
+                    tileSharer.AirArchived.Temperature * (theirMoles - movedMoles)) * Atmospherics.R / receiver.Volume;
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Components;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Robust.Server.GameObjects;
@@ -27,7 +28,6 @@ namespace Content.Server._NF.StationEvents.Events;
 public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErrorRuleComponent>
 {
     NanotrasenNameGenerator _nameGenerator = new();
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
@@ -53,7 +53,7 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!_map.TryGetMap(GameTicker.DefaultMap, out var mapUid))
+        if (!_map.TryGetMap(ServerGameTicker.DefaultMap, out var mapUid))
             return;
 
         var spawnCoords = new EntityCoordinates(mapUid.Value, Vector2.Zero);
@@ -156,7 +156,7 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
 
         _mapSystem.CreateMap(out var mapId);
 
-        var spawnedGrid = _mapManager.CreateGridEntity(mapId);
+        var spawnedGrid = _mapSystem.CreateGridEntity(mapId);
 
         _transform.SetMapCoordinates(spawnedGrid, new MapCoordinates(Vector2.Zero, mapId));
         _dungeon.GenerateDungeon(dungeonProto, dungeonProto.ID, spawnedGrid.Owner, spawnedGrid.Comp, Vector2i.Zero, _random.Next(), spawnCoords); // Frontier: add dungeonProto.ID
@@ -206,9 +206,10 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
         return false;
     }
 
-    protected override void Ended(EntityUid uid, BluespaceErrorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<BluespaceErrorRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
+        var component = rule.Comp;
 
         if (component.GridsUid == null)
             return;

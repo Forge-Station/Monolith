@@ -22,7 +22,7 @@
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Gun
@@ -33,6 +33,7 @@
       path: /Audio/Weapons/Guns/Gunshots/ship_duster.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 214
@@ -75,7 +76,7 @@
   - type: FireControlRotate
   - type: AmmoCounter
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Gun
@@ -131,7 +132,7 @@
   - type: FireControlRotate
   - type: AmmoCounter
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Gun
@@ -186,7 +187,7 @@
   - type: FireControlRotate
   - type: AmmoCounter
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Gun

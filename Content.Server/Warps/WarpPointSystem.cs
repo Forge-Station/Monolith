@@ -6,7 +6,7 @@ namespace Content.Server.Warps;
 
 public sealed partial class WarpPointSystem : EntitySystem
 {
-    [Dependency] private StationSystem _station = default!; // Frontier
+    [Dependency] private ServerStationSystem _station = default!; // Frontier
     public override void Initialize()
     {
         base.Initialize();

@@ -11,7 +11,6 @@ public sealed partial class RatvarianLanguageSystem : SharedRatvarianLanguageSys
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
 
 
-    [ValidatePrototypeId<StatusEffectPrototype>]
     private const string RatvarianKey = "RatvarianLanguage";
 
     // This is the word of Ratvar and those who speak it shall abide by His rules:

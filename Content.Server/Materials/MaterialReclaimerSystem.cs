@@ -3,6 +3,9 @@ using Content.Server.Administration.Logs;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Ghost;
 using Content.Server.Popups;
+using Content.Server._Forge.Shipyard.Systems; // Forge-change
+using Content.Shared._Forge.Shipyard.Components; // Forge-change
+using Content.Shared._NF.Whitelist.Components; // Forge-change
 using Content.Shared.Repairable;
 using Content.Server.Stack;
 using Content.Server.Wires;
@@ -43,6 +46,7 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private ShipyardVoucherReclaimSystem _voucherReclaim = default!; // Forge-change
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -82,26 +86,36 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
     private void OnInteractUsing(Entity<MaterialReclaimerComponent> entity, ref InteractUsingEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || entity.Comp.SolutionContainerId == null)
             return;
 
         // if we're trying to get a solution out of the reclaimer, don't destroy it
         // if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution) && outputSolution.Contents.Any()) // Frontier: previous implementation
         if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution)) // Frontier: do not trash solution containers if the reclaimer is empty
         {
-            if (TryComp<SolutionContainerManagerComponent>(args.Used, out var managerComponent) &&
-                _solutionContainer.EnumerateSolutions((args.Used, managerComponent)).Any(s => s.Solution.Comp.Solution.AvailableVolume > 0))
+            if (_solutionContainer.EnumerateSolutions(args.Used).Any(s => s.Solution.Comp.Solution.AvailableVolume > 0))
             {
                 if (_openable.IsClosed(args.Used))
                     return;
 
                 if (TryComp<SolutionTransferComponent>(args.Used, out var transfer) &&
-                    transfer.CanReceive)
+                    transfer.CanSend)
                     return;
             }
         }
 
         args.Handled = TryStartProcessItem(entity.Owner, args.Used, entity.Comp, args.User, predictSound: false); // Frontier: add predictSound: false
+
+        // Forge-change-start
+        if (!args.Handled
+            && HasComp<NFShipyardVoucherComponent>(args.Used)
+            && args.User is { } user
+            && !CanStart(entity.Owner, entity.Comp))
+        {
+            _popup.PopupClient(Loc.GetString("shipyard-voucher-reclaim-reclaimer-off"), entity, user);
+            args.Handled = true;
+        }
+        // Forge-change-end
     }
 
     private void OnSuicideByEnvironment(Entity<MaterialReclaimerComponent> entity, ref SuicideByEnvironmentEvent args)
@@ -133,8 +147,37 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
     private void OnActivePowerChanged(Entity<ActiveMaterialReclaimerComponent> entity, ref PowerChangedEvent args)
     {
-        if (!args.Powered)
+        if (args.Powered)
+            return;
+
+        // A finished timer still pays out. An earlier cut must not run the partial-completion
+        // formula: that deletes a voucher and, in the first half of the cycle, returns nothing.
+        if (Timing.CurTime >= entity.Comp.EndTime || !TryAbortVoucherReclaim(entity))
             TryFinishProcessItem(entity, null, entity.Comp);
+    }
+
+    /// <summary>
+    /// Forge-change: power loss ejects a shipyard voucher and clears the composition staged at insert time.
+    /// </summary>
+    private bool TryAbortVoucherReclaim(Entity<ActiveMaterialReclaimerComponent> entity)
+    {
+        if (entity.Comp.ReclaimingContainer?.ContainedEntities.FirstOrNull() is not { } item)
+            return false;
+
+        if (!HasComp<NFShipyardVoucherComponent>(item))
+            return false;
+
+        if (!Container.Remove(item, entity.Comp.ReclaimingContainer, force: true))
+            return false;
+
+        _voucherReclaim.CancelStagedReclaim(item);
+        RemCompDeferred<ActiveMaterialReclaimerComponent>(entity.Owner);
+
+        if (TryComp<MaterialReclaimerComponent>(entity.Owner, out var reclaimer))
+            _audio.Stop(reclaimer.Stream);
+
+        _popup.PopupEntity(Loc.GetString("shipyard-voucher-reclaim-interrupted"), entity.Owner);
+        return true;
     }
 
     private void OnBreakage(Entity<MaterialReclaimerComponent> ent, ref BreakageEventArgs args)
@@ -191,6 +234,9 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         float completion = 1f,
         MaterialReclaimerComponent? component = null)
     {
+        if (EntityManager.IsQueuedForDeletion(item))
+            return;
+
         if (!Resolve(uid, ref component))
             return;
 
@@ -198,7 +244,10 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         var xform = Transform(uid);
 
-        SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
+        // Forge-change-start: unused vouchers reclaim full lathe material value.
+        var efficiency = HasComp<ShipyardVoucherFullReclaimComponent>(item) ? 1f : component.Efficiency;
+        SpawnMaterialsFromComposition(uid, item, completion * efficiency, xform: xform);
+        // Forge-change-end
 
         if (CanGib(uid, item, component))
         {
@@ -257,7 +306,7 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         TransformComponent? xform = null,
         PhysicalCompositionComponent? composition = null)
     {
-        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform))
+        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform) || reclaimerComponent.SolutionContainerId == null)
             return;
 
         efficiency *= reclaimerComponent.Efficiency;
@@ -277,9 +326,9 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         // Frontier: use old material reclaimer code
         if (reclaimerComponent.UseOldSolutionLogic &&
-            TryComp<SolutionContainerManagerComponent>(item, out var solutionContainer))
+            TryComp<SolutionManagerComponent>(item, out _))
         {
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solutionContainer)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var quantity in solution.Contents)

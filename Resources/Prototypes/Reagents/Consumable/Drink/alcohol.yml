@@ -222,6 +222,9 @@
           shouldHave: false
       - !type:Drunk
         boozePower: 2
+        conditions: # Forge-change: and now we here. Dwarf not drunk because dwarf IS drunk
+        - !type:OrganType
+          type: Dwarf
 
 - type: reagent
   id: Gin
@@ -571,7 +574,7 @@
   desc: reagent-desc-antifreeze
   physicalDesc: reagent-physical-desc-translucent
   flavor: antifreeze
-  color: "#ff7d63"
+  color: "#42e1a1" # Forge-Change
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/antifreeze.rsi
     state: icon_empty
@@ -586,6 +589,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: AtomicBomb
@@ -635,6 +643,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: BahamaMama
@@ -665,6 +678,19 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  # Forge-change-Start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+  # Forge-change-End
 
 - type: reagent
   id: Barefoot
@@ -680,6 +706,19 @@
   metamorphicMaxFillLevels: 3
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  # Forge-change-Start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+  # Forge-change-End
 
 - type: reagent
   id: BeepskySmash
@@ -757,6 +796,19 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  # Forge-change-Start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.06
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+  # Forge-change-End
 
 - type: reagent
   id: BraveBull
@@ -906,6 +958,11 @@
           Brute: -1
           Airloss: -1
           Toxin: -1
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: DriestMartini
@@ -1117,6 +1174,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: IrishCream
@@ -1140,7 +1202,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.2
-
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 - type: reagent
   id: IrishCoffee
   name: reagent-name-irish-coffee
@@ -1163,6 +1229,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: LongIslandIcedTea
@@ -1378,6 +1449,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.2
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: Patron
@@ -1516,6 +1592,11 @@
         component: Muted
       - !type:SatiateThirst
         factor: 2
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: Singulo
@@ -1771,6 +1852,11 @@
         - !type:AdjustReagent
           reagent: Ethanol
           amount: 0.15
+        # Forge-change-Start
+        - !type:AdjustReagent
+          reagent: Lactozit
+          amount: 0.01
+        # Forge-change-End
   fizziness: 0.5
 
 - type: reagent
@@ -1795,6 +1881,11 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.15
+      # Forge-change-Start
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+      # Forge-change-End
 
 - type: reagent
   id: VodkaRedBool
@@ -1887,6 +1978,11 @@
           key: Drowsiness
           time: 1.0
           type: Remove
+        # Forge-change-Start
+        - !type:AdjustReagent
+          reagent: Lactozit
+          amount: 0.01
+        # Forge-change-End
   fizziness: 0.15
 
 - type: reagent

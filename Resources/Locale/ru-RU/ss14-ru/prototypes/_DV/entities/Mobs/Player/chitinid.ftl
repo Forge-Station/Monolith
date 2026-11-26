@@ -1,0 +1,1 @@
+ent-MobChitinid = Урист МакМуравей

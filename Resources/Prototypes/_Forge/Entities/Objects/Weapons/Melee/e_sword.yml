@@ -100,7 +100,7 @@
   description: На первый взгляд неприметный пласталевый клинок, с парой кнопок на рукояти.
   components:
   - type: Sprite
-    sprite: Forge/Objects/Weapons/Melee/tl_e_sword.rsi
+    sprite: _Forge/Objects/Weapons/Melee/tl_e_sword.rsi
 # region WIP
     layers:
     - state: e_sword
@@ -110,7 +110,7 @@
       shader: unshaded
       map: [ "blade" ]
   - type: Item
-    sprite: Forge/Objects/Weapons/Melee/tl_e_sword-inhands.rsi
+    sprite: _Forge/Objects/Weapons/Melee/tl_e_sword-inhands.rsi
   - type: EnergySword
     colorOptions:
       - "#ebf0e9"
@@ -126,7 +126,7 @@
     - "#2288ff" # can only be blue
 
 - type: entity
-  parent: BaseMeleeWeaponEnergy
+  parent: [ BaseMeleeWeaponEnergy, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: WeaponPhaseBladeForge
   name: nano-laminate phaseblade
   description: A heavy bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs
@@ -208,3 +208,33 @@
     malus: 0.6
   - type: Execution
     doAfterDuration: 4.0
+
+- type: entity
+  parent: WeaponPhaseBladeForge
+  id: WeaponPhaseDoubleBladeForge
+  name: nano-laminate double phaseblade
+  description: A heavy double bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs
+  suffix: Forge
+  components:
+  - type: ComponentToggler
+    components:
+    - type: MeleeWeapon
+      attackRate: 1.4
+      damage:
+        types:
+          Slash: 45
+          Structural: 200
+    - type: Reflect
+      reflectProb: 0.5
+    - type: DisarmMalus
+      malus: 0.7
+  - type: Item
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi
+    size: Huge
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi
+    slots:
+    - Back
+    - SuitStorage
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi

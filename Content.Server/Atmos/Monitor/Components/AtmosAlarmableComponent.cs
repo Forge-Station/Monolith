@@ -1,7 +1,8 @@
 using Content.Shared.Atmos.Monitor;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Atmos.Monitor.Components;
 // AtmosAlarmables are entities that can be alarmed
@@ -29,7 +30,7 @@ namespace Content.Server.Atmos.Monitor.Components;
 public sealed partial class AtmosAlarmableComponent : Component
 {
     [ViewVariables]
-    public readonly Dictionary<string, AtmosAlarmType> NetworkAlarmStates = new();
+    public readonly Dictionary<DeviceAddress, AtmosAlarmType> NetworkAlarmStates = new();
 
     [ViewVariables] public AtmosAlarmType LastAlarmState = AtmosAlarmType.Invalid;
 
@@ -44,7 +45,7 @@ public sealed partial class AtmosAlarmableComponent : Component
     /// <summary>
     ///     List of tags to check for when synchronizing alarms.
     /// </summary>
-    [DataField("syncWith", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<TagPrototype>))]
+    [DataField("syncWith", customTypeSerializer: typeof(ProtoId<TagPrototype>))]
     public HashSet<string> SyncWithTags { get; private set; } = new();
 
     [DataField("monitorAlertTypes")]

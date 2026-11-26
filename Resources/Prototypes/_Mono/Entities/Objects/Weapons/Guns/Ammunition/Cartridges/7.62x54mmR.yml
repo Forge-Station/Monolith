@@ -74,20 +74,22 @@
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#65fe08"
 
-- type: entity
-  id: Cartridge762x54mmRRubber
-  name: cartridge (7.62x54mmR rubber)
-  parent: BaseCartridge762x54mmR
-  components:
-  - type: CartridgeAmmo
-    proto: Bullet762x54mmRRubber
-  - type: Sprite
-    layers:
-      - state: base
-        map: [ "enum.AmmoVisualLayers.Base" ]
-      - state: tip
-        map: [ "enum.AmmoVisualLayers.Tip" ]
-        color: "#43c4f7"
+# Forge-change-start
+#- type: entity
+#  id: Cartridge762x54mmRRubber
+#  name: cartridge (7.62x54mmR rubber)
+#  parent: BaseCartridge762x54mmR
+#  components:
+#  - type: CartridgeAmmo
+#    proto: Bullet762x54mmRRubber
+#  - type: Sprite
+#    layers:
+#      - state: base
+#        map: [ "enum.AmmoVisualLayers.Base" ]
+#      - state: tip
+#        map: [ "enum.AmmoVisualLayers.Tip" ]
+#        color: "#43c4f7"
+# Forge-change-end
 
 # Mono AP syst
 #anti-flesh:

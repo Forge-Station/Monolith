@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
@@ -25,7 +26,7 @@ public sealed partial class TipsSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private IConsoleHost _conHost = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
 

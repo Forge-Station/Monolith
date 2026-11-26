@@ -16,7 +16,6 @@ public sealed partial class SlurredSystem : SharedSlurredSystem
 
 
 
-    [ValidatePrototypeId<StatusEffectPrototype>]
     private const string SlurKey = "SlurredSpeech";
 
     public override void Initialize()

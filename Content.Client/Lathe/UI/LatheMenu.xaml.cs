@@ -42,6 +42,12 @@ public sealed partial class LatheMenu : FancyWindow
 
     public EntityUid Entity;
 
+    /// <summary>
+    /// Last recipe IDs shown — used to avoid clearing/rebuilding the list on every material tick.
+    /// Forge-Change: prevents UIBox2 crashes / MainLoop thrash when materials update frequently.
+    /// </summary>
+    private List<string> _shownRecipeIds = new();
+
     public LatheMenu()
     {
         RobustXamlLoader.Load(this);
@@ -132,9 +138,35 @@ public sealed partial class LatheMenu : FancyWindow
         if (!int.TryParse(AmountLineEdit.Text, out var quantity) || quantity <= 0)
             quantity = 1;
 
-        var sortedRecipesToShow = recipesToShow.OrderBy(_lathe.GetRecipeName);
-        RecipeList.Children.Clear();
+        var sortedRecipesToShow = recipesToShow.OrderBy(_lathe.GetRecipeName).ToList();
         _entityManager.TryGetComponent(Entity, out LatheComponent? lathe);
+
+        var newIds = sortedRecipesToShow.Select(p => p.ID).ToList();
+        var sameList = newIds.Count == _shownRecipeIds.Count
+                       && newIds.SequenceEqual(_shownRecipeIds);
+
+        if (sameList && RecipeList.ChildCount == newIds.Count)
+        {
+            // Materials changed — only refresh producibility / tooltips, don't rebuild controls
+            // (full rebuild causes layout thrash and UIBox2 crashes under load).
+            var i = 0;
+            foreach (var child in RecipeList.Children)
+            {
+                if (child is not RecipeControl control)
+                    continue;
+
+                var prototype = sortedRecipesToShow[i];
+                var canProduce = _lathe.CanProduce(Entity, prototype, quantity, component: lathe);
+                control.SetCanProduce(canProduce);
+                control.TooltipTextSupplier = () => GenerateTooltipText(prototype);
+                i++;
+            }
+
+            return;
+        }
+
+        RecipeList.Children.Clear();
+        _shownRecipeIds = newIds;
 
         foreach (var prototype in sortedRecipesToShow)
         {

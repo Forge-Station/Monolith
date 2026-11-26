@@ -7,6 +7,7 @@ using Content.Shared._NF.Kitchen.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.FixedPoint;
 using Content.Shared.Kitchen;
+using Content.Shared.Kitchen.Components;
 using Content.Shared.Stacks;
 
 namespace Content.Server.Kitchen.EntitySystems;
@@ -60,10 +61,10 @@ public sealed partial class MicrowaveSystem : EntitySystem
                 solidsDict.Add(solidID, amountToAdd);
             }
 
-            if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
+            if (!TryComp<SolutionManagerComponent>(item, out _))
                 continue;
 
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solMan)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var (reagent, quantity) in solution.Contents)

@@ -6,7 +6,9 @@ using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Content.Shared.Timing; // Forge-Change - BioScan
+using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems; // Forge-Change - BioScan
 
 // Mono
 using Robust.Shared.Audio;
@@ -107,6 +109,9 @@ namespace Content.Server.Shuttles.Components
 
         [ViewVariables]
         public TimeSpan NextSpeedSetTime = TimeSpan.Zero;
+
+        [ViewVariables]
+        public ShuttleConsoleMapScreenMode MapScreenMode = ShuttleConsoleMapScreenMode.BioScan; // Forge-Change - Cloaking
         // Forge-Change-end
         // </Mono>
 

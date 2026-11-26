@@ -6,7 +6,10 @@ ent-NpcStationAiRammerSmart = { ent-NpcStationAiRammer }
     .suffix = Ai, Smart
 ent-NpcStationAiRammerSmartDodging = { ent-NpcStationAiRammer }
     .desc = { ent-NpcStationAiRammer.desc }
-    .suffix = Ai, Smart, Dodging
+    .suffix = Ai, Smart, Уклонение
 ent-NpcStationAiRammerStraight = { ent-NpcStationAiRammer }
     .desc = { ent-NpcStationAiRammer.desc }
-    .suffix = Ai, No Evasion
+    .suffix = Ai, Без уклонения
+
+ent-NpcStationAiApproacherDodger = ядро сближающегося ИИ
+    .desc = Угрожающе стоит на месте. И уклоняется.

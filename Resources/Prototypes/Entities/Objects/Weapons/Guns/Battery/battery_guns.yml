@@ -285,25 +285,36 @@
   components:
   - type: StaticPrice
     price: 500
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
   - type: HitscanBatteryAmmoProvider
     proto: RedMediumLaser #Mono: RedLaser >> RedMediumLaser
     fireCost: 30 #Mono: 62.5 >> 30
   - type: PirateBountyItem # Mono
     id: StandardFactionLongarm
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
+    fireRate: 3 # Forge-change
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     - FullAuto
 
 - type: entity
-  name: LWC pulse pistol
+  name: VCD QSH-13 Pulse Pistol
   parent: BaseWeaponBatterySmall
   id: WeaponPulsePistol
-  description: A state of the art energy pistol favoured as a sidearm by the TSFN and TSFMC. # Mono
+  description: The pulse pistol is a compact version of the TSF pulse rifle. Though it uses the same self-recharging technology, it has a smaller battery that makes it impractical for sustained battlefield use. Nevertheless, it has found a niche in the hands of TSFN and TSFMC officers as a defensive sidearm. # Mono
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_pistol.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -316,7 +327,7 @@
     zeroVisible: false
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_pistol.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_pistol.rsi
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -340,13 +351,13 @@
   # End Mono
 
 - type: entity
-  name: LWC pulse carbine
+  name: VCD QBH-12 Pulse Carbine
   parent: [BaseWeaponBattery, BaseGunWieldable]
   id: WeaponPulseCarbine
-  description: A common sight in the hands of higher ranked TSF, the pulse carbine is a punchy laser weapon salvaged from the remnants of Nanotrasen. # Mono
+  description: The pulse carbine is a slightly more compact version of the TSF pulse rifle that combines self-recharging technology with an even faster rate of fire meant to terrify enemies on the battlefield. Though known to overheat occasionally in prolonged battle, this does not stop the Marine special forces who favor them. # Mono
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -357,11 +368,21 @@
     magState: mag
     steps: 5
     zeroVisible: false
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
     selectedMode: SemiAuto
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
     fireRate: 3
     burstCooldown: 0.65 # Mono
     burstFireRate: 12 # Mono
@@ -389,28 +410,38 @@
   # End Mono
 
 - type: entity
-  name: NT pulse rifle
+  name: VCD QBH-11 Pulse Rifle
   parent: [BaseWeaponBattery, BaseGunWieldable]
   id: WeaponPulseRifle
-  description: A weapon that used to be used by the special operations units of NT, but now commonly seen in the hands of the TSF. # Mono
+  description: The first pulse model reproduced since the technology fell into TSF hands after the end of the Corporate War, this rifle defines cutting edge technology in the hands of elite TSF military troops and the officers that command them.  # Mono
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: false
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
-    fireRate: 1.5
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
+    fireRate: 2.5 # Forge-change 1.5->2.5
     availableModes:
     - SemiAuto
     - FullAuto
@@ -432,7 +463,7 @@
     autoRechargePauseTime: 30
   - type: SpeedModifiedOnWield
     walkModifier: 0.90
-    sprintModifier: 0.85
+    sprintModifier: 0.90 # Forge-change 0.85->0.90
   # End Mono
 
   # Mono Addition
@@ -444,7 +475,7 @@
   description: A weapon that used to be used by the special operations units of NT, but mounted onto a silicon. # Mono
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -457,9 +488,9 @@
     zeroVisible: false
   - type: Appearance
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
   - type: Gun
-    fireRate: 1.5
+    fireRate: 2.25 # Forge-change 1.5->2.25
     availableModes:
     - SemiAuto
     - FullAuto
@@ -481,7 +512,7 @@
     autoRechargePauseTime: 30
   - type: SpeedModifiedOnWield
     walkModifier: 0.90
-    sprintModifier: 0.85
+    sprintModifier: 0.90 # Forge-change 0.85->0.90
   # End Mono
 
 - type: entity
@@ -498,6 +529,10 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
   - type: MagazineVisuals
     magState: mag
     steps: 5
@@ -505,16 +540,22 @@
   - type: Appearance
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/laser_cannon.rsi
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
-    fireRate: 1.5
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
+    fireRate: 2 # Forge-change 1.5->2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: HitscanBatteryAmmoProvider
     proto: RedHeavyLaser
-    fireCost: 160
+    fireCost: 120 # Forge-change 160->120
   - type: Battery
-    maxCharge: 4000
-    startingCharge: 4000
+    maxCharge: 4200 # Forge-change 4000->4200
+    startingCharge: 4200 # Forge-change 4000->4200
   - type: Tag
     tags:
     - TurretCompatibleWeapon
@@ -566,20 +607,30 @@
       shader: unshaded
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/xray.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
   - type: HitscanBatteryAmmoProvider
     proto: XrayLaser
-    fireCost: 133.3
+    fireCost: 140 # Forge-change 133.3->140
   - type: MagazineVisuals
     magState: mag
     steps: 5
     zeroVisible: true
   - type: Appearance
   - type: Battery
-    maxCharge: 4000
-    startingCharge: 4000
+    maxCharge: 4200 # Forge-change 4000->4200
+    startingCharge: 4200 # Forge-change 4000->4200
 
 - type: entity
   name: practice disabler
@@ -947,3 +998,35 @@
     autoRechargeRate: 24
     autoRechargePause: true
     autoRechargePauseTime: 30
+
+- type: entity
+  parent: WeaponAdvancedLaser
+  id: WeaponLaserGunXenoborg
+  name: xenoborg laser gun
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/xenoborg_laser_gun.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-unshaded-4
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+      
+- type: entity
+  parent: WeaponLaserCannon
+  id: WeaponLaserCannonXenoborg
+  name: xenoborg laser cannon
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 200
+    autoRechargePause: true
+    autoRechargePauseTime: 5
+  # "remove" wield bonus and penalty so borgs can use it
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  - type: Gun
+    fireRate: 2
+    minAngle: 1
+    maxAngle: 2

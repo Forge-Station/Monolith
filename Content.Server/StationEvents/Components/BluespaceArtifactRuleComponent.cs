@@ -1,6 +1,6 @@
 ﻿using Content.Server.StationEvents.Events;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.StationEvents.Components;
 
@@ -11,10 +11,10 @@ namespace Content.Server.StationEvents.Components;
 [RegisterComponent, Access(typeof(BluespaceArtifactRule))]
 public sealed partial class BluespaceArtifactRuleComponent : Component
 {
-    [DataField("artifactSpawnerPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("artifactSpawnerPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string ArtifactSpawnerPrototype = "RandomArtifactSpawner";
 
-    [DataField("artifactFlashPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("artifactFlashPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string ArtifactFlashPrototype = "EffectFlashBluespace";
 
     [DataField("possibleSightings")]

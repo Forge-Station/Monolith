@@ -21,6 +21,10 @@
   - type: NpcFactionMember
     factions:
     - TSFMCTurret
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: TSF
+  # Forge-Change-end
 
 - type: entity
   id: WeaponTurretLaserSilicon
@@ -34,7 +38,7 @@
     - SiliconsExpeditionNF
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretCC
   suffix: CC, Colossus
   components:
@@ -43,40 +47,81 @@
     - CC
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretTSFMC
   suffix: TSFMC
   components:
   - type: NpcFactionMember
     factions:
     - TSFMCTurret
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: TSF
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTSFMCPackingGraph
+    node: WeaponTurretTSFMCPacked
+  # Forge-Change-end
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretUSSP
   suffix: USSP
   components:
   - type: NpcFactionMember
     factions:
     - USSPTurret
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: USSP
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretUSSPPackingGraph
+    node: WeaponTurretUSSPPacked
+  # Forge-Change-end
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretPDV
   suffix: PDV
   components:
   - type: NpcFactionMember
     factions:
     - PirateNF
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: PDV
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretPDVPackingGraph
+    node: WeaponTurretPDVPacked
+  # Forge-Change-end
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretViper
   suffix: Viper
   components:
   - type: NpcFactionMember
     factions:
     - VGTurret
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: VG
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretViperPackingGraph
+    node: WeaponTurretViperPacked
+  # Forge-Change-end
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretXenoborg
+  suffix: Xenoborg
+  components:
+  - type: NpcFactionMember
+    factions:
+    - XenoborgTurret
 
 - type: entity
   parent: BaseWeaponTurretNF
@@ -111,7 +156,7 @@
     context: "human"
   - type: Gun
     fireRate: 9
-    projectileSpeed: 55
+    projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -122,6 +167,10 @@
   - type: NpcFactionMember
     factions:
     - TSFMCTurret
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: TSF
+  # Forge-Change-end
   - type: Construction
     deconstructionTarget: null
     graph: WeaponTurretMk290PackingGraph
@@ -142,6 +191,7 @@
           - Magazine556x45mmFMJ
           - Magazine556x45mmBox
           - Magazine68x52mmCaseless
+          - MagazineTurretBallistic # Forge-Change
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -154,6 +204,7 @@
   - type: NpcFactionMember
     factions:
     - TSFMCTurret
+    - TSFMC
 
 - type: entity
   parent: BaseMk290Sentry
@@ -179,6 +230,7 @@
           - Magazine556x45mmFMJ
           - Magazine556x45mmBox
           - Magazine68x52mmCaseless
+          - MagazineTurretBallistic # Forge-Change
 
 - type: constructionGraph # deconstruction graph
   id: WeaponTurretMk290PackingGraph
@@ -209,7 +261,7 @@
   - type: WeaponCaseInsertable
   - type: MultiHandedItem
   - type: SpawnAfterInteract
-    prototype: WeaponTurretMk290
+    prototype: WeaponTurretMk290Empty # Forge-Change
     doAfter: 5
     removeOnInteract: true
   - type: Sprite

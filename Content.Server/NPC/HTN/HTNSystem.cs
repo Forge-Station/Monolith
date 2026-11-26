@@ -50,6 +50,7 @@ public sealed partial class HTNSystem : EntitySystem
         _mapQuery = GetEntityQuery<WorldControllerComponent>(); // Frontier
         _loadedQuery = GetEntityQuery<LoadedChunkComponent>(); // Frontier
         SubscribeLocalEvent<HTNComponent, MobStateChangedEvent>(_npc.OnMobStateChange);
+        SubscribeLocalEvent<HTNComponent, ComponentStartup>(OnHTNStartup);
         SubscribeLocalEvent<HTNComponent, MapInitEvent>(_npc.OnNPCMapInit);
         SubscribeLocalEvent<HTNComponent, PlayerAttachedEvent>(_npc.OnPlayerNPCAttach);
         SubscribeLocalEvent<HTNComponent, PlayerDetachedEvent>(_npc.OnPlayerNPCDetach);
@@ -144,11 +145,62 @@ public sealed partial class HTNSystem : EntitySystem
         }
     }
 
+    private void OnHTNStartup(EntityUid uid, HTNComponent component, ComponentStartup args)
+    {
+        // MapInit is skipped for entities loaded already initialized. Operators assume Owner exists.
+        EnsureOwner(uid, component);
+    }
+
+    /// <summary>
+    /// Ship tasks call GetValue(Owner) every tick. A missing key used to throw and leave the plan running.
+    /// </summary>
+    private void EnsureOwner(EntityUid uid, HTNComponent component)
+    {
+        if (component.Blackboard.ContainsKey(NPCBlackboard.Owner))
+            return;
+
+        component.Blackboard.ReadOnly = false;
+        component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+    }
+
     private void OnHTNShutdown(EntityUid uid, HTNComponent component, ComponentShutdown args)
     {
         _npc.OnNPCShutdown(uid, component, args);
         component.PlanningToken?.Cancel();
         component.PlanningJob = null;
+    }
+
+    /// <summary>
+    /// Enable / disable the hierarchical task network of an entity
+    /// </summary>
+    /// <param name="ent">The entity and its <see cref="HTNComponent"/></param>
+    /// <param name="state">Set 'true' to enable, or 'false' to disable, the HTN</param>
+    /// <param name="planCooldown">Specifies a time in seconds before the entity can start planning a new action (only takes effect when the HTN is enabled)</param>
+    // ReSharper disable once InconsistentNaming
+    [PublicAPI]
+    public void SetHTNEnabled(Entity<HTNComponent> ent, bool state, float planCooldown = 0f)
+     {
+        if (ent.Comp.Enabled == state)
+            return;
+
+        ent.Comp.Enabled = state;
+        ent.Comp.PlanAccumulator = planCooldown;
+
+        ent.Comp.PlanningToken?.Cancel();
+        ent.Comp.PlanningToken = null;
+
+        if (ent.Comp.Plan != null)
+        {
+            var currentOperator = ent.Comp.Plan.CurrentOperator;
+
+            ShutdownTask(currentOperator, ent.Comp.Blackboard, HTNOperatorStatus.Failed);
+            ShutdownPlan(ent.Comp);
+
+            ent.Comp.Plan = null;
+        }
+
+        if (ent.Comp.Enabled && ent.Comp.PlanAccumulator <= 0)
+            RequestPlan(ent.Comp);
     }
 
     /// <summary>
@@ -191,6 +243,11 @@ public sealed partial class HTNSystem : EntitySystem
                 stats.SkippedByCadence++;
                 continue;
             }
+
+            if (!comp.Enabled)
+                continue;
+
+            EnsureOwner(uid, comp);
 
             if (comp.PlanningJob != null)
             {

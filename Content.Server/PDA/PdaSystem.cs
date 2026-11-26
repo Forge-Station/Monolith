@@ -1,3 +1,4 @@
+// using Content.Server._Mono.AlertLevel; // Forge-change
 using Content.Server.Access.Systems;
 using Content.Server.AlertLevel;
 using Content.Server.CartridgeLoader;
@@ -7,14 +8,23 @@ using Content.Server.PDA.Ringer;
 using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.Traitor.Uplink;
+using Content.Shared._DV.CCVars; // DeltaV - PDA date
 using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Chat;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Implants;
+using Content.Shared.Inventory;
 using Content.Shared.Light;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.PDA;
+using Content.Shared.PDA.Ringer;
+using Content.Shared.Silicons.Borgs.Components; // DeltaV - silicon PDAs
+using Content.Shared.Silicons.StationAi; // DeltaV - silicon PDAs
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration; // DeltaV - PDA date
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -33,7 +43,7 @@ namespace Content.Server.PDA
         [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private InstrumentSystem _instrument = default!;
         [Dependency] private RingerSystem _ringer = default!;
-        [Dependency] private StationSystem _station = default!;
+        [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private StoreSystem _store = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private UserInterfaceSystem _ui = default!;
@@ -42,6 +52,9 @@ namespace Content.Server.PDA
         [Dependency] private IdCardSystem _idCard = default!;
         [Dependency] private SectorServiceSystem _sectorService = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly IConfigurationManager _config = default!; // DeltaV
+
+        private static DateTime ServerDate; // DeltaV - PDA
 
         public override void Initialize()
         {
@@ -63,6 +76,29 @@ namespace Content.Server.PDA
             SubscribeLocalEvent<StationRenamedEvent>(OnStationRenamed);
             SubscribeLocalEvent<EntityRenamedEvent>(OnEntityRenamed, after: new[] { typeof(IdCardSystem) });
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
+            // SubscribeLocalEvent<WarLevelChangedEvent>(OnWarLevelChanged); // Forge-change
+
+            // Begin DeltaV additions
+            Subs.CVar(_config,
+                DCCVars.YearOffset,
+                value => ServerDate = DateTime.Today.AddYears(value),
+                true);
+            // End DeltaV additions
+            SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
+        }
+
+        private void OnPlayerAttached(PlayerAttachedEvent args)
+        {
+            // When a player reconnects, update all PDAs that have open UIs for this player.
+            // This ensures the shift remaining timer and other dynamic data are refreshed.
+            var query = EntityQueryEnumerator<PdaComponent>();
+            while (query.MoveNext(out var uid, out var pda))
+            {
+                if (_ui.IsUiOpen(uid, PdaUiKey.Key, args.Entity))
+                {
+                    UpdatePdaUi(uid, pda, args.Entity);
+                }
+            }
         }
 
         private void OnEntityRenamed(ref EntityRenamedEvent ev)
@@ -78,7 +114,8 @@ namespace Content.Server.PDA
                 {
                     if (comp.ContainedId == idCard)
                     {
-                        SetOwner(uid, comp, ev.Uid, ev.NewName);
+                        comp.OwnerName = ev.NewName;
+                        Dirty(uid, comp);
                     }
                 }
             }
@@ -91,6 +128,7 @@ namespace Content.Server.PDA
             if (!HasComp<UserInterfaceComponent>(uid))
                 return;
 
+            //UpdateWarLevel(uid, pda); // Mono //Forge-Change
             UpdateAlertLevel(uid, pda);
             UpdateStationName(uid, pda);
         }
@@ -123,13 +161,6 @@ namespace Content.Server.PDA
             UpdatePdaUi(uid, pda);
         }
 
-        public void SetOwner(EntityUid uid, PdaComponent pda, EntityUid owner, string ownerName)
-        {
-            pda.OwnerName = ownerName;
-            pda.PdaOwner = owner;
-            UpdatePdaUi(uid, pda);
-        }
-
         private void OnStationRenamed(StationRenamedEvent ev)
         {
             UpdateAllPdaUisOnStation();
@@ -139,6 +170,13 @@ namespace Content.Server.PDA
         {
             UpdateAllPdaUisOnStation();
         }
+
+        // Forge-change-start
+        // private void OnWarLevelChanged(WarLevelChangedEvent args)
+        // {
+        //     UpdateAllPdaUisOnStation();
+        // }
+        // Forge-change-end
 
         private void UpdateAllPdaUisOnStation()
         {
@@ -153,9 +191,12 @@ namespace Content.Server.PDA
         {
             _ringer.RingerPlayRingtone(ent.Owner);
 
-            if (!_containerSystem.TryGetContainingContainer((ent, null, null), out var container)
-                || !TryComp<ActorComponent>(container.Owner, out var actor))
+            // Begin DeltaV - PDAs can be self-viewed
+            if (!(TryComp<ActorComponent>(ent, out var actor) ||
+                (_containerSystem.TryGetContainingContainer((ent, null, null), out var container)
+                && TryComp<ActorComponent>(container.Owner, out actor))))
                 return;
+            // End DeltaV - PDAs can be self-viewed
 
             var message = FormattedMessage.EscapeText(args.Message);
             var wrappedMessage = Loc.GetString("pda-notification-message",
@@ -186,8 +227,10 @@ namespace Content.Server.PDA
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = HasComp<UplinkComponent>(uid) && IsUnlocked(uid);
 
+            pda.CurrentDate = pda.DateOverride ?? ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
             UpdateAlertLevel(uid, pda);
+            //UpdateWarLevel(uid, pda); // Mono //Forge-Change
             // TODO: Update the level and name of the station with each call to UpdatePdaUi is only needed for latejoin players.
             // TODO: If someone can implement changing the level and name of the station when changing the PDA grid, this can be removed.
 
@@ -221,6 +264,26 @@ namespace Content.Server.PDA
                 }
             }
 
+
+            // Begin DeltaV - PDAs can be silicons
+            var owner = id?.FullName;
+            var job = id?.LocalizedJobTitle;
+            if (HasComp<BorgChassisComponent>(uid))
+            {
+                if (TryComp<BorgSwitchableTypeComponent>(uid, out var switchable) && switchable.SelectedBorgType is { } borgType)
+                    job = Loc.GetString($"borg-type-{borgType}-transponder");
+                else
+                    job = Loc.GetString("borg-type-any-transponder");
+
+                owner = MetaData(uid).EntityName;
+            }
+            if (HasComp<StationAiHeldComponent>(uid))
+            {
+                job = Loc.GetString($"station-ai-transponder");
+                owner = MetaData(uid).EntityName;
+            }
+            // End DeltaV - PDAs can be silicons
+
             var state = new PdaUpdateState(
                 programs,
                 GetNetEntity(loader.ActiveProgram),
@@ -230,12 +293,14 @@ namespace Content.Server.PDA
                 new PdaIdInfoText
                 {
                     ActualOwnerName = pda.OwnerName,
-                    IdOwner = id?.FullName,
-                    JobTitle = id?.LocalizedJobTitle,
+                    IdOwner = owner,
+                    JobTitle = job,
                     CompanyName = companyName,
                     CompanyColor = companyColor,
+                    CurrentDate = pda.CurrentDate, // DeltaV - PDA date
                     StationAlertLevel = pda.StationAlertLevel,
-                    StationAlertColor = pda.StationAlertColor
+                    StationAlertColor = pda.StationAlertColor,
+                    //WarLevel = pda.WarLevel //Forge-Change
                 },
                 balance, // Frontier
                 ownedShipName, // Frontier
@@ -336,13 +401,24 @@ namespace Content.Server.PDA
                 pda.StationAlertColor = details.Color;
         }
 
+        // Mono
+        // Forge-change-start
+        // private void UpdateWarLevel(EntityUid uid, PdaComponent pda)
+        // {
+        //     var station = _sectorService.GetServiceEntity();
+        //     if (!TryComp(station, out WarLevelComponent? warComp))
+        //         return;
+        //     pda.WarLevel = warComp.PostWar ? Loc.GetString("comp-pda-ui-station-war-level-post") : Loc.GetString("comp-pda-ui-station-war-level-pre");
+        // }
+        // Forge-change-end
+
         private string? GetDeviceNetAddress(EntityUid uid)
         {
             string? address = null;
 
             if (TryComp(uid, out DeviceNetworkComponent? deviceNetworkComponent))
             {
-                address = deviceNetworkComponent?.Address;
+                address = DeviceLocalizationHelpers.GetAddressFromId(deviceNetworkComponent);
             }
 
             return address;

@@ -1,3 +1,4 @@
+using Content.Shared.Station.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.UI;
@@ -40,6 +41,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.Chemistry.Components;
 using static Content.Shared.Configurable.ConfigurationComponent;
 using Robust.Shared.Containers;
 using Content.Shared.Storage.EntitySystems;
@@ -57,13 +59,12 @@ namespace Content.Server.Administration.Systems
         [Dependency] private IConsoleHost _console = default!;
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private IGameTiming _gameTiming = default!;
-        [Dependency] private SharedMapSystem _map = default!;
-        [Dependency] private IMapManager _mapManager = default!;
+        [Dependency] private SharedMapSystem _mapManager = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private AdminSystem _adminSystem = default!;
         [Dependency] private DisposalTubeSystem _disposalTubes = default!;
         [Dependency] private EuiManager _euiManager = default!;
-        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private ServerGameTicker _ticker = default!;
         [Dependency] private GhostRoleSystem _ghostRoleSystem = default!;
         [Dependency] private ArtifactSystem _artifactSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
@@ -72,7 +73,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private ToolshedManager _toolshed = default!;
         [Dependency] private RejuvenateSystem _rejuvenate = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
-        [Dependency] private StationSystem _stations = default!;
+        [Dependency] private ServerStationSystem _stations = default!;
         [Dependency] private StationSpawningSystem _spawning = default!;
         [Dependency] private ExamineSystemShared _examine = default!;
         [Dependency] private AdminFrozenSystem _freeze = default!;
@@ -86,7 +87,10 @@ namespace Content.Server.Administration.Systems
         {
             SubscribeLocalEvent<GetVerbsEvent<Verb>>(GetVerbs);
             SubscribeLocalEvent<RoundRestartCleanupEvent>(Reset);
-            SubscribeLocalEvent<SolutionContainerManagerComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+
+            // TODO: This is genuinely terrible, solutions are already networked and we shouldn't need to update the BUI like this.
+            SubscribeLocalEvent<SolutionComponent, SolutionChangedEvent>((x, ref _) => OnSolutionChanged(x.Owner));
+            SubscribeLocalEvent<SolutionManagerComponent, SolutionChangedEvent>((x, ref _) => OnSolutionChanged(x.Owner));
         }
 
         private void GetVerbs(GetVerbsEvent<Verb> ev)
@@ -626,7 +630,9 @@ namespace Content.Server.Administration.Systems
 
             // Add verb to open Solution Editor
             if (_groupController.CanCommand(player, "addreagent") &&
-                EntityManager.HasComponent<SolutionContainerManagerComponent>(args.Target))
+                (HasComp<SolutionContainerManagerComponent>(args.Target)
+                 || HasComp<SolutionManagerComponent>(args.Target)
+                 || HasComp<SolutionComponent>(args.Target)))
             {
                 Verb verb = new()
                 {
@@ -641,13 +647,13 @@ namespace Content.Server.Administration.Systems
         }
 
         #region SolutionsEui
-        private void OnSolutionChanged(Entity<SolutionContainerManagerComponent> entity, ref SolutionContainerChangedEvent args)
+        private void OnSolutionChanged(EntityUid uid)
         {
             foreach (var list in _openSolutionUis.Values)
             {
                 foreach (var eui in list)
                 {
-                    if (eui.Target == entity.Owner)
+                    if (eui.Target == uid)
                         eui.StateDirty();
                 }
             }

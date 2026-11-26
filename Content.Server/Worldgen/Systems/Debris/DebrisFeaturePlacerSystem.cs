@@ -24,7 +24,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
     [Dependency] private PoissonDiskSampler _sampler = default!;
     [Dependency] private TransformSystem _xformSys = default!;
     [Dependency] private ILogManager _logManager = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     private ISawmill _sawmill = default!;
@@ -243,7 +243,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
         }
 
         if (failures > 0)
-            _sawmill.Error($"Failed to place {failures} debris at chunk {args.Chunk}");
+            _sawmill.Error($"Failed to place {failures} debris at chunk {args.Chunk} at coords {args.Coords}");
     }
 
     /// <summary>
@@ -255,7 +255,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
     private bool HasCollisions(MapId mapId, Box2 point)
     {
         _mapGrids.Clear();
-        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids);
+        _mapManager.FindGridsIntersecting(mapId, point, ref _mapGrids, includeMap: false);
         return _mapGrids.Count > 0;
     }
 

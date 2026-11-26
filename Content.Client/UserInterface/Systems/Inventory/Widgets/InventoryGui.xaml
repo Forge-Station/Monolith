@@ -1,4 +1,6 @@
-﻿<widgets:InventoryGui
+﻿<!-- Forge-Change: left-aligned overlay so the clothing grid expands up from the
+     toggle on one baseline (no gap). Stays on the left so opening I does not cover the back slot. -->
+<widgets:InventoryGui
     xmlns="https://spacestation14.io"
     xmlns:inventory="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Controls"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Widgets"
@@ -7,14 +9,15 @@
     VerticalExpand="True"
     VerticalAlignment="Bottom"
     Orientation="Horizontal"
-    HorizontalAlignment="Center">
-    <Control HorizontalAlignment="Center">
+    HorizontalAlignment="Left">
+    <Control HorizontalAlignment="Left">
         <!-- Needs to default to invisible because if we attach to a non-slots entity this will never get unset -->
         <controls:SlotButton
             Name="InventoryButton"
             Access="Public"
             Visible="False"
             VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
             HorizontalExpand="False"
             VerticalExpand="False"
             ButtonTexturePath="Slots/toggle"/>
@@ -26,7 +29,7 @@
             SlotGroup="Default"
             ExpandBackwards="True"
             VerticalExpand="True"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
         />
     </Control>
 </widgets:InventoryGui>

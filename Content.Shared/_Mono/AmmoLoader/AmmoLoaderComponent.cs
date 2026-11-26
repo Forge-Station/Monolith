@@ -1,7 +1,7 @@
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Mono.AmmoLoader;
 
@@ -28,7 +28,7 @@ public sealed partial class AmmoLoaderComponent : Component
     /// <summary>
     /// Source port for sending load signals to linked artillery.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<SourcePortPrototype>))]
     public string LoadPort = "AmmoLoaderLoad";
 
     /// <summary>

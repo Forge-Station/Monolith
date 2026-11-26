@@ -7,9 +7,9 @@ using Content.Server.Shuttles.Components;
 
 namespace Content.Server._Forge.ShuttleBinder;
 
-public sealed class ShuttleTransmitterSystem : EntitySystem
+public sealed partial class ShuttleTransmitterSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

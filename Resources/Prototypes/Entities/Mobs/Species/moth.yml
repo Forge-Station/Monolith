@@ -5,13 +5,17 @@
   id: BaseMobMoth
   abstract: true
   components:
+  - type: CEZFlyer # Mono: z-level flight
+    flightSpeed: 0.35
+    flightMoveSpeedModifier: 0.35
+    hoverStaminaDrain: 4
+  - type: CEControllableFlight
+    startFlightDoAfter: 2
   - type: HumanoidAppearance
     species: Moth
     hideLayersOnEquip:
     - HeadTop
     - Hair
-  - type: Hunger
-  - type: Thirst
   - type: Carriable # Carrying system from nyanotrasen.
   - type: Icon
     sprite: Mobs/Species/Moth/parts.rsi

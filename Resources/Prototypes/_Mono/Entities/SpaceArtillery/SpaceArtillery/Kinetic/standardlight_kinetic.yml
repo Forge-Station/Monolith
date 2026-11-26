@@ -20,7 +20,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -108,13 +108,14 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
     - Toggle
   - type: Gun
-    fireRate: 12
+    damageModifier: 5
+    fireRate: 10
     recoil: 5 # 1/5x
     projectileSpeed: 192
     minAngle: 0
@@ -194,7 +195,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -262,15 +263,16 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
     - Toggle
   - type: Gun
+    damageModifier: 1
     fireRate: 25
     recoil: 5 # 1/5x
-    projectileSpeed: 216
+    projectileSpeed: 160
     minAngle: 0
     maxAngle: 4
     shootThermalSignature: 100000 # ~4.5km if firing continuously

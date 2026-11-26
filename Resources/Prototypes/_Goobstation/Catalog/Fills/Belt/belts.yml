@@ -5,6 +5,7 @@
   components:
   - type: StorageFill
     contents:
+    # Forge-Change-Start
       - id: DefibrillatorCompact
       - id: EnergyScalpel
       - id: AdvancedRetractor
@@ -14,16 +15,19 @@
       - id: MedicatedSuture
       - id: RegenerativeMesh
       - id: Bloodpack
-      - id: EmergencyMedipen
+      - id: HypoMini
+      - id: EpinephrineChemistryBottle
+      - id: EpinephrineChemistryBottle
+    # Forge-Change-End
 
 - type: entity
   id: ClothingBeltHolsterFilledCentComm
   parent: ClothingBeltHolster
-  suffix: Filled, N1984
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
-    - id: WeaponPistolN1984
+    - id: WeaponRevolverMateba
 
 - type: entity
   id: ClothingBeltSheathFilledNavyOfficer

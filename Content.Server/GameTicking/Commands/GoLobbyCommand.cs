@@ -1,5 +1,5 @@
-﻿using Content.Server.Administration;
-using Content.Server.GameTicking.Presets;
+using Content.Server.Administration;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -20,7 +20,7 @@ namespace Content.Server.GameTicking.Commands
             GamePresetPrototype? preset = null;
             var presetName = string.Join(" ", args);
 
-            var ticker = _e.System<GameTicker>();
+            var ticker = _e.System<ServerGameTicker>();
 
             if (args.Length > 0)
             {

@@ -1,7 +1,7 @@
 #T1
 - type: loadout
   id: ContractorBriefcaseBrownFilled
-  name: brown briefcase (empty)
+  name: loadout-name-ContractorBriefcaseBrownFilled
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -11,7 +11,7 @@
 
 - type: loadout
   id: ContractorToolboxEmergency
-  name: emergency toolbox (empty)
+  name: loadout-name-ContractorToolboxEmergency
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -21,7 +21,7 @@
 
 - type: loadout
   id: ContractorToolboxMechanical
-  name: mechanical toolbox (empty)
+  name: loadout-name-ContractorToolboxMechanical
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
@@ -170,7 +170,7 @@
 
 - type: loadout
   id: ContractorEmotionalPetCarrier
-  name: emotional support pet
+  name: loadout-name-ContractorEmotionalPetCarrier
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT3

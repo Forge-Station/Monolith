@@ -4,6 +4,7 @@ using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
 using Content.Client.Inventory;
 using Content.Client.Storage.Systems;
+using Content.Client._Forge.UserInterface; // Forge-Change
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
@@ -34,7 +35,6 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
 
     [UISystemDependency] private readonly ClientInventorySystem _inventorySystem = default!;
     [UISystemDependency] private readonly HandsSystem _handsSystem = default!;
-    [UISystemDependency] private readonly ContainerSystem _container = default!;
 
     private EntityUid? _playerUid;
     private InventorySlotsComponent? _playerInventory;
@@ -91,9 +91,10 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
         CommandBinds.Unregister<ClientInventorySystem>();
     }
 
-    private SlotButton CreateSlotButton(SlotData data)
+    // Forge-Change: HUD slots opt into HudScale; stripping / character windows stay 64px.
+    private SlotButton CreateSlotButton(SlotData data, bool useHudScale)
     {
-        var button = new SlotButton(data);
+        var button = new SlotButton(data) { UseHudScale = useHudScale }; // Forge-Change
         button.Pressed += ItemPressed;
         button.StoragePressed += StoragePressed;
         button.Hover += SlotButtonHovered;
@@ -116,6 +117,7 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
         if (button != null)
         {
             _inventoryButton = button;
+            _inventoryButton.UseHudScale = true; // Forge-Change
             _inventoryButton.Pressed += InventoryButtonPressed;
         }
     }
@@ -146,7 +148,7 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
 
             if (!container.TryGetButton(data.SlotName, out var button))
             {
-                button = CreateSlotButton(data);
+                button = CreateSlotButton(data, useHudScale: true); // Forge-Change
                 container.AddButton(button);
             }
 
@@ -187,10 +189,13 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
             }
             else
             {
+                // Forge-Change-Start: keep empty I-key grid cells the same size as scaled HUD slots.
+                var placeholderSize = ForgeUiSizing.ButtonSize;
                 _inventoryHotbar.AddChild(new Control
                 {
-                    MinSize = new Vector2(64, 64)
+                    MinSize = new Vector2(placeholderSize, placeholderSize)
                 });
+                // Forge-Change-End
             }
         }
 
@@ -217,7 +222,7 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
 
             if (!_strippingWindow!.InventoryButtons.TryGetButton(data.SlotName, out var button))
             {
-                button = CreateSlotButton(data);
+                button = CreateSlotButton(data, useHudScale: false); // Forge-Change
                 _strippingWindow!.InventoryButtons.AddButton(button, data.ButtonOffset);
             }
 
@@ -342,8 +347,7 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
         // Set green / red overlay at 50% transparency
         var hoverEntity = _entities.SpawnEntity("hoverentity", MapCoordinates.Nullspace);
         var hoverSprite = _entities.GetComponent<SpriteComponent>(hoverEntity);
-        var fits = _inventorySystem.CanEquip(player.Value, held, control.SlotName, out _, slotDef) &&
-                   _container.CanInsert(held, container);
+        var fits = _inventorySystem.CanEquip(player.Value, held, control.SlotName, out _, slotDef, containerSlot: container);
 
         if (!fits && _entities.TryGetComponent<StorageComponent>(container.ContainedEntity, out var storage))
         {
@@ -375,7 +379,7 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
         if (!_slotGroups.TryGetValue(data.SlotGroup, out var slotGroup))
             return;
 
-        var button = CreateSlotButton(data);
+        var button = CreateSlotButton(data, useHudScale: true); // Forge-Change
         slotGroup.AddButton(button);
     }
 

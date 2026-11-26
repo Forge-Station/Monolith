@@ -7,6 +7,7 @@
   - MedicalDoctor
   - Chemist
   - Cloning
+  - Genetics
   - Cryogenics # Note: Frontier changes inside
   - Surgery # Shitmed Change
   - MedicalBounties # Frontier
@@ -20,6 +21,18 @@
   id: Cloning
   name: guide-entry-cloning
   text: "/ServerInfo/_Forge/Guidebook/Medical/Cloning.xml" # Forge-change
+
+- type: guideEntry
+  id: Genetics
+  name: guide-entry-genetics
+  text: "/ServerInfo/_Forge/Guidebook/Medical/Genetics.xml"
+  children:
+  - GeneticsGenes
+
+- type: guideEntry
+  id: GeneticsGenes
+  name: guide-entry-genetics-genes
+  text: "/ServerInfo/_Forge/Guidebook/Medical/GeneticsGenes.xml"
 
 - type: guideEntry
   id: Cryogenics
@@ -56,31 +69,31 @@
 
 # Shitmed Change Start
 
-- type: guideEntry
-  id: Surgery
-  name: guide-entry-surgery
-  text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/Surgery.xml" # Forge-change
-  children:
-  - PartManipulation
-  - OrganManipulation
-  - UtilitySurgeries
+# - type: guideEntry
+#   id: Surgery
+#   name: guide-entry-surgery
+#   text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/Surgery.xml" # Forge-change
+#   children:
+#   - PartManipulation
+#   - OrganManipulation
+#   - UtilitySurgeries
 
-- type: guideEntry
-  id: PartManipulation
-  name: guide-entry-partmanipulation
-  text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/PartManipulation.xml" # Forge-change
-  filterEnabled: true
+# - type: guideEntry
+#   id: PartManipulation
+#   name: guide-entry-partmanipulation
+#   text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/PartManipulation.xml" # Forge-change
+#   filterEnabled: true
 
-- type: guideEntry
-  id: OrganManipulation
-  name: guide-entry-organmanipulation
-  text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/OrganManipulation.xml" # Forge-change
-  filterEnabled: true
+# - type: guideEntry
+#   id: OrganManipulation
+#   name: guide-entry-organmanipulation
+#   text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/OrganManipulation.xml" # Forge-change
+#   filterEnabled: true
 
-- type: guideEntry
-  id: UtilitySurgeries
-  name: guide-entry-utilitysurgeries
-  text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/UtilitySurgeries.xml" # Forge-change
-  filterEnabled: true
+# - type: guideEntry
+#   id: UtilitySurgeries
+#   name: guide-entry-utilitysurgeries
+#   text: "/ServerInfo/_Forge/Guidebook/_Shitmed/Medical/UtilitySurgeries.xml" # Forge-change
+#   filterEnabled: true
 
 # Shitmed Change End

@@ -103,7 +103,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: DeviceLinkSource
     range: 50
@@ -115,7 +115,7 @@
       - RetractControlRods
   - type: ActivatableUI
     key: enum.NuclearReactorUiKey.Key
-  - type: ActivatableUIRequiresAnchor
+  #- type: ActivatableUIRequiresAnchor # Mono - We arent letting you fucking anchor that
   - type: UserInterface
     interfaces:
       enum.NuclearReactorUiKey.Key:

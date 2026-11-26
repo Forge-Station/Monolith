@@ -12,6 +12,7 @@ using Content.Shared.Whitelist; // Forge-Change
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;  // Forge-Change
 
 namespace Content.Shared.Item.ItemToggle;
 /// <summary>
@@ -28,14 +29,13 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!; // Forge-Change
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
+    [Dependency] private IGameTiming _gameTiming = default!; // Forge-Change
 
-    private EntityQuery<ItemToggleComponent> _query;
+    [Dependency] private readonly EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemToggleComponent>();
 
         SubscribeLocalEvent<ItemToggleComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ItemToggleComponent, MapInitEvent>(OnMapInit);
@@ -128,7 +128,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// <returns>Same as <see cref="TrySetActive"/></returns>
     public bool Toggle(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         return TrySetActive(ent, !ent.Comp.Activated, user, predicted);
@@ -151,7 +151,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     public bool TryActivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -197,7 +197,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     public bool TryDeactivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -277,13 +277,12 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void TurnOnOnWielded(Entity<ItemToggleComponent> ent, ref ItemWieldedEvent args)
     {
-        // FIXME: for some reason both client and server play sound
-        TryActivate((ent, ent.Comp));
+        TryActivate((ent, ent.Comp), args.User);  // Forge-Change
     }
 
     public bool IsActivated(Entity<ItemToggleComponent?> ent)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return true; // assume always activated if no component
 
         return ent.Comp.Activated;
@@ -302,6 +301,9 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void UpdateActiveSound(Entity<ItemToggleActiveSoundComponent> ent, ref ItemToggledEvent args)
     {
+        if (!_gameTiming.IsFirstTimePredicted)  // Forge-Change
+            return;
+
         var (uid, comp) = ent;
         if (!args.Activated)
         {

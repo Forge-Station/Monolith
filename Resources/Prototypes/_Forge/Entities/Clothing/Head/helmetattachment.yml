@@ -6,9 +6,9 @@
   description: A pair of basic optoelectronics night vision goggles with high sensibility to flashes, worn in the helmet attachment slot. Whoops, those are broken.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Headattachments/NVGs.rsi
+    sprite: _Forge/Clothing/Head/Headattachments/NVGs.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Headattachments/NVGs.rsi
+    sprite: _Forge/Clothing/Head/Headattachments/NVGs.rsi
     clothingVisuals:
       helmetattachment:
       - state: equipped-HELMETATTACHMENT
@@ -16,11 +16,12 @@
     relayOverlay: true
     goggleEffect: true
     action: ActionToggleNightVision
-    viewCircleRadius: 400
+    viewCircleRadius: 600 # Forge-Change 400 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#a6ffa6" # Forge-Change #00FF00 to #a6ffa6 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#FFFFFFFF" # Forge-Change #FFFFFF32 to #FFFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
 
   - type: IdentityBlocker
     coverage: EYES

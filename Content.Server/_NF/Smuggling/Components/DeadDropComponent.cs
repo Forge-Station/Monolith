@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server._NF.Smuggling.Components;
@@ -62,7 +62,7 @@ public sealed partial class DeadDropComponent : Component
     /// <summary>
     ///     The paper prototype to spawn.
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string HintPaper = "PaperCargoInvoice";
 
     /// <summary>

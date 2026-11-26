@@ -15,12 +15,12 @@
   name: loadout-group-magazine
   minLimit: 1
   loadouts:
-  - Faction556x45mmAmmoLoadout #AR-220
+  - TSFCaselessAmmoBoxLoadout #AR-220
   - Faction762x51mmAmmoLoadout #OAR-308
   - Faction12GaugeAmmoLoadout #Defensie-12
   - FactionRechargerLoadout #Energy
   fallbacks:
-  - Faction556x45mmAmmoLoadout #AR-220
+  - TSFCaselessAmmoBoxLoadout #AR-220
 
 - type: loadout
   id: FactionAr220Loadout

@@ -8,10 +8,18 @@
     - type: Passport
     - type: UseDelay
       delay: 0.5
+    - type: ActivatableUI
+      key: enum.PassportUiKey.Key
+      requiresComplex: false
+      verbText: passport-ui-verb-open
+    - type: UserInterface
+      interfaces:
+        enum.PassportUiKey.Key:
+          type: PassportBoundUserInterface
     - type: Sprite
-      sprite: _EE/Contractors/Passport.rsi
+      sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_biesel_open
+      - state: passport_biesel_closed
     - type: Appearance
     - type: EmitSoundOnPickup
       sound: /Audio/_Goobstation/Items/handling/book_pickup.ogg
@@ -25,9 +33,9 @@
   id: SolFedPassport
   components:
     - type: Sprite
-      sprite: Forge/Passport.rsi
+      sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_solfed_open # todo: allow people to toggle open and closed
+      - state: passport_solfed_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-solfed-tsf
@@ -54,7 +62,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-solfed-freedom
+      - description: passport-solfed-freecolonies
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -68,9 +76,9 @@
   id: ImperialPassport
   components:
     - type: Sprite
-      sprite: Forge/Passport.rsi
+      sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_imperial_open # todo: allow people to toggle open and closed
+      - state: passport_imperial_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-imperial-tsf
@@ -97,7 +105,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-imperial-freedom
+      - description: passport-imperial-freecolonies
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -111,9 +119,9 @@
   id: USSPPassport
   components:
     - type: Sprite
-      sprite: Forge/Passport.rsi
+      sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_ussp_open # todo: allow people to toggle open and closed
+      - state: passport_ussp_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-ussp-tsf
@@ -140,7 +148,7 @@
           - !type:NationalityRequirement
             nationalities:
               - USSP
-      - description: passport-ussp-freedom
+      - description: passport-ussp-freecolonies
         fontSize: 12
         color: "#ad4141"
         requireDetailRange: true
@@ -154,9 +162,9 @@
   id: FreeColoniesPassport
   components:
     - type: Sprite
-      sprite: Forge/Passport.rsi
+      sprite: _Forge/Objects/Misc/passport.rsi
       layers:
-      - state: passport_freedom_open # todo: allow people to toggle open and closed
+      - state: passport_freedom_closed
     - type: ExtendDescription
       descriptionList:
       - description: passport-freecolonies-tsf

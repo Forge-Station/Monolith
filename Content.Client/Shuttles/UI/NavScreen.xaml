@@ -1,20 +1,28 @@
+<!-- Forge-Change: VerticalExpand so the nav radar fills a resized shuttle window. -->
 <controls:BoxContainer Visible="False"
               HorizontalExpand="True"
+              VerticalExpand="True"
               xmlns:controls="https://spacestation14.io"
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
               xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
               xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
                 <!-- Mono - wrap -->
-                <controls:LayoutContainer Margin="5 4 10 5">
+                <!-- Forge-Change-Start -->
+                <controls:LayoutContainer Name="NavRadarHost"
+                                     Margin="5 4 10 5"
+                                     HorizontalExpand="True"
+                                     VerticalExpand="True">
                     <ui:ShuttleNavControl Name="NavRadar"
                                      MouseFilter="Stop"
                                      VerticalAlignment="Stretch"
                                      VerticalExpand="True"
                                      HorizontalExpand="True"/>
                 </controls:LayoutContainer>
+                <!-- Forge-Change-End -->
                 <!-- Nav controls -->
-                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <!-- Forge-Change-Start: sidebar scrolls when the window is short; extra width goes to the radar. -->
+                <controls:PanelContainer VerticalExpand="True" HorizontalExpand="False" Margin="4 4 4 4">
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
                     </controls:PanelContainer.PanelOverride>
@@ -22,69 +30,133 @@
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
+                <controls:ScrollContainer VerticalExpand="True"
+                                          HorizontalExpand="True"
+                                          HScrollEnabled="False"
+                                          VScrollEnabled="True"
+                                          MinWidth="280"
+                                          MaxWidth="280">
                 <controls:BoxContainer Name="RightDisplayNav"
                       VerticalAlignment="Top"
-                      HorizontalAlignment="Center"
-                      VerticalExpand="True"
-                      MinWidth="256"
-                      MaxWidth="256"
-                      Margin="5 5 5 5"
+                      HorizontalAlignment="Stretch"
+                      VerticalExpand="False"
+                      HorizontalExpand="True"
+                      MinWidth="260"
+                      Margin="4 5 4 5"
                       Orientation="Vertical">
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
-                               VerticalExpand="True"
+                               VerticalExpand="False"
                                HorizontalAlignment="Center"/>
                     </controls1:StripeBack>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <!-- Forge-Change-Start: label/value rows so Russian captions do not clip or overlap. -->
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 2 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
                         </controls:PanelContainer.PanelOverride>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="8 8 8 8">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
                         </controls:PanelContainer.PanelOverride>
-                    <controls:GridContainer Columns="2"
+                    <controls:BoxContainer Name="ReadonlyDisplay"
+                                   Orientation="Vertical"
                                    HorizontalAlignment="Stretch"
                                    VerticalAlignment="Top"
                                    HorizontalExpand="True"
-                                   Margin="6 6 6 6"
-                                   Name="ReadonlyDisplay">
-                        <controls:Label Text="{controls:Loc 'shuttle-console-designation'}" FontColorOverride="#00ff2a"/>
-                        <controls:Label Name="ShuttleDesignation"
-                               Text="{controls:Loc 'shuttle-console-designation-unknown'}"
-                               HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-position'}" FontColorOverride="#00ff2a"/>
-                        <controls:Label Name="GridPosition"
-                               Text="0.0, 0.0"
-                               HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}" FontColorOverride="#00ff2a"/>
-                        <controls:Label Name="GridOrientation"
-                               Text="0.0"
-                               HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}" FontColorOverride="#00ff2a"/>
-                        <controls:Label Name="GridLinearVelocity"
-                               Text="0.0, 0.0"
-                               HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                        <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}" FontColorOverride="#00ff2a"/>
-                        <controls:Label Name="GridAngularVelocity"
-                               Text="0.0"
-                               HorizontalExpand="True"
-                               Align="Right"
-                               FontColorOverride="#00ff2a"/>
-                    </controls:GridContainer>
+                                   Margin="4 4 4 4"
+                                   SeparationOverride="2">
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-designation'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="ShuttleDesignation"
+                                   Text="{controls:Loc 'shuttle-console-designation-unknown'}"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-position'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridPosition"
+                                   Text="0.0, 0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridOrientation"
+                                   Text="0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridLinearVelocity"
+                                   Text="0.0, 0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}" FontColorOverride="#00ff2a"/>
+                            <controls:Label Name="GridAngularVelocity"
+                                   Text="0.0"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"/>
+                        </controls:BoxContainer>
+                        <!-- Mono: z-level altimeter -->
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Name="GridAltitudeCaption"
+                                   Text="{controls:Loc 'shuttle-console-altitude'}"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                            <controls:Label Name="GridAltitude"
+                                   Text="-"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Name="GridVerticalVelocityCaption"
+                                   Text="{controls:Loc 'shuttle-console-vertical-velocity'}"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                            <controls:Label Name="GridVerticalVelocity"
+                                   Text="-"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                        </controls:BoxContainer>
+                        <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                            <controls:Label Name="GridTravelStateCaption"
+                                   Text="{controls:Loc 'shuttle-console-travel-state'}"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                            <controls:Label Name="GridTravelState"
+                                   Text="-"
+                                   HorizontalExpand="True"
+                                   Align="Right"
+                                   ClipText="True"
+                                   FontColorOverride="#00ff2a"
+                                   Visible="False"/>
+                        </controls:BoxContainer>
+                    </controls:BoxContainer>
                     </controls:PanelContainer>
                     </controls:PanelContainer>
+                    <!-- Forge-Change-End -->
                     <!-- Forge-Change-Start -->
-                    <controls:PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer Name="ShieldPanel" Visible="False" VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -97,10 +169,10 @@
                     <controls1:StripeBack
                         MinSize="48 48">
                         <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"
-                               VerticalExpand="True"
+                               VerticalExpand="False"
                                HorizontalAlignment="Center"/>
                     </controls1:StripeBack>
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -111,8 +183,8 @@
                             TextAlign="Center"
                             StyleClasses="ButtonSquare"
                             ToggleMode="True"/>
-                    <controls:Button Name="IFFShuttleToggle"
-                             Text="{controls:Loc 'shuttle-console-iffshuttles-toggle'}"
+                    <controls:Button Name="IFFDetailedToggle"
+                             Text="{controls:Loc 'shuttle-console-iff-detailed'}"
                              TextAlign="Center"
                              StyleClasses="ButtonSquare"
                              ToggleMode="True"/>
@@ -124,7 +196,7 @@
                         </controls:BoxContainer>
                     </controls:PanelContainer>
                     <!-- Frontier - Inertia dampener controls-->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -156,7 +228,7 @@
                     </controls:PanelContainer>
                     <!-- End Frontier - Inertia dampener controls-->
                     <!-- Frontier - IFF search -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -167,8 +239,33 @@
                     </controls:PanelContainer>
                     <!-- End Frontier - IFF search -->
 
+                    <!-- Forge-Change: nav markers -->
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4 4 4 4" SeparationOverride="4">
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-markers-label'}" HorizontalExpand="True"/>
+                                <controls:Label Name="MarkerCountLabel" Text="0/5" Align="Right"/>
+                            </controls:BoxContainer>
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="4">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-marker-x'}"/>
+                                <controls:LineEdit Name="MarkerXEdit" HorizontalExpand="True" PlaceHolder="0.0"/>
+                                <controls:Label Text="{controls:Loc 'shuttle-console-marker-y'}"/>
+                                <controls:LineEdit Name="MarkerYEdit" HorizontalExpand="True" PlaceHolder="0.0"/>
+                            </controls:BoxContainer>
+                            <controls:Button Name="MarkerTrackButton"
+                                             Text="{controls:Loc 'shuttle-console-marker-track'}"
+                                             TextAlign="Center"
+                                             StyleClasses="ButtonSquare"/>
+                            <controls:BoxContainer Name="MarkerList" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="2"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
+                    <!-- End Forge-Change: nav markers -->
+
                     <!-- Frontier - Maximum IFF Distance -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -196,7 +293,7 @@
                     <!-- End Frontier - Maximum Shuttle Speed -->
 
                     <!-- Network Port Buttons -->
-                    <controls:PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                         <controls:PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </controls:PanelContainer.PanelOverride>
@@ -211,15 +308,11 @@
                                    HorizontalAlignment="Center"/>
                         </controls:PanelContainer>
                         <controls:PanelContainer Margin="1">
-                            <controls:ScrollContainer
-                                HorizontalExpand="False"
-                                MinHeight="80"
-                                MaxHeight="80">
-                                <controls:GridContainer
-                                             Columns="8"
-                                             Rows="2"
-                                             HorizontalExpand="False"
-                                             HorizontalAlignment="Center"
+                            <!-- Forge-Change-Start: 2-column ports so they fit the sidebar and scroll with it. -->
+                            <controls:GridContainer
+                                             Columns="2"
+                                             HorizontalExpand="True"
+                                             HorizontalAlignment="Stretch"
                                              Name="NetworkPortsBox"
                                              Margin="0 6 0 6">
                                     <controls:Button Name="DeviceButton1"
@@ -227,57 +320,59 @@
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton2"
                                                      Text="{controls:Loc 'shuttle-console-device-button-2'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton3"
                                                      Text="{controls:Loc 'shuttle-console-device-button-3'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton4"
                                                      Text="{controls:Loc 'shuttle-console-device-button-4'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton5"
                                                      Text="{controls:Loc 'shuttle-console-device-button-5'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton6"
                                                      Text="{controls:Loc 'shuttle-console-device-button-6'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton7"
                                                      Text="{controls:Loc 'shuttle-console-device-button-7'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                     <controls:Button Name="DeviceButton8"
                                                      Text="{controls:Loc 'shuttle-console-device-button-8'}"
                                                      TextAlign="Center"
                                                      StyleClasses="ButtonSquare"
                                                      ToolTip="{controls:Loc 'shuttle-console-network-connect-tooltip'}"
-                                                     SetWidth="55"/>
+                                                     HorizontalExpand="True"/>
                                 </controls:GridContainer>
-                            </controls:ScrollContainer>
+                            <!-- Forge-Change-End -->
                         </controls:PanelContainer>
                     </controls:BoxContainer>
                 </controls:PanelContainer>
                     <!-- End Network Port Buttons -->
                     </controls:BoxContainer>
+                </controls:ScrollContainer>
                     </controls:PanelContainer>
                 </controls:PanelContainer>
+                <!-- Forge-Change-End -->
                 </controls:BoxContainer>
 

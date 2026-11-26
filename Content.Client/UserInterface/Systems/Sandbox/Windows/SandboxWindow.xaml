@@ -9,6 +9,8 @@
         <Button Name="SpawnEntitiesButton" Access="Public" Text="{Loc sandbox-window-spawn-entities-button}"/>
         <Button Name="SpawnDecalsButton" Access="Public" Text="{Loc sandbox-window-spawn-decals-button}"/>
         <!-- Forge-Change -->
+        <Button Name="SpawnPaletteButton" Access="Public" Text="{Loc mapping-palette-open-button}"/>
+        <!-- Forge-Change -->
         <Button Name="PaintWallsButton" Access="Public" Text="{Loc sandbox-window-paint-walls-button}"/>
 
         <Label Text="{Loc sandbox-window-visibility-label}"/>

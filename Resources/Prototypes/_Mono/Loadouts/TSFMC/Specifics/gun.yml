@@ -3,13 +3,23 @@
   name: loadout-group-weapon
   minLimit: 1
   loadouts:
-  - FactionFrostLoadout
+  # - FactionFrostLoadout # Forge-change delete additional frost
   - FactionDrozdLoadout
-  - FactionLecterLoadout
-  - FactionVulcanLoadout
+  - FactionRiversongLoadout
+  - FactionDragonfangLoadout
   - FactionBanditLoadout
   fallbacks:
-  - FactionFrostLoadout
+  - FactionDrozdLoadout # Forge-change fallback to drozd
+
+- type: loadoutGroup
+  id: TsfmcFirearmCommand
+  name: loadout-group-weapon
+  minLimit: 0
+  loadouts:
+  - FactionRiversongLoadout
+  - FactionDrozdLoadout
+  - FactionDragonfangLoadout
+  - SecurityGuardEnforcerLoadout
 
 - type: loadoutGroup
   id: TsfmcFirearm
@@ -60,5 +70,5 @@
   minLimit: 0
   loadouts:
   - FactionRechargerLoadout #Energy
-  - FactionMagnum45Loadout # Inspector/Python/Mateba
+  - FactionMagnum357Loadout # Inspector/Python/Mateba
   - FactionAcpPistolAmmoLoadout #MK58

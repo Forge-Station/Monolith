@@ -1,0 +1,16 @@
+- type: uiTheme
+  id: ForgePickMeTheme
+  path: /Textures/_Forge/Interface/PickMe/
+  colors:
+    whiteText: "#f8f4ff"
+    slotSelectedGold: "#e8e8e8"
+    slotColor: "#e8e8e8"
+    slotOutline: "#e8e8e8"
+    slotText: "#e8e8e8"
+    nanoGold: "#e8e8e8"
+    goodGreenFore: "#e8e8e8"
+    concerningOrangeFore: "#e8e8e8"
+    dangerousRedFore: "#e8e8e8"
+    disabledFore: "#e8e8e8"
+    _itemstatus_content_margin_right: "#06060404"
+    _itemstatus_content_margin_left: "#04060604"

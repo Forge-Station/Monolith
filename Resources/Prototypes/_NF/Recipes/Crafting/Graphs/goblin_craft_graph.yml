@@ -516,6 +516,39 @@
   - node: NFGoblinMadeLantern
     entity: NFGoblinMadeLantern
 
+#region crossbow goblin hand
+- type: constructionGraph
+  id: crossbowGoblinHand
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: crossbowGoblinHand
+      steps:
+      - tag: GoblinPreciousTrash
+        name: construction-graph-component-goblin-precious-trash
+        icon:
+          sprite: Objects/Consumable/Food/snacks.rsi
+          state: cheesiehonkers-trash
+        doAfter: 0.2
+      - tag: GoblinPreciousTrash
+        name: construction-graph-component-goblin-precious-trash
+        icon:
+          sprite: Objects/Consumable/Food/snacks.rsi
+          state: boritos-trash
+        doAfter: 0.2
+      - tag: GoblinPreciousTrash
+        name: construction-graph-component-goblin-precious-trash
+        icon:
+          sprite: Objects/Consumable/Food/snacks.rsi
+          state: chips-trash
+        doAfter: 0.2
+      - material: Cable
+        amount: 5
+        doAfter: 0.5
+  - node: crossbowGoblinHand
+    entity: CrossbowGoblinHand
+
 #region power cell
 - type: constructionGraph
   id: NFGoblinMadePowerCell

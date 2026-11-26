@@ -4,6 +4,7 @@ using Content.Server.GameTicking.Events;
 using Content.Shared.Audio;
 using Content.Shared.Audio.Events;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Events;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -13,7 +14,6 @@ namespace Content.Server.Audio;
 
 public sealed partial class ContentAudioSystem : SharedContentAudioSystem
 {
-    [ValidatePrototypeId<SoundCollectionPrototype>]
     private const string LobbyMusicCollection = "MonoLobbyMusic"; // Mono
 
     [Dependency] private AudioSystem _serverAudio = default!;

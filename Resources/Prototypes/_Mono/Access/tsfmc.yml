@@ -11,3 +11,14 @@
   - Security
   - Mercenary # Frontier
   - Captain # Frontier
+  - TurretCommandTSFShuttle # Forge-Change
+
+- type: accessGroup
+  id: TSF
+  tags:
+  - HeadOfSecurity
+  - Armory
+  - Bailiff
+  - Sergeant
+  - Security
+  - TsfmcEngineering

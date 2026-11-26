@@ -21,7 +21,11 @@ shuttle-console-exclusion = Зона отчуждения
 shuttle-console-strafing = Режим стрейфа
 shuttle-console-nav-settings = Настройки
 shuttle-console-iff-toggle = Показ системы опознавания
+shuttle-console-iff-detailed = Подробный IFF
 shuttle-console-dock-toggle = Показ стыковочных портов
+shuttle-console-iff-toggle-short = IFF
+shuttle-console-iff-detailed-short = D.IFF
+shuttle-console-dock-toggle-short = DOCKS
 shuttle-console-iffshuttles-toggle = Показать шаттлы
 
 # MAP
@@ -34,6 +38,12 @@ shuttle-console-ftl-state-Arriving = Прибытие
 shuttle-console-ftl-state-Cooldown = Перезарядка
 shuttle-console-map-settings = Настройки
 shuttle-console-ftl-button = БСС
+shuttle-console-cloak-button = Стелс
+shuttle-console-toggle-mod-button = Сменить режим
+shuttle-console-cloak-none = Стелс: Отсутствует
+shuttle-console-cloak-ready = Стелс: Готов
+shuttle-console-cloak-active = Стелс: Активен
+shuttle-console-cloak-cooldown = Стелс: Перезарядка
 shuttle-console-map-rebuild =
     Сканировать на
     наличие объектов

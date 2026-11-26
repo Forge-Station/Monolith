@@ -35,8 +35,7 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
             || !component.DamageContainers.Contains(damageable.DamageContainerID)
             || !HasDamage((args.Target.Value, damageable), component, args.User)
             || !TryComp<WelderComponent>(args.Used, out var welder)
-            || !TryComp<SolutionContainerManagerComponent>(args.Used, out var solutionContainer)
-            || !_solutionContainer.TryGetSolution(((EntityUid) args.Used, solutionContainer), welder.FuelSolutionName, out var solution))
+            || !_solutionContainer.TryGetSolution(args.Used.Value, welder.FuelSolutionName, out var solution))
             return;
 
         _damageableSystem.TryChangeDamage(uid, component.Damage, true, false, origin: args.User);

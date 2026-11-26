@@ -4,30 +4,33 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Lock.Visualizers;
 
-public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent>
+public sealed partial class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent>
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, LockVisualsComponent comp, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null
-            || !AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out _, args.Component))
+            || !args.Sprite.LayerMapTryGet(LockVisualLayers.Lock, out _)
+            || !AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
             return;
 
-        // Lock state for the entity.
-        if (!AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
-            locked = true;
+        var unlockedStateExist = args.Sprite.BaseRSI != null
+            && args.Sprite.BaseRSI.TryGetState(comp.StateUnlocked, out _);
 
-        var unlockedStateExist = args.Sprite.BaseRSI?.TryGetState(comp.StateUnlocked, out _);
+        var hasOpen = AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component);
 
-        if (AppearanceSystem.TryGetData<bool>(uid, StorageVisuals.Open, out var open, args.Component))
+        if (hasOpen)
         {
-            args.Sprite.LayerSetVisible(LockVisualLayers.Lock, !open);
+            _sprite.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open);
         }
-        else if (!(bool) unlockedStateExist!)
-            args.Sprite.LayerSetVisible(LockVisualLayers.Lock, locked);
+        else if (!(bool)unlockedStateExist!)
+            _sprite.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, locked);
 
-        if (!open && (bool) unlockedStateExist!)
+        // When Open is missing, treat as closed (open defaults false) — same as upstream.
+        if (!open && (bool)unlockedStateExist!)
         {
-            args.Sprite.LayerSetState(LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
+            _sprite.LayerSetRsiState((uid, args.Sprite), LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
         }
     }
 }

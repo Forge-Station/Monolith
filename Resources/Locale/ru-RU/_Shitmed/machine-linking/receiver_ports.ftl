@@ -5,5 +5,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 signal-port-name-operating-table = Операционный стол
+signal-port-name-operating-table-receiver = Автодок Марк.XIV
 signal-port-description-operating-table-receiver = Приемник сигнала операционного стола
 signal-port-description-operating-table-sender = Передатчик сигнала операционного стола

@@ -48,6 +48,10 @@
     - MindRoleGhostRoleFamiliar
   - type: GhostRoleMobSpawner
     prototype: MobSpawnBabyDragon
+  # FoodEggBase's solution is also named food. Keep this one off that id so
+  # cracking and spilling use the container below.
+  - type: Solution
+    id: dragonEgg
   - type: SolutionContainerManager
     solutions:
       food:

@@ -12,7 +12,6 @@ namespace Content.Shared.NPC.Systems;
 public sealed partial class NpcFactionSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
 
     /// <summary>
@@ -104,7 +103,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
     /// </summary>
     public void AddFaction(Entity<NpcFactionMemberComponent?> ent, string faction, bool dirty = true)
     {
-        if (!_proto.HasIndex<NpcFactionPrototype>(faction))
+        if (!ProtoMan.HasIndex<NpcFactionPrototype>(faction))
         {
             Log.Error($"Unable to find faction {faction}");
             return;
@@ -127,7 +126,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
 
         foreach (var faction in factions)
         {
-            if (!_proto.HasIndex(faction))
+            if (!ProtoMan.HasIndex(faction))
             {
                 Log.Error($"Unable to find faction {faction}");
                 continue;
@@ -145,7 +144,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
     /// </summary>
     public void RemoveFaction(Entity<NpcFactionMemberComponent?> ent, string faction, bool dirty = true)
     {
-        if (!_proto.HasIndex<NpcFactionPrototype>(faction))
+        if (!ProtoMan.HasIndex<NpcFactionPrototype>(faction))
         {
             Log.Error($"Unable to find faction {faction}");
             return;
@@ -227,6 +226,19 @@ public sealed partial class NpcFactionSystem : EntitySystem
 
         return ent.Comp.Factions.Overlaps(other.Comp.Factions) || ent.Comp.FriendlyFactions.Overlaps(other.Comp.Factions);
     }
+
+    // Forge-Change-start
+    /// <summary>
+    /// True when <paramref name="ent"/> treats <paramref name="other"/> as a hostile faction member.
+    /// </summary>
+    public bool IsHostileFactionMember(Entity<NpcFactionMemberComponent?> ent, Entity<NpcFactionMemberComponent?> other)
+    {
+        if (!Resolve(ent, ref ent.Comp, false) || !Resolve(other, ref other.Comp, false))
+            return false;
+
+        return ent.Comp.HostileFactions.Overlaps(other.Comp.Factions);
+    }
+    // Forge-Change-end
 
     public bool IsFactionFriendly(string target, string with)
     {
@@ -310,7 +322,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
     /// </summary>
     private void RefreshFactions()
     {
-        var factionPrototypes = _proto.EnumeratePrototypes<NpcFactionPrototype>();
+        var factionPrototypes = ProtoMan.EnumeratePrototypes<NpcFactionPrototype>();
 
         _factions = factionPrototypes.ToFrozenDictionary(
             faction => faction.ID,

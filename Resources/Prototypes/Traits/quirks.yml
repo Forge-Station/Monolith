@@ -22,3 +22,14 @@
   category: Quirks
   components:
   - type: Snoring
+
+# Forge-Change-Start
+- type: trait
+  id: LactozitIntolerance
+  name: trait-lactozit-intolerance-name
+  description: trait-lactozit-intolerance-desc
+  category: Disabilities
+  components:
+    - type: LactozitIntolerance
+      timeBetweenIncidents: 30, 40
+# Forge-Change-End

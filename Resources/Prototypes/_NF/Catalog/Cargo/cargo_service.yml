@@ -1,6 +1,6 @@
 - type: cargoProduct
   id: CargoBarreSpaceCleaner
-  name: barrel of space cleaner #Mono
+  # Forge-change: use the localized product name instead of an English override.
   icon:
     sprite: _NF/Objects/Storage/Barrels/blue.rsi
     state: icon

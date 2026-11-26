@@ -32,6 +32,8 @@ ent-MobChickenGhost = { ent-MobChicken }
     .suffix = Роль призрака
     .desc = { ent-MobChicken.desc }
 
-ent-MobFoxGhost = MobFoxGhost
+ent-MobFoxGhost = { ent-MobFox }
+    .desc = { ent-MobFox.desc }
+    .suffix = Призрак
 ent-MobPugGhost = мопс
     .desc = Коренастая собака с приплюснутой мордочкой. Милашка?

@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.CrewManifest;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Client.Lobby;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Players.PlayTimeTracking;
@@ -9,7 +9,6 @@ using Content.Shared.CCVar;
 using Content.Shared.GameTicking; // Frontier
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.StatusIcon;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;

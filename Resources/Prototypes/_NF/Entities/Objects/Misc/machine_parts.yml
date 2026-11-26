@@ -99,7 +99,7 @@
 - type: entity
   id: QuadraticCapacitorStockPart
   name: bluespace capacitor
-  parent: CapacitorStockPart
+  parent: [ CapacitorStockPart, BaseFactionGearOtherFactionT3 ] # Froge-change add parent forbidden ADS
   description: A bluespace capacitor used in the construction of a variety of devices.
   suffix: Rating 6
   components:
@@ -114,7 +114,7 @@
 - type: entity
   id: FemtoManipulatorStockPart
   name: bluespace manipulator
-  parent: MicroManipulatorStockPart
+  parent: [ MicroManipulatorStockPart, BaseFactionGearOtherFactionT3 ]  # Froge-change add parent forbidden ADS
   description: A bluespace manipulator used in the construction of a variety of devices.
   suffix: Rating 6
   components:
@@ -129,7 +129,7 @@
 - type: entity
   id: BluespaceMatterBinStockPart
   name: bluespace matter bin
-  parent: MatterBinStockPart
+  parent: [ MatterBinStockPart, BaseFactionGearOtherFactionT3 ]  # Froge-change add parent forbidden ADS
   description: A bluespace matter bin used in the construction of a variety of devices.
   suffix: Rating 6
   components:

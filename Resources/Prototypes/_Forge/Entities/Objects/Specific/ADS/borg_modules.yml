@@ -5,7 +5,7 @@
   name: pre-fracture advanced weapon cyborg module
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
     layers:
     - state: forerunner
     - state: icon-forerunner
@@ -13,9 +13,9 @@
     moduleId: Security
     items:
     - WeaponPhaseBladeForge
-    - WeaponRifleAsakimAutopulserADM
+    - WeaponRifleADMAutopulserForge
   - type: BorgModuleIcon
-    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: advanced-weapon-module }
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: advanced-weapon-module }
 
 - type: entity
   id: BorgModuleForerunnerWeapon
@@ -23,7 +23,7 @@
   name: pre-fracture standard weapon cyborg module
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
     layers:
     - state: forerunner
     - state: icon-forerunner
@@ -33,7 +33,96 @@
     - WeaponPhaseBladeForge
     - WeaponRifleADMPistolForge
   - type: BorgModuleIcon
-    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerSMGWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(CQC)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMSmgForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerMachinegunWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Support)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMMachinegunForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerRifleWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Long range)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMRifleForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerDevastatorExplosive
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture self-destruction system cyborg module
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - ADMDevastatorExplosive
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: syndicate-martyr-module }
+
+- type: entity
+  id: BorgModuleForerunnerDevastatorWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Melee)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseDoubleBladeForge
+    - WeaponRifleADMPistolForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
 
 #region Tools
 - type: entity
@@ -42,14 +131,14 @@
   name: pre-fracture RCD module
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Robotics/borgmodule.rsi
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
     layers:
     - state: forerunner
     - state: icon-forerunner
   - type: ItemBorgModule
     moduleId: RCD
     items:
-    - RCDRecharging
+    - RCDRechargingForerunner
     - ShipRepairDeviceRedacted
   - type: BorgModuleIcon
-    icon: { sprite: Forge/Interface/Action/actions_borg.rsi, state: rcd-module }
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: rcd-module }

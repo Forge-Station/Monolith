@@ -1,27 +1,18 @@
+# BSII-20 "Requiem" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowSecurityIcons ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Renegade ]
   id: ClothingHeadHelmetHardsuitRenegatebsii20
   name: BSII-20 "Requiem" helmet
   description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatelight.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/renegatelight.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatelight.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 400
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
-
   - type: Armor
     modifiers:
       coefficients:
@@ -36,30 +27,49 @@
     - HeadTop
     - HeadSide
 
+# lightweight jauggernaut hardsuit BSII-300 "Locksmith"
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitRenegatebsii30
-  name: BSII-30 "Locksmith" helmet
-  description: The interchangeable helmet system for the majority of BSII-20 hardsuits.
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
+  id: ClothingHeadHelmetHardsuitRenegateLightweightJuggernaut
+  name: BSII-300 "Locksmith" helmet
+  description: The interchangeable helmet system for the majority of BSII-300 lightweight jauggernaut hardsuits.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatearmed.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 400
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 10
+        Slash: 10
+        Piercing: 10
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
+# CRIII-200 "Bug" hardsuit
+- type: entity
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2Renegade ]
+  id: ClothingHeadHelmetHardsuitRenegatecriii200
+  name: CRIII-200 "Bug" helmet
+  description: The interchangeable helmet system for the majority of CRIII-200 hardsuits.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
   - type: Armor
     modifiers:
       coefficients:
@@ -74,35 +84,21 @@
     - HeadTop
     - HeadSide
 
+# OIII-18 "Omega" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitRenegatecriii200
-  name: CRIII-200 "Bug" helmet
-  description: The interchangeable helmet system for the majority of CRIII-200 hardsuits.
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner ]
+  id: ClothingHeadHelmetHardsuitRenegateEnergyShield
+  name: OIII-18 "Omega" helmet
+  description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/renegatecommand.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 400
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
-
-  - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 3
-    isEquipment: true
-    toggleAction: PulseThermalVision
   - type: Armor
     modifiers:
       coefficients:
@@ -117,30 +113,142 @@
     - HeadTop
     - HeadSide
 
+# YIV3020 "Svyatogor" juggernaut suit
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitRenegateoiii18
-  name: OIII-18 "Omega" helmet
-  description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner ]
+  id: ClothingHeadHelmetHardsuitRenegateHeavyJuggernaut
+  name: YIV3020 "Svyatogor" helmet
+  description: The interchangeable helmet system for the majority of YIV3020 hardsuits.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/renegateadvanced.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 400
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
+  - type: Armor
+    modifiers:
+      flatReductions:
+        Blunt: 15
+        Slash: 15
+        Piercing: 15
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
+# SYS-549 "Cloak"
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons, BaseClothingHelmetMassScanner]
+  id: ClothingHeadHelmetHardsuitRenegateStealth 
+  name: hardsuit SYS-549 "Cloak"
+  description: The interchangeable helmet system for the majority of SYS-549 hardsuits. Has a stealth generator.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Hardsuits/syndicate.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Hardsuits/syndicate.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: ThermalVision
+    flashDurationMultiplier: 2
+    pulseTime: 3
+    isEquipment: true
+    toggleAction: PulseThermalVision
+  - type: ToggleClothing
+    action: ActionTogglePhaseCloak
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: Stealth
+      minVisibility: -1.5
+      maxVisibility: 1
+      damageVisibilityModifier: 0.5
+      attackVisibilityModifier: 1.5
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.33
+      movementVisibilityRate: 0.17
+  - type: UseDelay
+    delay: 2
+  - type: PowerCellDraw
+    drawRate: 0.5
+  - type: ToggleCellDraw
+  - type: ClothingBatteryAlert
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellInternalHardsuit
+        disableEject: true
+        swap: false
+
+# RMP-240 "Cicada"
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, ShowSecurityIcons, BaseClothingHelmetMassScanner]
+  id: ClothingHeadHelmetHardsuitRenegateAdvancedLight
+  name: hardsuit RMP-240 "Cicada"
+  description: The interchangeable helmet system for the majority of RMP-240 hardsuits. Has a many visors and high quality NVG.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# LRC-4034 "Prism"
+- type: entity
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, BaseClothingHelmetMassScanner]
+  id: ClothingHeadHelmetHardsuitRenegateReflectElite
+  name: hardsuit LRC-4034 "Prism"
+  description: The interchangeable helmet system for the majority of LRC-4034 hardsuits. Has a many visors, high quality NVG and a reflective plate of armor.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Mono/Clothing/Head/Hardsuits/pdv_medic.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/Head/Hardsuits/pdv_medic.rsi
+    equippedState: off-equipped-HELMET
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3
@@ -152,7 +260,8 @@
         Blunt: 0.9
         Slash: 0.9
         Piercing: 0.9
-        Heat: 0.95
+      flatReductions:
+        Heat: 10
   - type: HideLayerClothing
     slots:
     - Hair
@@ -160,30 +269,22 @@
     - HeadTop
     - HeadSide
 
+# CRIII-278 "Sequent"
 - type: entity
-  parent: [ ClothingHeadHardsuitBase, ShowMedicalIcons, ShowSecurityIcons ]
-  id: ClothingHeadHelmetHardsuitRenegateyiv3020
-  name: YIV3020 "Svyatogor" helmet
-  description: The interchangeable helmet system for the majority of YIV3020 hardsuits.
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner]
+  id: ClothingHeadHelmetHardsuitRenegateCommander
+  name: hardsuit CRIII-278 "Sequent"
+  description: The interchangeable helmet system for the majority of CRIII-278 hardsuits. Has a many visors, high quality NVG and a thermal vision.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+    sprite: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/renegatejuggernaut.rsi
+    sprite: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi
+    equippedState: off-equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: NightVision
-    relayOverlay: true
-    goggleEffect: true
-    action: ActionToggleNightVision
-    viewCircleRadius: 400
-    viewCircleCount: 2
-    viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
-
   - type: ThermalVision
     flashDurationMultiplier: 2
     pulseTime: 3

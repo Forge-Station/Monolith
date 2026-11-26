@@ -41,6 +41,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Map.Components;
+using Content.Server._Forge.ReviveReward; // Forge-change: medical update is real??
+using Content.Shared.Humanoid.Prototypes;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -84,7 +86,7 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private InventorySystem _inventory = default!;
         [Dependency] private ElectrocutionSystem _electrocution = default!;
-        [Dependency] private StationSystem _station = default!; // Frontier: medical insurance
+        [Dependency] private ServerStationSystem _station = default!; // Frontier: medical insurance
         [Dependency] private SharedMapSystem _map = default!; // Frontier: medical insurance
 
         public override void Initialize()
@@ -262,8 +264,11 @@ namespace Content.Server.Explosion.EntitySystems
 
             // Frontier: Gets species of the implant user
             var speciesText = $"";
-            if (TryComp<HumanoidAppearanceComponent>(implanted.ImplantedEntity, out var species))
-                speciesText = $" ({species.Species})";
+            if (TryComp<HumanoidAppearanceComponent>(implanted.ImplantedEntity, out var species) &&
+                _prototypeManager.TryIndex(species.Species, out SpeciesPrototype? speciesProto))
+            {
+                speciesText = $" ({Loc.GetString(speciesProto.Name)})";
+            }
 
             var critMessage = Loc.GetString(component.CritMessage, ("user", implanted.ImplantedEntity.Value), ("specie", speciesText), ("grid", gridText), ("position", posText));
             var reviveMessage = Loc.GetString(component.ReviveMessage, ("user", implanted.ImplantedEntity.Value), ("specie", speciesText), ("grid", gridText), ("position", posText)); // Mono
@@ -279,16 +284,25 @@ namespace Content.Server.Explosion.EntitySystems
                 switch (mobstate.CurrentState)
                 {
                     case MobState.Critical:
-                    {
-                        var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
-                        _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
-                        break;
-                    }
+                        {
+                            var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
+                            _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
+                            break;
+                        }
                     case MobState.Dead:
-                    {
-                        _radioSystem.SendRadioMessage(uid, deathMessage, radioChannel, uid, null, language);
-                        break;
-                    }
+                        {
+                            _radioSystem.SendRadioMessage(uid, deathMessage, radioChannel, uid, null, language);
+
+                            // Forge-change-start
+                            if (TryComp<ReviveRewardComponent>(uid, out var reviveReward))
+                            {
+                                reviveReward.Death = true;
+                                reviveReward.DeathPos = pos.Position;
+                            }
+                            // Forge-change-end
+
+                            break;
+                        }
                 }
             }
 
@@ -400,12 +414,10 @@ namespace Content.Server.Explosion.EntitySystems
                     // If a beaker is missing, the entity won't explode, so no reason to log it
                     if (chemicalPayloadComponent?.BeakerSlotA.Item is not { } beakerA ||
                         chemicalPayloadComponent?.BeakerSlotB.Item is not { } beakerB ||
-                        !TryComp(beakerA, out SolutionContainerManagerComponent? containerA) ||
-                        !TryComp(beakerB, out SolutionContainerManagerComponent? containerB) ||
                         !TryComp(beakerA, out FitsInDispenserComponent? fitsA) ||
                         !TryComp(beakerB, out FitsInDispenserComponent? fitsB) ||
-                        !_solutionContainerSystem.TryGetSolution((beakerA, containerA), fitsA.Solution, out _, out var solutionA) ||
-                        !_solutionContainerSystem.TryGetSolution((beakerB, containerB), fitsB.Solution, out _, out var solutionB))
+                        !_solutionContainerSystem.TryGetSolution(beakerA, fitsA.Solution, out _, out var solutionA) ||
+                        !_solutionContainerSystem.TryGetSolution(beakerB, fitsB.Solution, out _, out var solutionB))
                         return;
 
                     _adminLogger.Add(LogType.Trigger,

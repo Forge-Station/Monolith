@@ -329,9 +329,9 @@
   components:
   - type: FingerprintMask
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/Color/yellow.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/yellow.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/Color/yellow.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/yellow.rsi # Forge-change
   - type: Butcherable
     butcheringType: Knife
     spawned:

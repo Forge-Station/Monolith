@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Linq;
 using Content.Shared._Mono.Radar;
 using Content.Shared.Projectiles;
 using Robust.Shared.Map;
@@ -9,15 +10,17 @@ namespace Content.Client._Mono.Radar;
 public sealed partial class RadarBlipsSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _map = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
 
     private const double BlipStaleSeconds = 3.0;
+    private float _suppressPruneTimer;
     private TimeSpan _lastRequestTime = TimeSpan.Zero;
     private static readonly TimeSpan RequestThrottle = TimeSpan.FromMilliseconds(500);
 
     private TimeSpan _lastUpdatedTime;
     private List<BlipNetData> _blips = new();
+    private List<MissileVectorNetData> _missiles = new();
     private List<HitscanNetData> _hitscans = new();
     private List<BlipConfig> _configPalette = new();
 
@@ -26,6 +29,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
 
     // cached results to avoid allocating on every draw/frame
     private readonly List<BlipData> _cachedBlipData = new();
+    private readonly List<MissileVectorData> _cachedMissileData = new();
 
     public override void Initialize()
     {
@@ -39,11 +43,12 @@ public sealed partial class RadarBlipsSystem : EntitySystem
     private void HandleReceiveBlips(GiveBlipsEvent ev, EntitySessionEventArgs args)
     {
         _configPalette = ev.ConfigPalette;
+        _missiles = ev.Missiles;
         _hitscans = ev.HitscanLines;
         _lastUpdatedTime = _timing.CurTime;
 
-        // Forge-Change-Start
-        _blips.Clear();
+        // Forge-Change-Start: filter suppressed blips without clearing the shared event list.
+        _blips = new List<BlipNetData>(ev.Blips.Count);
         foreach (var blip in ev.Blips)
         {
             if (!_suppressedBlips.Contains(blip.Uid))
@@ -102,6 +107,23 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         });
     }
     // Forge-Change-End
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        // Hits suppress blips locally, and the set is only pruned when a radar report arrives.
+        // Players who never open a radar otherwise keep every projectile hit for the whole round.
+        if (_suppressedBlips.Count == 0)
+            return;
+
+        _suppressPruneTimer += frameTime;
+        if (_suppressPruneTimer < 2f)
+            return;
+
+        _suppressPruneTimer = 0f;
+        PruneSuppressedBlips(_blips);
+    }
 
     public void RequestBlips(EntityUid console)
     {
@@ -165,6 +187,52 @@ public sealed partial class RadarBlipsSystem : EntitySystem
     }
 
     /// <summary>
+    /// Gets the missile vectors to be rendered on the radar
+    /// </summary>
+    public List<MissileVectorData> GetMissileLines()
+    {
+        // clear the cache and bail early if the data is stale
+        _cachedMissileData.Clear();
+        if (_timing.CurTime.TotalSeconds - _lastUpdatedTime.TotalSeconds > BlipStaleSeconds)
+            return _cachedMissileData;
+
+        // populate the cached list instead of allocating a new one each frame
+        foreach (var missile in _missiles)
+        {
+            var tiedBlip = _blips.FirstOrDefault(x => x.Uid == missile.Uid);
+            if (tiedBlip == default)
+                continue;
+
+            var coord = tiedBlip.Position;
+            var color = Color.FromHex("#00AACC");
+            var colorArcs = Color.FromHex("#FF0040");
+
+            var predictedPosStart = new NetCoordinates(missile.Uid, coord.Position + tiedBlip.Vel * (float)(_timing.CurTime - _lastUpdatedTime).TotalSeconds);
+            var posEnd = Vector2.Create(
+                predictedPosStart.X + (missile.Range / 2) * (float)Math.Cos(tiedBlip.Rotation + Math.PI * -0.5),
+                predictedPosStart.Y + (missile.Range / 2) * (float)Math.Sin(tiedBlip.Rotation + Math.PI * -0.5));
+            var predictedPosEnd = new NetCoordinates(missile.Uid, posEnd);
+
+            _cachedMissileData.Add(new(missile.Uid, predictedPosStart, predictedPosEnd, color));
+            if (missile.ScanArc > 0)
+            {
+                var posEndLeft = Vector2.Create(
+                    predictedPosStart.X + (missile.Range) * (float)Math.Cos(tiedBlip.Rotation + Math.PI * -0.5 - (missile.ScanArc * 0.5)),
+                    predictedPosStart.Y + (missile.Range) * (float)Math.Sin(tiedBlip.Rotation + Math.PI * -0.5 - (missile.ScanArc * 0.5)));
+                var posEndRight = Vector2.Create(
+                    predictedPosStart.X + (missile.Range) * (float)Math.Cos(tiedBlip.Rotation + Math.PI * -0.5 + (missile.ScanArc * 0.5)),
+                    predictedPosStart.Y + (missile.Range) * (float)Math.Sin(tiedBlip.Rotation + Math.PI * -0.5+ (missile.ScanArc * 0.5)));
+                var predictedPosLeft = new NetCoordinates(missile.Uid, posEndLeft);
+                var predictedPosRight = new NetCoordinates(missile.Uid, posEndRight);
+                _cachedMissileData.Add(new(missile.Uid, predictedPosStart, predictedPosLeft, colorArcs));
+                _cachedMissileData.Add(new(missile.Uid, predictedPosStart, predictedPosRight, colorArcs));
+            }
+        }
+
+        return _cachedMissileData;
+    }
+
+    /// <summary>
     /// Gets the hitscan lines to be rendered on the radar
     /// </summary>
     public List<HitscanNetData> GetHitscanLines()
@@ -183,4 +251,12 @@ public record struct BlipData
     Angle Rotation,
     EntityUid? GridUid,
     BlipConfig Config
+);
+
+public record struct MissileVectorData
+(
+    NetEntity NetUid,
+    NetCoordinates PositionStart,
+    NetCoordinates PositionEnd,
+    Color Color
 );

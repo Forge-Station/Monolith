@@ -1,6 +1,12 @@
 ent-ClothingBeltWebbingsNormalTrauma = разгрузка травматологии
     .desc = Ременно-поясная система тактических ремней с подсумками, что носят сотрудники военизированной травматологии. Удобно к эксплуатации и хранения медицинских инструментов, препаратов и боеприпасов.
+ent-ClothingBeltWebbingsNormalTraumaFilled = { ent-ClothingBeltWebbingsNormalTrauma }
+    .desc = { ent-ClothingBeltWebbingsNormalTrauma.desc }
+    .suffix = Заполненый, TTI
 ent-ClothingBeltTrauma = пояс парамедика TTI
     .desc = Стерильный медицинский пояс со множеством карманов под медицинские препараты от таблеток до синтезированных лекарств. Подчёркивает себя своим собственным стилем, дополняя образ носителя.
+ent-ClothingBeltTraumaFilled = { ent-ClothingBeltTrauma }
+    .desc = { ent-ClothingBeltTrauma.desc }
+    .suffix = Заполненый, TTI
 ent-ADTClothingBeltPrazatSheathInq = гидравлические ножны «Серратор»
     .desc = Усиленные гидравлические ножны, предназначенные для фиксации и быстрого извлечения пиломеча «Серратор» Mk. 01M.

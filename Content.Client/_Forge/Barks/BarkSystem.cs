@@ -1,7 +1,7 @@
 using Content.Client.Audio;
 using Content.Shared._Forge.Barks;
 using Content.Shared.Chat;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Robust.Client.Audio;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
@@ -16,12 +16,12 @@ namespace Content.Client._Forge.Barks;
 /// <summary>
 /// The system responsible for the sound transmission for each subscriber
 /// </summary>
-public sealed class BarkSystem : EntitySystem
+public sealed partial class BarkSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private const float MinimalVolume = -10f;
     private const float WhisperFade = 4f;
@@ -51,7 +51,7 @@ public sealed class BarkSystem : EntitySystem
                 return;
         }
 
-        var userVolume = _cfg.GetCVar(ForgeVars.BarksVolume);
+        var userVolume = _cfg.GetCVar(ForgeCCVars.BarksVolume);
         var baseVolume = SharedAudioSystem.GainToVolume(userVolume * ContentAudioSystem.BarksMultiplier);
 
         float volume = MinimalVolume + baseVolume;

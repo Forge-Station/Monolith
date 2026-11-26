@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Server.GameTicking;
@@ -13,7 +14,7 @@ namespace Content.Server.Magic;
 public sealed partial class MagicSystem : SharedMagicSystem
 {
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedMindSystem _mind = default!;
 

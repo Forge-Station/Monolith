@@ -24,7 +24,7 @@
           steps:
             - component: ComputerTabletopBoard
               store: board
-              name: any tabletop computer circuit board
+              name: construction-required-any-tabletop-computer-circuit-board # Forge-change
               icon:
                 sprite: "Objects/Misc/module.rsi"
                 state: "id_mod"

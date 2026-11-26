@@ -2,6 +2,11 @@
   id: CC
   hostile:
   - SimpleHostile
+  # Forge-Change-start
+  - Dragon
+  - Xeno
+  - Xenoborg
+  # Forge-Change-end
   - Zombie
   - Chimera
 
@@ -93,4 +98,22 @@
   - SimpleNeutral
   - Mouse
   - USSP
+  defaultHostile: true
+
+- type: npcFaction
+  id: MMC
+  neutral:
+  - CC
+  - USSP
+  - VG
+  - NanoTrasen
+  - SimpleNeutral
+  - Mouse
+  defaultHostile: true
+
+- type: npcFaction
+  id: XenoborgTurret # Doesn't like intruders.
+  friendly:
+  - Mothership
+  - Xenoborg
   defaultHostile: true

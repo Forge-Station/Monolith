@@ -1335,6 +1335,10 @@
             Quantity: 6
           - ReagentId: Allicin
             Quantity: 3
+          # Forge-change-Start
+          - ReagentId: Lactozit
+            Quantity: 2
+          # Forge-Change-End
   - type: Tag
     tags:
     - Meat
@@ -1399,5 +1403,5 @@
           Quantity: 10
         - ReagentId: Lactozit # Forge-change
           Quantity: 1         # Forge-change
- 
+
 

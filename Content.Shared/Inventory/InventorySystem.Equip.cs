@@ -39,7 +39,6 @@ public abstract partial class InventorySystem
     [Dependency] private SharedStrippableSystem _strippable = default!;
     [Dependency] private SharedBodySystem _body = default!; // Mono
 
-    [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
 
     private void InitializeEquip()
@@ -151,7 +150,7 @@ public abstract partial class InventorySystem
             return false;
         }
 
-        if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing))
+        if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing, containerSlot: slotContainer))
         {
             if(!silent)
                 _popup.PopupCursor(Loc.GetString(reason));
@@ -161,8 +160,7 @@ public abstract partial class InventorySystem
         if (checkDoafter &&
             clothing != null &&
             clothing.EquipDelay > TimeSpan.Zero &&
-            (clothing.Slots & slotDefinition.SlotFlags) != 0 &&
-            _containerSystem.CanInsert(itemUid, slotContainer))
+            (clothing.Slots & slotDefinition.SlotFlags) != 0)
         {
             var args = new DoAfterArgs(
                 EntityManager,
@@ -195,7 +193,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target);
+        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
 
         return true;
     }
@@ -226,11 +224,11 @@ public abstract partial class InventorySystem
 
     public bool CanEquip(EntityUid uid, EntityUid itemUid, string slot, [NotNullWhen(false)] out string? reason,
         SlotDefinition? slotDefinition = null, InventoryComponent? inventory = null,
-        ClothingComponent? clothing = null, ItemComponent? item = null) =>
-        CanEquip(uid, uid, itemUid, slot, out reason, slotDefinition, inventory, clothing, item);
+        ClothingComponent? clothing = null, ItemComponent? item = null, ContainerSlot? containerSlot = null, bool assumeEmpty = false) =>
+        CanEquip(uid, uid, itemUid, slot, out reason, slotDefinition, inventory, clothing, item, containerSlot, assumeEmpty);
 
     public bool CanEquip(EntityUid actor, EntityUid target, EntityUid itemUid, string slot, [NotNullWhen(false)] out string? reason, SlotDefinition? slotDefinition = null,
-        InventoryComponent? inventory = null, ClothingComponent? clothing = null, ItemComponent? item = null)
+        InventoryComponent? inventory = null, ClothingComponent? clothing = null, ItemComponent? item = null, ContainerSlot? containerSlot = null, bool assumeEmpty = false)
     {
         reason = "inventory-component-can-equip-cannot";
         if (!Resolve(target, ref inventory, false))
@@ -238,7 +236,13 @@ public abstract partial class InventorySystem
 
         Resolve(itemUid, ref clothing, ref item, false);
 
-        if (slotDefinition == null && !TryGetSlot(target, slot, out slotDefinition, inventory: inventory))
+        if ((containerSlot == null || slotDefinition == null) && !TryGetSlotContainer(target, slot, out containerSlot, out slotDefinition, inventory: inventory))
+            return false;
+
+        if (_containerSystem.TryGetContainingContainer(itemUid, out var container) && !_containerSystem.CanRemove(itemUid, container))
+            return false;
+
+        if (!_containerSystem.CanInsert(itemUid, containerSlot!, assumeEmpty))
             return false;
 
         DebugTools.Assert(slotDefinition.Name == slot);
@@ -519,7 +523,7 @@ public abstract partial class InventorySystem
 
         Dirty(target, inventory);
 
-        _movementSpeed.RefreshMovementSpeedModifiers(target);
+        _movementSpeed.RefreshMovementSpeedModifiers(target, alsoFriction: true); // Mono
 
         return true;
     }

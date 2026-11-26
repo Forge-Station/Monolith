@@ -41,9 +41,20 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.ResetZoom);
             common.AddFunction(ContentKeyFunctions.InspectEntity);
             common.AddFunction(ContentKeyFunctions.ToggleRoundEndSummaryWindow);
+            // DeltaV - Begin NanoChat keybinds
+            common.AddFunction(ContentKeyFunctions.NanoChatNavigateUp);
+            common.AddFunction(ContentKeyFunctions.NanoChatNavigateDown);
+            common.AddFunction(ContentKeyFunctions.NanoChatNavigateUpUnread);
+            common.AddFunction(ContentKeyFunctions.NanoChatNavigateDownUnread);
+            // DeltaV - End NanoChat keybinds
 
             // Not in engine, because engine cannot check for sanbox/admin status before starting placement.
             common.AddFunction(ContentKeyFunctions.EditorCopyObject);
+            common.AddFunction(ContentKeyFunctions.MappingUnselect); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropper); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropperTile); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingEyedropperDecal); // Forge-Change
+            common.AddFunction(ContentKeyFunctions.MappingRemoveDecal); // Forge-Change
 
             // Not in engine because the engine doesn't understand what a flipped object is
             common.AddFunction(ContentKeyFunctions.EditorFlipObject);

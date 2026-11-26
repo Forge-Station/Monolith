@@ -103,9 +103,13 @@ public sealed partial class AirlockSystem : SharedAirlockSystem
                 // Forge-Change-End
         }
 
-        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseUnlit, unlitVisible);
-        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseBolted, boltedVisible);
-        if (comp.EmergencyAccessLayer)
+        // Preview / incomplete sprites may omit these layers — never LayerSet* without a map entry.
+        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseUnlit, out _))
+            args.Sprite.LayerSetVisible(DoorVisualLayers.BaseUnlit, unlitVisible);
+        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseBolted, out _))
+            args.Sprite.LayerSetVisible(DoorVisualLayers.BaseBolted, boltedVisible);
+        if (comp.EmergencyAccessLayer
+            && args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseEmergencyAccess, out _))
         {
             args.Sprite.LayerSetVisible(
                 DoorVisualLayers.BaseEmergencyAccess,
@@ -120,16 +124,19 @@ public sealed partial class AirlockSystem : SharedAirlockSystem
         // Idle open/closed must use static unlit states. OpeningSpriteState/ClosingSpriteState RSI entries are
         // full frame sequences — using them here loops forever (looks like "disco" / opening anim), especially
         // after reconnect when Appearance reapplies often with Forge openUnlitVisible on closed doors.
-        switch (state)
+        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseUnlit, out _))
         {
-            case DoorState.Open:
-                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.OpenSpriteState);
-                args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
-                break;
-            case DoorState.Closed:
-                args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState);
-                args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
-                break;
+            switch (state)
+            {
+                case DoorState.Open:
+                    args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.OpenSpriteState);
+                    args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
+                    break;
+                case DoorState.Closed:
+                    args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState);
+                    args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
+                    break;
+            }
         }
     }
 }

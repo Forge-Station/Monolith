@@ -25,7 +25,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 
         SubscribeLocalEvent<CartridgeLoaderComponent, MapInitEvent>(OnMapInit);
 
-        SubscribeLocalEvent<CartridgeLoaderComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CartridgeLoaderComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<CartridgeLoaderComponent, CartridgeLoaderUiMessage>(OnLoaderUiMessage);
         SubscribeLocalEvent<CartridgeLoaderComponent, CartridgeUiMessage>(OnUiMessage);
@@ -272,6 +271,10 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
         if (!loader.BackgroundPrograms.Contains(programUid))
             RaiseLocalEvent(programUid, new CartridgeActivatedEvent(loaderUid));
 
+        // DV: Logic for raising the active program changed event
+        var ev = new ActiveProgramChangedEvent(loaderUid, loader.ActiveProgram, programUid);
+        RaiseLocalEvent(loaderUid, ref ev);
+
         loader.ActiveProgram = programUid;
         UpdateUserInterfaceState(loaderUid, loader);
     }
@@ -289,6 +292,10 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 
         if (!loader.BackgroundPrograms.Contains(programUid))
             RaiseLocalEvent(programUid, new CartridgeDeactivatedEvent(programUid));
+
+        // DV: Logic for raising the active program changed event
+        var ev = new ActiveProgramChangedEvent(loaderUid, programUid, loader.ActiveProgram);
+        RaiseLocalEvent(loaderUid, ref ev);
 
         loader.ActiveProgram = default;
         UpdateUserInterfaceState(loaderUid, loader);
@@ -402,11 +409,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
         RelayEvent(component, new CartridgeAfterInteractEvent(uid, args));
     }
 
-    private void OnPacketReceived(EntityUid uid, CartridgeLoaderComponent component, DeviceNetworkPacketEvent args)
-    {
-        RelayEvent(component, new CartridgeDeviceNetPacketEvent(uid, args));
-    }
-
     private void OnLoaderUiMessage(EntityUid loaderUid, CartridgeLoaderComponent component, CartridgeLoaderUiMessage message)
     {
         var cartridge = GetEntity(message.CartridgeUid);
@@ -495,22 +497,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 }
 
 /// <summary>
-/// Gets sent to running programs when the cartridge loader receives a device net package
-/// </summary>
-/// <seealso cref="DeviceNetworkPacketEvent"/>
-public sealed class CartridgeDeviceNetPacketEvent : EntityEventArgs
-{
-    public readonly EntityUid Loader;
-    public readonly DeviceNetworkPacketEvent PacketEvent;
-
-    public CartridgeDeviceNetPacketEvent(EntityUid loader, DeviceNetworkPacketEvent packetEvent)
-    {
-        Loader = loader;
-        PacketEvent = packetEvent;
-    }
-}
-
-/// <summary>
 /// Gets sent to running programs when the cartridge loader receives an after interact event
 /// </summary>
 /// <seealso cref="AfterInteractEvent"/>
@@ -531,3 +517,9 @@ public sealed class CartridgeAfterInteractEvent : EntityEventArgs
 /// </summary>
 [ByRefEvent]
 public record struct ProgramInstallationAttempt(EntityUid LoaderUid, string Prototype, bool Cancelled = false);
+
+/// <summary>
+/// DV: Raised whenever the currently open program changes
+/// </summary>
+[ByRefEvent]
+public readonly record struct ActiveProgramChangedEvent(EntityUid LoaderUid, EntityUid? OldActiveProgram, EntityUid? NewActiveProgram);

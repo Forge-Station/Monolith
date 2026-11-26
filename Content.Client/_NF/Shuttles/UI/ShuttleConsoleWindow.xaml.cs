@@ -27,6 +27,15 @@ namespace Content.Client.Shuttles.UI
             {
                 OnNetworkPortButtonPressed?.Invoke(sourcePort, targetPort);
             };
+
+            NavContainer.OnAddCoordinateMarker += (x, y) => OnAddCoordinateMarker?.Invoke(x, y);
+            NavContainer.OnRemoveMarker += id => OnRemoveMarker?.Invoke(id);
+            MapContainer.OnTrackEntity += entity => OnTrackEntity?.Invoke(entity);
+            MapContainer.OnRemoveMarker += id => OnRemoveMarker?.Invoke(id);
         }
+
+        public event Action<float, float>? OnAddCoordinateMarker;
+        public event Action<int>? OnRemoveMarker;
+        public event Action<NetEntity>? OnTrackEntity;
     }
 }

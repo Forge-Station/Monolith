@@ -7,10 +7,9 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client._NF.Shipyard.BUI;
 
-public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
+public sealed partial class ShipyardConsoleBoundUserInterface : BoundUserInterface
 {
     private ShipyardConsoleMenu? _menu;
-    private ShipyardRulesPopup? _rulesWindow;
     [Dependency] private ShipyardPreviewSystem _preview = default!;
     public int Balance { get; private set; }
 
@@ -114,7 +113,10 @@ public sealed class ShipyardConsoleBoundUserInterface : BoundUserInterface
         }
 
         var vessel = row.Vessel;
+        // Load the client-side grid first. Visiting the preview map with no grid looks like a black screen.
+        if (!_preview.TryPreviewGrid(vessel))
+            return;
+
         SendMessage(new ShipyardConsolePreviewMessage());
-        _preview.TryPreviewGrid(vessel);
     }
 }

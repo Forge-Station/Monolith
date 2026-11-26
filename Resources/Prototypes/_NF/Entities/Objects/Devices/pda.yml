@@ -26,6 +26,7 @@
       - AppraisalCartridge
       - NetProbeCartridge
       - MedTekCartridge # Mono
+      - NanoChatCartridge # DeltaV
 
 - type: entity
   parent: BasePDA
@@ -143,8 +144,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     - WantedListCartridge
     - LedgerCartridge
 
@@ -310,8 +312,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     - LedgerCartridge
     - MailMetricsCartridge
 
@@ -382,7 +385,8 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     - LedgerCartridge
     - MedTekCartridge #medtek preloaded. Should be ok.

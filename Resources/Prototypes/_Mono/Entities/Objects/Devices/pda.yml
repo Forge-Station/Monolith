@@ -10,8 +10,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -112,31 +113,6 @@
 
 - type: entity
   parent: SheriffPDA
-  id: MarsocFTLPDA
-  name: TSFMC MARSOC fire team leader PDA
-  description: A standard TSFMC personal computer.
-  components:
-  - type: Pda
-    id: TsfMarsocFTLIDCard
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
-    - CrewManifestCartridge
-    - NotekeeperCartridge
-    - NewsReaderCartridge
-    - MedTekCartridge
-    - WantedListCartridge
-    - LogProbeCartridge
-    - AstroNavCartridge
-    - MailMetricsCartridge # Frontier
-  - type: Geiger # Mono
-    showExamine: true
-    showControl: true
-    isEnabled: true
-    attachedToSuit: true # Mono
-
-- type: entity
-  parent: SheriffPDA
   id: MarsocPDA
   name: TSFMC MARSOC operative PDA
   description: A standard TSFMC personal computer.
@@ -152,7 +128,9 @@
     - MedTekCartridge
     - WantedListCartridge
     - LogProbeCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     - MailMetricsCartridge # Frontier
   - type: Geiger # Mono
     showExamine: true
@@ -171,8 +149,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -233,10 +212,40 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: PdaBorderColor
     borderColor: "#533980"
+
+- type: entity
+  parent: BasePDVPDA
+  id: PDVTarkhanPDA
+  name: PDV tarkhan PDA
+  components:
+  - type: Pda
+    id: PDVTarkhanIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-tarkhan
+  - type: Geiger # Mono
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true # Mono
+  - type: CartridgeLoader
+    preinstalled:
+    - LedgerCartridge
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
+  - type: PdaBorderColor
+    borderColor: "#EEEEEE"
 
 
 - type: entity
@@ -310,8 +319,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -378,3 +388,81 @@
   components:
   - type: Pda
     id: VGCommanderIDCard
+
+# Mieyo
+
+- type: entity
+  parent: BasePDA
+  id: BaseMMCPDA
+  description: A basic personal computer for access restriction and organization.
+  abstract: true
+  components:
+  - type: CartridgeLoader
+    preinstalled:
+    - CrewManifestCartridge
+    - NotekeeperCartridge
+    - NewsReaderCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
+  - type: Sprite
+    sprite: _Mono/Objects/Devices/pda.rsi
+    layers:
+    - map: [ "enum.PdaVisualLayers.Base" ]
+      state: "pda-mieyo"
+    - state: "light_overlay"
+      map: [ "enum.PdaVisualLayers.Flashlight" ]
+      shader: "unshaded"
+      visible: false
+    - state: "id_overlay"
+      map: [ "enum.PdaVisualLayers.IdLight" ]
+      shader: "unshaded"
+      visible: false
+  - type: Icon
+    sprite: _Mono/Objects/Devices/pda.rsi
+    state: pda-mieyo
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-mieyo
+  - type: Geiger
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true
+  - type: PdaBorderColor
+    borderColor: "#AAAAAA"
+    accentHColor: "#d9a200"
+
+#- type: entity
+#  parent: BaseMMCPDA
+#  id: MieyoEmployeePDA
+#  name: mieyo employee PDA
+#  components:
+#  - type: Pda
+#    id: MieyoEmployeeIDCard
+
+#- type: entity
+#  parent: BaseMMCPDA
+#  id: MieyoSecurityPDA
+#  name: mieyo corporate security PDA
+#  components:
+#  - type: Pda
+#    id: MieyoSecurityIDCard
+
+#- type: entity
+#  parent: BaseMMCPDA
+#  id: MieyoLiasonPDA
+#  name: mieyo corporate liason PDA
+#  components:
+#  - type: CartridgeLoader
+#    preinstalled:
+#    - CrewManifestCartridge
+#    - NotekeeperCartridge
+#    - NewsReaderCartridge
+#    - BountyContractsCartridge
+#    - AstroNavCartridge
+#    - LedgerCartridge
+#  - type: Pda
+#    id: MieyoLiasonIDCard

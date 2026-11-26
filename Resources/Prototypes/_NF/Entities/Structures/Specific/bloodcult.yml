@@ -76,7 +76,10 @@
     sprite: _NF/Structures/Specific/BloodCult/wall.rsi
   - type: IconSmooth
     key: walls
-    base: cult
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: cult
 
 - type: entity
   parent: BaseStructure
@@ -206,7 +209,7 @@
     radius: 10
     energy: 0.8
     softness: 1
-    offset: "0, -0.5"
+    offset: "0, 0.495"
     color: "#990000"
 
 # Props and decoration

@@ -5,13 +5,17 @@
   id: BaseMobAsakim
   abstract: true
   components:
+  # Forge-Change-Start
+  - type: ShowRoleInformation
+    window: RoleInformationAsakim
+    duration: 15
+  #Forge-Change-End
   - type: HumanoidAppearance
     species: Asakim
     hideLayersOnEquip:
     - Snout
     #    - HeadTop # WWDP - Because visible horns its cool
     - HeadSide
-  - type: Hunger
   - type: Puller
     needsHands: false
   - type: MovementSpeedModifier
@@ -36,7 +40,6 @@
   #   scale: 1.2, 1.2
   - type: PlayerToolModifier
     pryTimeMultiplier: 0.7
-  - type: Thirst
   - type: Icon
     sprite: _Mono/Mobs/Species/Asakim/parts.rsi
     state: full
@@ -141,9 +144,6 @@
           32:
             sprite: _White/Mobs/Species/displacement.rsi
             state: shoes
-  - type: GuideHelp
-    guides:
-    - Asakim
     # WWDP-Edit-End
 
 - type: entity

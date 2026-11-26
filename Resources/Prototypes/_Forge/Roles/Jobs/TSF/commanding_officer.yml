@@ -31,12 +31,16 @@
   access:
   - TsfmcEngineering
   - TsfSecApartment
+  - TurretCommandTSF
+  - TurretCommandTSFShuttle
   special:
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember
       factions:
       - TSFMC
+    - type: ChatRank
+      rank: tsf-o6
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TSFTrackingImplant ]
   - !type:AddComponentSpecial
@@ -60,7 +64,9 @@
     back:
     - Multitool
     - DoorRemoteNfsd
-    - BaseSecurityUplinkRadioSheriff
+    - FederationMilitaryCredit
+    - FederationMilitaryCredit25
+  # - BaseSecurityUplinkRadioSheriff # Forge-Change
     - PhoneInstrumentHigh
     - TSFSecApartmentTablet
     - RubberStampTSFCommandingOfficer

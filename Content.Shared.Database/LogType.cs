@@ -493,4 +493,14 @@ public enum LogType
 
     // RMC14
     RMCTelephone = 10042,
+
+    /// <summary>
+    /// A player wrote on paper. Image uploads are Medium impact so they can be filtered.
+    /// </summary>
+    Paper = 300, // Forge
+
+    /// <summary>
+    /// An antagonist was selected or assigned.
+    /// </summary>
+    AntagSelection = 301,
 }

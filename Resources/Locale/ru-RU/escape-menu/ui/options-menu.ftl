@@ -63,8 +63,21 @@ ui-options-lighting-low = Низкое
 ui-options-lighting-medium = Среднее
 ui-options-lighting-high = Высокое
 ui-options-scale-label = Масштаб UI:
+# Forge-Change-Start
+ui-options-chat-font-size = Размер текста чата:
+ui-options-chat-font-size-value = { $size } пикс.
+ui-options-examine-font-size = Размер текста осмотра:
+ui-options-examine-font-size-value = { $size } пикс.
+ui-options-hud-scale = Масштаб HUD (хотбар, слоты, действия):
+ui-options-storage-scale = Масштаб слотов сумок и поясов:
+ui-options-hud-theme-pickme = ПикМи
+# Forge-Change-End
 ui-options-scale-auto = Автоматическое ({ TOSTRING($scale, "P0") })
 ui-options-scale-75 = 75%
+ui-options-scale-80 = 80%
+ui-options-scale-85 = 85%
+ui-options-scale-90 = 90%
+ui-options-scale-95 = 95%
 ui-options-scale-100 = 100%
 ui-options-scale-125 = 125%
 ui-options-scale-150 = 150%
@@ -195,6 +208,11 @@ ui-options-function-editor-line-place = Размещать в линию
 ui-options-function-editor-rotate-object = Повернуть
 ui-options-function-editor-flip-object = Перевернуть
 ui-options-function-editor-copy-object = Копировать
+# Forge-Change-Start
+ui-options-function-mapping-eyedropper = Пипетка маппинга (Shift+ПКМ)
+ui-options-function-mapping-eyedropper-tile = Пипетка маппинга, тайл (Alt+ПКМ)
+ui-options-function-mapping-eyedropper-decal = Пипетка маппинга, декаль (Ctrl+ПКМ)
+# Forge-Change-End
 ui-options-function-show-debug-console = Открыть консоль
 ui-options-function-show-debug-monitors = Показать дебаг информацию
 ui-options-function-inspect-entity = Изучить сущность

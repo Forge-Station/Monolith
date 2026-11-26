@@ -30,3 +30,7 @@ ent-SpaceCash30000 = { ent-SpaceCash }
 ent-SpaceCash1000000 = { ent-SpaceCash }
     .suffix = 1000000
     .desc = { ent-SpaceCash.desc }
+
+ent-SpaceCash7500 = { ent-SpaceCash }
+    .desc = { ent-SpaceCash.desc }
+    .suffix = 7500

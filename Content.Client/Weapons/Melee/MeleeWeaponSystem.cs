@@ -33,6 +33,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private TransformSystem _transform = default!; // Goobstation
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -44,6 +45,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         _xformQuery = GetEntityQuery<TransformComponent>();
         SubscribeNetworkEvent<MeleeLungeEvent>(OnMeleeLunge);
         UpdatesOutsidePrediction = true;
+        UpdatesAfter.Add(typeof(TransformSystem)); // Forge-Change
     }
 
     public override void FrameUpdate(float frameTime)
@@ -103,7 +105,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         EntityCoordinates coordinates;
 
-        if (MapManager.TryFindGridAt(mousePos, out var gridUid, out _))
+        if (_map.TryFindGridAt(mousePos, out var gridUid, out _))
         {
             coordinates = TransformSystem.ToCoordinates(gridUid, mousePos);
         }

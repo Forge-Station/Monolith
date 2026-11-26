@@ -5,7 +5,9 @@
   minLimit: 0
   loadouts:
   - MdMedicOuterClothingBeltWebbingTrauma
+  - MdMedicOuterClothingBeltWebbingTraumaFilled # Forge-Change
   - MdMedicOuterClothingBeltTrauma
+  - MdMedicOuterClothingBeltTraumaFilled # Forge-Change
   - ContractorClothingBeltPlant
   - ContractorClothingBeltPlantFilled
   - ContractorClothingBeltMedical
@@ -21,12 +23,30 @@
 
 - type: loadout
   id: MdMedicOuterClothingBeltWebbingTrauma
+  name: loadout-name-tti-belt-webbing-empty # Forge-Change
   price: 0
   equipment:
     belt: ClothingBeltWebbingsNormalTrauma
 
 - type: loadout
   id: MdMedicOuterClothingBeltTrauma
+  name: loadout-name-tti-belt-trauma-empty # Forge-Change
   price: 0
   equipment:
     belt: ClothingBeltTrauma
+
+# Forge-Change-Start
+- type: loadout
+  id: MdMedicOuterClothingBeltWebbingTraumaFilled
+  name: loadout-name-tti-belt-webbing-filled
+  price: 20000
+  equipment:
+    belt: ClothingBeltWebbingsNormalTraumaFilled
+
+- type: loadout
+  id: MdMedicOuterClothingBeltTraumaFilled
+  name: loadout-name-tti-belt-trauma-filled
+  price: 20000
+  equipment:
+    belt: ClothingBeltTraumaFilled
+# Forge-Change-End

@@ -7,16 +7,20 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Forge/Structures/Catwalk/darktile.rsi
+    sprite: _Forge/Structures/Catwalk/darktile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: Forge/Structures/Catwalk/darktile.rsi
+    sprite: _Forge/Structures/Catwalk/darktile.rsi
     state: catwalk_preview
   - type: Transform
     anchored: true
   - type: IconSmooth
     key: catwalk
-    base: catwalk_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ catwalk ]
+      base: catwalk_
+      swapOuterBits: true
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepCatwalk
@@ -56,10 +60,10 @@
   description: Мостик закрывающий техническое пространство под плиткой.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Catwalk/steeltile.rsi
+    sprite: _Forge/Structures/Catwalk/steeltile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: Forge/Structures/Catwalk/steeltile.rsi
+    sprite: _Forge/Structures/Catwalk/steeltile.rsi
     state: catwalk_preview
 
 - type: entity
@@ -69,8 +73,8 @@
   description: Мостик закрывающий техническое пространство под плиткой.
   components:
   - type: Sprite
-    sprite: Forge/Structures/Catwalk/whitetile.rsi
+    sprite: _Forge/Structures/Catwalk/whitetile.rsi
     drawdepth: FloorTiles
   - type: Icon
-    sprite: Forge/Structures/Catwalk/whitetile.rsi
+    sprite: _Forge/Structures/Catwalk/whitetile.rsi
     state: catwalk_preview

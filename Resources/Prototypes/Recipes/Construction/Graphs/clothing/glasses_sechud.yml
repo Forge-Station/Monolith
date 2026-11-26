@@ -7,13 +7,13 @@
         - to: glassesSec
           steps:
             - tag: Sunglasses
-              name: sun glasses
+              name: construction-required-sun-glasses # Forge-change
               icon:
                 sprite: Clothing/Eyes/Glasses/sunglasses.rsi
                 state: icon
               doAfter: 5
             - tag: HudSecurity
-              name: security hud
+              name: construction-required-security-hud # Forge-change
               icon:
                 sprite: Clothing/Eyes/Hud/sec.rsi
                 state: icon

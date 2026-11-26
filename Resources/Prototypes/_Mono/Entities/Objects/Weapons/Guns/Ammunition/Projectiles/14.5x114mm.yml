@@ -7,9 +7,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 70
+        Piercing: 80
         Structural: 500
-    ignoreResistances: true # Goobstation
+    ignoreResistances: true
     penetrationThreshold: 500
     penetrationDamageTypeRequirement:
     - Structural
@@ -18,3 +18,6 @@
   - type: Tracer
     color: "#FFFFFFFF"
     length: 3
+  - type: Reflective # Forge-change
+    reflective: # Forge-change
+    - None # Forge-change

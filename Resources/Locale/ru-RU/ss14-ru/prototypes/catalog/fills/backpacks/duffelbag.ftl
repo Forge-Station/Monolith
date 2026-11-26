@@ -51,3 +51,5 @@ ent-ClothingBackpackDuffelSyndicateDecoyKitFilled = набор обманок
     .desc = Содержит отвлекающие устройства, как звуковые, так и визуальные. Скоро появятся и обонятельные.
 ent-ClothingBackpackDuffelSyndicateRaidBundle = набор рейдерского костюма Горлекса
     .desc = Содержит прочный рейдерский бронекостюм Горлекса.
+ent-ClothingBackpackDuffelSyndicateMedicHardsuitBundle = набор медицинского скафандра Синдиката
+    .desc = Содержит кроваво-красный медицинский скафандр Синдиката.

@@ -27,7 +27,7 @@
     Steel: 75
     Cloth: 150
     Plasma: 150
-    Biomass: 15
+    Biomass: 8
 
 - type: latheRecipe
   id: HMEAdvancedMedkitCombat
@@ -70,7 +70,7 @@
     Durathread: 450
     Cloth: 300
     Plasma: 1350
-    Biomass: 30
+    Biomass: 18
 
 - type: latheRecipe
   id: HMEAdvancedCompactDefibrillator
@@ -93,7 +93,7 @@
     Steel: 1500
     Silver: 300
     Plasma: 750
-    Plastitanium: 300
+    Plasteel: 500
     Diamond: 50
 
 - type: latheRecipe
@@ -106,7 +106,7 @@
     Silver: 500
     Plasma: 1250
     Durathread: 750
-    Plastitanium: 1000
+    Plastitanium: 750
     Diamond: 150
 
 - type: latheRecipe
@@ -115,15 +115,15 @@
   completetime: 15
   materialDiscountScale: 0
   materials:
-    Plastic: 1000
-    Steel: 3000
-    Plasteel: 1000
-    Glass: 800
-    Silver: 500
-    Gold: 500
-    Uranium: 1500
-    Durathread: 3000
-    Plastitanium: 1500
+    Plastic: 2500
+    Steel: 3400
+    Plasteel: 2000
+    Glass: 3400
+    Silver: 2000
+    Gold: 2000
+    Uranium: 400
+    Durathread: 6000
+    Plastitanium: 1000
     Diamond: 200
 
 - type: latheRecipe
@@ -134,15 +134,16 @@
   materials:
     Plastic: 1250
     Steel: 4000
-    Glass: 500
-    Silver: 500
-    Gold: 500
-    Uranium: 1250
+    Glass: 1250
+    Silver: 1000
+    Gold: 1000
+    Uranium: 800
     Durathread: 4500
-    Plastitanium: 2500
+    Copper: 1000
+    Plastitanium: 2000
     Diamond: 300
     UraniumFissile: 100
-    Plasteel: 3000
+    Plasteel: 6000
 
 - type: latheRecipe
   id: HMEJumpsuit

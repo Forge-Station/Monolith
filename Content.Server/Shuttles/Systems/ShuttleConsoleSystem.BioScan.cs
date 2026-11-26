@@ -10,6 +10,8 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
@@ -78,7 +80,7 @@ public sealed partial class ShuttleConsoleSystem
         out EntityUid targetGrid,
         out ShuttleBioScanStatus failStatus)
     {
-        if (!_mapManager.TryFindGridAt(mapCoordinates, out targetGrid, out _))
+        if (!_mapSystem.TryFindGridAt(mapCoordinates, out targetGrid, out _))
         {
             failStatus = ShuttleBioScanStatus.InvalidTarget;
             return false;

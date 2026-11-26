@@ -2,13 +2,13 @@ recipes-secret-door-name = потайная дверь
 recipes-secret-door-desc = Дверь, замаскированная под стену. Идеальное решение для сокрытия ваших тёмных делишек.
 
 
-#MiningWalls
+# MiningWalls
 construction-recipe-wall-mining = { ent-WallMining }
 construction-recipe-wall-mining-desc = { ent-WallMining.desc }
 construction-recipe-wall-mining-diagonal = { ent-WallMiningDiagonal }
 construction-recipe-wall-mining-diagonal-desc = { ent-WallMiningDiagonal.desc }
 
-#MiningWindows
+# MiningWindows
 construction-recipe-mining-window = { ent-MiningWindow }
 construction-recipe-mining-window-desc = { ent-MiningWindow.desc }
 construction-recipe-mining-window-diagonal = { ent-MiningWindow }
@@ -25,13 +25,13 @@ construction-recipe-mining-window-uran-diagonal = { ent-MiningWindowUranDiagonal
 construction-recipe-mining-window-uran-diagonal-desc = { ent-MiningWindowUranDiagonal.desc }
 
 
-#PlastitaniumWalls
+# PlastitaniumWalls
 construction-recipe-plastitanium-wall  = { ent-WallPlastitanium }
 construction-recipe-plastitanium-wall-desc = { ent-WallPlastitanium.desc }
 construction-recipe-wall-plastitanium-diagonal = { ent-WallPlastitaniumDiagonal }
 construction-recipe-wall-plastitanium-diagonal-desc = { ent-WallPlastitaniumDiagonal.desc }
 
-#PlastitaniumWindows
+# PlastitaniumWindows
 construction-recipe-plastitanium-window = { ent-PlastitaniumWindow }
 construction-recipe-plastitanium-window-desc = { ent-PlastitaniumWindow.desc }
 construction-recipe-plastitanium-window-diagonal = { ent-PlastitaniumWindow }
@@ -48,7 +48,7 @@ construction-recipe-plastitanium-window-uran-diagonal = { ent-PlastitaniumWindow
 construction-recipe-plastitanium-window-uran-diagonal-desc = { ent-PlastitaniumWindowUranDiagonal.desc }
 
 
-#ShuttlemWalls
+# ShuttlemWalls
 construction-recipe-shuttle-wall = { ent-WallShuttle }
 construction-recipe-shuttle-wall-desc = { ent-WallShuttle.desc }
 construction-recipe-shuttle-secret-door-construction = стена шаттла (секретная дверь)
@@ -56,7 +56,7 @@ construction-recipe-shuttle-secret-door-construction-desc = Дверь засе�
 construction-recipe-interior-shuttle-wall = { ent-WallShuttleInterior }
 construction-recipe-interior-shuttle-wall-desc = { ent-WallShuttleInterior.desc }
 
-#ShuttleWindows
+# ShuttleWindows
 construction-recipe-shuttle-window = { ent-ShuttleWindow }
 construction-recipe-shuttle-window-desc = { ent-ShuttleWindow.desc }
 construction-recipe-shuttle-window-diagonal = { ent-ShuttleWindow }
@@ -73,19 +73,19 @@ construction-recipe-shuttle-window-uran-diagonal = { ent-ShuttleWindowUranDiagon
 construction-recipe-shuttle-window-uran-diagonal-desc = { ent-ShuttleWindowUranDiagonal.desc }
 
 
-#Materials
+# Materials
 construction-recipe-sheet-plastitanium-glass-1 = { ent-SheetPlastitaniumGlass }
 construction-recipe-sheet-plastitanium-glass-1-desc = { ent-SheetPlastitaniumGlass.desc }
 
 
-#FillingCabinets
+# FillingCabinets
 construction-recipe-extinguisher-cabinet = { ent-ExtinguisherCabinet }
 construction-recipe-extinguisher-cabinet-desc = { ent-ExtinguisherCabinet.desc }
 construction-recipe-defibrillator-cabinet = { ent-DefibrillatorCabinet }
 construction-recipe-defibrillator-cabinet-desc = { ent-DefibrillatorCabinet.desc }
 
 
-#SuitStorageBase
+# SuitStorageBase
 construction-recipe-suit-storage = { ent-SuitStorageBase }
 construction-recipe-suit-storage-desc = { ent-SuitStorageBase.desc }
 

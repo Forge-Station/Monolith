@@ -5,7 +5,7 @@
   parent: BaseVesselAntag
   name: PPU Akula
   description: A USSP long range harasser, meant for hit and runs. Comes with two dravons and CTLA-25.
-  price: 64000
+  price: 70321
   category: Small
   group: Shipyard # Forge-change: Ussp to Shipyard
   access: Mercenary
@@ -28,11 +28,12 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Akula USSP{1}'
+          mapNameTemplate: 'Akula MIL{1}' # Forge-change: Ussp to MIL
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-            USSPSergeant: [ 0, 0 ]
-            USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

@@ -58,29 +58,27 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 {
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
 
-    [Dependency] private readonly DeviceListSystem _deviceList = default!;
+    [Dependency] private DeviceListSystem _deviceList = default!;
 
-    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ShuttleConsoleSystem _shuttleConsole = default!;
 
-    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private BoardingTeleportEngineSystem _engine = default!;
 
-    [Dependency] private readonly BoardingTeleportEngineSystem _engine = default!;
-
-    [Dependency] private readonly BoardingTeleportLockSystem _lock = default!;
+    [Dependency] private BoardingTeleportLockSystem _lock = default!;
 
 
 
@@ -143,7 +141,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         if (!TryComp<DeviceListComponent>(ent, out var deviceList))
             return;
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((ent.Owner, deviceList)))
 
         {
 
@@ -448,7 +446,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             ShuttleBioScanStatus.None,
 
-            true);
+            true,
+            default, // Forge-Change - Cloaking
+            default, // Forge-Change - Cloaking
+            ShuttleCloakingStatus.None, // Forge-Change - Cloaking
+            ShuttleConsoleMapScreenMode.BioScan); // Forge-Change - Cloaking
 
 
 
@@ -494,6 +496,15 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         displayRisk = BoardingTeleportBalance.ApplyLockRiskPenalty(displayRisk / 100f, lockRiskPenalty) * 100f;
         if (ent.Comp.TargetGrid is { } uiTargetRisk && _lock.TryGetScramblerEffect(uiTargetRisk, out var uiScramblerRisk))
             displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, uiScramblerRisk.RiskBonus) * 100f;
+
+        var shieldPierceRisk = 0f;
+        if (_engine.TryGetLinkedEngine(ent.Owner, ent.Comp, out _, out var pierceEngine) &&
+            ent.Comp.TargetGrid is { } pierceTarget &&
+            BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, pierceTarget, pierceEngine, out var pierceScatter, out shieldPierceRisk))
+        {
+            displayScatter = BoardingTeleportBalance.ApplyScramblerScatterBonus(displayScatter, pierceScatter);
+            displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, shieldPierceRisk) * 100f;
+        }
 
         var lockAge = _lock.GetEffectiveLockAge(ent.Comp);
         var platforms = BuildPlatformUiEntries(ent.Owner, ent.Comp);
@@ -542,7 +553,9 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             GetSelectedLandingNet(ent.Comp),
 
-            platforms);
+            platforms,
+
+            shieldPierceRisk * 100f);
 
 
 
@@ -680,6 +693,14 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         var scatterRadius = BoardingTeleportBalance.ComputeScatterRadius(mode, distanceScale, experimentalScatter);
         scatterRadius = BoardingTeleportBalance.ApplyLockScatterPenalty(scatterRadius, lockScatter);
         scatterRadius = BoardingTeleportBalance.ApplyScramblerScatterBonus(scatterRadius, scramScatter);
+
+        if (platform.LinkedConsole is { } pierceConsole &&
+            _engine.TryGetLinkedEngine(pierceConsole, console, out _, out var pierceEngine) &&
+            console.TargetGrid is { } pierceTarget &&
+            BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, pierceTarget, pierceEngine, out var pierceScatter, out _))
+        {
+            scatterRadius = BoardingTeleportBalance.ApplyScramblerScatterBonus(scatterRadius, pierceScatter);
+        }
 
         if (experimentalScatter && TryFindPhaseShiftLanding(center, out landing))
 
@@ -1032,6 +1053,14 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
             ApplyLockAndScramblerToBalance(console, console.TargetGrid, out _, out var lockRisk, out _, out var scramRisk, out _);
             chance = BoardingTeleportBalance.ApplyLockRiskPenalty(chance, lockRisk);
             chance = BoardingTeleportBalance.ApplyScramblerRiskBonus(chance, scramRisk);
+
+            if (consoleUid is { } shieldConsole &&
+                _engine.TryGetLinkedEngine(shieldConsole, console, out _, out var shieldEngine) &&
+                console.TargetGrid is { } shieldTarget &&
+                BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, shieldTarget, shieldEngine, out _, out var shieldRisk))
+            {
+                chance = BoardingTeleportBalance.ApplyScramblerRiskBonus(chance, shieldRisk);
+            }
         }
 
         return chance;
@@ -1072,7 +1101,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             return;
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((ent.Owner, deviceList)))
 
         {
 
@@ -1134,7 +1163,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((consoleUid, deviceList)))
 
         {
 
@@ -1166,7 +1195,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
     {
 
-        if (_mapManager.TryFindGridAt(coordinates, out targetGrid, out _))
+        if (_map.TryFindGridAt(coordinates, out targetGrid, out _))
 
             return true;
 
@@ -1216,6 +1245,17 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
+        // Cross-map locks would hit admin arenas / dormant ADS maps — same map only.
+        if (_transform.GetMapId(scannerGrid) != _transform.GetMapId(targetGrid))
+
+        {
+
+            status = BoardingTeleportStatus.InvalidTarget;
+
+            return false;
+
+        }
+
         if (IsGridInActiveFtl(targetGrid))
 
         {
@@ -1226,13 +1266,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-        if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out _))
+        if (BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid))
 
         {
 
-            status = BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid)
-                ? BoardingTeleportStatus.TargetShielded
-                : BoardingTeleportStatus.TargetShieldTooStrong;
+            status = BoardingTeleportStatus.TargetShielded;
 
             return false;
 

@@ -5,10 +5,10 @@
   parent: BaseVesselAntag
   name: NCS Natisk
   description: A tank with a layer of reinforced walls under its exterior hull, ensuring its able to send out obscene amounts of firepower.
-  price: 53500
+  price: 69870
   category: Medium
   group: Ussp
-  access: USSP
+  access: Mercenary # Forge-change: Ussp to Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/natisk.yml
   guidebookPage: Null
   class:
@@ -33,5 +33,6 @@
             prefixCreator: '14'
         - type: StationJobs
           availableJobs:
-           USSPSergeant: [ 0, 0 ]
-           USSPRifleman: [ 0, 0 ]
+           Contractor: [ 0, 0 ] # Forge-change: Ussp Rolesto Contractor
+           Pilot: [ 0, 0 ] # Forge-change: Ussp Roles to Pilot
+           Mercenary: [ 0, 0 ] # Forge-change: Ussp Roles to Mercenary

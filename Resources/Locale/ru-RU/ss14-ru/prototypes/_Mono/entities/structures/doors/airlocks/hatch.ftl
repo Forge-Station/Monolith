@@ -13,3 +13,9 @@ ent-AirlockHatchGrandVizierLocked = { ent-AirlockHatch }
 ent-AirlockHatchPDVCommandLocked = { ent-AirlockHatch }
     .desc = { ent-AirlockHatch.desc }
     .suffix = командование PDV, Закрыт
+
+ent-AirlockHatchViper = герметичный люк
+    .desc = Он открывается, он закрывается, он может вас раздавить.
+
+ent-AirlockHatchViperCommand = { ent-AirlockHatchViper }
+    .desc = { ent-AirlockHatchViper.desc }

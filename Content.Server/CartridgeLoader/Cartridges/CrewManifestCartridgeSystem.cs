@@ -14,9 +14,8 @@ public sealed partial class CrewManifestCartridgeSystem : EntitySystem
     [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private CrewManifestSystem _crewManifest = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ServerStationSystem _stationSystem = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
     private const string CartridgePrototypeName = "CrewManifestCartridge";
 
     /// <summary>

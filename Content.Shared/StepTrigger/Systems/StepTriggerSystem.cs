@@ -1,4 +1,6 @@
 using Content.Shared.DeviceLinking; //Mono
+using Content.Shared.DeviceLinking.Components;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Gravity;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.Whitelist;
@@ -15,7 +17,9 @@ public sealed partial class StepTriggerSystem : EntitySystem
     [Dependency] private SharedGravitySystem _gravity = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private SharedDeviceLinkSystem _links = default!; //Mono
+    [Dependency] private DeviceLinkSystem _links = default!; //Mono
+
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsquery = default!;
 
     public override void Initialize()
     {
@@ -39,12 +43,11 @@ public sealed partial class StepTriggerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = GetEntityQuery<PhysicsComponent>();
         var enumerator = EntityQueryEnumerator<StepTriggerActiveComponent, StepTriggerComponent, TransformComponent>();
 
         while (enumerator.MoveNext(out var uid, out var active, out var trigger, out var transform))
         {
-            if (!Update(uid, trigger, transform, query))
+            if (!Update(uid, trigger, transform))
             {
                 continue;
             }
@@ -53,7 +56,7 @@ public sealed partial class StepTriggerSystem : EntitySystem
         }
     }
 
-    private bool Update(EntityUid uid, StepTriggerComponent component, TransformComponent transform, EntityQuery<PhysicsComponent> query)
+    private bool Update(EntityUid uid, StepTriggerComponent component, TransformComponent transform)
     {
         if (!component.Active ||
             component.Colliding.Count == 0)
@@ -80,15 +83,15 @@ public sealed partial class StepTriggerSystem : EntitySystem
 
         foreach (var otherUid in component.Colliding)
         {
-            UpdateColliding(uid, component, transform, otherUid, query);
+            UpdateColliding(uid, component, transform, otherUid);
         }
 
         return false;
     }
 
-    private void UpdateColliding(EntityUid uid, StepTriggerComponent component, TransformComponent ownerXform, EntityUid otherUid, EntityQuery<PhysicsComponent> query)
+    private void UpdateColliding(EntityUid uid, StepTriggerComponent component, TransformComponent ownerXform, EntityUid otherUid)
     {
-        if (!query.TryGetComponent(otherUid, out var otherPhysics))
+        if (!_physicsquery.TryComp(otherUid, out var otherPhysics))
             return;
 
         var otherXform = Transform(otherUid);

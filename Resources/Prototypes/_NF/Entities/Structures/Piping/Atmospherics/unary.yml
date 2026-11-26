@@ -37,7 +37,7 @@
     sendBroadcastAttemptEvent: true
     examinableAddress: true
     prefix: device-address-prefix-gas-drill
-  - type: WiredNetworkConnection # still needed?
+  - type: WiredNetwork # still needed?
   - type: PowerSwitch
   - type: StationAiWhitelist
   - type: Sprite
@@ -113,7 +113,7 @@
         pipeDirection: South
   - type: DeviceNetwork
     prefix: device-address-prefix-sale-point
-  - type: WiredNetworkConnection # still needed?
+  - type: WiredNetwork # still needed?
   - type: Sprite
     sprite: _NF/Structures/Piping/Atmospherics/salepoint.rsi
     layers:

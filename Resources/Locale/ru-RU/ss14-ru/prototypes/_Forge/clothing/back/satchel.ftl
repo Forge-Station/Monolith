@@ -6,3 +6,6 @@ ent-ClothingBackpackSatchelSyndicate = сумка Горлекса
     .desc = Приятная на ощупь красная-черная сумка.
 ent-ClothingBackpackSatchelRenegade = сумка ренегатов
     .desc = Удобная, мало весит и невероятно стильная.
+ent-ClothingBackpackSatchelNexus = Сумка Nexus
+    .suffix = Nexus
+    .desc = Фирменная сумка  Nexus.

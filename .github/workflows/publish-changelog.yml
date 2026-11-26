@@ -3,27 +3,43 @@
 # #
 # # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# name: Publish Changelog
+ name: Publish Changelog
 
-# on:
-#   workflow_dispatch:
-#   schedule:
-#     - cron: '0 10 * * *'
+ on:
+   workflow_dispatch:
+   schedule:
+     - cron: '30 14 * * 3'
 
-# jobs:
-#  publish_changelog:
-#     runs-on: ubuntu-latest
-#     steps:
+ concurrency:
+  group: publish-changelog
+  cancel-in-progress: false
 
-#     - name: checkout
-#       uses: actions/checkout@v3
-#       with:
-#         token: ${{secrets.GITHUB_TOKEN}}
-#         ref: main
+ jobs:
+  publish_changelog:
+     runs-on: ubuntu-latest
+     permissions:
+       contents: read
+       actions: read
+       
+     steps:
+     - name: checkout
+       uses: actions/checkout@v3
+       with:
+         token: ${{secrets.GITHUB_TOKEN}}
+         ref: main
 
-#     - name: Publish changelog
-#       run: Tools/actions_changelogs_since_last_run.py
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
-#     continue-on-error: true
+     - name: Setup Python
+       uses: actions/setup-python@v5
+       with:
+         python-version: '3.12'
+
+     - name: Install changelog deps
+       run: pip install requests pyyaml
+      
+     - name: Publish changelog
+       run: Tools/actions_changelogs_since_last_run.py
+       env:
+         CHANGELOG_DIR: Resources/Changelog/Forge.yml
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_CHANGELOG_WEBHOOK }}
+     continue-on-error: true

@@ -35,6 +35,8 @@ using Robust.Shared.Collections;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Roles.Jobs;
 using Content.Server._NF.Players.GhostRole.Events; // Frontier
+using Content.Shared.PDA; // Forge-Change
+using Content.Server._Forge.Silicons.StationAi; // Forge-Change
 
 namespace Content.Server.Ghost.Roles;
 
@@ -188,6 +190,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
         UpdateGhostRoleCount();
         UpdateRaffles(frameTime);
+        ProcessPendingReregistrations(); // Forge-Change
     }
 
     /// <summary>
@@ -263,8 +266,12 @@ public sealed partial class GhostRoleSystem : EntitySystem
                             $"{ghostRole.RaffleConfig?.Decider} finding a winner");
             }
 
-            // raffle over
-            RemoveRaffleAndUpdateEui(entityUid, raffle);
+            // Forge-Change: taking the role can unregister and remove this raffle during PickWinner.
+            if (_ghostRoleRaffles.TryGetValue(raffle.Identifier, out var activeRaffle) &&
+                activeRaffle.Owner == entityUid)
+            {
+                RemoveRaffleAndUpdateEui(entityUid, raffle);
+            }
         }
     }
 
@@ -301,7 +308,9 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         if (args.NewStatus == SessionStatus.InGame)
         {
-            var response = new GhostUpdateGhostRoleCountEvent(_ghostRoles.Count);
+            // Forge-Change: the button count and the window list have to use the same filter.
+            // The raw dictionary also includes paused roles and PDAs, which the window hides.
+            var response = new GhostUpdateGhostRoleCountEvent(GetGhostRoleCount());
             RaiseNetworkEvent(response, args.Session.Channel);
         }
         else
@@ -313,6 +322,11 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
     public void RegisterGhostRole(Entity<GhostRoleComponent> role)
     {
+        // Forge-Change: PDAs must never appear as ghost roles (use-in-hand used to flood the list).
+        // Station AI brains carry a PDA and are still real ghost roles.
+        if (IsSuppressedPdaGhostRole(role.Owner))
+            return;
+
         if (_ghostRoles.ContainsValue(role))
             return;
 
@@ -341,16 +355,25 @@ public sealed partial class GhostRoleSystem : EntitySystem
     // probably fine to be init because it's never added during entity initialization, but much later
     private void OnRaffleInit(Entity<GhostRoleRaffleComponent> ent, ref ComponentInit args)
     {
+        TryInitializeRaffle(ent); // Forge-Change
+    }
+
+    // Forge-Change: a raffle component can be re-added before its init event after a previous raffle is removed.
+    private bool TryInitializeRaffle(Entity<GhostRoleRaffleComponent> ent)
+    {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return false;
+
         if (!TryComp(ent, out GhostRoleComponent? ghostRole))
         {
             // can't have a raffle for a ghost role that doesn't exist
             RemComp<GhostRoleRaffleComponent>(ent);
-            return;
+            return false;
         }
 
         var config = ghostRole.RaffleConfig;
         if (config is null)
-            return; // should, realistically, never be reached but you never know
+            return false; // should, realistically, never be reached but you never know
 
         var settings = config.SettingsOverride
                        ?? _prototype.Index<GhostRoleRaffleSettingsPrototype>(config.Settings).Settings;
@@ -360,7 +383,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
             Log.Error($"Ghost role on {ent} has invalid raffle settings (max duration shorter than initial)");
             ghostRole.RaffleConfig = null; // make it a non-raffle role so stuff isn't entirely broken
             RemComp<GhostRoleRaffleComponent>(ent);
-            return;
+            return false;
         }
 
         var raffle = ent.Comp;
@@ -371,6 +394,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         // we copy these settings into the component because they would be cumbersome to access otherwise
         raffle.JoinExtendsDurationBy = TimeSpan.FromSeconds(settings.JoinExtendsDurationBy);
         raffle.MaxDuration = TimeSpan.FromSeconds(settings.MaxDuration);
+        return true;
     }
 
     private void OnRaffleShutdown(Entity<GhostRoleRaffleComponent> ent, ref ComponentShutdown args)
@@ -405,6 +429,13 @@ public sealed partial class GhostRoleSystem : EntitySystem
         var raffle = _ghostRoleRaffles.TryGetValue(identifier, out var raffleEnt)
             ? raffleEnt.Comp
             : EnsureComp<GhostRoleRaffleComponent>(roleEnt.Owner);
+
+        // Forge-Change: do not expose or run a raffle with the uninitialized TimeSpan.MaxValue sentinel.
+        if (raffle.Countdown == TimeSpan.MaxValue &&
+            !TryInitializeRaffle((roleEnt.Owner, raffle)))
+        {
+            return;
+        }
 
         _ghostRoleRaffles.TryAdd(identifier, (roleEnt.Owner, raffle));
 
@@ -554,7 +585,27 @@ public sealed partial class GhostRoleSystem : EntitySystem
     public int GetGhostRoleCount()
     {
         var metaQuery = GetEntityQuery<MetaDataComponent>();
-        return _ghostRoles.Count(pair => metaQuery.GetComponent(pair.Value.Owner).EntityPaused == false);
+        var count = 0;
+        List<uint>? stale = null;
+
+        foreach (var (id, role) in _ghostRoles)
+        {
+            // Forge-Change: a deleted mob left in the dictionary used to throw here and freeze
+            // the count on the last raw number, while the window stayed empty.
+            if (!metaQuery.TryGetComponent(role.Owner, out var meta))
+            {
+                (stale ??= new List<uint>()).Add(id);
+                continue;
+            }
+
+            if (meta.EntityPaused || IsSuppressedPdaGhostRole(role.Owner))
+                continue;
+
+            count++;
+        }
+
+        DropStaleGhostRoles(stale);
+        return count;
     }
 
     /// <summary>
@@ -568,9 +619,22 @@ public sealed partial class GhostRoleSystem : EntitySystem
         var roles = new List<GhostRoleInfo>();
         var metaQuery = GetEntityQuery<MetaDataComponent>();
 
+        // Forge-Change: a deleted role owner used to throw here and leave the window empty.
+        List<uint>? stale = null;
+
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
-            if (metaQuery.GetComponent(uid).EntityPaused)
+            if (!metaQuery.TryGetComponent(uid, out var meta))
+            {
+                (stale ??= new List<uint>()).Add(id);
+                continue;
+            }
+
+            if (meta.EntityPaused)
+                continue;
+
+            // Forge-Change: hide leftover PDA ghost roles from the list.
+            if (IsSuppressedPdaGhostRole(uid))
                 continue;
 
 
@@ -592,9 +656,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
             }
 
             var rafflePlayerCount = (uint?) raffle?.CurrentMembers.Count ?? 0;
-            var raffleEndTime = raffle is not null
-                ? _timing.CurTime.Add(raffle.Countdown)
-                : TimeSpan.MinValue;
+            // Forge-Change: a component waiting for initialization uses TimeSpan.MaxValue as a sentinel.
+            var raffleEndTime = GetRaffleEndTime(raffle);
 
             roles.Add(new GhostRoleInfo
             {
@@ -610,7 +673,23 @@ public sealed partial class GhostRoleSystem : EntitySystem
             });
         }
 
+        DropStaleGhostRoles(stale);
         return roles.ToArray();
+    }
+
+    // Forge-Change: remove ghost roles whose entity is already gone.
+    private void DropStaleGhostRoles(List<uint>? stale)
+    {
+        if (stale == null)
+            return;
+
+        foreach (var id in stale)
+        {
+            _ghostRoles.Remove(id);
+        }
+
+        _needsUpdateGhostRoleCount = true;
+        UpdateAllEui();
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent message)
@@ -652,8 +731,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         if (!ghostRole.ReregisterOnGhost || component.LifeStage > ComponentLifeStage.Running)
             return;
 
-        ghostRole.Taken = false;
-        RegisterGhostRole((uid, ghostRole));
+        ReregisterGhostRole((uid, ghostRole)); // Forge-Change
     }
 
     public void Reset(RoundRestartCleanupEvent ev)
@@ -666,6 +744,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
         _openUis.Clear();
         _ghostRoles.Clear();
         _ghostRoleRaffles.Clear();
+        ClearPendingReregistrations(); // Forge-Change
         _nextRoleIdentifier = 0;
     }
 
@@ -744,7 +823,16 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         return Resolve(uid, ref component, false) &&
                !component.Taken &&
-               !MetaData(uid).EntityPaused;
+               !MetaData(uid).EntityPaused &&
+               !IsSuppressedPdaGhostRole(uid); // Forge-Change: PDAs cannot be taken as ghost roles
+    }
+
+    /// <summary>
+    /// PDAs must not appear as ghost roles. Station AI brains carry a PDA and remain real takeover roles.
+    /// </summary>
+    private bool IsSuppressedPdaGhostRole(EntityUid uid)
+    {
+        return HasComp<PdaComponent>(uid) && !HasComp<StationAiPersonalityComponent>(uid);
     }
 
     private void OnTakeoverTakeRole(EntityUid uid, GhostTakeoverAvailableComponent component, ref TakeGhostRoleEvent args)

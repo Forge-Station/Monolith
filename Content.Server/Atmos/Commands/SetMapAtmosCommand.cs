@@ -1,8 +1,8 @@
 using Content.Server.Administration;
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Administration;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
 
@@ -12,7 +12,6 @@ namespace Content.Server.Atmos.Commands;
 public sealed partial class AddMapAtmosCommand : LocalizedCommands
 {
     [Dependency] private IEntityManager _entities = default!;
-    [Dependency] private IMapManager _map = default!;
 
     private const string _cmd = "cmd-set-map-atmos";
     public override string Command => "setmapatmos";
@@ -28,7 +27,7 @@ public sealed partial class AddMapAtmosCommand : LocalizedCommands
         }
 
         int.TryParse(args[0], out var id);
-        var map = _map.GetMapEntityId(new MapId(id));
+        var map = _entities.System<SharedMapSystem>().GetMap(new MapId(id));
         if (!map.IsValid())
         {
             shell.WriteError(Loc.GetString("cmd-parse-failure-mapid",  ("arg", args[0])));

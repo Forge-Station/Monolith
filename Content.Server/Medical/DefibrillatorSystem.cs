@@ -21,9 +21,12 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.PowerCell;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Toggleable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Content.Shared._Forge.ReviveReward; // Forge-change
 
 namespace Content.Server.Medical;
 
@@ -212,6 +215,8 @@ public sealed partial class DefibrillatorSystem : EntitySystem
             {
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
+
+                RaiseLocalEvent(new EntityRevivedEvent(target, user)); // Forge-change
             }
 
             if (_mind.TryGetMind(target, out _, out var mind) &&

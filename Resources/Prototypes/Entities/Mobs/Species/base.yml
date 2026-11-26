@@ -119,7 +119,7 @@
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
       effects:
-      - !type:WashCreamPieReaction
+      - !type:WashReaction #Forge-Change
   - type: StatusEffects
     allowed:
     - Stun
@@ -173,8 +173,9 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Dna
+  - type: Genome
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: CanEnterCryostorage
   - type: InteractionPopup
     successChance: 1
@@ -246,6 +247,18 @@
   id: BaseMobSpeciesOrganic
   abstract: true
   components:
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: NormalSatiationThirst
+  - type: SatiationSpeedModifier
+    satiations:
+      Hunger:
+        Starving: 0.75
+      Thirst:
+        Parched: 0.75
   - type: Barotrauma
     damage:
       types:
@@ -310,6 +323,14 @@
     shape:
       - 0, 0, 4, 4
       - 0, 3, 6, 5
+  - type: CanMoveInAir # Monolith: Allow air movement for Z levels (:3)
+  - type: EmitSoundOnInternalsActive # Crescent
+    sound:
+      collection: InternalsBreathing
+      params:
+        maxDistance: 3
+        rolloffFactor: 2
+        volume: -10
 
 - type: entity
   save: false

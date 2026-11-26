@@ -1,3 +1,5 @@
+using Robust.Shared.Map; // Forge-change
+
 namespace Content.Server._Mono.Projectiles.TargetSeeking;
 
 /// <summary>
@@ -30,6 +32,27 @@ public sealed partial class TargetSeekingComponent : Component
     [DataField]
     public EntityUid? CurrentTarget;
 
+    // Forge-change-start
+    /// <summary>
+    /// Map/grid coordinates used for guidance when <see cref="CurrentTarget"/> is a shuttle grid.
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public EntityCoordinates? TargetAimCoordinates;
+
+    /// <summary>
+    /// Equipment entity that <see cref="TargetAimCoordinates"/> was taken from, if any.
+    /// </summary>
+    public EntityUid? AimEntity;
+
+    /// <summary>
+    /// How often to discard the current target and run acquisition again (e.g. thermal decoys).
+    /// </summary>
+    [DataField]
+    public float RetargetInterval = 5f;
+
+    public float RetargetAccumulator;
+    // Forge-change-end
+
     /// <summary>
     /// Should tracked entities know that they are being tracked?
     /// </summary>
@@ -40,7 +63,7 @@ public sealed partial class TargetSeekingComponent : Component
     /// Tracking algorithm used for intercepting the target.
     /// </summary>
     [DataField]
-    public TrackingMethod TrackingAlgorithm = TrackingMethod.AdvancedPredictive;
+    public TrackingMethod TrackingAlgorithm = TrackingMethod.Predictive;
 
     /// <summary>
     /// How fast the projectile accelerates in m/s².
@@ -82,6 +105,12 @@ public sealed partial class TargetSeekingComponent : Component
     /// Whether seeking has been disabled (e.g., after entering an enemy grid).
     /// </summary>
     public bool SeekingDisabled;
+
+    /// <summary>
+    /// Do we want to draw arc/velocity lines on radar?
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    public bool ArcLines = true;
 }
 
 /// <summary>

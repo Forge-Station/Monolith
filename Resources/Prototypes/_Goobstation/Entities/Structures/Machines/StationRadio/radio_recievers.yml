@@ -1,0 +1,77 @@
+- type: entity
+  id: StationRadioReceiver
+  name: station radio
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  description: Listen to the top hits of your stations local radio.
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/StationRadio/stationradio.rsi
+    layers:
+    - state: icon-1
+    - state: unlit
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+    drawdepth: SmallObjects
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.10,-0.10,0.10,0.10"
+        density: 500
+        mask:
+        - TabletopMachineMask
+        layer:
+        - BulletImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Machine
+    board: StationRadioCircuitboard
+  - type: RadioSpeaker
+    powerRequired: true
+    speakNormally: true
+    enabled: true
+    channels:
+    - RadioShow
+  - type: Speech
+    speechVerb: StationRadio
+  - type: ActiveRadio
+    channels:
+    - RadioShow
+  - type: StationRadioReceiver
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+
+#Forge-Change-UwU-start
+- type: entity
+  id: StationRadioReceiverUwU
+  name: station UwU radio
+  suffix: UwU
+  parent: StationRadioReceiver
+  components:
+    - type: Sprite
+      sprite: _Forge/Structures/Machines/StationRadio/stationradioUwU.rsi
+      layers:
+      - state: icon-2
+      - state: unlit
+        shader: unshaded
+        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      drawdepth: SmallObjects
+    - type: Machine
+      board: StationRadioUwUCircuitboard
+#Forge-Change-UwU-end

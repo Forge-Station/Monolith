@@ -17,7 +17,6 @@ public sealed partial class DrainComponent : Component
 {
     public const string SolutionName = "drainBuffer";
 
-    [ValidatePrototypeId<TagPrototype>]
     public const string PlungerTag = "Plunger";
 
     [ViewVariables]

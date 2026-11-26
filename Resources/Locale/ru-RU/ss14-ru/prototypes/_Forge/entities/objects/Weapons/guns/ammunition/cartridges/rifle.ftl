@@ -22,7 +22,3 @@ ent-ForgeCartridgeRifle60Incendiary = патрон (.60 зажигательны
     .desc = { ent-ForgeCartridgeRifle25.desc }
 ent-ForgeCartridgeRifle60AP = патрон (.60 бронебойный)
     .desc = { ent-ForgeCartridgeRifle25.desc }
-
-# 12.7x85mm
-ent-ForgeCartridgeUllman127x85mm = патрон (12.7x85 мм)
-    .desc = Более лёгкая версия патрона 14.5x114мм, но все ещё способная прошивать всех насквозь.

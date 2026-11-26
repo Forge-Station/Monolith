@@ -43,6 +43,7 @@
         map: [ "harvest_alert" ]
         visible: false
   - type: Appearance
+  - type: PlantHealthBarTarget
   - type: GenericVisualizer
     visuals:
       enum.PlantHolderVisuals.HealthLight:
@@ -72,6 +73,28 @@
       params:
         volume: -6
         variation: 0.20
+  # Forge-Change-start
+  - type: ItemSlots
+    slots:
+      harvestContainer:
+        name: plant-holder-harvest-container-slot
+        whitelist:
+          components:
+          - FitsInDispenser
+        insertSound:
+          path: /Audio/Effects/Fluids/slosh.ogg
+          params:
+            volume: -6
+        ejectSound:
+          path: /Audio/Effects/Fluids/slosh.ogg
+          params:
+            volume: -6
+  - type: ContainerContainer
+    containers:
+      harvestContainer: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  # Forge-Change-end
   - type: Destructible
     thresholds:
     - trigger:
@@ -97,6 +120,12 @@
     guides:
     - Botany
     - Chemicals
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+    prefix: device-address-prefix-hydroponics
+    examinableAddress: true
+  - type: WiredNetwork
   - type: PirateBountyItem # Frontier
     id: HydroponicsTray # Frontier
   #<Forge>

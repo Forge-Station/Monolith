@@ -20,9 +20,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
-using System.IO;
-using System.Linq;
-using System.Numerics;
 using YamlDotNet.RepresentationModel;
 using Content.Shared._EE.Contractors.Prototypes; // Forge-change: _EE nationality
 using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
@@ -48,15 +45,12 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private MarkingManager _markingManager = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
-    [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
 
     // Forge-change: take _EE nationality
-    [ValidatePrototypeId<NationalityPrototype>]
     public const string DefaultNationality = "TransSolarFederation";
 
     // Corvax-Frontier-Barks-start
-    [ValidatePrototypeId<BarkPrototype>]
     public const string DefaultBarkVoice = "BarksGoonSpeak1";
     // Corvax-Frontier-Barks-end
     // Corvax-TTS-Start

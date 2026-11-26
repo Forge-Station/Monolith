@@ -6,9 +6,13 @@ ent-SpaceCash25000 = { ent-SpaceCash }
     .desc = { ent-SpaceCash.desc }
 ent-SpaceCashCounterfeit = кредиты
     .desc = Всем нужны деньги.
+ent-SpaceCashCounterfeit100000 = кредиты
+    .desc = Всем нужны странные деньги. 
 
 ent-SpaceCash100000 = кредиты
-    .desc = Стандарт Валериан C- Что за чёрт...? ЭТО ЖАЛКИЕ ПОДДЕЛКИ!!!
-ent-SpaceCashCounterfeit200000 = SpaceCashCounterfeit200000
+    .desc = { ent-SpaceCash.desc }
+ent-SpaceCashCounterfeit200000 = { ent-SpaceCashCounterfeit }
+    .desc = Стандартные кре... Что за чёрт?.. ЭТО ЖАЛКИЕ ПОДДЕЛКИ!!!
+    .suffix = 200000
 ent-CreditCounterfeit = кредит
 ent-Spesso = кредит

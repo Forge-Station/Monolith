@@ -5,6 +5,33 @@
   id: Magazine635x40mmCaseless
   result: Magazine635x40mmCaseless
 
+# Forge-change-start
+- type: latheRecipe
+  parent: BaseAmmoPlasteelAPPistolCaliberSubMachineGunMagazineRecipe
+  id: Magazine635x40mmCaselessPlasteelAP
+  result: Magazine635x40mmCaselessPlasteelAP
+
+- type: latheRecipe
+  parent: BaseAmmoIncendiaryPistolCaliberSubMachineGunMagazineRecipe
+  id: Magazine635x40mmCaselessIncendiary
+  result: Magazine635x40mmCaselessIncendiary
+
+- type: latheRecipe
+  parent: BaseAmmoUraniumPistolCaliberSubMachineGunMagazineRecipe
+  id: Magazine635x40mmCaselessUranium
+  result: Magazine635x40mmCaselessUranium
+
+- type: latheRecipe
+  parent: BaseAmmoHPPistolCaliberSubMachineGunMagazineRecipe
+  id: Magazine635x40mmCaselessHP
+  result: Magazine635x40mmCaselessHP
+
+- type: latheRecipe
+  parent: BaseAmmoRIPPistolCaliberSubMachineGunMagazineRecipe
+  id: Magazine635x40mmCaselessRIP
+  result: Magazine635x40mmCaselessRIP
+# Forge-change-end
+
 #Ammo boxes
 
 - type: latheRecipe
@@ -21,3 +48,30 @@
   parent: BaseAmmoFMJPistolCaliberAmmoBoxRecipe
   id: AmmoBox635x40mmCaselessBig
   result: AmmoBox635x40mmCaselessBig
+
+# Forge-change-start
+- type: latheRecipe
+  parent: BaseAmmoPlasteelAPPistolCaliberAmmoBoxRecipe
+  id: AmmoBox635x40mmCaselessPlasteelAP
+  result: AmmoBox635x40mmCaselessPlasteelAP
+
+- type: latheRecipe
+  parent: BaseAmmoIncendiaryPistolCaliberAmmoBoxRecipe
+  id: AmmoBox635x40mmCaselessIncendiary
+  result: AmmoBox635x40mmCaselessIncendiary
+
+- type: latheRecipe
+  parent: BaseAmmoUraniumPistolCaliberAmmoBoxRecipe
+  id: AmmoBox635x40mmCaselessUranium
+  result: AmmoBox635x40mmCaselessUranium
+
+- type: latheRecipe
+  parent: BaseAmmoHPPistolCaliberAmmoBoxRecipe
+  id: AmmoBox635x40mmCaselessHP
+  result: AmmoBox635x40mmCaselessHP
+
+- type: latheRecipe
+  parent: BaseAmmoRIPPistolCaliberAmmoBoxRecipe
+  id: AmmoBox635x40mmCaselessRIP
+  result: AmmoBox635x40mmCaselessRIP
+# Forge-change-end

@@ -38,6 +38,8 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -47,7 +49,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private IAdminLogManager _logger = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private BiomeSystem _biomes = default!;
@@ -57,6 +59,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private DockingSystem _dockSystem = default!;
     [Dependency] private DungeonSystem _dungeon = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private Content.Server.Explosion.EntitySystems.ExplosionSystem _explosion = default!; // Mono: z-level transit crush
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private FixtureSystem _fixtures = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
@@ -69,12 +72,12 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedSalvageSystem _salvage = default!;
     [Dependency] private ShuttleConsoleSystem _console = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private StunSystem _stuns = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ThrusterSystem _thruster = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private GameTicker _ticker = default!; //frontier edit to get the main map in FTL
+    [Dependency] private ServerGameTicker _ticker = default!; //frontier edit to get the main map in FTL
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private PopupSystem _popup = default!;
 
@@ -104,6 +107,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
         SubscribeLocalEvent<ShuttleComponent, ComponentStartup>(OnShuttleStartup);
         SubscribeLocalEvent<ShuttleComponent, ComponentShutdown>(OnShuttleShutdown);
+        SubscribeLocalEvent<IFFComponent, ComponentStartup>(OnShuttleIFFStartup); // Mono
         SubscribeLocalEvent<ShuttleComponent, TileFrictionEvent>(OnTileFriction);
         SubscribeLocalEvent<ShuttleComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<ShuttleComponent, FTLCompletedEvent>(OnFTLCompleted);
@@ -118,6 +122,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        UpdateDeferredImpactTileBreaks();
         UpdateHyperspace();
         // Forge-Change:start add-poi-capture-update
         UpdateForgePoiCapture();
@@ -165,6 +170,22 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         }
 
         component.DampingModifier = component.BodyModifier;
+    }
+
+    // Mono - track ID
+    private void OnShuttleIFFStartup(EntityUid uid, IFFComponent component, ComponentStartup args)
+    {
+        if (!EntityManager.HasComponent<MapGridComponent>(uid))
+        {
+            return;
+        }
+
+        if (!EntityManager.TryGetComponent(uid, out PhysicsComponent? physicsComponent))
+        {
+            return;
+        }
+        var num = _random.Next();
+        component.Address = $" {num >> 16:X4}-{num & 0xFFFF:X4}";
     }
 
     public void Toggle(EntityUid uid, ShuttleComponent component,

@@ -10,11 +10,11 @@ using Robust.Shared.Utility;
 
 namespace Content._Forge.Shared.Loudspeaker.Systems;
 
-public sealed class LoudSpeakerSystem : EntitySystem
+public sealed partial class LoudSpeakerSystem : EntitySystem
 {
 
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -112,7 +112,7 @@ public sealed class LoudSpeakerSystem : EntitySystem
                 Dirty(ent);
             },
             Text = Loc.GetString("loudspeaker-toggle"),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Forge/Interface/Misc/volume.png")),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/_Forge/Interface/Misc/volume.png")),
         };
 
         args.Verbs.Add(toggleLoudspeakerVerb);

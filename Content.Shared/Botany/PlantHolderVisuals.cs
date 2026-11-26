@@ -12,5 +12,13 @@ namespace Content.Shared.Botany
         NutritionLight,
         AlertLight,
         HarvestLight,
+        HealthPercent,
+        HasPlant,
+        WeedsHigh,
+        Radioactive,
+        // Forge-Change-start
+        WaterPercent,
+        NutritionPercent,
+        // Forge-Change-end
     }
 }

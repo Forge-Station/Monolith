@@ -1,3 +1,12 @@
+research-technology-forge-turret-command = Управление турелями
+research-technology-forge-turret-adventurer = Турели авантюристов
+research-technology-forge-turret-mercenary = Турель наёмников
+research-technology-forge-turret-nt = Турели NanoTrasen
+research-technology-forge-turret-empire = Турели Империи
+research-technology-forge-turret-tsf = Турели ТСФ
+research-technology-forge-turret-ussp = Турели СССП
+research-technology-forge-turret-pdv = Турели ПДВ
+research-technology-forge-turret-vg = Турели Гадюки
 forge-research-technology-advpromax = продвинутый реверс-инженеринг магнитного поля
 forge-research-technology-battlepromax = боевой реверс-инженеринг магнитного поля
 
@@ -56,7 +65,8 @@ research-technology-empire-prototype-stealh = Военно-разведыват�
 research-technology-empire-basic-guns = Базовое вооружение
 research-technology-empire-subsonic = Безгильзовое вооружение
 research-technology-empire-advanced-guns = Продвинутое вооружение
-research-technology-empire-heavy-weapons = Тяжелое вооружение
+research-technology-empire-advanced-energy-guns = Продвинутое энергетическое оружие
+research-technology-empire-heavy-weapons = Эксперементальное вооружение
 research-technology-empire-melee-weapons = Продвинутое вооружение ближнего боя
 
 research-technology-empire-vouchers-t1-germes = Технология сборки "Гермес ES"

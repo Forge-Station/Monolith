@@ -24,7 +24,7 @@ public sealed partial class GatewaySystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private MetaDataSystem _metadata = default!;
-    [Dependency] private StationSystem _stations = default!;
+    [Dependency] private ServerStationSystem _stations = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
 

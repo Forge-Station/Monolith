@@ -24,6 +24,8 @@ namespace Content.Shared.Examine
         [Dependency] private SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected MobStateSystem MobStateSystem = default!;
 
+        [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
+
         public const float MaxRaycastRange = 100;
 
         /// <summary>
@@ -45,8 +47,6 @@ namespace Content.Shared.Examine
         protected const float ExamineDetailsRange = 3f;
 
         protected const float ExamineBlurrinessMult = 2.5f;
-
-        private EntityQuery<GhostComponent> _ghostQuery;
 
         /// <summary>
         ///     Creates a new examine tooltip with arbitrary info.
@@ -211,10 +211,11 @@ namespace Content.Shared.Examine
                     continue;
                 }
 
-                var bBox = o.BoundingBox;
-                bBox = bBox.Translated(_transform.GetWorldPosition(result.HitEntity));
+                if (!TryComp(result.HitEntity, out TransformComponent? xform))
+                    return false;
 
-                if (bBox.Contains(origin.Position) || bBox.Contains(other.Position))
+                if (_occluder.ContainsPoint(o, xform, origin.Position) ||
+                    _occluder.ContainsPoint(o, xform, other.Position))
                 {
                     continue;
                 }

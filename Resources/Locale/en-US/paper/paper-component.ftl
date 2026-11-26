@@ -17,5 +17,10 @@ paper-component-action-stamp-paper-self = You stamp {THE($target)} with {THE($st
 paper-ui-fill-level = {$currentLength}/{$maxLength}
 
 paper-ui-save-button = Save ({$keybind})
+paper-ui-insert-image-button = Insert image
+paper-ui-insert-image-tooltip = Convert a PNG, WebP, JPEG or GIF into a compact paper drawing.
+paper-ui-insert-image-failed = Couldn't read that image.
+paper-ui-insert-image-too-large = That file is too big.
+paper-ui-insert-image-no-space = Not enough space left on this page.
 
 paper-tamper-proof-modified-message = This page was written using tamper-proof ink.

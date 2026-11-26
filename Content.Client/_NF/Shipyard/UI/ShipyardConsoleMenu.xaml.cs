@@ -18,8 +18,8 @@ namespace Content.Client._NF.Shipyard.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShipyardConsoleMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly ILocalizationManager _localization = default!; //Forge-Change: add localization manager
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private ILocalizationManager _localization = default!; //Forge-Change: add localization manager
 
     public event Action<ButtonEventArgs>? OnSellShip;
     public event Action<ButtonEventArgs>? OnOrderApproved;
@@ -187,7 +187,7 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
             {
                 Vessel = prototype,
                 VesselName = { Text = VesselDisplayLocale.GetLocalizedName(_localization, prototype!) }, // Forge-Change: add locale for vessel names
-                VesselDescription = { Text = prototype!.Description }, // Mono
+                VesselDescription = { Text = VesselDisplayLocale.GetLocalizedDescription(_localization, prototype!) }, // Forge-Change: add locale for vessel descriptions
                 Purchase = { Text = Loc.GetString("shipyard-console-purchase-available"), Disabled = !canPurchase },
                 Guidebook = { Disabled = prototype!.GuidebookPage is null, TooltipDelay = 0.2f, ToolTip = VesselDisplayLocale.GetLocalizedDescription(_localization, prototype) }, // Forge-Change: add locale for vessel names
                 Price = { Text = priceText },
@@ -324,11 +324,14 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     public void UpdateState(ShipyardConsoleInterfaceState state)
     {
         BalanceLabel.Text = BankSystemExtensions.ToSpesoString(state.Balance);
-        var shipPrice = 0;
-        if (!state.FreeListings)
-            shipPrice = state.ShipSellValue;
 
-        ShipAppraisalLabel.Text = $"{BankSystemExtensions.ToSpesoString(shipPrice)} ({state.SellRate * 100.0f:F1}%)";
+        // Forge-change-start Voucher Has Cost
+        ShipAppraisalKeyLabel.Text = state.PurchasedWithVoucher
+            ? Loc.GetString("shipyard-console-appraisal-voucher-label")
+            : Loc.GetString("shipyard-console-appraisal-label");
+
+        ShipAppraisalLabel.Text = $"{BankSystemExtensions.ToSpesoString(state.ShipSellValue)} ({state.SellRate * 100.0f:F1}%)";
+        // Forge-change-end
         SellShipButton.Disabled = state.ShipDeedTitle == null;
         UnassignDeedButton.Disabled = state.ShipDeedTitle == null;
 

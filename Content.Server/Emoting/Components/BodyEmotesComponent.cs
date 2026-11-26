@@ -1,6 +1,6 @@
 using Content.Server.Emoting.Systems;
 using Content.Shared.Chat.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Emoting.Components;
 
@@ -14,7 +14,7 @@ public sealed partial class BodyEmotesComponent : Component
     /// <summary>
     ///     Emote sounds prototype id for body emotes.
     /// </summary>
-    [DataField("soundsId", customTypeSerializer: typeof(PrototypeIdSerializer<EmoteSoundsPrototype>))]
+    [DataField("soundsId", customTypeSerializer: typeof(ProtoId<EmoteSoundsPrototype>))]
     public string? SoundsId;
 
     /// <summary>

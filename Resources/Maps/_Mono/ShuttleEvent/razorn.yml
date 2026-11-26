@@ -855,7 +855,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 5.5,-3.5
       parent: 1
-- proto: GyroscopeSecurity
+- proto: GyroscopeADS # Forge-Change
   entities:
   - uid: 105
     components:
@@ -1108,7 +1108,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,1.5
       parent: 1
-- proto: ThrusterLarge
+- proto: ThrusterLargeADS # Forge-Change
   entities:
   - uid: 122
     components:
@@ -1122,7 +1122,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 3.5,-7.5
       parent: 1
-- proto: ThrusterSecurity
+- proto: ThrusterADS # Forge-Change
   entities:
   - uid: 123
     components:

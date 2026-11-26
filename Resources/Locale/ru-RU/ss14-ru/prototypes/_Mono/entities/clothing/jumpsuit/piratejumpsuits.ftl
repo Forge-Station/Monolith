@@ -9,3 +9,6 @@ ent-PirateClothingUniformJumpsuitMilitaryTurtleneckMercenaryCaptain = пират
 ent-PirateClothingUniformJumpsuitMilitaryTurtleneckBlueMercenary = пиратская синяя военная водолазка наёмника
 ent-PirateClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryMedic = пиратская синяя военная водолазка медика-наёмника
 ent-PirateClothingUniformJumpskirtBlackElegantDress = пиратская синяя военная водолазка медика-наёмника
+
+ent-PirateClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryCaptain = { ent-ClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryCaptain }
+    .desc = { ent-ClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryCaptain.desc }

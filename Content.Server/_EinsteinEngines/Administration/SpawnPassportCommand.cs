@@ -13,7 +13,7 @@ namespace Content.Server.Administration.Toolshed;
 public sealed class SpawnPassportCommand : ToolshedCommand
 {
     private SharedPassportSystem? _passportSystem;
-    private GameTicker? _ticker;
+    private ServerGameTicker? _ticker;
     private MindSystem? _mindSystem;
     private SharedJobSystem? _jobSystem;
 
@@ -21,7 +21,7 @@ public sealed class SpawnPassportCommand : ToolshedCommand
     public IEnumerable<EntityUid> SpawnPassport([PipedArgument] IEnumerable<EntityUid> input)
     {
         _passportSystem ??= GetSys<SharedPassportSystem>();
-        _ticker ??= GetSys<GameTicker>();
+        _ticker ??= GetSys<ServerGameTicker>();
         _mindSystem ??= GetSys<MindSystem>();
         _jobSystem ??= GetSys<SharedJobSystem>();
 
@@ -40,7 +40,7 @@ public sealed class SpawnPassportCommand : ToolshedCommand
     public void SpawnPassport(IInvocationContext ctx)
     {
         _passportSystem ??= GetSys<SharedPassportSystem>();
-        _ticker ??= GetSys<GameTicker>();
+        _ticker ??= GetSys<ServerGameTicker>();
         _mindSystem ??= GetSys<MindSystem>();
         _jobSystem ??= GetSys<SharedJobSystem>();
 

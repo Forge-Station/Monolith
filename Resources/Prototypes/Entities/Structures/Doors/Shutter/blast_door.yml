@@ -60,6 +60,10 @@
   - type: ShipRepairable
     repairTime: 6
     repairCost: 8
+  - type: IconSmooth
+    key: doors
+  - type: PlacementReplacement
+    key: blastdoors
 
 - type: entity
   id: BlastDoorOpen
@@ -144,7 +148,6 @@
         Blunt: 25 # yowch
   - type: IconSmooth
     key: chitin
-    mode: NoSprite
 
 - type: entity
   parent: BlastDoorXeno
@@ -204,3 +207,43 @@
     node: frame1
   placement:
     mode: SnapgridCenter
+
+# Xenoborg Blastdoors
+- type: entity
+  parent: BlastDoor
+  id: BlastDoorXenoborg
+  name: xenoborg blast door
+  description: Don't lose a head!
+  components:
+  - type: Sprite
+    sprite: Structures/Doors/Shutters/xenoborg_blastdoor.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    closeTimeOne: 0.4
+    closeTimeTwo: 0.7
+    openTimeOne: 0.4
+    openTimeTwo: 0.7
+    openingAnimationTime: 1.1
+    closingAnimationTime: 1.0
+    canPry: false
+    crushDamage:
+      types:
+        Blunt: 25 # yowch
+
+- type: entity
+  parent: BlastDoorXenoborg
+  id: BlastDoorXenoborgOpen
+  suffix: Open
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false

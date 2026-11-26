@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Holosign
 {
@@ -7,7 +7,7 @@ namespace Content.Server.Holosign
     public sealed partial class HolosignProjectorComponent : Component
     {
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("signProto", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("signProto", customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
         public string SignProto = "HolosignWetFloor";
 
         /// <summary>

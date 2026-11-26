@@ -1,0 +1,26 @@
+<local:PassportWindow xmlns="https://spacestation14.io"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:Content.Client._EE.Contractors.UI"
+                         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                         xmlns:passport="clr-namespace:Content.Client._Forge.Contractors.UI"
+                         x:Class="Content.Client._EE.Contractors.UI.PassportWindow"
+                         MouseFilter="Stop"
+                         MinSize="720 540"
+                         SetSize="740 560">
+    <PanelContainer Name="CoverPanel">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#3B1F1A" BorderColor="#C9A227" BorderThickness="3"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="8 6 8 8">
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 6">
+                <Control HorizontalExpand="True"/>
+                <PanelContainer StyleClasses="AngleRect" VerticalAlignment="Center">
+                    <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"/>
+                </PanelContainer>
+            </BoxContainer>
+
+            <passport:PassportDocumentControl Name="Document" Access="Public" VerticalExpand="True" HorizontalExpand="True"/>
+        </BoxContainer>
+    </PanelContainer>
+</local:PassportWindow>

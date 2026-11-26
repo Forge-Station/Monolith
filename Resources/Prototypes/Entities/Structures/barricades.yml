@@ -10,6 +10,10 @@
   name: wooden barricade
   abstract: true
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactWood
   - type: InteractionOutline
   - type: Sprite
     sprite: Structures/barricades.rsi
@@ -55,6 +59,7 @@
   - type: Tag
     tags:
     - Wooden
+    - NoGridGodmode # Forge-change
   - type: Flammable
     fireSpread: true
     damage:
@@ -106,6 +111,7 @@
   - type: Tag
     tags:
     - Wooden
+    - NoGridGodmode # Forge-change
   - type: Flammable
     fireSpread: true
     damage:

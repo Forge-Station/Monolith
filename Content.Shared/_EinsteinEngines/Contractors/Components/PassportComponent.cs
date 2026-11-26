@@ -1,21 +1,26 @@
 using System; // Forge-Change
 using Content.Shared.Preferences;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._EE.Contractors.Components;
 
-[RegisterComponent, NetworkedComponent]
+// Forge-change-start: networked booklet state for in-hand passport UI.
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)]
 public sealed partial class PassportComponent : Component
 {
-    public bool IsClosed;
+    /// <summary>
+    /// True while the booklet is closed. Opening the UI opens the booklet;
+    /// closing the last UI session closes it again.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsClosed = true;
 
     /// <summary>
     /// Until when toggling open/closed is blocked (anti-spam + prediction correctness).
     /// </summary>
-    /// Forge-Change
-    public TimeSpan ToggleCooldownEnd;
+    public TimeSpan ToggleCooldownEnd; // Forge-Change
 
     [ViewVariables]
-    public HumanoidCharacterProfile OwnerProfile;
+    public HumanoidCharacterProfile? OwnerProfile;
 }
+// Forge-change-end

@@ -7,7 +7,7 @@
 # Gives ability to understand TauCetiBasic.
 - type: entity
   id: BasicGalaticCommonTranslatorImplanter
-  parent: BaseTranslatorImplanter
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: basic common translator implanter
   components:
   - type: Implanter
@@ -16,7 +16,7 @@
 # Gives both ability to speak and understand TauCetiBasic.
 - type: entity
   id: AdvancedGalaticCommonTranslatorImplanter
-  parent: BaseTranslatorImplanter
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: advanced common translator implanter
   components:
   - type: Implanter
@@ -24,7 +24,7 @@
 
 - type: entity
   id: BubblishTranslatorImplanter
-  parent: BaseTranslatorImplanter
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: bubblish translator implant
   components:
   - type: Implanter
@@ -32,7 +32,7 @@
 
 - type: entity
   id: NekomimeticTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: nekomimetic translator implant
   components:
   - type: Implanter
@@ -40,7 +40,7 @@
 
 - type: entity
   id: DraconicTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: unathi translator implant
   components:
   - type: Implanter
@@ -56,7 +56,7 @@
 
 - type: entity
   id: CanilunztTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: canilunzt translator implant
   components:
   - type: Implanter
@@ -80,7 +80,7 @@
 
 - type: entity
   id: RootSpeakTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: root-speak translator implant
   components:
   - type: Implanter
@@ -88,7 +88,7 @@
 
 - type: entity
   id: MofficTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: moffic translator implant
   components:
   - type: Implanter
@@ -96,7 +96,7 @@
 
 - type: entity
   id: ValyrianStandardTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: valyrian standard translator implant
   components:
   - type: Implanter
@@ -112,7 +112,7 @@
 
 - type: entity
   id: ChittinTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: chittin translator implant
   components:
   - type: Implanter
@@ -136,8 +136,18 @@
 
 - type: entity
   id: NewKinPidginTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: ka'rakk translator implant
   components:
   - type: Implanter
     implant: NewKinPidginTranslatorImplant
+
+# Forge-Change-Start
+- type: entity
+  id: CadrisTranslatorImplanter
+  parent: [ BaseTranslatorImplanter ]
+  name: cadris translator implant
+  components:
+  - type: Implanter
+    implant: CadrisTranslatorImplant
+# Forge-Change-En

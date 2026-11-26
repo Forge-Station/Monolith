@@ -4,3 +4,8 @@ ent-ComputerShipyardSHM = консоль верфи SHM
     .desc = Используется для передачи кораблей из резервов сотрудников SHM.
 ent-ComputerShipyardDrakeIndustries = консоль верфи Drake Industries
     .desc = Используется аффилированными с Drake Industries для покупки специализированных грузовых шаттлов.
+ent-ComputerShipyardViper = консоль верфи «Viper»
+    .desc = Используется для импорта судов от различных производителей.
+
+ent-ComputerShipyardMMC = консоль верфи ММС
+    .desc = Используется для получения судов из резервов сотрудников ММС.

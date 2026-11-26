@@ -10,13 +10,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.DataMiner;
 
-public sealed class DataMinerSystem : EntitySystem
+public sealed partial class DataMinerSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private SharedToolSystem _tool = default!;
 
-    [ValidatePrototypeId<StackPrototype>]
     private const string Credit = "CreditCounterfeit";
 
     public override void Initialize()

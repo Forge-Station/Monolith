@@ -459,10 +459,11 @@ public abstract partial class SharedBuckleSystem
 
     private void Unbuckle(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap, EntityUid? user)
     {
+        // Forge-Change: raw Entity<T> ToString dumped the component type into the admin log.
         if (user == buckle.Owner)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled themselves from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user.Value):player} unbuckled themselves from {ToPrettyString(strap.Owner)}");
         else if (user != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled {buckle} from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user.Value):player} unbuckled {ToPrettyString(buckle.Owner)} from {ToPrettyString(strap.Owner)}");
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 

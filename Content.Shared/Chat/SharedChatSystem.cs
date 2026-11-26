@@ -30,15 +30,12 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units /// Forge-Change
     public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units /// Forge-Change
 
-    [ValidatePrototypeId<RadioChannelPrototype>]
     public const string CommonChannel = "Common";
 
     public static string DefaultChannelPrefix = $"{RadioChannelPrefix}{DefaultChannelKey}";
 
-    [ValidatePrototypeId<SpeechVerbPrototype>]
     public const string DefaultSpeechVerb = "Default";
 
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
     /// <summary>
@@ -52,7 +49,7 @@ public abstract partial class SharedChatSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        DebugTools.Assert(_prototypeManager.HasIndex<RadioChannelPrototype>(CommonChannel));
+        DebugTools.Assert(ProtoMan.HasIndex<RadioChannelPrototype>(CommonChannel));
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
         CacheRadios();
         CacheCollectiveMinds(); // Goobstation - Starlight collective mind port
@@ -70,15 +67,15 @@ public abstract partial class SharedChatSystem : EntitySystem
 
     private void CacheRadios()
     {
-        _keyCodes = _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>()
+        _keyCodes = ProtoMan.EnumeratePrototypes<RadioChannelPrototype>()
             .ToFrozenDictionary(x => x.KeyCode);
     }
 
     // Goobstation - Starlight collective mind port
     private void CacheCollectiveMinds()
     {
-        _prototypeManager.PrototypesReloaded -= OnPrototypeReload;
-        _mindKeyCodes = _prototypeManager.EnumeratePrototypes<CollectiveMindPrototype>()
+        ProtoMan.PrototypesReloaded -= OnPrototypeReload;
+        _mindKeyCodes = ProtoMan.EnumeratePrototypes<CollectiveMindPrototype>()
             .ToFrozenDictionary(x => x.KeyCode);
     }
 
@@ -89,13 +86,13 @@ public abstract partial class SharedChatSystem : EntitySystem
     public SpeechVerbPrototype GetSpeechVerb(EntityUid source, string message, SpeechComponent? speech = null)
     {
         if (!Resolve(source, ref speech, false))
-            return _prototypeManager.Index<SpeechVerbPrototype>(DefaultSpeechVerb);
+            return ProtoMan.Index<SpeechVerbPrototype>(DefaultSpeechVerb);
 
         // check for a suffix-applicable speech verb
         SpeechVerbPrototype? current = null;
         foreach (var (str, id) in speech.SuffixSpeechVerbs)
         {
-            var proto = _prototypeManager.Index<SpeechVerbPrototype>(id);
+            var proto = ProtoMan.Index<SpeechVerbPrototype>(id);
             if (message.EndsWith(Loc.GetString(str)) && proto.Priority >= (current?.Priority ?? 0))
             {
                 current = proto;
@@ -103,7 +100,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         }
 
         // if no applicable suffix verb return the normal one used by the entity
-        return current ?? _prototypeManager.Index<SpeechVerbPrototype>(speech.SpeechVerb);
+        return current ?? ProtoMan.Index<SpeechVerbPrototype>(speech.SpeechVerb);
     }
 
     /// <summary>
@@ -161,7 +158,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
+            channel = ProtoMan.Index<RadioChannelPrototype>(CommonChannel);
             return true;
         }
 
@@ -186,7 +183,7 @@ public abstract partial class SharedChatSystem : EntitySystem
             RaiseLocalEvent(source, ev);
 
             if (ev.Channel != null)
-                _prototypeManager.TryIndex(ev.Channel, out channel);
+                ProtoMan.TryIndex(ev.Channel, out channel);
             return true;
         }
 
@@ -239,7 +236,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         else if (defaultChannel != null)
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = _prototypeManager.Index<CollectiveMindPrototype>(defaultChannel.Value);
+            channel = ProtoMan.Index<CollectiveMindPrototype>(defaultChannel.Value);
             return true;
         }
 

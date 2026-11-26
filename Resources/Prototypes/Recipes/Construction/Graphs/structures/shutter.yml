@@ -45,7 +45,7 @@
               anchored: true
           steps:
             - component: DoorElectronics
-              name: door electronics
+              name: construction-required-door-electronics # Forge-change
               icon:
                 sprite: "Objects/Misc/module.rsi"
                 state: "door_electronics"

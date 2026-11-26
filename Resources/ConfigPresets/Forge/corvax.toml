@@ -105,6 +105,7 @@ server_ban_erase_player = false
 [nf14.respawn]
 enabled = true
 time = 300.0
+ghost_role_time = 1800.0
 
 [nf14.uncryo]
 enabled = true

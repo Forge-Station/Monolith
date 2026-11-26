@@ -1,0 +1,10 @@
+station-radio-frequency-listen-title = Station radio
+station-radio-frequency-music-title = Radio rig
+station-radio-frequency-voice-title = Radio server
+station-radio-frequency-listen-label = Listening frequency
+station-radio-frequency-music-label = Music broadcast frequency
+station-radio-frequency-voice-label = Voice broadcast frequency
+station-radio-frequency-receiver-on = Radio on
+station-radio-frequency-receiver-off = Radio off
+station-radio-frequency-examine-listen = Tuned to frequency {$frequency}.
+station-radio-frequency-examine-music = Broadcasting music on frequency {$frequency}.

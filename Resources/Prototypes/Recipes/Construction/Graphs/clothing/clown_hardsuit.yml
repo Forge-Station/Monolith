@@ -10,37 +10,37 @@
               amount: 5
               doAfter: 1
             - tag: SuitEVA
-              name: an EVA suit
+              name: construction-required-eva-suit # Forge-change
               icon:
                 sprite: Clothing/OuterClothing/Suits/eva.rsi
                 state: icon
               doAfter: 1
             - tag: HelmetEVA
-              name: an EVA helmet
+              name: construction-required-eva-helmet # Forge-change
               icon:
                 sprite: Clothing/Head/Helmets/eva.rsi
                 state: icon
               doAfter: 1
             - tag: CrayonPurple
-              name: purple crayon
+              name: construction-required-purple-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: purple
               doAfter: 1
             - tag: CrayonRed
-              name: red crayon
+              name: construction-required-red-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: red
               doAfter: 1
             - tag: CrayonYellow
-              name: yellow crayon
+              name: construction-required-yellow-crayon # Forge-change
               icon:
                 sprite: Objects/Fun/crayons.rsi
                 state: yellow
               doAfter: 1
             - tag: ClownRecorder
-              name: clown recorder
+              name: construction-required-clown-recorder # Forge-change
               icon:
                 sprite: Objects/Fun/clownrecorder.rsi
                 state: icon

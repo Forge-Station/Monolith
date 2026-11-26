@@ -1,4 +1,5 @@
 using Content.Shared.Chemistry.Components;
+using Content.Shared._Forge.Botany;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Audio;
 
@@ -7,6 +8,8 @@ namespace Content.Server.Botany.Components;
 [RegisterComponent]
 public sealed partial class PlantHolderComponent : Component
 {
+    public const string HarvestContainerSlotId = "harvestContainer"; // Forge-Change
+
     /// <summary>
     /// Game time for the next plant reagent update.
     /// </summary>
@@ -52,6 +55,14 @@ public sealed partial class PlantHolderComponent : Component
     /// </summary>
     [DataField]
     public bool DrawWarnings = false;
+
+    // Forge-Change-start
+    /// <summary>
+    ///     Set after this plant's data has been saved to a hydroponics console journal.
+    /// </summary>
+    [DataField]
+    public bool CultivarArchived;
+    // Forge-Change-end
 
     [DataField]
     public float WaterLevel = 100f;
@@ -121,10 +132,17 @@ public sealed partial class PlantHolderComponent : Component
     public bool ImproperPressure;
 
     /// <summary>
-    /// Not currently used.
+    /// True if the plant is losing health because tray light mode does not match IdealLight.
     /// </summary>
     [DataField]
     public bool ImproperLight;
+
+    /// <summary>
+    /// Forced day/shade setting used instead of a real lux sample.
+    /// Ambient matches typical station lighting (~7 cd).
+    /// </summary>
+    [DataField]
+    public HydroponicsLightMode LightMode;
 
     /// <summary>
     /// Set to true to force a plant update (visuals, component, etc.) regardless of the current

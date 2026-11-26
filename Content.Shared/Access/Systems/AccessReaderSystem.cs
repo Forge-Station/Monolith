@@ -23,12 +23,11 @@ namespace Content.Shared.Access.Systems;
 
 public sealed partial class AccessReaderSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private EmagSystem _emag = default!;
     [Dependency] private TagSystem _tag = default!;
-    [Dependency] private SharedGameTicker _gameTicker = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SharedStationRecordsSystem _recordsSystem = default!;
@@ -73,12 +72,12 @@ public sealed partial class AccessReaderSystem : EntitySystem
         component.AccessLogLimit = state.AccessLogLimit;
     }
 
-    private void OnLinkAttempt(EntityUid uid, AccessReaderComponent component, LinkAttemptEvent args)
+    private void OnLinkAttempt(EntityUid uid, AccessReaderComponent component, ref LinkAttemptEvent args)
     {
         if (args.User == null) // AutoLink (and presumably future external linkers) have no user.
             return;
         if (!IsAllowed(args.User.Value, uid, component))
-            args.Cancel();
+            args.Cancelled = true;
     }
 
     // Frontier: TODO - cache for demag?
@@ -406,7 +405,7 @@ public sealed partial class AccessReaderSystem : EntitySystem
     private bool FindAccessTagsItem(EntityUid uid, out HashSet<ProtoId<AccessLevelPrototype>> tags)
     {
         tags = new();
-        var ev = new GetAccessTagsEvent(tags, _prototype);
+        var ev = new GetAccessTagsEvent(tags, ProtoMan);
         RaiseLocalEvent(uid, ref ev);
 
         return tags.Count != 0;

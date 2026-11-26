@@ -24,7 +24,8 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
@@ -55,7 +56,6 @@ namespace Content.Shared.Interaction
     public abstract partial class SharedInteractionSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
-        [Dependency] private IMapManager _mapManager = default!;
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private RotateToFaceSystem _rotateToFaceSystem = default!;
@@ -77,16 +77,16 @@ namespace Content.Shared.Interaction
 
         [Dependency] private INetManager _net = default!; // Mono
 
-        private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery;
-        private EntityQuery<FixturesComponent> _fixtureQuery;
-        private EntityQuery<ItemComponent> _itemQuery;
-        private EntityQuery<PhysicsComponent> _physicsQuery;
-        private EntityQuery<HandsComponent> _handsQuery;
-        private EntityQuery<InteractionRelayComponent> _relayQuery;
-        private EntityQuery<CombatModeComponent> _combatQuery;
-        private EntityQuery<WallMountComponent> _wallMountQuery;
-        private EntityQuery<UseDelayComponent> _delayQuery;
-        private EntityQuery<ActivatableUIComponent> _uiQuery;
+        [Dependency] private readonly EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
+        [Dependency] private readonly EntityQuery<FixturesComponent> _fixtureQuery = default!;
+        [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+        [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+        [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
+        [Dependency] private readonly EntityQuery<InteractionRelayComponent> _relayQuery = default!;
+        [Dependency] private readonly EntityQuery<CombatModeComponent> _combatQuery = default!;
+        [Dependency] private readonly EntityQuery<WallMountComponent> _wallMountQuery = default!;
+        [Dependency] private readonly EntityQuery<UseDelayComponent> _delayQuery = default!;
+        [Dependency] private readonly EntityQuery<ActivatableUIComponent> _uiQuery = default!;
 
         private const CollisionGroup InRangeUnobstructedMask = CollisionGroup.Impassable | CollisionGroup.InteractImpassable;
 
@@ -102,17 +102,6 @@ namespace Content.Shared.Interaction
 
         public override void Initialize()
         {
-            _ignoreUiRangeQuery = GetEntityQuery<IgnoreUIRangeComponent>();
-            _fixtureQuery = GetEntityQuery<FixturesComponent>();
-            _itemQuery = GetEntityQuery<ItemComponent>();
-            _physicsQuery = GetEntityQuery<PhysicsComponent>();
-            _handsQuery = GetEntityQuery<HandsComponent>();
-            _relayQuery = GetEntityQuery<InteractionRelayComponent>();
-            _combatQuery = GetEntityQuery<CombatModeComponent>();
-            _wallMountQuery = GetEntityQuery<WallMountComponent>();
-            _delayQuery = GetEntityQuery<UseDelayComponent>();
-            _uiQuery = GetEntityQuery<ActivatableUIComponent>();
-
             SubscribeLocalEvent<BoundUserInterfaceCheckRangeEvent>(HandleUserInterfaceRangeCheck);
             SubscribeLocalEvent<BoundUserInterfaceMessageAttempt>(OnBoundInterfaceInteractAttempt);
 
@@ -745,7 +734,9 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            if (!Resolve(other, ref other.Comp))
+            // Forge-Change: a deleted or not-yet-replicated target is a failed range check, not an error.
+            // Resolve() logs a full stack trace by default, and heavy attacks send one of these per swing.
+            if (!Resolve(other, ref other.Comp, false))
                 return false;
 
             var ev = new InRangeOverrideEvent(origin, other);
@@ -825,7 +816,7 @@ namespace Content.Shared.Interaction
                 fixtureA.FixtureCount > 0 &&
                 _fixtureQuery.TryComp(other, out var fixtureB) &&
                 fixtureB.FixtureCount > 0 &&
-                Resolve(origin, ref origin.Comp))
+                Resolve(origin, ref origin.Comp, false)) // Forge-Change
             {
                 var (worldPosA, worldRotA) = _transform.GetWorldPositionRotation(origin.Comp);
                 var xfA = new Transform(worldPosA, worldRotA);
@@ -871,9 +862,17 @@ namespace Content.Shared.Interaction
             // No fixtures, e.g. wallmounts.
             else
             {
-                originPos = _transform.GetMapCoordinates(origin, origin);
-                var otherParent = (other.Comp ?? Transform(other)).ParentUid;
-                targetRot = otherParent.IsValid() ? Transform(otherParent).LocalRotation + otherAngle : otherAngle;
+                // Forge-Change: a missing transform here used to throw and log once per swing.
+                var originXform = origin.Comp;
+                var otherXform = other.Comp;
+                if (!Resolve(origin, ref originXform, false) || !Resolve(other, ref otherXform, false))
+                    return false;
+
+                originPos = _transform.GetMapCoordinates(originXform);
+                var otherParent = otherXform.ParentUid;
+                targetRot = otherParent.IsValid() && TryComp(otherParent, out TransformComponent? parentXform)
+                    ? parentXform.LocalRotation + otherAngle
+                    : otherAngle;
             }
 
             // Do a raycast to check if relevant
@@ -944,7 +943,7 @@ namespace Content.Shared.Interaction
                     ignoreAnchored = angleDelta < wallMount.Arc / 2 || Math.Tau - angleDelta < wallMount.Arc / 2;
                 }
 
-                if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+                if (ignoreAnchored && _map.TryFindGridAt(targetCoords, out var gridUid, out var grid))
                     ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
             }
 
@@ -1223,7 +1222,7 @@ namespace Content.Shared.Interaction
                     _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} activated {ToPrettyString(used):used}");
 
                 if (delayComponent != null)
-                    _useDelay.TryResetDelay(used, component: delayComponent);
+                    _useDelay.TryResetDelay((used, delayComponent));
                 return true;
             }
 
@@ -1236,7 +1235,7 @@ namespace Content.Shared.Interaction
             DoContactInteraction(user, used);
             // Still need to call this even without checkUseDelay in case this gets relayed from Activate.
             if (delayComponent != null)
-                _useDelay.TryResetDelay(used, component: delayComponent);
+                _useDelay.TryResetDelay((used, delayComponent));
 
             _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} activated {ToPrettyString(used):used}");
             return true;

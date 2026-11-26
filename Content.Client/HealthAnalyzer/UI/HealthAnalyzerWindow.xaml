@@ -337,6 +337,36 @@
                     </BoxContainer>
                 </PanelContainer>
             </PanelContainer>
+
+            <PanelContainer Name="GenesDivider"
+                            Visible="False"
+                            StyleClasses="LowDivider"/>
+
+            <PanelContainer Name="GenesPanel"
+                            Visible="False"
+                            VerticalExpand="False"
+                            HorizontalExpand="True"
+                            Margin="4 4 4 4"
+                            SetHeight="120">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
+                </PanelContainer.PanelOverride>
+                <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical"
+                                  Margin="5 5">
+                        <Label Text="{Loc 'health-analyzer-window-entity-genes-text'}"
+                               Margin="0 0 0 4"/>
+                        <ScrollContainer ReturnMeasure="True"
+                                         VerticalExpand="True">
+                            <BoxContainer Name="GenesContainer"
+                                          Orientation="Vertical"/>
+                        </ScrollContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </PanelContainer>
             <!-- Forge-Change-End -->
 
         </BoxContainer>

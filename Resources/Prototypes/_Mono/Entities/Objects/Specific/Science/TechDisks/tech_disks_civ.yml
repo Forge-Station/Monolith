@@ -2,7 +2,7 @@
 # Normal civ r&d recipes
 
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskBluespaceBags
   name: pre-fracture bluespace storage tech disk
   description: A disk capable of adding advanced bluespace storage to a server's recipes.
@@ -167,7 +167,7 @@
     - MachineShieldMS100Circuitboard
 
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskSpeedBoots
   name: pre-fracture speed manipulation tech disk
   description: A disk capable of adding speed boots to a server's recipes.
@@ -226,6 +226,27 @@
     - MachineShieldMS500Circuitboard
     - MachineShieldMS250Circuitboard
     - MachineShieldMS100Circuitboard
+
+# Forge — bluespace boarding scrambler. Not on the open Experimental tree; rare fracture loot.
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskBoardingScrambler
+  name: pre-fracture bluespace scrambler tech disk
+  description: A precursor disk that adds the bluespace boarding scrambler board and flatpack to a server's recipes. Scarcer than the shuttle shield disk.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#ff6868"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - BoardingBluespaceScramblerMachineCircuitboard
+    - BoardingBluespaceScramblerFlatpack
 
 # Forge — civilian FSG tier 3 (not on CivilianServices tree; loot / trade)
 - type: entity
@@ -314,7 +335,7 @@
 
 # Forge-change
 - type: entity
-  parent: TechDiskBase
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: TechDiskTierBS4
   name: BS parts tech disk
   description: A disk capable of adding BS parts to a server's recipes.
@@ -333,3 +354,23 @@
     - BluespaceMatterBinStockPart
     - QuadraticCapacitorStockPart
     - FemtoManipulatorStockPart
+
+# Forge-change
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  id: TechDiskCloaking
+  name: disc with cloaking technology ADSCDM "Weeping Angel"
+  description: A disk containing a cloaking device ADSCDM "Weeping Angel"
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#d4d4d4"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineCloakingWeepingAngelCircuitboard

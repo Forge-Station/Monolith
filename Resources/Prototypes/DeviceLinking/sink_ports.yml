@@ -79,6 +79,16 @@
   description: signal-port-description-med-scanner-receiver
 
 - type: sinkPort
+  id: GeneticsScannerReceiver
+  name: signal-port-name-genetics-scanner-receiver
+  description: signal-port-description-genetics-scanner-receiver
+
+- type: sinkPort
+  id: GeneticsServerReceiver
+  name: signal-port-name-genetics-server-receiver
+  description: signal-port-description-genetics-server-receiver
+
+- type: sinkPort
   id: ArtifactAnalyzerReceiver
   name: signal-port-name-artifact-analyzer-receiver
   description: signal-port-description-artifact-analyzer-receiver

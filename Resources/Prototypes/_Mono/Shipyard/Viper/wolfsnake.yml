@@ -10,16 +10,15 @@
   name: VG Wolfsnake
   description: A heavy duty artillery platform outsourced to GS. Comes with a massive cannon from the corporate wars.
 #  limit: 3 --- Not sure. Will await review.
-  price: 161093
+  price: 196620
   purchasable: false # Voucher only
   category: Large
-  group: Viper
-  access: Viper
+  group: Shipyard
+  access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/Viper/wolfsnake.yml
   guidebookPage: Null
   class:
-  - Scrapyard
-  - Pursuit
+  - Fighter # Forge changes
   engine:
   - Bananium
 

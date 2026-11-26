@@ -22,7 +22,7 @@ public sealed partial class MarketSystem: SharedMarketSystem
     [Dependency] private StackSystem _stackSystem = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     public override void Initialize()
     {

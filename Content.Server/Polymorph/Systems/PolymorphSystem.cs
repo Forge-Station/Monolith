@@ -31,7 +31,7 @@ public sealed partial class PolymorphSystem : EntitySystem
 {
     [Dependency] private ISerializationManager _serialization = default!; // Goobstation
     [Dependency] private IComponentFactory _compFact = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private ActionsSystem _actions = default!;
@@ -345,7 +345,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 _hands.TryPickupAnyHand(parent, held, checkActionBlocker: false);
             }
         }
-        else if (component.Configuration.Inventory == PolymorphInventoryChange.Drop)
+        else
         {
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {

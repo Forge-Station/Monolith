@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CargoTelepad
   parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, ConstructibleMachine, BaseMachinePowered] # Frontier
   name: cargo telepad
@@ -35,7 +35,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
-#  - type: WirelessNetworkConnection # Frontier
+#  - type: WirelessNetwork # Frontier
 #    range: 200 # Frontier
   - type: DeviceLinkSink
     ports:

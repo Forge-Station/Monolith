@@ -1,40 +1,216 @@
 ent-BoxFolderSr = папка ПФ
-    .desc = Папка, наполненная шаблонами документов.
+    .desc = Папка с шаблонами служебных документов.
     .suffix = Формы
-ent-PaperWrittenFrontierFormEmployment = Трудовой контракт
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormEmployeePayHistory = История выплат сотрудника
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormFundRequisition = Запрос на выделение средств
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormAuthorization = Разрешение на работу с блюспейс-угрозами
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormShuttleTitleChange = Изменение прав собственности на шаттл
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormShuttleDerelict = Декларация о спасении имущества
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormContrabandAmnesty = Соглашение об амнистии контрабанды
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormContrabandTurnover = Квитанция о передаче контрабанды
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
-ent-PaperWrittenFrontierFormContrabandPermit = Разрешение на контрабанду класса 2
-    .suffix = Бумажные шаблоны
-    .desc = { ent-Paper.desc }
 
-ent-PaperWrittenFrontierContrabandPermit = employment contract
-ent-PaperWrittenFrontierAuthorization = employment contract
-ent-PaperWrittenFrontierFundRequisition = employment contract
-ent-PaperWrittenFrontierShuttleTitleChange = employment contract
-ent-PaperWrittenFrontierContrabandAmnesty = employment contract
-ent-PaperWrittenFrontierShuttleDerelict = employment contract
-ent-PaperWrittenFrontierEmployeePayHistory = PaperWrittenFrontierEmployeePayHistory
-ent-PaperWrittenFrontierEmployment = PaperWrittenFrontierEmployment
-ent-PaperWrittenFrontierContrabandTurnover = employment contract
+ent-PaperWrittenFrontierEmployment = трудовой договор
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierEmployment = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Трудовой договор[/head]
+         
+        { "[" }bold]Имя:[/bold]
+        { "[" }bold]Вид:[/bold]
+        { "[" }bold]Должность:[/bold]
+        { "[" }bold]Должностные обязанности:[/bold]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+         
+        { "[" }bold]Почасовая оплата:[/bold]
+         
+        { "[" }bold]Время смены:[/bold]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или Смотрителя Центрального «Колосса».[/color]
+
+ent-PaperWrittenFrontierEmployeePayHistory = история выплат сотруднику
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierEmployeePayHistory = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]История выплат сотруднику[/head]
+         
+        { "[" }bold]Имя:[/bold]
+        { "[" }bold]Должность:[/bold]
+        { "[" }bold]Почасовая оплата:[/bold]
+        { "[" }bold]История выплат (время смены, полученная сумма):[/bold]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати Командования Фронтира: полковника или Смотрителя Центрального «Колосса».[/color]
+
+ent-PaperWrittenFrontierFundRequisition = заявка на выделение средств
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierFundRequisition = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Заявка на выделение средств[/head]
+         
+        { "[" }bold]Имя:[/bold]
+        { "[" }bold]Сумма:[/bold]
+        { "[" }bold]Основание:[/bold]
+        { "[" }bold]Время смены:[/bold]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписи и печати Командования Фронтира: полковника или Смотрителя Центрального «Колосса».[/color]
+
+ent-PaperWrittenFrontierAuthorization = разрешение на борьбу с блюспейс-угрозами
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierAuthorization = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Разрешение на борьбу с блюспейс-угрозами[/head]
+         
+        { "[" }color=#660000]Эта форма может быть выдана только при отсутствии исполняющего обязанности полковника либо с его одобрения.[/color]
+         
+        { "[" }bold]Капитан судна:[/bold]
+        { "[" }bold]IFF судна:[/bold]
+        { "[" }bold]Время смены:[/bold]
+         
+        { "[" }bold]Представители Командования Фронтира, выдавшие разрешение:[/bold]
+            { "[" }bullet]XXXXXXXX, представитель колоний
+            { "[" }bullet]XXXXXXXX, полковник
+         
+        Настоящий документ разрешает указанным выше судну и его капитану оказывать содействие КМП ТСФ и властям Фронтира в нейтрализации враждебных блюспейс-угроз. К таким угрозам относятся, помимо прочего:
+            { "[" }bullet] суда культистов
+            { "[" }bullet] суда Синдиката
+            { "[" }bullet] суда Федерации волшебников
+            { "[" }bullet] суда Arcadia Industries
+         
+        Настоящий документ НЕ наделяет уполномоченную сторону полицейскими полномочиями. Уполномоченная сторона не получает особого права арестовывать, задерживать или привлекать к ответственности лиц, связанных с NanoTrasen.
+         
+        { "[" }bold]Любая контрабанда, изъятая во время операций на борту враждебных судов, должна быть передана КМП ТСФ либо Смотрителю Центрального «Колосса» за денежное вознаграждение. Отказ от передачи контрабанды прекращает действие соглашения и может повлечь уголовное преследование уполномоченной стороны.[/bold]
+         
+        Уполномоченная сторона обязана хранить копию документа и предъявлять её для проверки. Для сокращения потерь она должна поддерживать связь с командованием КМП ТСФ и (или) Смотрителем Центрального «Колосса».
+         
+        Перед вступлением в бой с враждебным судном уполномоченная сторона обязана выполнить указания КМП ТСФ по сбору сил и иной подготовке к абордажу.
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или Смотрителя Центрального «Колосса».[/color]
+
+ent-PaperWrittenFrontierShuttleTitleChange = заявление о переименовании судна
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierShuttleTitleChange = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Переименование судна[/head]
+         
+        { "[" }bold]Имя капитана:[/bold]
+        { "[" }bold]Прежнее название судна:[/bold]
+        { "[" }bold]Новое название судна:[/bold]
+        { "[" }bold]Время смены:[/bold]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или представителя колоний.[/color]
+
+ent-PaperWrittenFrontierShuttleDerelict = декларация о признании судна бесхозным
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierShuttleDerelict = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Декларация о признании судна бесхозным[/head]
+         
+        { "[" }bold]IFF судна:[/bold] [color=#2200BD][/color]
+        { "[" }bold]Время первого вызова:[/bold] [color=#2200BD][/color]
+        { "[" }bold]Время смены:[/bold] [color=#2200BD][/color]
+         
+        Настоящим диспетчер движения Фронтира официально объявляет указанное выше судно покинутым капитаном и признаёт его бесхозным имуществом, доступным для утилизации. Судно не отвечает ни по радио, ни по факсу более двадцати (20) минут.
+         
+        В соответствии с §9.3 Космического закона представитель станции Фронтира или КМП ТСФ отбуксирует судно не менее чем на триста (300) метров от станции Фронтира. После этого любое другое судно, действующее в секторе, вправе разобрать его на утилизацию.
+         
+        Ни администрация ТСФ, ни корпорация NanoTrasen, ни Союз освоения Фронтира, ни какая-либо иная организация не возмещают связанным с этим судном лицам понесённые убытки.
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или представителя колоний.[/color]
+
+ent-PaperWrittenFrontierContrabandAmnesty = соглашение об амнистии за контрабанду
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierContrabandAmnesty = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Соглашение об амнистии за контрабанду[/head]
+         
+        { "[" }color=#660000]Эта форма может быть выдана только при отсутствии исполняющего обязанности полковника либо с его одобрения.[/color]
+         
+        { "[" }head=3]Владелец контрабанды[/head]
+            { "[" }bold]Имя:[/bold]
+            { "[" }bold]Вид:[/bold]
+            { "[" }bold]IFF судна:[/bold]
+         
+        { "[" }bold]Выплата за единицу FMC:[/bold] [color=#ff0000]$2,000[/color]
+        { "[" }bold]Время смены:[/bold]
+         
+        Настоящий документ является договором между указанным выше владельцем контрабанды и Командованием Фронтира.
+         
+        Владелец контрабанды освобождается от ответственности за её хранение при условии, что в разумный срок, с учётом оговорки ниже, передаст все предметы контрабанды 3-го класса, а также предметы 2-го класса, не включённые в разрешение на контрабанду 2-го класса, и не станет использовать их со злым умыслом. Нарушение условий настоящего документа аннулирует все действующие разрешения на контрабанду 2-го класса.
+         
+        Если переданная контрабанда не будет полностью оплачена по указанному выше тарифу, владелец вправе по своему усмотрению сохранить её без каких-либо взысканий.
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или представителя колоний.[/color]
+
+ent-PaperWrittenFrontierContrabandTurnover = квитанция о передаче контрабанды
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierContrabandTurnover = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Квитанция о передаче контрабанды[/head]
+         
+        { "[" }bold]Владелец контрабанды:[/bold]
+        { "[" }bold]Общая стоимость контрабанды (FMC):[/bold]
+        { "[" }bold]Выплата за единицу FMC:[/bold] [color=#ff0000]$2,000[/color]
+        { "[" }bold]Общая сумма выплаты:[/bold]
+         
+        { "[" }bold]Контрабанда 2-го класса:[/bold]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+         
+        { "[" }bold]Контрабанда 3-го класса:[/bold]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+         
+        { "[" }bold]Время смены:[/bold]
+         
+         
+         
+        { "[" }color=#AAAAAA]Форма недействительна без подписей обеих сторон и печати Командования Фронтира: полковника или представителя колоний.[/color]
+
+ent-PaperWrittenFrontierContrabandPermit = разрешение на контрабанду 2-го класса
+    .desc = { ent-Paper.desc }
+    .suffix = Бумажный шаблон
+paper-content-PaperWrittenFrontierContrabandPermit = [color=#000f89]◥[bold]N[/bold]◣ [bold]Командование пограничного аванпоста[/bold][/color]
+        { "[" }color=#000f89]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        { "[" }head=2]Разрешение на контрабанду 2-го класса[/head]
+         
+        { "[" }color=#660000]Эта форма может быть выдана только при отсутствии исполняющего обязанности полковника либо с его одобрения.[/color]
+         
+        { "[" }bold]Владелец разрешения:[/bold]
+        { "[" }bold]Члены экипажа владельца:[/bold]
+            { "[" }bullet/]
+            { "[" }bullet/]
+            { "[" }bullet/]
+         
+        { "[" }bold]Время смены:[/bold]
+         
+        Настоящее разрешение позволяет указанным выше владельцу и членам его экипажа хранить и использовать контрабанду 2-го класса.
+        Нарушение условий соглашения об амнистии за контрабанду аннулирует настоящее разрешение.
+        Полное определение контрабанды 2-го класса приведено в §6.1.4 Космического закона.
+         
+         
+         
+        { "[" }color=#AAAAAA]Разрешение недействительно без подписи владельца, а также подписи и печати полковника.[/color]

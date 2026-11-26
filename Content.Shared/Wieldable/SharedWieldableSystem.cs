@@ -11,7 +11,8 @@ using Content.Shared.Item;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Components;
@@ -134,10 +135,19 @@ public abstract partial class SharedWieldableSystem : EntitySystem
              noWieldNeeded.GetBonus)
            )
         {
-            args.MinAngle += bonus.Comp.MinAngle;
-            args.MaxAngle += bonus.Comp.MaxAngle;
-            args.AngleDecay += bonus.Comp.AngleDecay;
-            args.AngleIncrease += bonus.Comp.AngleIncrease;
+            // Mono start - do all this stupid bullshit because i'm too lazy to make attachments modify the wieldcomp
+            if (TryComp<GunComponent>(args.Gun, out var gunComp))
+            {
+                var minAngleAdd = bonus.Comp.MinAngle * (gunComp.MinAngleModified / gunComp.MinAngle);
+                var maxAngleAdd = bonus.Comp.MaxAngle * (gunComp.MaxAngleModified / gunComp.MaxAngle);
+                var angleDecayAdd = bonus.Comp.AngleDecay * (gunComp.AngleDecayModified / gunComp.AngleDecay);
+                var angleIncreaseAdd = bonus.Comp.AngleIncrease * (gunComp.AngleIncreaseModified / gunComp.AngleIncrease);
+                args.MinAngle += minAngleAdd;
+                args.MaxAngle += maxAngleAdd;
+                args.AngleDecay += angleDecayAdd;
+                args.AngleIncrease += angleIncreaseAdd;
+            }
+            // Mono end
         }
     }
 

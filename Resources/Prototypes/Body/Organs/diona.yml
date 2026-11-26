@@ -35,7 +35,6 @@
   - type: OrganPhysiology # Forge-change
     organ: Brain
   - type: MindContainer
-    showExamineInfo: true
   - type: Speech
     enabled: false
   - type: TypingIndicator

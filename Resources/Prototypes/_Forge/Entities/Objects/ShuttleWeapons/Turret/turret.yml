@@ -17,7 +17,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -93,7 +93,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -112,12 +112,13 @@
     minAngle: 0
     maxAngle: 1
     fireRate: 0.1
-    recoil: 25 
+    recoil: 25
     shootThermalSignature: 48000000 # ~7km after firing
     soundGunshot:
       path: /Audio/_Mono/Weapons/Guns/Gunshots/cannon.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+    Sabotageable: false # Forge-Change
   - type: SpaceArtillery
     powerChargeRate: 12000
     powerUsePassive: 1500
@@ -149,3 +150,94 @@
   - type: ShipRepairable
     repairTime: 30
     repairCost: 100
+
+# Drake Industries
+- type: entity
+  parent: BasicHitscan
+  id: DrakeApolloMk2Laser
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: muzzle_beam_heavy2
+    travelFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: beam_heavy2
+    impactFlash:
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: impact_beam_heavy2
+  - type: HitscanRadarSignature
+    radarColor: "#e67a22"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 150
+        Structural: 100
+  - type: HitscanBasicRaycast
+    maxDistance: 1200
+  - type: MiningGatheringSoft
+  - type: MiningGatheringHard
+  - type: DrakeHitscanGathering
+    collectToGun: true
+    teleportOre: false
+
+- type: entity
+  id: WeaponTurretDrakeApolloMk2
+  name: D-20 Apollo MK2 mining laser cannon
+  suffix: Drake, НЕ МАППИТЬ
+  description: Drake Industries Apollo rework. Heavier beams shatter rock; mined ore deposits into the turret and travels through disposal pipes underneath — same as ship drills.
+  parent: WeaponLaserTurretApollo
+  components:
+  - type: StaticPrice
+    price: 22000
+  - type: Sprite
+    sprite: _Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 90000
+  - type: Gun
+    fireRate: 4
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeApolloMk2Laser
+    fireCost: 150
+  - type: OrePipeBuffer
+    maxTotalCount: 300
+  - type: Rotatable
+    rotateWhilePulling: false
+    rotateWhileAnchored: true
+    increment: 90
+
+- type: entity
+  id: WeaponTurretDrakeApolloMk2Portable
+  parent: WeaponLaserTurretApolloPortable
+  name: D-20 Apollo MK2 mining laser cannon
+  suffix: Drake, НЕ МАППИТЬ
+  description: Drake Industries Apollo rework. Heavier beams shatter rock; mined ore deposits into the turret and travels through disposal pipes underneath — same as ship drills.
+  components:
+  - type: StaticPrice
+    price: 22000
+  - type: Sprite
+    sprite: _Forge/Objects/ShuttleWeapons/drake_apollo_mk2.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 90000
+    startingCharge: 90000
+  - type: BatterySelfRecharger
+    autoRechargeRate: 90000
+  - type: Gun
+    fireRate: 4
+  - type: ShipGunClass
+    shipClass: Superheavy
+  - type: HitscanBatteryAmmoProvider
+    proto: DrakeApolloMk2Laser
+    fireCost: 150
+  - type: OrePipeBuffer
+    maxTotalCount: 300

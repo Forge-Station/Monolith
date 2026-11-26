@@ -21,6 +21,7 @@
   - WeaponTurretL85AutocannonCircuitboard
   - WeaponLaserTurretL1PhalanxCircuitboard
   - WeaponTurretM25Circuitboard
+  - AmmoLoaderSmallMachineCircuitboard #Forge-change
   technologyPrerequisites:
   - BasicShuttleArmament
   - ShuttleAdvancedComponents
@@ -40,6 +41,7 @@
   - WeaponTurretVesperaCircuitboard
   - WeaponTurretM220Circuitboard
   - ShipWeaponFabricatorCircuitboard
+  - AmmoLoaderMachineCircuitboard #Forge-change 
   technologyPrerequisites:
   - ForgeShipWeaponResearchEntry
   position: -11, 5

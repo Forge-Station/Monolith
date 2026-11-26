@@ -1,48 +1,43 @@
 # Harmony Medical Enterprises
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: [BaseClothingModsuitHelmetHideIdentity, ClothingFlightProfileEasy, ClothingNightVision2Normal]
   id: ClothingModsuitHelmetHMELightSuit
   name: HME light hardsuit "Preserver" helmet
-  description: light-HME-modsuit-helmet-desc 
+  description: light-HME-modsuit-helmet-desc
   categories: [ HideSpawnMenu ]
   components:
-  - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Head/Modsuits/hme_lightmod.rsi
-    layers:
-    - state: helmet
-    - state: helmet-sealed
-      visible: false
-      map: [ "sealed" ]
-  - type: HideLayerClothing
-    slots:
-    - Snout
+    sprite: _Forge/Clothing/Head/Modsuits/hme_lightmod.rsi
   - type: SealableClothing
     sealUpPopup: sealable-clothing-seal-up-helmet
     sealDownPopup: sealable-clothing-seal-down-helmet
-  - type: SealableClothingVisuals
-    spriteLayer: sealed
-    clothingVisuals:
-      head:
-      - state: equipped-HEAD-sealed
-      head-vox:
-      - state: equipped-HEAD-sealed-vox
   - type: ShowHealthBars
     damageContainers:
     - Inorganic
     - Silicon
     - Biological
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.CrewMonitoringUIKey.Key
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
   - type: UserInterface
     interfaces:
-      enum.CrewMonitoringUIKey.Key:
-        type: CrewMonitoringBoundUserInterface
-  - type: CrewMonitoringConsole
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+    activeIfWorn: true
   - type: Armor
     modifiers:
       coefficients:
@@ -50,24 +45,6 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-        Radiation: 0.90
-  - type: ComponentToggler
-    components:
-    - type: BreathMask
-    - type: PressureProtection
-      highPressureMultiplier: 0.3
-      lowPressureMultiplier: 1000
-    - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
-    - type: IdentityBlocker
-    - type: IngestionBlocker
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
@@ -108,15 +85,15 @@
     autoRechargeRate: 2
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: [BaseClothingModsuitHelmet, ClothingFlightProfileMedium, ClothingNightVision4Normal]
   id: ClothingModsuitHelmetHMEHeavySuit
   name: HME heavy hardsuit "Intercessor" helmet
-  description: heavy-HME-modsuit-helmet-desc 
+  description: heavy-HME-modsuit-helmet-desc
   categories: [ HideSpawnMenu ]
   components:
   - type: Appearance
   - type: Sprite
-    sprite: Forge/Clothing/Head/Modsuits/hme_heavymod.rsi
+    sprite: _Forge/Clothing/Head/Modsuits/hme_heavymod.rsi
     layers:
     - state: helmet
     - state: helmet-sealed
@@ -153,24 +130,35 @@
     - Inorganic
     - Silicon
     - Biological
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: DetectionRangeMultiplier
+    infraredMultiplier: 0.5
+    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.CrewMonitoringUIKey.Key
+    key: enum.RadarConsoleUiKey.Key
+    inHandsOnly: false # Mono
+    singleUser: true
   - type: UserInterface
     interfaces:
-      enum.CrewMonitoringUIKey.Key:
-        type: CrewMonitoringBoundUserInterface
-  - type: CrewMonitoringConsole
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: ActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHardsuitMassScanner
+    activeIfWorn: true
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.90
-        Slash: 0.90
-        Piercing: 0.90
-        Heat: 0.90
-        Radiation: 0.90
+        Piercing: 0.9
+        Heat: 0.9
+      flatReductions:
+        Blunt: 7.5
+        Slash: 7.5
   - type: ComponentToggler
     components:
     - type: BreathMask
@@ -230,26 +218,14 @@
 # ARS Omnissia
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: BaseClothingModsuitHelmetHideIdentity
   id: ClothingModsuitHelmetOmnissia
   name: ARS Omnissia modsuit helmet
   description: Sealed helmet with night vision and diagnostic readouts for synthetic crew.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Modsuits/omnissiamod.rsi
-    layers:
-    - state: helmet
-    - state: helmet-sealed
-      visible: false
-      map: [ "sealed" ]
-  - type: SealableClothingVisuals
-    spriteLayer: sealed
-    clothingVisuals:
-      head:
-      - state: equipped-HEAD-sealed
-      head-vox:
-      - state: equipped-HEAD-sealed-vox
+    sprite: _Forge/Clothing/Head/Modsuits/omnissiamod.rsi
   - type: Armor
     modifiers:
       coefficients:
@@ -262,12 +238,12 @@
     relayOverlay: true
     goggleEffect: true
     action: ActionToggleNightVision
-    viewCircleRadius: 400
+    viewCircleRadius: 600 # Forge-Change 350 to 600 // это радиус обзора
     viewCircleCount: 2
     viewCircleSpacing: 280
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
-
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: ShowHealthBars
     damageContainers:
     - Inorganic

@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared.DeviceNetwork.Components; // Forge-Change-add: notify NetworkConfigurator on mode cycle
+using Content.Shared.DeviceConfigurator.Components; // Forge-Change-add: notify NetworkConfigurator on mode cycle
 using Content.Shared.Interaction;
 using Content.Shared.Prying.Components;
 using Content.Shared.Tools.Components;
@@ -79,7 +79,7 @@ public abstract partial class SharedToolSystem
         if (playSound && current.ChangeSound != null)
             _audioSystem.PlayPredicted(current.ChangeSound, uid, user);
 
-        if (_protoMan.TryIndex(current.Behavior.First(), out ToolQualityPrototype? quality))
+        if (ProtoMan.TryIndex(current.Behavior.First(), out ToolQualityPrototype? quality))
             multiple.CurrentQualityName = Loc.GetString(quality.Name);
 
         if (HasComp<NetworkConfiguratorComponent>(uid)) // Forge-Change-add: close multitool UI when leaving pulsing mode

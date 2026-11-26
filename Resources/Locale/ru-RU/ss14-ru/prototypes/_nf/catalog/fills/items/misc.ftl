@@ -1,5 +1,6 @@
 ent-ClothingShoesBootsMagSecurityFilled = { ent-ClothingShoesBootsMagSecurity }
     .desc = { ent-ClothingShoesBootsMagSecurity.desc }
+    .suffix = Заполненные
 ent-ClothingShoesBootsMagNfsdFilled = { ent-ClothingShoesBootsMagNfsd }
     .desc = { ent-ClothingShoesBootsMagNfsd.desc }
 ent-ClothingShoesBootsMagPirateFilled = { ent-ClothingShoesBootsMagPirate }

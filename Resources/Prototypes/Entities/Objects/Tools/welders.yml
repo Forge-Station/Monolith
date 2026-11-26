@@ -16,7 +16,7 @@
     sound:
       path: /Audio/Items/welder_drop.ogg
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standart/welder.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder.rsi
     layers:
     - state: icon
     - state: welder_flame
@@ -31,7 +31,7 @@
           False: { visible: false }
   - type: Item
     size: Small
-    sprite: Forge/Objects/Tools/Standart/welder.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder.rsi
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -85,10 +85,10 @@
     soundHit:
       collection: MetalThud
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
@@ -145,12 +145,12 @@
   description: "An industrial welder with over double the fuel capacity."
   components:
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standart/welder_industrial.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_industrial.rsi
   - type: Item
-    sprite: Forge/Objects/Tools/Standart/welder_industrial.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_industrial.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 250
@@ -166,12 +166,12 @@
   description: "An advanced industrial welder with a raised capacity for fuel while also being faster at welding."
   components:
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standart/welder_industrialadv.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_industrialadv.rsi
   - type: Item
-    sprite: Forge/Objects/Tools/Standart/welder_industrialadv.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_industrialadv.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 350
@@ -186,12 +186,12 @@
   description: "An experimental welder producing a plasma-like flame along with a heavily upgraded fuel capacity capable of self-fuel generation while being less harmful to the eyes."
   components:
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standart/welder_experimental.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_experimental.rsi
   - type: Item
-    sprite: Forge/Objects/Tools/Standart/welder_experimental.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_experimental.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 2500
@@ -201,7 +201,7 @@
     radius: 1.5
     color: lightblue
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
       - ReagentId: WeldingFuel
@@ -221,15 +221,15 @@
   description: "A miniature welder used during emergencies."
   components:
   - type: Sprite
-    sprite: Forge/Objects/Tools/Standart/welder_mini.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_mini.rsi
   - type: Item
     size: Tiny
-    sprite: Forge/Objects/Tools/Standart/welder_mini.rsi
+    sprite: _Forge/Objects/Tools/Standart/welder_mini.rsi
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 60

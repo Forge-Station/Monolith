@@ -2,9 +2,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.BluespaceHarvester;
 
-public sealed class BluespaceHarvesterRiftSystem : EntitySystem
+public sealed partial class BluespaceHarvesterRiftSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Update(float frameTime)
     {

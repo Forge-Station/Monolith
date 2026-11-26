@@ -113,7 +113,7 @@ public sealed partial class BiomeSystem
             SetSeed(uid, component, _random.Next());
         }
 
-        if (_proto.TryIndex(component.Template, out var biome))
+        if (ProtoMan.TryIndex(component.Template, out var biome))
             SetTemplate(uid, component, biome);
 
         var xform = Transform(uid);
@@ -123,7 +123,7 @@ public sealed partial class BiomeSystem
         {
             var setTiles = new List<(Vector2i Index, Tile tile)>();
 
-            foreach (var grid in _mapManager.GetAllGrids(mapId))
+            foreach (var grid in _mapSystem.GetAllGrids(mapId))
             {
                 if (!_fixturesQuery.TryGetComponent(grid.Owner, out var fixtures))
                     continue;
@@ -156,7 +156,7 @@ public sealed partial class BiomeSystem
 
         foreach (var layer in markers)
         {
-            var proto = ProtoManager.Index(layer);
+            var proto = ProtoMan.Index(layer);
             var enumerator = new ChunkIndicesEnumerator(area, proto.Size);
 
             while (enumerator.MoveNext(out var chunk))

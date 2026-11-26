@@ -54,6 +54,8 @@
     node: done
     containers:
     - entity_storage
+  - type: Paintable # Forge-Change
+    group: Locker   # Forge-Change
 
 - type: entity
   id: LockerBaseSecure

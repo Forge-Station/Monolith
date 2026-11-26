@@ -18,22 +18,12 @@
   - type: MobPrice
     price: 2000
   - type: Perishable
-  - type: Hunger
-    thresholds: # Mono
-      Overfed: 200
-      Okay: 100
-      Peckish: 50
-      Starving: 25
-      Dead: 0
-    baseDecayRate: 0.00925925925926 # Guy needs to eat and drink
-  - type: Thirst
-    thresholds:
-      OverHydrated: 200
-      Okay: 150
-      Thirsty: 100
-      Parched: 50
-      Dead: 0
-    baseDecayRate: 0.04
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: DragonPetHunger
+      Thirst:
+        prototype: SimpleMobBaseThirst
   - type: StatusEffects
     allowed:
       - Stun
@@ -180,12 +170,13 @@
   - type: NightVision # Gen 3 wide-quadtube
     relayOverlay: false
     goggleEffect: true
-    viewCircleRadius: 450
-    viewCircleCount: 4
+    viewCircleRadius: 1000 #Forge-changed 400 to 1000
+    viewCircleCount: 2
     viewCircleSpacing: 280
     action: ActionToggleNightVision
-    phosphorColor: "#00FF00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
+    lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
+    amplification: 1.0 #Forge-Change 32 to 1.0 // параметр Усиление влияет на то как сильно слепят источники света
   - type: LanguageKnowledge
     speaks:
     - TauCetiBasic

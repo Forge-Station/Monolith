@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -11,11 +11,11 @@ using Content.Shared.Wieldable.Components;
 
 namespace Content.Shared._Forge.Weapons;
 
-public sealed class SpeciesWieldSystem : EntitySystem
+public sealed partial class SpeciesWieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedWieldableSystem _wieldable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private readonly Dictionary<EntityUid, EntityUid> _pendingDrops = new();
 
@@ -85,8 +85,11 @@ public sealed class SpeciesWieldSystem : EntitySystem
             handsComponent.Hands.Values.Count(hand => hand.HeldEntity == null) >= 2)
             return;
 
-        _popup.PopupClient("Этот предмет требует две руки! Освободите обе руки.", args.User, args.User);
         args.Cancel();
+
+        // Verb checks raise this event with ShowPopup false. The message is only for a real pickup.
+        if (args.ShowPopup)
+            _popup.PopupClient("Этот предмет требует две руки! Освободите обе руки.", args.User, args.User);
     }
 
     private void OnUnequippedHand(EntityUid uid, SpeciesWieldComponent speciesOneHandedComponent, GotUnequippedHandEvent args)

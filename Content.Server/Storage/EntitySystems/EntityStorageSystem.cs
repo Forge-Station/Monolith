@@ -10,6 +10,7 @@ using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
+using Content.Shared.Atmos;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
@@ -25,7 +26,7 @@ public sealed partial class EntityStorageSystem : SharedEntityStorageSystem
 {
     [Dependency] private ConstructionSystem _construction = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
-    [Dependency] private IMapManager _map = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MapSystem _mapSystem = default!;
 
     public override void Initialize()

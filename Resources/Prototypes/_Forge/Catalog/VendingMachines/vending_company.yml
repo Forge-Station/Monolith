@@ -1,3 +1,4 @@
+#region TL
 - type: vendingMachineInventory
   id: CompanyVendInventoryTL
   startingInventory:
@@ -14,6 +15,7 @@
     TelecomServerFlatpack: 1
     EncryptionKeyTechnicLogistic: 2
 
+#region Viper Group
 - type: vendingMachineInventory
   id: CompanyVendInventoryViper
   startingInventory:
@@ -25,26 +27,34 @@
     ClothingBeltWebbingsBigViperGroup: 6
     ClothingMaskGasViperGroup: 6
     ClothingEyesGlassesViperGroup: 6
-    DisciplinesDiskVG: 2
+    DisciplinesDiskVG: 4
     EncryptionKeyViperGroup: 3
     TelecomServerFlatpack: 1
 
+#region Ullman I.
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman
   startingInventory:
-    ClothingOuterHardsuitUIPilot: 2
-    ClothingOuterHardsuitUllmanEngineer: 2
-    ClothingUniformJumpsuitSalvageSpecialist: 4294967295
+    ClothingOuterHardsuitUIPilot: 4
+    ClothingOuterHardsuitUllmanEngineer: 3
+    ClothingHeadHatBeretUI: 4294967295
+    ClothingHeadHatCapUI: 4294967295
+    ClothingUniformJumpsuitUI: 4294967295
+    ClothingUniformShirtUI: 4294967295
+    ClothingEyesUIGoogles: 4294967295
     ClothingNeckUllimanOvercoat: 4294967295
-    ClothingNeckHeavyUllimanOvercoat: 2
+    ClothingNeckCloakUllmanPoncho: 4294967295
+    ClothingNeckHeavyUllimanOvercoat: 4294967295
+    ClothingNeckMantleUI: 4294967295
+    ClothingBeltWebbingsNormalUi: 4294967295
+    ClothingBeltWebbingsBigUi: 4294967295
     WeaponPistolUllmanSmartMagnumMK5: 1
     TelecomServerFlatpack: 1
     EncryptionKeyUllmanIndustries: 2
-    DisciplinesDiskUllman: 2
-    ClothingUniformJumpsuitUI: 4294967295
-    ClothingEyesUIGoogles: 4294967295
-    ClothingNeckCloakUllmanPoncho: 4
+    DisciplinesDiskUllman: 4
+    
 
+#region USSP
 - type: vendingMachineInventory
   id: CompanyVendInventoryUSSP
   startingInventory:
@@ -67,15 +77,17 @@
     AmmoBox762x54mmRBigFMJ: 6 # 762x54mmR
     AmmoBox9x19mmFMJ: 6 # 9x19mm
     AmmoBox9x19mmBigFMJ: 6 # 9x19mm
-    AmmoBox45_magnumFMJ: 6 # .45 magnum
+    AmmoBox357_magnumFMJ: 6 # .357 magnum
     WeaponSniperMosin: 3 # Infinite
     WeaponRifleSVS: 3 # Infinite
     CombatKnife: 6 # Infinite
     SurvivalKnife: 6 # Infinite
+    ClothingHeadHatBeretVdv: 4294967295
+    ClothingUniformJumpsuitVdvtyelnyazhka: 4294967295
     ClothingUniformUSSP: 6 # Infinite
     ClothingHeadsetUSSP: 6 # Infinite
     EncryptionKeyUssp: 6
-    ClothingOuterHardsuitUsspL27: 4 # Infinite
+    # ClothingOuterHardsuitUsspL27: 4 # Infinite # Forge-change remove L27 hardsuit
     ClothingOuterHardsuitUsspL10: 4 # Infinite
     ClothingOuterHardsuitUsspM10: 4 # Infinite
     ClothingOuterCoatUSSP: 4 # Infinite
@@ -83,11 +95,10 @@
     # WeaponRifleAK502: 3 # Forge Removed
     # WeaponShotgunBigLeady: 3 # Forge Removed
     # WeaponDP29: 3 # Forge Removed
-    DisciplinesDiskUssp: 2
+    DisciplinesDiskUssp: 4
     FactionLatheFlatpack: 2
 
-# Drake Industries
-
+#region Drake I.
 - type: vendingMachineInventory
   id: CompanyVendInventoryDrake
   startingInventory:
@@ -108,19 +119,67 @@
     ClothingHeadHatBeretDrakeIndustries: 4
     ClothingOuterHardsuitDrakeMk4: 2
     PlasmaTankFilled: 4
-    DisciplinesDiskDrakeIndustries: 2
+    DisciplinesDiskDrakeIndustries: 3
     TelecomServerFlatpack: 1
     EncryptionKeyDrakeIndustries: 2
 
-# Vend Harmony Medical Enterprises
-
+#region Harmony M.E.
 - type: vendingMachineInventory
   id: CompanyVendInventoryHarmony
   startingInventory:
     TelecomServerFlatpack: 1
     EncryptionKeyHarmony: 4
-    DisciplinesDiskHME: 2
+    DisciplinesDiskHME: 4
     ClothingUniformJumpsuitHME: 4
     ClothingUniformJumpskirtHME: 4
     ClothingHeadHatBeretHME: 4
+
+#region Nexus S.C.
+- type: vendingMachineInventory
+  id: CompanyVendInventoryNSC
+  startingInventory:
+    ClothingHeadHelmetNexus: 5
+    ClothingBalaclavaSkiMaskBlack: 5
+    ClothingHeadHatNexusBeret: 5
+    ClothingHeadHatNexusCap: 5
+    ClothingHeadHatNexusStarBeret: 5
+    ClothingHeadHatNexusGarrisonCap: 5
+    ClothingEyesGlassesNexus: 5
+    ClothingMaskGasNexus: 5
+    ClothingBeltWebbingsNormalNexus: 5
+    ClothingBeltWebbingsBigNexus: 5
+    ClothingOuterVestWebNexus: 5
+    ClothingOuterCoatNexusGreatcoat: 5
+    ClothingUniformJumpsuitNexusTurtleneck: 5
+    ClothingUniformJumpsuitNexusWorker: 5
+    ClothingUniformJumpsuitNexusSecurity: 5
+    ClothingShoesBootsMagNexus: 5
+    ClothingHandsGlovesCombatNexus: 5
+    ClothingBackpackDuffelNexus: 5
+    ClothingBackpackSatchelNexus: 5
+    ClothingBackpackNexus: 5
+    ClothingHeadsetNexus: 5
+    ClothingNeckCloakNexus: 5
+    ClothingBackpackMessengerNexus: 5
+    ClothingNeckMantleNexus: 5
+    EncryptionKeyNexus: 2
+    TelecomServerFlatpack: 1
+    DisciplinesDiskNSC: 3
+
+#region Chun Logistics
+- type: vendingMachineInventory
+  id: CompanyVendInventoryChun
+  startingInventory:
+    VehicleATVNF: 4
+    VehicleKeyATV: 4
+    VehicleHoverbikeNFKeys: 4
+    ClothingShoesBootsGraviBootsCL: 4
+    ClothingShoesSkatesCL: 4
+    ClothingShoesSkatesDarkCL: 4
+    VehicleHoverboardCL: 4
+    VehicleGraviboardCL: 4
+    VehicleGraviscooterCL: 4
+    VehicleElectroscooterCL: 4
+    VehicleGravichairCL: 4
+    VehicleKeyCLUniversal: 8
 

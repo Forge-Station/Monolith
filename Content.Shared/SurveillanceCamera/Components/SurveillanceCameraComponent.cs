@@ -1,5 +1,4 @@
 using Content.Shared.DeviceNetwork;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -34,6 +33,12 @@ public sealed partial class SurveillanceCameraComponent : Component
     // the most terrible thing possible.
     [DataField("id")]
     public string CameraId = "camera";
+	
+    /// <summary>
+    /// If true, instead of showing the camera id it will show the entity name
+    /// </summary>
+    [DataField]
+    public bool UseEntityNameAsCameraId = false;
 
     [DataField, AutoNetworkedField]
     public bool NameSet;
@@ -42,6 +47,6 @@ public sealed partial class SurveillanceCameraComponent : Component
     public bool NetworkSet;
 
     // This has to be device network frequency prototypes.
-    [DataField("setupAvailableNetworks", customTypeSerializer:typeof(PrototypeIdListSerializer<DeviceFrequencyPrototype>))]
+    [DataField("setupAvailableNetworks", customTypeSerializer:typeof(ProtoId<DeviceFrequencyPrototype>))]
     public List<string> AvailableNetworks { get; private set; } = new();
 }

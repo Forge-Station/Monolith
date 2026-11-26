@@ -130,6 +130,7 @@
     availableModes:
     - FullAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    Sabotageable: false # Forge-Change
   - type: MagazineAmmoProvider
     autoEject: false
   - type: ItemSlots

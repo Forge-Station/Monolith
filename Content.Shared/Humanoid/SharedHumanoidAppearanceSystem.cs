@@ -1,4 +1,3 @@
-using Content.Shared._Forge.Barks; // Corvax-Frontier-Barks
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -6,11 +5,11 @@ using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Preferences;
-using Content.Shared._Forge.TTS; // Corvax-Frontier-Barks
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects.Components.Localization;
@@ -21,8 +20,6 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
-using Content.Shared._EE.Contractors.Prototypes; // Forge-change: _EE nationality
-using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change
 using Content.Shared.Sprite;
 
 namespace Content.Shared.Humanoid;
@@ -46,22 +43,16 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public const string DefaultSpecies = "Human";
-
-    // Forge-change: take _EE nationality
     public const string DefaultNationality = "TransSolarFederation";
-
-    // Corvax-Frontier-Barks-start
     public const string DefaultBarkVoice = "BarksGoonSpeak1";
-    // Corvax-Frontier-Barks-end
-    // Corvax-TTS-Start
     public const string DefaultVoice = "Papich";
+
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
     {
-        {Sex.Male, "Papich"},
-        {Sex.Female, "Charlotte"},
-        {Sex.Unsexed, "Biden"},
+        [Sex.Male] = DefaultVoice,
+        [Sex.Female] = DefaultVoice,
+        [Sex.Unsexed] = DefaultVoice,
     };
-    // Corvax-TTS-End
 
     public override void Initialize()
     {
@@ -128,7 +119,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
     private void OnExamined(EntityUid uid, HumanoidAppearanceComponent component, ExaminedEvent args)
     {
         var identity = Identity.Entity(uid, EntityManager);
-        var species = GetSpeciesRepresentation(component.Species).ToLower();
+        var species = GetSpeciesRepresentation(component.Species, component.CustomSpeciesName).ToLower(); // WOLFGATE
         var age = GetAgeRepresentation(component.Species, component.Age);
 
         // WWDP EDIT
@@ -397,6 +388,16 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         }
     }
 
+    public void SetTTSVoice(EntityUid uid, string voice, HumanoidAppearanceComponent? humanoid = null)
+    {
+        if (!Resolve(uid, ref humanoid))
+            return;
+
+        humanoid.Voice = voice;
+        if (TryComp<Content.Shared._Forge.TTS.TTSComponent>(uid, out var tts))
+            tts.VoicePrototypeId = voice;
+    }
+
     /// <summary>
     ///     Loads a humanoid character profile directly onto this humanoid mob.
     /// </summary>
@@ -415,10 +416,21 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 
         SetSpecies(uid, profile.Species, false, humanoid);
         SetSex(uid, profile.Sex, false, humanoid);
-        humanoid.EyeColor = profile.Appearance.EyeColor;
+        SetTTSVoice(uid, profile.Voice, humanoid);
 
-        humanoid.LastProfileLoaded = profile; //Set the loaded profile because Traits are about to need it
-        SetSkinColor(uid, profile.Appearance.SkinColor, false);
+        // WOLFGATE - ported from HardLight/Starlight: constrain eye colour per species.
+        var eyeColor = profile.Appearance.EyeColor;
+        if (_proto.TryIndex<SpeciesPrototype>(humanoid.Species, out var eyeSpecies)
+            && !EyeColor.VerifyEyeColor(eyeSpecies.EyeColoration, eyeColor))
+        {
+            eyeColor = EyeColor.ValidEyeColor(eyeSpecies.EyeColoration, eyeColor);
+        }
+
+        humanoid.EyeColor = eyeColor;
+        humanoid.CustomSpeciesName = profile.CustomSpeciesName;
+        // End WOLFGATE
+
+        SetSkinColor(uid, profile.Appearance.SkinColor, false, verify: !profile.MismatchedParts); // WOLFGATE(Species): Mismatched parts lets the skin take any colour
 
         humanoid.MarkingSet.Clear();
 
@@ -442,9 +454,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         // Hair/facial hair - this may eventually be deprecated.
         // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
         var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _proto)
-            ? new List<Color> { profile.Appearance.SkinColor.WithAlpha(hairAlpha) } // Forge-Change Corvax-Wega-Hair-Extended
-                .Concat(profile.Appearance.HairColor.Skip(1)).ToList() // Forge-Change Corvax-Wega-Hair-Extended
-            : profile.Appearance.HairColor; // Forge-Change Corvax-Wega-Hair-Extended
+            ? new List<Color> { profile.Appearance.SkinColor.WithAlpha(hairAlpha) } : profile.Appearance.HairColor;
         var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _proto)
             ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha) : profile.Appearance.FacialHairColor;
 
@@ -475,8 +485,6 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         EnsureDefaultMarkings(uid, humanoid);
-        SetBarkVoice(uid, profile.BarkVoice, humanoid); // Corvax-Frontier-Barks
-        SetTTSVoice(uid, profile.Voice, humanoid); // Corvax-TTS
 
         humanoid.Gender = profile.Gender;
         if (TryComp<GrammarComponent>(uid, out var grammar))
@@ -496,8 +504,8 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
             _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(profile.Appearance.Width, profile.Appearance.Height), appearance);
         }
 
-        humanoid.LastProfileLoaded = profile; //But traits can also modify the profile so we need to set it again.
-        RaiseLocalEvent(uid, new ProfileLoadFinishedEvent()); // Shitmed Change
+        ApplyAugments(uid, profile, humanoid); // WOLFGATE(Augments): swaps in the augmented parts and draws their styles
+        RaiseLocalEvent(uid, new ProfileLoadFinishedEvent { Profile = profile }); // Shitmed Change, WOLFGATE - pass profile
         Dirty(uid, humanoid);
     }
 
@@ -543,29 +551,6 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         humanoid.MarkingSet.EnsureDefault(humanoid.SkinColor, humanoid.EyeColor, _markingManager);
     }
 
-    // Corvax-Frontier-Barks-start
-    public void SetBarkVoice(EntityUid uid, string? barkvoiceId, HumanoidAppearanceComponent humanoid)
-    {
-        if (!TryComp<SpeechSynthesisComponent>(uid, out var comp))
-            return;
-
-        humanoid.BarkVoice = barkvoiceId ?? DefaultBarkVoice;
-        comp.VoicePrototypeId = barkvoiceId;
-    }
-    // Corvax-Frontier-Barks-end
-
-    // Corvax-TTS-Start
-    // ReSharper disable once InconsistentNaming
-    public void SetTTSVoice(EntityUid uid, string voiceId, HumanoidAppearanceComponent humanoid)
-    {
-        if (!TryComp<TTSComponent>(uid, out var comp))
-            return;
-
-        humanoid.Voice = voiceId;
-        comp.VoicePrototypeId = voiceId;
-    }
-    // Corvax-TTS-End
-
     /// <summary>
     ///
     /// </summary>
@@ -589,6 +574,16 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 
         if (sync)
             Dirty(uid, humanoid);
+    }
+
+    /// <summary>
+    /// WOLFGATE - as below, but a non-empty custom name replaces the species name outright.
+    /// </summary>
+    public string GetSpeciesRepresentation(string speciesId, string? customSpeciesName)
+    {
+        return string.IsNullOrWhiteSpace(customSpeciesName)
+            ? GetSpeciesRepresentation(speciesId)
+            : customSpeciesName;
     }
 
     /// <summary>

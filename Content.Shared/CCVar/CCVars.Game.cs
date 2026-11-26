@@ -1,4 +1,4 @@
-using Content.Shared.Roles;
+﻿using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
@@ -85,7 +85,7 @@ public sealed partial class CCVars
     ///     Controls the default game preset.
     /// </summary>
     public static readonly CVarDef<string>
-        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "MonoMixed", CVar.ARCHIVE); // Forge
+        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "MonoStandard", CVar.ARCHIVE); // Frontier: secret<nfpirate; WOLFGATE(Planets): defaults to MonoStandard (was nfpirate), whose round start spawns the star system.
 
     /// <summary>
     ///     Controls if the game can force a different preset if the current preset's criteria are not met.
@@ -97,7 +97,7 @@ public sealed partial class CCVars
     ///     The preset for the game to fall back to if the selected preset could not be used, and fallback is enabled.
     /// </summary>
     public static readonly CVarDef<string>
-        GameLobbyFallbackPreset = CVarDef.Create("game.fallbackpreset", "Traitor,Extended", CVar.ARCHIVE);
+        GameLobbyFallbackPreset = CVarDef.Create("game.fallbackpreset", "Deathmatch", CVar.ARCHIVE); // mono - trol
 
     /// <summary>
     ///     Controls if people can win the game in Suspicion or Deathmatch.
@@ -166,12 +166,6 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool>
         GameRoleWhitelist = CVarDef.Create("game.role_whitelist", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    ///     Forge-Change: starting bank balance for globally whitelisted players' new characters.
-    /// </summary>
-    public static readonly CVarDef<int>
-        GameWhitelistedStartingBalance = CVarDef.Create("game.whitelisted_starting_balance", 100000, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Whether or not disconnecting inside of a cryopod should remove the character or just store them until they reconnect.
@@ -463,12 +457,5 @@ public sealed partial class CCVars
     ///     Set to 0 to always disable timers and whitelists when dynamic roles are enabled.
     /// </summary>
     public static readonly CVarDef<int> DynamicRolesPlayerThreshold =
-         CVarDef.Create("game.dynamic_roles.player_threshold", 5, CVar.SERVERONLY | CVar.ARCHIVE);
-
-    /// <summary>
-    /// Forge-change: add
-    ///     Master Switch for Contractors
-    /// </summary>
-    public static readonly CVarDef<bool> ContractorsEnabled =
-        CVarDef.Create("contractors.enabled", true, CVar.SERVER | CVar.REPLICATED);
+         CVarDef.Create("game.dynamic_roles.player_threshold", 20, CVar.SERVERONLY | CVar.ARCHIVE);
 }

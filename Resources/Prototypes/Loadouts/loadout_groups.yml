@@ -76,6 +76,8 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 - type: loadoutGroup
   id: GroupEVATank
@@ -84,6 +86,7 @@
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
+  - LoadoutSpeciesEVAWaterVapor
 
 - type: loadoutGroup
   id: GroupPocketTankDouble
@@ -92,6 +95,7 @@
   loadouts:
   - LoadoutSpeciesPocketDoubleNitrogen
   - LoadoutSpeciesPocketDoubleOxygen
+  - LoadoutSpeciesPocketDoubleWaterVapor
 
 # Command
 - type: loadoutGroup
@@ -474,6 +478,8 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 - type: loadoutGroup
   id: MimeHead
@@ -530,6 +536,8 @@
   - EmergencyNitrogenMime
   - EmergencyOxygenMime
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 - type: loadoutGroup
   id: MusicianJumpsuit
@@ -815,6 +823,8 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 # Science
 - type: loadoutGroup
@@ -1096,6 +1106,8 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 - type: loadoutGroup
   id: SecurityStar
@@ -1272,7 +1284,6 @@
 - type: loadoutGroup
   id: ParamedicShoes
   name: loadout-group-paramedic-shoes
-  # Forge-Change: Removed unavailable trauma magboots from this shared loadout group.
   loadouts:
   - BlueShoes
   - MedicalWinterBoots
@@ -1286,6 +1297,8 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 # Wildcards
 - type: loadoutGroup
@@ -1328,6 +1341,8 @@
   - EmergencyNitrogenSyndicate
   - EmergencyOxygenSyndicate
   - LoadoutSpeciesVoxNitrogen
+  - WFLoadoutSpeciesAvaliAutoInjector # WOLFGATE(Species): Avali auto-injector, like the Vox tank
+  - WFEmergencySynthetic # WOLFGATE(Synthetics): a synthetic body's box, in place of the breather ones
 
 - type: loadoutGroup
   id: GroupSpeciesBreathTool

@@ -192,7 +192,7 @@ public sealed partial class OreHoldSystem : EntitySystem
             return;
 
         var bound = 1;
-        if (entProto.TryGetComponent(out StackComponent? stackTemplate, _factory))
+        if (entProto.TryComp(out StackComponent? stackTemplate, _factory))
         {
             var stackPrototype = _proto.Index<StackPrototype>(stackTemplate.StackTypeId);
             bound = stackPrototype.MaxCount ?? int.MaxValue;

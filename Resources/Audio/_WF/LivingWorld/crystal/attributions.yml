@@ -1,0 +1,11 @@
+- files:
+  - xen_crystal_radiation_hum01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/xen_crystal/xen_crystal_radiation_hum01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_crystal_radiation_charging01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/xen_crystal/xen_crystal_radiation_charging01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

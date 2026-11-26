@@ -20,6 +20,11 @@ public sealed partial class BodySystem : SharedBodySystem
         bool visible,
         SpriteComponent sprite)
     {
+        // WOLFGATE - a severed part draws every sprite of a marking, so linked colours have to be
+        // resolved here too or a split tail's BEHIND half comes out white.
+        if (colors != null)
+            colors = markingPrototype.ResolveLinkedColors(colors);
+
         for (var j = 0; j < markingPrototype.Sprites.Count; j++)
         {
             var markingSprite = markingPrototype.Sprites[j];

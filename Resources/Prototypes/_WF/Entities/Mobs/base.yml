@@ -1,0 +1,343 @@
+#region Remade
+- type: entity
+  abstract: true
+  parent: SimpleSpaceMobBase
+  id: WFRemadeBase
+  components:
+  - type: Insulated
+  - type: CombatMode
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: WFRemadeHuntCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        14
+      AggroVisionRadius: !type:Single
+        20
+  - type: NPCRetaliation
+    attackMemoryLength: 20
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 3
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: UseDelay
+    delay: 1
+  - type: NpcFactionMember
+    factions:
+    - WFRemade
+  # Breaks what is in its way when it has made no headway; the Monolith and its growths are its own.
+  - type: WFStuckBreaker
+    spare:
+      components:
+      - WFMonolith
+      - WFMonolithTap
+      - WFGrowth
+  - type: Hands
+  - type: ComplexInteraction
+  # No hands to pull with: a Remade drags a corpse to a vent by its grip all the same.
+  - type: Puller
+    needsHands: false
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: WFRemadeFlesh
+  - type: WolfmedDamageCause
+    cause: Unarmed
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 150
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: SlowOnDamage
+    speedModifierThresholds: {}
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: full
+      Dead:
+        Base: dead
+  - type: Temperature
+    heatDamageThreshold: 400
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - FootstepSound
+    - WFRemade
+  - type: NoSlip
+  - type: MovementIgnoreGravity
+  - type: ProtectedFromStepTriggers
+  - type: ZombieImmune
+  - type: Speech
+    enabled: false
+
+#region Bird
+- type: entity
+  abstract: true
+  parent: [BaseSimpleMob, MobCombat, MobBloodstream, MobFlammable]
+  id: WFBirdBase
+  components:
+  - type: WFBird
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -4
+  # Birds never fall down a cavern mouth they fly over.
+  - type: CEZPhysics
+    fallable: false
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: Body
+    prototype: Animal
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: [ "enum.WFBirdLayers.Shadow" ]
+      state: shadow
+      visible: false
+    - map: [ "enum.WFBirdLayers.Body" ]
+      state: sit
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+      # Where a flying bird is drawn, above its shadow: shots take it there. No layer until it takes off.
+      flight:
+        shape:
+          !type:PhysShapeCircle
+          position: 0, 0.5
+          radius: 0.35
+        density: 1
+        hard: true # rays only see hard fixtures; with no mask it pushes nothing
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Dead
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 2
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 1
+  - type: Bloodstream
+    bloodMaxVolume: 30
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: 200
+    currentTemperature: 300
+  - type: Perishable
+  - type: Tag
+    tags: []
+
+#region Dweller
+- type: entity
+  abstract: true
+  parent:
+  - MobNonHumanHostileBase
+  - MobHumanoidHostileAISimpleMelee
+  id: WFMobDwellerBase
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WFDwellers
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Critical
+      90: Dead
+  - type: DamageStateVisuals
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 3.5
+
+#region Horrors
+- type: entity
+  abstract: true
+  parent: SimpleSpaceMobBase
+  id: WFCavernHorrorBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        false
+  - type: NPCRetaliation
+    attackMemoryLength: 15
+  - type: InputMover
+  - type: MobMover
+  - type: MovementAlwaysTouching
+  - type: CombatMode
+  - type: BreathingImmunity
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+
+#region Cavern
+- type: entity
+  abstract: true
+  parent: BaseMobHuman
+  id: WFCavernPersonBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: InputMover
+  - type: MobMover
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: WFCavernWalkerCompound
+    blackboard:
+      FollowCloseRange: !type:Single
+        1.5
+      FollowRange: !type:Single
+        3
+      IdleRange: !type:Single
+        2
+
+- type: entity
+  abstract: true
+  parent: WFCavernPersonBase
+  id: WFMobTunnelRaiderBase
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: WFCavernRaiderCompound
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: WFNpcIntent
+    set: WFIntentsTunnelRaider
+    holds: true
+  - type: WFCavernRaider
+    loot:
+    - ScrapSteel
+    - PartRodMetal1
+  - type: WFCavernTelegraph
+    sound:
+      collection: WFCavernEncounterRaiderChatter
+    minInterval: 15
+    maxInterval: 35
+
+#region Squatter
+- type: entity
+  parent: BaseMobHuman
+  id: WFShipSquatter
+  name: squatter
+  description: Someone who has made himself at home.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: ActiveListener
+    range: 6
+  - type: WFNpcIntent
+    set: WFIntentsSquatter
+    leaveSeconds: 3
+    leaveDistance: 2
+  - type: Loadout
+    prototypes: [ WFShipSquatterGear ]
+  - type: WFShipSquatter
+    boardBarks:
+    - wf-ship-squatter-board-1
+    - wf-ship-squatter-board-2
+    - wf-ship-squatter-board-3
+    - wf-ship-squatter-board-4
+    - wf-ship-squatter-board-5
+    nearBarks:
+    - wf-ship-squatter-near-1
+    - wf-ship-squatter-near-2
+    - wf-ship-squatter-near-3
+    talkedBarks:
+    - wf-ship-squatter-talked-1
+    - wf-ship-squatter-talked-2
+    - wf-ship-squatter-talked-3
+    - wf-ship-squatter-talked-4
+    giftBarks:
+    - wf-ship-squatter-gift-1
+    - wf-ship-squatter-gift-2
+    angryBarks:
+    - wf-ship-squatter-angry-1
+    - wf-ship-squatter-angry-2
+    - wf-ship-squatter-angry-3
+    calmBarks:
+    - wf-ship-squatter-calm-1
+    - wf-ship-squatter-calm-2
+
+#region Stranger
+- type: entity
+  abstract: true
+  parent: BaseMobHuman
+  id: WFStrangerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  #- type: WFVehicleBoarder

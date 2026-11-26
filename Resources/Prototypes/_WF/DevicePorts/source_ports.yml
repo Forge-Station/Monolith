@@ -1,0 +1,4 @@
+- type: sourcePort
+  id: WFDrydockCraneSender
+  name: drydock-port-name-crane-sender
+  description: drydock-port-description-crane-sender

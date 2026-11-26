@@ -29,9 +29,9 @@ public abstract partial class SharedShuttleSystem : EntitySystem
     public const float FTLBufferRange = 20f;
     public const float TileDensityMultiplier = 0.5f; /// Forge-Change
 
-    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
     private List<Entity<MapGridComponent>> _grids = new();
 
     public override void Initialize()
@@ -49,6 +49,9 @@ public abstract partial class SharedShuttleSystem : EntitySystem
 
         if (shuttleMap == targetMap)
             return true;
+
+        if (!WfAllowFTL(shuttleUid, mapUid)) // WOLFGATE(Planets): you only FTL out of a planet network from orbit, and never FTL into an orbit layer.
+            return false;
 
         if (!TryComp<FTLDestinationComponent>(mapUid, out var destination) || !destination.Enabled)
             return false;

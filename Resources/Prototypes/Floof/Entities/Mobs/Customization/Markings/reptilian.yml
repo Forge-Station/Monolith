@@ -1,0 +1,23 @@
+# - type: marking
+# Wolfgate: ported from HardLight
+- type: marking
+  id: LizardFinTop
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, ProtoReptile, Canine]
+  sprites:
+  - sprite: Floof/Mobs/Customization/Reptilian/fin.rsi
+    state: primary
+  - sprite: Floof/Mobs/Customization/Reptilian/fin.rsi
+    state: secondary
+
+- type: marking
+  id: LizardCrestLargeTop
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, ProtoReptile, Canine]
+  sprites:
+  - sprite: Floof/Mobs/Customization/Reptilian/crest_large.rsi
+    state: primary
+  - sprite: Floof/Mobs/Customization/Reptilian/crest_large.rsi
+    state: secondary

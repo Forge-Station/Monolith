@@ -27,7 +27,6 @@ public sealed partial class VendingMachinePurchaseSystem : EntitySystem
 
         // Forge-Change: a deleted grid uid stays on the item and PVS logs GetNetEntity every time the item is seen.
         EntityManager.EntityDeleted += OnEntityDeleted;
-        SubscribeLocalEvent<VendingMachinePurchaseComponent, ComponentStartup>(OnPurchaseStartup);
     }
 
     public override void Shutdown()
@@ -36,7 +35,11 @@ public sealed partial class VendingMachinePurchaseSystem : EntitySystem
         base.Shutdown();
     }
 
-    private void OnPurchaseStartup(Entity<VendingMachinePurchaseComponent> ent, ref ComponentStartup args)
+    /// <summary>
+    /// Called from the trade market, which already owns <see cref="ComponentStartup"/> on this component.
+    /// A deleted purchase grid is cleared before PVS asks for its net id.
+    /// </summary>
+    public void OnPurchaseStartup(Entity<VendingMachinePurchaseComponent> ent)
     {
         if (ent.Comp.PurchaseGrid == EntityUid.Invalid)
             return;

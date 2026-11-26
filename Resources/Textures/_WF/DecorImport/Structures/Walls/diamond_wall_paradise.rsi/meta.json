@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b.",
+  "size": {
+    "x": 32,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "diamond_wall-0"
+    },
+    {
+      "name": "diamond_wall-1"
+    },
+    {
+      "name": "diamond_wall-2"
+    },
+    {
+      "name": "diamond_wall-3"
+    },
+    {
+      "name": "diamond_wall-4"
+    },
+    {
+      "name": "diamond_wall-5"
+    },
+    {
+      "name": "diamond_wall-6"
+    },
+    {
+      "name": "diamond_wall-7"
+    },
+    {
+      "name": "diamond_wall-8"
+    },
+    {
+      "name": "diamond_wall-9"
+    },
+    {
+      "name": "diamond_wall-10"
+    },
+    {
+      "name": "diamond_wall-11"
+    },
+    {
+      "name": "diamond_wall-12"
+    },
+    {
+      "name": "diamond_wall-13"
+    },
+    {
+      "name": "diamond_wall-14"
+    },
+    {
+      "name": "diamond_wall-15"
+    },
+    {
+      "name": "diamond_wall-21"
+    },
+    {
+      "name": "diamond_wall-23"
+    },
+    {
+      "name": "diamond_wall-29"
+    },
+    {
+      "name": "diamond_wall-31"
+    },
+    {
+      "name": "diamond_wall-38"
+    },
+    {
+      "name": "diamond_wall-39"
+    },
+    {
+      "name": "diamond_wall-46"
+    },
+    {
+      "name": "diamond_wall-47"
+    },
+    {
+      "name": "diamond_wall-55"
+    },
+    {
+      "name": "diamond_wall-63"
+    },
+    {
+      "name": "diamond_wall-74"
+    },
+    {
+      "name": "diamond_wall-75"
+    },
+    {
+      "name": "diamond_wall-78"
+    },
+    {
+      "name": "diamond_wall-79"
+    },
+    {
+      "name": "diamond_wall-95"
+    },
+    {
+      "name": "diamond_wall-110"
+    },
+    {
+      "name": "diamond_wall-111"
+    },
+    {
+      "name": "diamond_wall-127"
+    },
+    {
+      "name": "diamond_wall-137"
+    },
+    {
+      "name": "diamond_wall-139"
+    },
+    {
+      "name": "diamond_wall-141"
+    },
+    {
+      "name": "diamond_wall-143"
+    },
+    {
+      "name": "diamond_wall-157"
+    },
+    {
+      "name": "diamond_wall-159"
+    },
+    {
+      "name": "diamond_wall-175"
+    },
+    {
+      "name": "diamond_wall-191"
+    },
+    {
+      "name": "diamond_wall-203"
+    },
+    {
+      "name": "diamond_wall-207"
+    },
+    {
+      "name": "diamond_wall-223"
+    },
+    {
+      "name": "diamond_wall-239"
+    },
+    {
+      "name": "diamond_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

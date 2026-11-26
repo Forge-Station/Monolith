@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Storage;
 

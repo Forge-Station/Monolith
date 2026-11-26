@@ -4,7 +4,6 @@ using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Construction.Completions
 {

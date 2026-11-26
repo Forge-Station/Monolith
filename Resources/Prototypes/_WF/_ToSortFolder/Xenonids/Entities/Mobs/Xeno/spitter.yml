@@ -1,0 +1,116 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  # WOLFGATE: cut parent RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
+  id: CMXenoSpitter
+  name: Spitter
+  description: A gross, oozing alien of some kind.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpitter
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Spitter/spitter.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      650: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    # WOLFGATE: cut RMCSynthGrabbable (synths)
+  - type: Xeno
+    role: CMXenoSpitter
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabCorrosive
+    - ActionXenoAcidNormal
+    - ActionXenoSpit
+    - ActionXenoChargeSpit
+    - ActionXenoSprayAcid
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: -0.15,0.025
+    unlockAt: 540 # 9 minutes
+  - type: XenoHeavy
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoSentinel
+  - type: XenoAcid
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    plasmaRegenOnWeeds: 4
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - RMCXenoBoiler
+    - CMXenoPraetorian
+  - type: XenoSpit
+  - type: XenoChargeSpit
+  - type: XenoScatteredSpit
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: XenoTailStab
+    inject:
+      RMCMolecularAcid: 2
+    tailDamage:
+      groups:
+        Brute: 36
+  - type: CMArmor
+    xenoArmor: 15
+    explosionArmor: 20
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 25
+  - type: Tackle
+    min: 2
+    max: 6
+    chance: 0.45
+    stunMin: 4
+    stunMax: 5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - HumanoidAppearance # WOLFGATE: humanoids stand in for marines
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCXenoDamageVisuals
+    prefix: spitter
+  # WOLFGATE: cut TacticalMapIcon (tactical map)
+  - type: AcidTrap
+  # WOLFGATE: cut IntelRecoverCorpseObjectiveOnDeath (intel)
+  - type: FixedIdentity
+    name: cm-job-name-xeno-spitter
+  # WOLFGATE: cut RMCSurgeryXenoHeart (RMC medical)
+  - type: VentCrawler
+    ventCrawlIcon: spitter
+  # WOLFGATE: cut RMCActionOrder

@@ -12,6 +12,9 @@ public sealed class FireControlConsoleUpdateEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class FireControlConsoleBoundInterfaceState : BoundUserInterfaceState
 {
+    // WOLFGATE(CombatConsole): carry authoritative groups and countermeasure state.
+    public Content.Shared._WF.CombatConsole.WFCombatConsoleState Combat = new();
+
     public bool Connected;
     public FireControllableEntry[] FireControllables;
     public NavInterfaceState NavState;
@@ -142,12 +145,18 @@ public struct FireControllableEntry
     /// </summary>
     public bool HasManualReload;
 
-    public FireControllableEntry(NetEntity entity, NetCoordinates coordinates, string name, int? ammoCount = null, bool hasManualReload = false)
+    /// <summary>
+    /// Whether this weapon ignores line-of-sight restrictions.
+    /// </summary>
+    public bool IgnoresLos;
+
+    public FireControllableEntry(NetEntity entity, NetCoordinates coordinates, string name, int? ammoCount = null, bool hasManualReload = false, bool ignoresLos = false)
     {
         NetEntity = entity;
         Coordinates = coordinates;
         Name = name;
         AmmoCount = ammoCount;
         HasManualReload = hasManualReload;
+        IgnoresLos = ignoresLos;
     }
 }

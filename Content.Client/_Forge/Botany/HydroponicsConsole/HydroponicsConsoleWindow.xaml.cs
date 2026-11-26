@@ -130,7 +130,7 @@ public sealed partial class HydroponicsConsoleWindow : BaseWindow
 
     private void RebuildViewBar()
     {
-        ViewBar.DisposeAllChildren();
+        ViewBar.RemoveAllChildren();
         ViewBar.AddChild(MakeViewChip(Loc.GetString("hydroponics-console-view-trays"), ConsoleView.Trays));
         ViewBar.AddChild(MakeViewChip(Loc.GetString("hydroponics-console-view-journal", ("count", _journal.Count)), ConsoleView.Journal));
         JournalToolbar.Visible = true;
@@ -142,7 +142,7 @@ public sealed partial class HydroponicsConsoleWindow : BaseWindow
 
     private void RebuildFilterBar()
     {
-        FilterBar.DisposeAllChildren();
+        FilterBar.RemoveAllChildren();
         FilterBar.AddChild(MakeFilterChip(Loc.GetString("hydroponics-console-filter-all"), TrayFilter.All));
         FilterBar.AddChild(MakeFilterChip(Loc.GetString("hydroponics-console-filter-harvest"), TrayFilter.Harvest));
         FilterBar.AddChild(MakeFilterChip(Loc.GetString("hydroponics-console-filter-water"), TrayFilter.LowWater));
@@ -192,7 +192,7 @@ public sealed partial class HydroponicsConsoleWindow : BaseWindow
     private void RebuildList()
     {
         var scroll = ListScroll.VScrollTarget;
-        ListContainer.DisposeAllChildren();
+        ListContainer.RemoveAllChildren();
 
         if (_view == ConsoleView.Journal)
         {
@@ -282,7 +282,7 @@ public sealed partial class HydroponicsConsoleWindow : BaseWindow
 
     private void ShowSelectedDetails()
     {
-        DetailContainer.DisposeAllChildren();
+        DetailContainer.RemoveAllChildren();
 
         if (_view == ConsoleView.Journal)
         {
@@ -524,7 +524,7 @@ public sealed partial class HydroponicsConsoleWindow : BaseWindow
 
     private void ShowEmptyDetails()
     {
-        DetailContainer.DisposeAllChildren();
+        DetailContainer.RemoveAllChildren();
         DetailContainer.AddChild(_styles.Sub(Loc.GetString("hydroponics-console-detail-none")));
     }
 

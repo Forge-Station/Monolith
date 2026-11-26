@@ -1,0 +1,91 @@
+# Mono's expedition PDV mobs and their gear were not in this build. The planet vault's troopers parent these.
+# The kit is the Vanguard uniform and a sidearm or rifle; WFPlanetPdvGear replaces the pack.
+
+- type: startingGear
+  id: PDVMobGearA
+  equipment:
+    jumpsuit: WFRMCUniformPDV
+    back: ClothingBackpackPDV
+    shoes: ClothingShoesBootsCombat
+    head: ClothingHeadHelmetMercenary
+    outerClothing: ClothingOuterArmorBulletproof
+    pocket1: WeaponPistolAnaconda
+
+- type: startingGear
+  id: PDVMobGearB
+  parent: PDVMobGearA
+  equipment:
+    suitstorage: WeaponRifleMolot
+
+- type: startingGear
+  id: PDVMobGearC
+  parent: PDVMobGearA
+  equipment:
+    suitstorage: WeaponRifleWSPR
+
+- type: startingGear
+  id: PDVMobGearD
+  parent: PDVMobGearA
+  equipment:
+    suitstorage: WeaponRifleVympel
+
+- type: entity
+  parent: MobHumanoidHostileBase
+  id: MobPDVBaseA
+  name: vanguard trooper
+  suffix: AI, Hostile, PDV
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateNF
+  - type: RandomHumanoidAppearance
+    randomizeHair: true
+    randomizeName: true
+  - type: Loadout
+    prototypes:
+    - PDVMobGearA
+
+- type: entity
+  parent: MobPDVBaseA
+  id: MobPDVBaseB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes:
+    - PDVMobGearB
+
+- type: entity
+  parent: MobPDVBaseA
+  id: MobPDVBaseC
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes:
+    - PDVMobGearC
+
+- type: entity
+  parent: MobPDVBaseA
+  id: MobPDVBaseD
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes:
+    - PDVMobGearD
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobPDV
+  name: PDV spawner
+  suffix: AI, Hostile, PDV
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+  - type: RandomSpawner
+    prototypes:
+    - MobPDVBaseA
+    - MobPDVBaseB
+    - MobPDVBaseC
+    - MobPDVBaseD

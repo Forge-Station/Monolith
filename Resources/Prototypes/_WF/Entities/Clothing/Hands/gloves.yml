@@ -1,0 +1,9 @@
+#region Asf
+- type: entity
+  parent: ClothingHandsButcherable
+  id: WFAsfClothingHandsGloves
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Hands/gloves.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Hands/gloves.rsi

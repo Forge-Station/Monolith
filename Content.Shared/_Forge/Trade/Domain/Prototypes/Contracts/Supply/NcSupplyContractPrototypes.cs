@@ -45,7 +45,7 @@ public sealed partial class NcSupplyTargetEntry
 ///     Trade contracts Supply: the player brings already existing items and turns them in through
 ///     the current server-authoritative claim/reward flow. No runtime, no spawning, no prediction.
 /// </summary>
-[Prototype("ncSupplyContract")]
+[Prototype]
 public sealed partial class NcSupplyContractPrototype : IPrototype
 {
     [DataField("name", required: true)]

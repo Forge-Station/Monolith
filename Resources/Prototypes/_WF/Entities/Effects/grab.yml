@@ -1,0 +1,16 @@
+- type: entity
+  parent: RMCBaseEffect
+  id: CMEffectGrab
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: grab
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

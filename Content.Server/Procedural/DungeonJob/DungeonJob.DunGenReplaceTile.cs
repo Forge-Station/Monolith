@@ -14,7 +14,7 @@ public sealed partial class DungeonJob
     /// </summary>
     private async Task<Dungeon> GenerateTileReplacementDunGen(ReplaceTileDunGen gen, DungeonData data, HashSet<Vector2i> reservedTiles, Random random)
     {
-        var tiles = _maps.GetAllTilesEnumerator(_gridUid, _grid);
+        var tiles = _maps.GetAllTiles(_gridUid, _grid);
         var replacements = new List<(Vector2i Index, Tile Tile)>();
         var reserved = new HashSet<Vector2i>();
 

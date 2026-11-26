@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Edge piece taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/effects/new_corruption.dmi), rotated and combined by Tools/_WF/Remade/port_assets.py",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall-1"
+    },
+    {
+      "name": "wall-2"
+    },
+    {
+      "name": "wall-3"
+    },
+    {
+      "name": "wall-4"
+    },
+    {
+      "name": "wall-5"
+    },
+    {
+      "name": "wall-6"
+    },
+    {
+      "name": "wall-7"
+    },
+    {
+      "name": "wall-8"
+    },
+    {
+      "name": "wall-9"
+    },
+    {
+      "name": "wall-10"
+    },
+    {
+      "name": "wall-11"
+    },
+    {
+      "name": "wall-12"
+    },
+    {
+      "name": "wall-13"
+    },
+    {
+      "name": "wall-14"
+    },
+    {
+      "name": "wall-15"
+    }
+  ]
+}

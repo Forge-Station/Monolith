@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Gore, organs and veins from DS13-1.0 (https://github.com/DS-13-Dev-Team/DS13-1.0, icons/effects/blood.dmi and spacevines.dmi) and DS13-2.0 (https://github.com/DS-13-Dev-Team/DS13-2.0, necromorph_organ.dmi), recoloured; the rest drawn by Tools/_WF/Remade/port_environment.py",
+  "size": {
+    "x": 32,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "cocoon1"
+    },
+    {
+      "name": "cocoon2"
+    }
+  ]
+}

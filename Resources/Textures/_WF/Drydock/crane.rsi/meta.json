@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate, palette after kyres1's Monolith ship turrets",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carriage"
+    },
+    {
+      "name": "turret"
+    },
+    {
+      "name": "boom_outer"
+    },
+    {
+      "name": "boom_mid"
+    },
+    {
+      "name": "boom_inner"
+    },
+    {
+      "name": "boom_tip"
+    },
+    {
+      "name": "trolley"
+    },
+    {
+      "name": "beacon_on",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "beacon_off"
+    },
+    {
+      "name": "arm"
+    },
+    {
+      "name": "arm_end"
+    }
+  ]
+}

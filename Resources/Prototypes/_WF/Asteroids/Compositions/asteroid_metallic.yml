@@ -1,0 +1,48 @@
+# What each kind of asteroid holds. Every unit of rock mass is one vein of the picked ore, so yields follow the ore
+# prototypes that vein rocks use. Ore weights and the inert share start from each kind's soft mineral table
+# (Resources/Prototypes/_NF/Entities/Markers/Spawners/Random/Salvage/minerals.yml), tilted towards iron and coal, which
+# steel and plasteel need, at the expense of malachite, quartz and salt; each kind keeps its signature ores. Lithium,
+# the economy's main tuning knob, keeps its share and comes mostly from chromite as before. Volatility feeds the
+# overcharge blast.
+
+# Metallic: the rare rich kind, rolled by a few rocks in any cluster. Little plain rock, mostly iron, silver and gold
+# with a chance of diamond, and tough: crack it at high power or with two lasers. Drawn in blue steel with bare plates.
+- type: wfAsteroidComposition
+  id: WFAsteroidMetallic
+  name: wf-asteroid-name-metallic
+  examine: wf-asteroid-examine-metallic
+  look: metallic
+  # Dense ore: each vein drops half again as much, on top of the rock's own yield.
+  oreYield: 1.5
+  minOres: 2
+  maxOres: 3
+  minInert: 0.12
+  maxInert: 0.25
+  minResistance: 0.45
+  maxResistance: 0.6
+  minInstability: 0.05
+  maxInstability: 0.25
+  ores:
+  - ore: NFOreSteel
+    weight: 6
+    color: "#c98a6b"
+  - ore: NFOreSilver
+    weight: 5
+    color: "#d8dde3"
+  - ore: NFOreGold
+    weight: 5
+    color: "#ffd040"
+  - ore: CopperOre
+    weight: 3
+    color: "#3fb58a"
+  - ore: NFOreUranium
+    weight: 2
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: OreDiamond
+    weight: 1.5
+    color: "#9ff0ff"
+  - ore: NFOreBluespace
+    weight: 0.5
+    color: "#3d7bff"
+    volatility: 0.5

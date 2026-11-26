@@ -1,0 +1,78 @@
+- type: entity
+  parent: BasePDA
+  id: WFAsfEnvoyPDA
+  components:
+  - type: Pda
+    id: WFAsfEnvoyIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-envoy
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-envoy
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#EBC913"
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfEnforcerPDA
+  components:
+  - type: Pda
+    id: WFAsfEnforcerIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-enforcer
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-enforcer
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#F2EEFB"
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfFieldResearcherPDA
+  components:
+  - type: Pda
+    id: WFAsfFieldResearcherIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-researcher
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-researcher
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#C9BFE0"
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfColonistPDA
+  components:
+  - type: Pda
+    id: WFAsfColonistIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-colonist
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-colonist
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"

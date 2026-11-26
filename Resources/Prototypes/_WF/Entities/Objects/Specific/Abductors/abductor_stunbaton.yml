@@ -1,0 +1,15 @@
+# Their batons come out switched on, an NPC doesn't stop to thumb the switch, and do no harm. WFCrewGrabberSystem keeps them charged in crew hands.
+- type: entity
+  parent: Stunbaton
+  id: WFCrewAbductorBaton
+  suffix: NPC crew
+  components:
+  - type: ItemToggle
+    activated: true
+  - type: MeleeWeapon
+    angle: 0
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 0
+    animation: WeaponArcSlash

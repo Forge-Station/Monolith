@@ -1,0 +1,125 @@
+- type: entity
+  parent: BaseHealingItem
+  id: BaseMedicalPatch
+  abstract: true
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Onyx/Objects/Medical/medical_patch.rsi
+    state: MakeshiftPatch
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+  - type: ExaminableSolution
+    solution: drink
+  - type: Sticky
+    stickDelay: 3
+    unstickDelay: 2
+    stickPopupStart: medical-patch-stick-start
+    stickPopupSuccess: medical-patch-stick-success
+    unstickPopupStart: medical-patch-remove-start
+    unstickPopupSuccess: medical-patch-remove-success
+    whitelist:
+      components:
+      - Bloodstream
+  - type: StickyVisualizer
+  - type: Appearance
+  - type: MixableSolution
+    solution: drink
+  - type: MedicalPatch
+  - type: Tag
+    tags:
+    - MedicalPatch
+
+- type: entity
+  parent: BaseHealingItem
+  id: UsedMedicalPatch
+  name: used patch
+  description: ...ew.
+  components:
+  - type: Sprite
+    sprite: _Onyx/Objects/Medical/medical_patch.rsi
+    state: GenericPatchSmallUsed
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 100
+
+- type: entity
+  parent: UsedMedicalPatch
+  id: UsedMedicalPatchMakeshift
+  components:
+  - type: Sprite
+    sprite: _Onyx/Objects/Medical/medical_patch.rsi
+    state: MakeshiftPatchUsed
+
+- type: entity
+  parent: BaseMedicalPatch
+  id: MedicalPatchMakeshift
+  name: makeshift patch
+  description: This doesn't look hygienic. Hopefully it does the job.
+  components:
+  - type: MedicalPatch
+    updateTime: 2
+    singleUse: true
+    trashObject: UsedMedicalPatchMakeshift
+  - type: Construction
+    graph: MedicalPatchMakeshift
+    node: medicalPatchMakeshift
+
+- type: constructionGraph
+  id: MedicalPatchMakeshift
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: medicalPatchMakeshift
+      steps:
+      - material: Cloth
+        amount: 1
+        doAfter: 5
+  - node: medicalPatchMakeshift
+    entity: MedicalPatchMakeshift
+
+- type: construction
+  id: MedicalPatchMakeshift
+  graph: MedicalPatchMakeshift
+  icon: # WOLFGATE(Wolfmed): Wolfgate's construction prototype requires an icon; Onyx's linter did not
+    sprite: _Onyx/Objects/Medical/medical_patch.rsi
+    state: MakeshiftPatch
+  startNode: start
+  targetNode: medicalPatchMakeshift
+  category: construction-category-tools
+  objectType: Item
+
+- type: constructionGraph
+  id: SilkPatchMakeshift
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: silkPatchMakeshift
+      steps:
+      - material: WebSilk
+        amount: 4
+        doAfter: 5
+  - node: silkPatchMakeshift
+    entity: MedicalPatchMakeshift
+
+- type: construction
+  id: SilkPatchMakeshift
+  graph: SilkPatchMakeshift
+  icon: # WOLFGATE(Wolfmed): Wolfgate's construction prototype requires an icon; Onyx's linter did not
+    sprite: _Onyx/Objects/Medical/medical_patch.rsi
+    state: MakeshiftPatch
+  startNode: start
+  targetNode: silkPatchMakeshift
+  category: construction-category-tools
+  objectType: Item
+  entityWhitelist:
+    tags:
+    - SpiderCraft

@@ -1,0 +1,139 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from NovaSector at https://github.com/NovaSector/NovaSector/blob/7499f47bfc6b768a72c922be46971ebfccf794a1/modular_nova/modules/medical/icons/on_limb_overlays.dmi. Converted to RSI for Wolfgate.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "gauze_head",
+            "directions": 4
+        },
+        {
+            "name": "gauze_chest",
+            "directions": 4
+        },
+        {
+            "name": "gauze_r_arm",
+            "directions": 4
+        },
+        {
+            "name": "gauze_l_arm",
+            "directions": 4
+        },
+        {
+            "name": "gauze_r_leg",
+            "directions": 4
+        },
+        {
+            "name": "gauze_l_leg",
+            "directions": 4
+        },
+        {
+            "name": "gauze_r_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "gauze_l_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_head",
+            "directions": 4
+        },
+        {
+            "name": "splint_chest",
+            "directions": 4
+        },
+        {
+            "name": "splint_r_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_l_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_r_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_l_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_r_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_l_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_head",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_chest",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_r_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_l_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_r_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_l_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_r_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_tribal_l_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_head",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_chest",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_r_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_l_arm",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_r_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_l_leg",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_r_leg_digitigrade",
+            "directions": 4
+        },
+        {
+            "name": "splint_improv_l_leg_digitigrade",
+            "directions": 4
+        }
+    ]
+}

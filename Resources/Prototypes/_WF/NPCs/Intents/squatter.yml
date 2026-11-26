@@ -1,0 +1,11 @@
+# He only ever beats you down: no gun, no killing blow, and he leaves a downed man be.
+- type: wfNpcIntentSet
+  id: WFIntentsSquatter
+  intents:
+  - kind: BeatDown
+    weight: 1
+  cooldown: 300
+  beatLines:
+  - wf-ship-squatter-beat-1
+  - wf-ship-squatter-beat-2
+  - wf-ship-squatter-beat-3

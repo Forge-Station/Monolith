@@ -1,0 +1,16 @@
+# Avali animated sprites
+# Wolfgate: ported from HardLight
+- type: marking
+  id: AvaliTailBaseAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    avali_tail_wag_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    avali_tail_wag_BEHIND: avali_tail_wag_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_RMC14/Mobs/Avali/avali_parts.rsi # WOLFGATE - split art
+      state: avali_tail_wag_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_RMC14/Mobs/Avali/avali_parts.rsi # WOLFGATE - south frame on TailBehind
+      state: avali_tail_wag_BEHIND

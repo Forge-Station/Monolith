@@ -1,0 +1,68 @@
+- type: loadout
+  id: WFAsfLoadoutUniformService
+  equipment:
+    jumpsuit: WFAsfClothingUniformService
+
+- type: loadout
+  id: WFAsfLoadoutUniformColonist
+  equipment:
+    jumpsuit: WFAsfClothingUniformColonist
+
+- type: loadout
+  id: WFAsfLoadoutUniformResearcher
+  equipment:
+    jumpsuit: WFAsfClothingUniformResearcher
+
+- type: loadout
+  id: WFAsfLoadoutUniformCasual
+  equipment:
+    jumpsuit: WFAsfClothingUniformCasual
+
+- type: loadout
+  id: WFAsfLoadoutUniformMedic
+  equipment:
+    jumpsuit: WFAsfClothingUniformMedic
+
+- type: loadout
+  id: WFAsfLoadoutUniformFormal
+  equipment:
+    jumpsuit: WFAsfClothingUniformFormal
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitService
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformColonist
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  fallbacks:
+  - WFAsfLoadoutUniformService
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitResearcher
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformColonist
+  fallbacks:
+  - WFAsfLoadoutUniformResearcher
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitColonist
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformColonist
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  fallbacks:
+  - WFAsfLoadoutUniformColonist

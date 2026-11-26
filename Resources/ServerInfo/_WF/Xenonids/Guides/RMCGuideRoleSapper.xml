@@ -1,0 +1,20 @@
+<Document>
+  #Sapper, Tier 3
+  <GuideEntityEmbed Entity="RMCXenoBoilerSapper"/>
+  ##Playing as a Sapper
+  Become a supportive damage-dealer, trading greater area damage potential for shorter cooldowns and tools for setting up and executing ambushes. Catch hosts that venture too far from safety with your Deploy Traps, blast any who get too close with your Acid Shotgun or Acid Tail Stab, and quickly chip away at the durability of the host frontline with your Acid Mine.
+
+  You inherit the weaknesses of the Boiler, so stay behind your sisters.
+
+  Due to high acid reserves, the Sapper glows in the dark making it seen by any host easily.
+
+  ##Abilities:
+  - [bold][color=#E61919]PASSIVE[/color][/bold]: Glows in the dark.
+  - [bold][color=#E61919]PASSIVE[/color][/bold]: You gain Insight when you hit mobs with your Acid Shotgun. These will empower your next Deploy Traps if you gain 10. Hitting a mob stuck in your traps will instantly grant you 10 stacks.
+  - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved.
+  - [bold]Toggle Long Range Sight[/bold]: See further in all directions.
+  - [bold]Acid Shotgun[/bold]: A short ranged blast of nine acid pellets that can deal significant damage to mobs and grants a stack of Insight per pellet that hits. Deals more damage to trapped mobs and maxes stacks of Insight.
+  - [bold]Deploy Traps[/bold]: Deploy a line of traps that will snare any mobs that step on them and increase the damage your abilities do while they are snared. If it is cast while empowered, it snares for longer and also empowers your next Acid Mine.
+  - [bold]Acid Mine[/bold]: Trigger a remote detonation that will explode after a moment of delay, dealing damage to mobs, structures and emplacements. If it is empowered, it deals more damage and applies a lingering acid to mobs.
+
+</Document>

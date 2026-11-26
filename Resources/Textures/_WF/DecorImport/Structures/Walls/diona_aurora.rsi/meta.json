@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "diona0",
+      "directions": 4
+    },
+    {
+      "name": "diona1",
+      "directions": 4
+    },
+    {
+      "name": "diona2",
+      "directions": 4
+    },
+    {
+      "name": "diona3",
+      "directions": 4
+    },
+    {
+      "name": "diona4",
+      "directions": 4
+    },
+    {
+      "name": "diona5",
+      "directions": 4
+    },
+    {
+      "name": "diona6",
+      "directions": 4
+    },
+    {
+      "name": "diona7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

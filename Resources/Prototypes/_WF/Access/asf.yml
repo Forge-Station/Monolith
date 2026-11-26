@@ -1,0 +1,45 @@
+- type: accessLevel
+  id: WFAsf
+  name: wf-asf-access-crew
+
+- type: accessLevel
+  id: WFAsfBridge
+  name: wf-asf-access-bridge
+
+- type: accessLevel
+  id: WFAsfSecurity
+  name: wf-asf-access-security
+
+- type: accessLevel
+  id: WFAsfCommand
+  name: wf-asf-access-command
+
+# Colonist
+- type: accessGroup
+  id: WFAsfCrew
+  tags:
+  - WFAsf
+
+# Field Researcher
+- type: accessGroup
+  id: WFAsfResearch
+  tags:
+  - WFAsf
+  - WFAsfBridge
+
+# Enforcer
+- type: accessGroup
+  id: WFAsfSecurity
+  tags:
+  - WFAsf
+  - WFAsfBridge
+  - WFAsfSecurity
+
+# Envoy
+- type: accessGroup
+  id: WFAsfCommand
+  tags:
+  - WFAsf
+  - WFAsfBridge
+  - WFAsfSecurity
+  - WFAsfCommand

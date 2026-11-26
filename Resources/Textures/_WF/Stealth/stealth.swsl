@@ -1,0 +1,36 @@
+light_mode unshaded;
+
+// Stealth without SCREEN_TEXTURE. Z-levels render each level in its own pass, so a screen copy taken while
+// the player's own map draws holds only the levels below it, and the upstream shader showed that through a
+// cloaked sprite. This fades the sprite's own alpha instead, with a faint shimmer while partly visible.
+
+uniform highp float visibility; // 1 fully visible, -1.5 fully hidden
+uniform mediump vec2 reference;
+uniform lowp float glow; // how visible strongly green pixels (a visor) stay while cloaked; 0 hides them too
+
+const mediump float time_scale = 0.25;
+const mediump float distance_scale = 0.125;
+
+void fragment() {
+
+    highp vec4 sprite = zTexture(UV);
+
+    if (sprite.a == 0.0) {
+        discard;
+    }
+
+    // Same distortion field as the upstream shader, anchored to the parent so it doesn't crawl as you move.
+    highp vec2 coords = (FRAGCOORD.xy + reference) * distance_scale;
+    highp float w = sin(TIME + (coords.x + coords.y + 2.0*sin(TIME*time_scale) * sin(TIME*time_scale + coords.x - coords.y)) );
+
+    lowp float solid = clamp(visibility, 0.0, 1.0);
+    // Fades out over the -1.5..0 band, so a fully cloaked sprite draws nothing at all.
+    lowp float fading = clamp((visibility + 1.5) / 1.5, 0.0, 1.0);
+    lowp float shimmer = (0.5 + 0.5 * w) * 0.3 * fading * (1.0 - solid);
+
+    // A pixel far greener than it is red or blue is a visor or eye lens: it keeps glowing through the field.
+    lowp float greenness = sprite.g - max(sprite.r, sprite.b);
+    lowp float visor = smoothstep(0.2, 0.35, greenness) * glow * (0.85 + 0.15 * w);
+
+    COLOR = vec4(sprite.rgb, sprite.a * max(max(solid, shimmer), visor));
+}

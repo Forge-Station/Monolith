@@ -1,0 +1,34 @@
+wf-pdv-rank-nefer = Nfr.
+wf-pdv-rank-onbasi = Onb.
+wf-pdv-rank-cavus = Çvş.
+wf-pdv-rank-bascavus = BşÇvş.
+wf-pdv-rank-mulazim-sani = MlzS.
+wf-pdv-rank-mulazim-evvel = MlzE.
+wf-pdv-rank-yuzbasi = Yzb.
+wf-pdv-rank-kolagasi = Kol.
+wf-pdv-rank-binbasi = Bnb.
+wf-pdv-rank-kaymakam = Kym.
+wf-pdv-rank-miralay = Mrl.
+wf-pdv-rank-vizier = Vzr.
+wf-pdv-rank-sihhiye-neferi = S.Nfr.
+wf-pdv-rank-sihhiye-onbasi = S.Onb.
+wf-pdv-rank-sihhiye-cavus = S.Çvş.
+wf-pdv-rank-tabip-mulazim = Tbp.Mlz.
+
+# Rank names in the loadout's chat rank tab
+wf-pdv-rank-name-nefer = Nefer (Private)
+wf-pdv-rank-name-onbasi = Onbaşı (Corporal)
+wf-pdv-rank-name-cavus = Çavuş (Sergeant)
+wf-pdv-rank-name-bascavus = Başçavuş (Sergeant Major)
+wf-pdv-rank-name-mulazim-i-sani = Mülazım-ı Sani (Second Lieutenant)
+wf-pdv-rank-name-mulazim-i-evvel = Mülazım-ı Evvel (First Lieutenant)
+wf-pdv-rank-name-yuzbasi = Yüzbaşı (Captain)
+wf-pdv-rank-name-kolagasi = Kolağası (Senior Captain)
+wf-pdv-rank-name-grand-vizier = Grand Vizier
+wf-pdv-rank-name-binbasi = Binbaşı (Major)
+wf-pdv-rank-name-kaymakam = Kaymakam (Lieutenant Colonel)
+wf-pdv-rank-name-miralay = Miralay (Colonel)
+wf-pdv-rank-name-sihhiye-neferi = Sıhhiye Neferi (Medical Private)
+wf-pdv-rank-name-sihhiye-onbasisi = Sıhhiye Onbaşısı (Medical Corporal)
+wf-pdv-rank-name-sihhiye-cavusu = Sıhhiye Çavuşu (Medical Sergeant)
+wf-pdv-rank-name-tabip-mulazim = Tabip Mülazım (Surgeon Lieutenant)

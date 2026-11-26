@@ -4,6 +4,52 @@
   name: Urist McPositronic
   description: A positronic brain in a metal body.
   components:
+  # WOLFGATE(Wolfmed): P5-1/P5-2, PROTO Q: IPCs become wound hosts.
+  # Onyx does the same on its own MobIpc (ONYX Resources/Prototypes/Corvax/Body/Species/ipc.yml:92-113).
+  - type: WoundHost
+  # WOLFGATE(Wolfmed): P5-D10/U1: IPCs get pain shock, as Onyx's do.
+  # Onyx puts PainShockTarget on BaseSpeciesMob (ONYX Body/species_base.yml:54),
+  # which its MobIpc parents - Onyx IPCs DO get pain shock. Wolfgate put it on BaseMobSpeciesOrganic
+  # (P2-D7, Entities/Mobs/Species/base.yml:256), which MobIPC does not inherit, so it is restated here.
+  # IpcBodyPartProfile leaves canFeelPain at its default (true). EmoteOnDamage is deliberately NOT added:
+  # Onyx's copy uses the broken `emotes:` key (DECISIONS 8.2-3) and MobIpc's allowedEmotes are Boop/Whirr.
+  - type: PainShockTarget
+  # WOLFGATE(Wolfmed): P5-2/P5-D4/U16: an IPC's bloodstream carries its own fluid.
+  # Onyx's bloodReferenceSolution (Oil 250) maps onto Wolfgate's classic
+  # bloodReagent + bloodMaxVolume; WG's BloodstreamComponent has no bloodReferenceSolution field.
+  # Wound bleeding writes BleedAmount through BloodstreamSystem.TryModifyWoundBleedProjection (GUARD E3)
+  # and TryModifyBloodLevel spills BloodReagent - so an IPC leaks its fluid, not blood. SolutionContainerManager
+  # is not declared: BloodstreamSystem's EnsureSolution EnsureComp's it. No circulatoryStream:
+  # IpcBodyPartProfile stays on the primary Organic stream, exactly as Onyx's does (P5-D3).
+  # chemicalMaxVolume: 0 (U16) because an IPC has no metabolizer - OrganIPCPump's Metabolizer block is
+  # commented out (_EinsteinEngines/Body/Organs/ipc.yml) - so a 250u chemical solution would be a trap.
+  # InjectableSolution is deliberately NOT added; Onyx gets it by parenting MobBloodstream
+  # (Entities/Mobs/base.yml), Wolfgate does not, and nothing can metabolise what is injected.
+  # bloodlossDamage uses Bloodloss, never Heat (P5-D6): Heat is in WoundHostComponent.LocalizedDamageTypes,
+  # so it would be routed to a part, create IpcMechanicalDamageWound severity and bleed at chance 1 - a
+  # self-reinforcing leak loop. Bloodloss stays systemic and self-limits via bloodlossHealDamage.
+  - type: Bloodstream
+    bloodReagent: WFWolfmedHydraulicFluid # WOLFGATE(Wolfmed): playtest 3 IPC 2: was Oil, lamp oil a lit welder set alight in its own puddle
+    bloodMaxVolume: 250
+    bloodRefreshAmount: 0.5 # WOLFGATE(Synthetics): slow hydraulic regeneration, as the synthetic biotype overlay
+    chemicalMaxVolume: 0
+    # WOLFGATE(Wolfmed): fluid loss deals an IPC no damage.
+    # An IPC never takes Airloss-group damage: Bloodloss reads as oxygen loss on the analyzer, and it does not
+    # breathe. WFSiliconWolfmed no longer accepts Bloodloss either.
+    bloodlossDamage:
+      types: {}
+    bloodlossHealDamage:
+      types: {}
+  # WOLFGATE(Wolfmed): P5-D5/P5-D5b: IPCs use the WFSiliconWolfmed damage container.
+  # Silicon's types plus Wolfmed's own. Bloodloss was added in phase 5 and taken out again (see
+  # _WF/Wolfmed/Damage/containers.yml): it sits in the Airloss group, so an IPC read as losing oxygen. PROTO S/T added
+  # WFSiliconWolfmed to the welder and nanite applicator in WP13-1, so repair keeps working
+  # (WeldingHealableSystem.cs:33-35). damageModifierSet is inherited per key from
+  # PlayerSiliconHumanoidBase:26-28 (component data merges field by field); restated here only so the pair
+  # is readable in one place.
+  - type: Damageable
+    damageContainer: WFSiliconWolfmed
+    damageModifierSet: IPC
   - type: LanguageKnowledge # Einstein Engines - Languages
     speaks:
     - TauCetiBasic
@@ -65,10 +111,18 @@
     factions:
     - NanoTrasen
   - type: StandingState
+  # WOLFGATE(Wolfmed) START: HUD/BRAIN: Critical is back.
+  # On a wound host CONSC owns the mob state and writes Critical
+  # for an unconscious body; with the state missing a chassis could never be knocked out or shut down, so
+  # a pulled cell or a destroyed pump left a machine walking while its readout said STANDBY.
+  # MobThresholds names no Critical rung, so damage totals still cannot put it there.
   - type: MobState
     allowedStates:
     - Alive
-    - Dead # why did EE just not remove the state and instead made them crit at 119.999???
+    # - Dead # why did EE just not remove the state and instead made them crit at 119.999???
+    - Critical
+    - Dead
+  # WOLFGATE END
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -79,14 +133,22 @@
       Dead: BorgDead
   - type: TypingIndicator
     proto: robot
+  # WOLFGATE(Wolfmed) START: D22/P5-D11: the Blunt gib moves from 400 to 1500.
+  # Body damage on a wound host is the sum of every part's positive damage
+  # (WoundDamageProjectionSystem.RefreshBodyDamage:156-201), so the old flat Blunt 400 is reachable
+  # from routine limb damage on a corpse - the same reason BaseMobSpeciesOrganic was raised to 1500
+  # (Entities/Mobs/Species/base.yml:270-278). MobThresholds is NOT touched: death stays at a
+  # projected total of 100.
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 400
+        # damage: 400
+        damage: 1500
       behaviors:
       - !type:GibBehavior { }
+  # WOLFGATE END
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.9 #Forge-Change 0.7=>0.9

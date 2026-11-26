@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by Zethine (discord: synthetic_086) South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tail_default_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_default_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_seer_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_seer_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_seer_overlay_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_feathers_seer_overlay_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_fins_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_fins_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_fins_overlay_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_fins_overlay_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_nub_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_nub_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_nub_overlay_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_nub_overlay_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_spiny_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_spiny_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_spiny_overlay_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_spiny_overlay_FRONT",
+      "directions": 4
+    }
+  ]
+}

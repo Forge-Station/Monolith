@@ -145,8 +145,8 @@ namespace Content.Client.Cargo.UI
         /// </summary>
         public void PopulateOrders(IEnumerable<CargoOrderData> orders)
         {
-            Orders.DisposeAllChildren();
-            Requests.DisposeAllChildren();
+            Orders.RemoveAllChildren();
+            Requests.RemoveAllChildren();
 
             foreach (var order in orders)
             {

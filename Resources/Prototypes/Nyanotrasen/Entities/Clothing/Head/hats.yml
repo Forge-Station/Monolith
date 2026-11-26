@@ -46,6 +46,7 @@
   - type: Clothing
     sprite: Nyanotrasen/Clothing/Head/Hats/tinfoil.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Radiation: 0.95
@@ -83,6 +84,7 @@
   - type: Clothing
     sprite: Nyanotrasen/Clothing/Head/Helmets/men.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.80
@@ -102,6 +104,7 @@
   - type: Item
     size: Small
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.80

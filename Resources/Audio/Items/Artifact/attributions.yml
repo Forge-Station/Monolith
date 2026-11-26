@@ -2,3 +2,8 @@
   license: "CC-BY-4.0"
   copyright: "Created by Garuda1982, split into individual files and converted to OGG and Mono by EmoGarbage404 (github)"
   source: "https://freesound.org/people/Garuda1982/sounds/560310/"
+# WOLFGATE(Xenoarch): forced activation sound from the wizden rework
+- files: ["artifact-force-activated1.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by brunoboselli, split and converted by fildrance"
+  source: "https://freesound.org/people/brunoboselli/sounds/457294/"

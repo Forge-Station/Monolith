@@ -1,0 +1,161 @@
+uniform highp vec2 size;
+uniform highp vec2 fracOrigin;
+uniform highp vec2 axisA;
+uniform highp vec2 axisC;
+uniform highp vec2 cell0;
+uniform highp float spacing;
+uniform highp float along;
+uniform highp float density;
+uniform highp float streak;
+uniform highp float thick;
+uniform highp float wobble;
+uniform highp float rate;
+uniform highp float soft;
+uniform highp float mode;
+uniform highp float time;
+uniform highp float seed;
+uniform highp vec4 tint;
+uniform sampler2D mask;
+uniform highp vec2 maskOffset;
+uniform highp vec2 maskSize;
+uniform highp float invert;
+uniform highp vec2 dir;
+
+highp float hash(highp vec2 p) {
+    p = mod(p, 1024.0);
+    return fract(sin(dot(p, vec2(127.1, 311.7)) + seed * 17.13) * 43758.5453);
+}
+
+// Each cell holds at most one streak, its head at a hashed spot and its tail back along dir. A streak's head lies
+// ahead of its pixels along dir, so only this cell and the three cells on that side can reach the pixel.
+highp float rain(highp vec2 cell, highp vec2 f) {
+    highp vec2 cellPx = vec2(spacing, along) * 32.0;
+    highp float room = max(cellPx.y - streak, 0.0);
+    highp vec2 ahead = vec2(dir.x < 0.0 ? -1.0 : 1.0, dir.y < 0.0 ? -1.0 : 1.0);
+    highp float best = 0.0;
+    for (int i = 0; i < 4; i++) {
+        highp vec2 n = vec2(mod(float(i), 2.0), floor(float(i) / 2.0)) * ahead;
+        highp vec2 c = cell + n;
+        if (hash(c) >= density)
+            continue;
+
+        highp vec2 head = vec2((0.2 + 0.6 * hash(c + vec2(13.1, 3.7))) * cellPx.x,
+            hash(c + vec2(41.7, 9.2)) * room + streak) + n * cellPx;
+        highp vec2 q = head - f;
+        highp float t = dot(q, dir);
+        highp float side = abs(q.x * dir.y - q.y * dir.x);
+        if (t >= 0.0 && t < streak && side < thick * 0.5)
+            best = max(best, 0.35 + 0.65 * (1.0 - t / streak));
+    }
+
+    return best;
+}
+
+highp float snow(highp vec2 cell, highp vec2 f, highp float h) {
+    if (h >= density)
+        return 0.0;
+
+    highp float margin = wobble + thick;
+    highp float ox = margin + hash(cell + vec2(13.1, 3.7)) * max(spacing * 32.0 - 2.0 * margin, 0.0);
+    highp float oy = margin + hash(cell + vec2(41.7, 9.2)) * max(along * 32.0 - 2.0 * margin, 0.0);
+    ox += sin(time * 1.7 + h * 40.0) * wobble;
+
+    highp float dx = abs(f.x - ox);
+    highp float dy = abs(f.y - oy);
+    highp float r = thick * 0.5;
+
+    if (thick >= 3.0)
+        return (dx + dy < r + 0.5) ? 1.0 : 0.0;
+
+    return (max(dx, dy) < r) ? 1.0 : 0.0;
+}
+
+highp float splash(highp vec2 cell, highp vec2 f, highp float h) {
+    highp float period = 1.0 / rate;
+    highp float lt = time + h * period;
+    highp float k = floor(lt / period);
+    highp vec2 key = cell + vec2(k * 7.0, k * 3.0);
+
+    if (hash(key) >= density)
+        return 0.0;
+
+    highp float phase = fract(lt / period) * period;
+    highp float duration = 0.32;
+    if (phase >= duration)
+        return 0.0;
+
+    highp float frame = floor(phase / duration * 4.0);
+    highp float ox = (0.25 + 0.5 * hash(key + vec2(3.3, 5.1))) * spacing * 32.0;
+    highp float oy = (0.25 + 0.5 * hash(key + vec2(8.9, 1.4))) * along * 32.0;
+    highp float dx = f.x - ox;
+    highp float dy = (f.y - oy) * 2.0;
+    highp float d = sqrt(dx * dx + dy * dy);
+
+    if (frame < 0.5)
+        return d < 0.75 ? 1.0 : 0.0;
+
+    if (frame > 2.5)
+        return (abs(abs(dx) - 4.0) < 0.75 && abs(dy) < 0.75) ? 0.45 : 0.0;
+
+    highp float radius = frame * 1.5;
+    if (abs(d - radius) >= 0.75)
+        return 0.0;
+
+    return 1.0 - frame * 0.25;
+}
+
+// The mask is blurred ahead of time. Red is cover that fades softly, green is walls that cut almost hard, blue is open
+// ground. Splashes invert the open ground, so they fade out where the ground stops.
+highp float cover(highp vec2 pos) {
+    highp vec2 uv = pos / maskSize;
+    highp vec3 m = texture(mask, uv).rgb;
+    highp float soft = invert > 0.5 ? 1.0 - m.b : m.r;
+    return max(soft, m.g);
+}
+
+highp float vnoise(highp vec2 x) {
+    highp vec2 i = floor(x);
+    highp vec2 f = fract(x);
+    f = f * f * (3.0 - 2.0 * f);
+    highp float a = hash(i);
+    highp float b = hash(i + vec2(1.0, 0.0));
+    highp float c = hash(i + vec2(0.0, 1.0));
+    highp float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+highp float fog(highp vec2 q) {
+    highp float n = 0.5 * vnoise(q)
+        + 0.3 * vnoise(q * 2.0 + vec2(17.3, 5.1))
+        + 0.2 * vnoise(q * 4.0 + vec2(-8.7, 31.9));
+    highp float edge = 1.0 - density;
+    return smoothstep(edge, edge + max(soft, 0.001), n);
+}
+
+void fragment() {
+    highp vec2 local = UV2 * size + fracOrigin;
+    highp vec2 p = (floor(local * 32.0) + 0.5) / 32.0;
+    highp float u = cell0.x + dot(p, axisC) / spacing;
+    highp float v = cell0.y + dot(p, axisA) / along;
+    highp vec2 cell = floor(vec2(u, v));
+    highp vec2 f = vec2(fract(u) * spacing, fract(v) * along) * 32.0;
+    highp float alpha;
+
+    if (mode < 0.5)
+        alpha = rain(cell, f);
+    else if (mode < 1.5)
+        alpha = snow(cell, f, hash(cell));
+    else if (mode < 2.5)
+        alpha = splash(cell, f, hash(cell));
+    else
+        alpha = fog(vec2(u, v));
+
+    if (alpha <= 0.0)
+        discard;
+
+    alpha *= clamp(1.0 - cover(UV2 * size + maskOffset) * 2.0, 0.0, 1.0);
+    if (alpha <= 0.0)
+        discard;
+
+    COLOR = vec4(tint.rgb, tint.a * alpha);
+}

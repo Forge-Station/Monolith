@@ -12,6 +12,7 @@
   components:
   - type: Sprite
     layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -20,6 +21,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -37,12 +40,15 @@
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "enum.HumanoidVisualLayers.Wings" ] # For IPC wings porting from SimpleStation
     - map: [ "balaclava" ]
     - map: [ "mask" ]
     - map: [ "head" ]
     - map: [ "neck" ]
+    - map: [ "neck2" ]
+    - map: [ "neck3" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+    - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
     - map: [ "helmetcover" ]
     - map: [ "helmetattachment" ]
     - map: [ "pocket1" ]
@@ -67,10 +73,15 @@
     - "enum.HumanoidVisualLayers.RLeg"
     damageOverlayGroups:
       Brute:
-        sprite: Mobs/Effects/brute_damage.rsi
+        # WOLFGATE(Wolfmed) START: WP11-4, P3-4 Option B: the damage overlays use Onyx's wound art, severed parts included.
+        # Onyx's rsis have the same 6 states and attribution as the stock ones.
+        # sprite: Mobs/Effects/brute_damage.rsi
+        sprite: _Onyx/Wounds/brute_damage.rsi
         color: "#FF0000"
       Burn:
-        sprite: Mobs/Effects/burn_damage.rsi
+        # sprite: Mobs/Effects/burn_damage.rsi
+        sprite: _Onyx/Wounds/burn_damage.rsi
+        # WOLFGATE END
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:
@@ -82,6 +93,14 @@
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
+  # WOLFGATE(Xenonids): species can host facehuggers, be devoured by xenos and are slowed by their weeds
+  - type: Infectable
+  - type: Devourable
+  # WOLFGATE(Xenonids): xeno slows (slowing spit, neurotoxin) need RMC's species modifier; RMC's marine values
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 2
+    superSlowModifier: 4
+  - type: AffectableByWeeds
   - type: HumanoidAppearance
     species: Human
   - type: SlowOnDamage
@@ -119,7 +138,17 @@
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
       effects:
-      - !type:WashReaction #Forge-Change
+      - !type:WashCreamPieReaction
+      - !type:WashChemicalBurns # WOLFGATE(Wolfmed): W4: rinses caustic residue off a wound host.
+      - !type:WolfmedCoolOverheating # WOLFGATE(Wolfmed): W6: cools a cybernetic limb running hot.
+    # WOLFGATE(Wolfmed) START: W5: antiseptics clean open wounds on touch.
+    # Swabbing an open wound before it festers is most of the prevention in the infection model; water alone
+    # does not sterilise anything, so it is a separate reaction.
+    - reagents: [Ethanol, Bleach, Spaceacillin]
+      methods: [Touch]
+      effects:
+      - !type:WolfmedCleanWounds
+    # WOLFGATE END
   - type: StatusEffects
     allowed:
     - Stun
@@ -173,7 +202,6 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Dna
-  - type: Genome
   - type: MindContainer
   - type: MindExaminable
   - type: CanEnterCryostorage
@@ -234,7 +262,6 @@
   # Mono
   - type: ShipNpcTarget
     needGrid: NoGrid
-  - type: BodyPhysiology # Forge-change
 
 - type: entity
   save: false
@@ -247,6 +274,36 @@
   id: BaseMobSpeciesOrganic
   abstract: true
   components:
+  # WOLFGATE(Wolfmed) START: D20-D22, P2-D7, P2-D9: organic species get wound hosting, pain and a Blunt gib threshold.
+  # Wolfmed phase 1 (D21/D32). Non-organic descendants (protogen) have WoundHost stripped by
+  # Content.Shared/_WF/Wolfmed/Body/WolfmedWoundHostExclusionSystem.cs; see the manifest for the full list.
+  - type: WoundHost # D20: localizedDamageTypes left at Onyx's default, Caustic included
+  # Wolfmed phase 2 (P2-D7). ONYX Resources/Prototypes/Body/species_base.yml:54 (<Onyx-PainShock>);
+  # placed here rather than on BaseMobSpecies so only organic profiles carry it. Inert on D32-excluded
+  # protogen: PainComponent is only ever ensured on wound hosts.
+  - type: PainShockTarget
+  # Wolfmed phase 2 (P2-D9). ONYX Resources/Prototypes/Body/species_base.yml:124-133
+  # (<Onyx-PainSounds>). Key corrected from Onyx's `emotes:` to `emotesThreshold:` - Onyx's own YAML never
+  # bound (the field is EmotesThreshold; RT drops unknown mapping keys). `emotes:` is left empty so
+  # EmoteOnDamageSystem.OnDamage still returns at its Emotes.Count == 0 check - no double emote.
+  # Gated to wound hosts in C# by P2-D22, not by this block.
+  - type: EmoteOnDamage
+    emotesThreshold:
+      50: [ Scream ]
+      80: [ Scream, Crying ]
+    emoteChance: 0.6
+    withChat: true
+    hiddenFromChatWindow: true
+    emoteCooldown: 8
+  - type: Destructible # D22: part damage now projects onto the mob, so 400 is reachable from routine limb damage
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 1500
+      behaviors:
+      - !type:GibBehavior { }
+  # WOLFGATE END
   - type: Satiation
     satiations:
       Hunger:
@@ -268,11 +325,15 @@
     allowedStates:
     - Alive
     damageCap: 20
-    damage:
-      types:
-        Heat: -0.07
-      groups:
-        Brute: -0.07
+    # WOLFGATE(Wolfmed) START: D29: passive regen is neutralised on wound hosts.
+    # Onyx's per-part-profile recovery is the only passive heal on wound hosts.
+    # damage:
+    #   types:
+    #     Heat: -0.07
+    #   groups:
+    #     Brute: -0.07
+    damage: {}
+    # WOLFGATE END
   - type: Fingerprint
   - type: Blindable
   # Other
@@ -349,6 +410,7 @@
     noRot: true
     # TODO BODY Turn these into individual body parts?
     layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -357,6 +419,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: ["jumpsuit"]
     - map: [ "balaclava" ]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
@@ -377,6 +441,7 @@
     - map: [ "id" ]
     - map: [ "back" ]
     - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
@@ -391,7 +456,6 @@
   - type: Appearance
   - type: HumanoidAppearance
     species: Human
-  - type: TTS # Corvax-TTS — preview dummies parent InventoryBase, not BaseMob; SetTTSVoice requires this
   - type: Body
     prototype: Human
     requiredLegs: 2

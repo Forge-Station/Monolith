@@ -9,7 +9,7 @@ namespace Content.Shared._Forge.Trade;
 ///     Retrieval route source preset. Source owns only where cargo appears.
 ///     The actual cargo prototypes/counts live on ncRetrievalContract.cargo.
 /// </summary>
-[Prototype("ncRetrievalSourcePreset")]
+[Prototype]
 public sealed partial class NcRetrievalSourcePresetPrototype : IPrototype
 {
     /// <summary>If true, cargo entries are spawned when the contract is taken.</summary>
@@ -76,7 +76,7 @@ public sealed partial class NcRetrievalDestinationTargetData
 ///     Retrieval route destination preset. The target type derives delivery behavior:
 ///     StoreUi = claim at trader, MarkerGroup = cargo in radius, ContainerGroup = cargo inside turn-in container.
 /// </summary>
-[Prototype("ncRetrievalDestinationPreset")]
+[Prototype]
 public sealed partial class NcRetrievalDestinationPresetPrototype : IPrototype
 {
     [DataField("target", required: true)]
@@ -122,7 +122,7 @@ public enum NcRetrievalProofReissuePolicy : byte
 }
 
 /// <summary>Proof behavior preset. Proof is a transferable bearer receipt by default.</summary>
-[Prototype("ncRetrievalProofPreset")]
+[Prototype]
 public sealed partial class NcRetrievalProofPresetPrototype : IPrototype
 {
     [DataField("prototype", required: true)]
@@ -164,7 +164,7 @@ public sealed partial class NcRetrievalPinpointerData
 }
 
 /// <summary>Guidance preset. Guidance never controls spawn/claim; it only gives hints and pinpointer behavior.</summary>
-[Prototype("ncRetrievalGuidancePreset")]
+[Prototype]
 public sealed partial class NcRetrievalGuidancePresetPrototype : IPrototype
 {
     [DataField("sourceHint")]
@@ -204,7 +204,7 @@ public sealed partial class NcRetrievalRouteClaimData
 ///     Route preset composes repeated mechanics: source, destination, claim behavior, guidance and delivery flags.
 ///     Contracts keep only cargo + route + reward.
 /// </summary>
-[Prototype("ncRetrievalRoutePreset")]
+[Prototype]
 public sealed partial class NcRetrievalRoutePresetPrototype : IPrototype
 {
     [DataField("source")]

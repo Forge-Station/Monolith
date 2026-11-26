@@ -1,0 +1,49 @@
+# Splints (V5). Field treatment for a fracture: strapped over a broken arm or leg they reach the same
+# Reduced state a bonesetter reaches on the table, at a quarter of the penalty, without opening the limb.
+# Mending is still bone gel surgery or a bone-knitting reagent. Consumed on use.
+
+- type: entity
+  parent: BaseItem
+  id: WFWolfmedSplint
+  name: splint
+  description: A moulded polymer brace with two straps. Holds a broken limb still so it stops grinding itself apart.
+  components:
+  - type: Sprite
+    sprite: _WF/Wolfmed/Objects/Medical/splint.rsi
+    state: splint
+  - type: Item
+    size: Small
+  - type: WolfmedSplint
+    delay: 4
+    beginSound:
+      path: "/Audio/Items/Medical/ointment_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    endSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: StaticPrice
+    price: 30
+
+# The thing you make when medbay is out. A rod and a bandage do the same job, more slowly and with less
+# left of the bandage.
+- type: entity
+  parent: WFWolfmedSplint
+  id: WFWolfmedSplintImprovised
+  name: improvised splint
+  description: A metal rod bound to a limb with torn cloth. Crude, and better than a bone moving on its own.
+  components:
+  - type: Sprite
+    sprite: _WF/Wolfmed/Objects/Medical/splint.rsi
+    state: splint-improvised
+  - type: WolfmedSplint
+    delay: 7
+    overlay: SplintImprovised # G3: reads as a rod and a rag on the limb, not a medical brace.
+  - type: StaticPrice
+    price: 5
+  - type: Construction
+    graph: WFWolfmedSplintImprovised
+    node: splint

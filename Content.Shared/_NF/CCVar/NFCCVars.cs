@@ -96,10 +96,11 @@ public sealed class NFCCVars
         CVarDef.Create("nf14.worldgen.optional_stations", 6, CVar.SERVERONLY);
 
     /// <summary>
-    /// The multiplier to add to distance spawning calculations for a smidge of server setting variance
+    /// How far points of interest spawn, relative to the distances in their prototypes. 2 puts them twice as far out,
+    /// across the doubled sector.
     /// </summary>
     public static readonly CVarDef<float> POIDistanceModifier =
-        CVarDef.Create("nf14.worldgen.distance_modifier", 1f, CVar.SERVERONLY);
+        CVarDef.Create("nf14.worldgen.distance_modifier", 2f, CVar.SERVERONLY);
 
     /// <summary>
     /// The rough minimum distance between POIs in meters.
@@ -336,4 +337,16 @@ public sealed class NFCCVars
     /// </summary>
     public static readonly CVarDef<float> CrateGenerationGridBoundsScale =
         CVarDef.Create("nf14.events.crate_generation_grid_bounds_scale", 0.6f, CVar.SERVERONLY);
+
+    // WOLFGATE(Xenoarch) START: Frontier's xenoarch cvar, ported with the rework
+    /*
+     * Xenoarchaeology
+     */
+
+    /// <summary>
+    /// If true, every artifact node can only be activated once.
+    /// </summary>
+    public static readonly CVarDef<bool> XenoarchSingleUseNodes =
+        CVarDef.Create("nf14.xenoarch.single_use_nodes", true, CVar.REPLICATED);
+    // WOLFGATE END
 }

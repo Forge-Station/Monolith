@@ -5,6 +5,7 @@
   id: BaseAlertOrder
   order:
     - category: Health
+    - category: WFWolfmedPain # WOLFGATE(Wolfmed): VISUALS: the pain HUD sits under the health doll
     - category: Stamina
     - alertType: SuitPower
     - alertType: ModsuitPower # Goobstation - Modsuits

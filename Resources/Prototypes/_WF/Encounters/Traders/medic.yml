@@ -1,0 +1,34 @@
+# A medical supplier selling clinic overstock below station prices, out of a medical hull. One guard and a gunner.
+- type: wfEncounter
+  id: WFEncounterMedicTrader
+  name: wf-encounter-name-trader-medic
+  announcement: wf-encounter-announce-trader-medic
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1.5
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Triage
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderMedic ]
+    skill: Regular
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

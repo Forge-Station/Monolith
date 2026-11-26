@@ -565,10 +565,234 @@ GunneryServer: GunneryServerMedium # Mono
 
 # Frontier: put Frontier-related migrations in nf_migration.yml. Thank you.
 
-# 2026-10-09
-StationAdminBankATMBlackMarket: null # Forge-change-del - delet all notice with LedgerCartridgeRework
-ComputerBlackMarketBankATM: null # Forge-change-del - delet all notice with LedgerCartridgeRework
+# WOLFGATE(Prototypes) START: WF prototype id prefix
+# 2026-09-23
+# ActionWFHarpoonPayOut: WFActionHarpoonPayOut  # still spawned as ActionWFHarpoonPayOut; WFActionHarpoonPayOut is not an entity
+# ActionWFHarpoonReelIn: WFActionHarpoonReelIn  # still spawned as ActionWFHarpoonReelIn; WFActionHarpoonReelIn is not an entity
+# ActionWFHarpoonRelease: WFActionHarpoonRelease  # still spawned as ActionWFHarpoonRelease; WFActionHarpoonRelease is not an entity
+# MobCanine: WFMobCanine  # still spawned as MobCanine; WFMobCanine is not an entity
+# MobCanineDummy: WFMobCanineDummy  # still spawned as MobCanineDummy; WFMobCanineDummy is not an entity
+# PowerCordClampHV: WFPowerCordClampHV  # still spawned as PowerCordClampHV; WFPowerCordClampHV is not an entity
+# PowerCordClampLV: WFPowerCordClampLV  # still spawned as PowerCordClampLV; WFPowerCordClampLV is not an entity
+# PowerCordClampMV: WFPowerCordClampMV  # still spawned as PowerCordClampMV; WFPowerCordClampMV is not an entity
+# PowerCordCoilHV: WFPowerCordCoilHV  # still spawned as PowerCordCoilHV; WFPowerCordCoilHV is not an entity
+# PowerCordCoilHV1: WFPowerCordCoilHV1  # still spawned as PowerCordCoilHV1; WFPowerCordCoilHV1 is not an entity
+# PowerCordCoilLV: WFPowerCordCoilLV  # still spawned as PowerCordCoilLV; WFPowerCordCoilLV is not an entity
+# PowerCordCoilLV1: WFPowerCordCoilLV1  # still spawned as PowerCordCoilLV1; WFPowerCordCoilLV1 is not an entity
+# PowerCordCoilMV: WFPowerCordCoilMV  # still spawned as PowerCordCoilMV; WFPowerCordCoilMV is not an entity
+# PowerCordCoilMV1: WFPowerCordCoilMV1  # still spawned as PowerCordCoilMV1; WFPowerCordCoilMV1 is not an entity
+# RopeAttachPointDebug: WFRopeAttachPointDebug  # still spawned as RopeAttachPointDebug; WFRopeAttachPointDebug is not an entity
+# RopeBungeeCoil: WFRopeBungeeCoil  # still spawned as RopeBungeeCoil; WFRopeBungeeCoil is not an entity
+# RopeBungeeCoil1: WFRopeBungeeCoil1  # still spawned as RopeBungeeCoil1; WFRopeBungeeCoil1 is not an entity
+# RopeCoilDebug: WFRopeCoilDebug  # still spawned as RopeCoilDebug; WFRopeCoilDebug is not an entity
+# RopeCoilDebug1: WFRopeCoilDebug1  # still spawned as RopeCoilDebug1; WFRopeCoilDebug1 is not an entity
+# RopeHempCoil: WFRopeHempCoil  # still spawned as RopeHempCoil; WFRopeHempCoil is not an entity
+# RopeHempCoil1: WFRopeHempCoil1  # still spawned as RopeHempCoil1; WFRopeHempCoil1 is not an entity
+# RopeSteelCableCoil: WFRopeSteelCableCoil  # still spawned as RopeSteelCableCoil; WFRopeSteelCableCoil is not an entity
+# RopeSteelCableCoil1: WFRopeSteelCableCoil1  # still spawned as RopeSteelCableCoil1; WFRopeSteelCableCoil1 is not an entity
+# RopeSyntheticCoil: WFRopeSyntheticCoil  # still spawned as RopeSyntheticCoil; WFRopeSyntheticCoil is not an entity
+# RopeSyntheticCoil1: WFRopeSyntheticCoil1  # still spawned as RopeSyntheticCoil1; WFRopeSyntheticCoil1 is not an entity
+# RopeTowCableCoil: WFRopeTowCableCoil  # still spawned as RopeTowCableCoil; WFRopeTowCableCoil is not an entity
+# RopeTowCableCoil1: WFRopeTowCableCoil1  # still spawned as RopeTowCableCoil1; WFRopeTowCableCoil1 is not an entity
+# ShipHarpoon: WFShipHarpoon  # still spawned as ShipHarpoon; WFShipHarpoon is not an entity
+# ShipHarpoonTurret: WFShipHarpoonTurret  # still spawned as ShipHarpoonTurret; WFShipHarpoonTurret is not an entity
+# ShipHarpoonTurretFlatpack: WFShipHarpoonTurretFlatpack  # still spawned as ShipHarpoonTurretFlatpack; WFShipHarpoonTurretFlatpack is not an entity
+ShipVoucherMedicalResponder: null  # WFShipVoucherMedicalResponder is not an entity prototype
+# TetherAnchorEye: WFTetherAnchorEye  # still spawned as TetherAnchorEye; WFTetherAnchorEye is not an entity
+# TetherInstaller: WFTetherInstaller  # still spawned as TetherInstaller; WFTetherInstaller is not an entity
+# VendingMachineWolfgate: WFVendingMachineWolfgate  # still spawned as VendingMachineWolfgate; WFVendingMachineWolfgate is not an entity
+WallmountShipPaSpeaker: null  # WFWallmountShipPaSpeaker is not an entity prototype
+WolfgateErtSpawner: null  # WFErtSpawner is not an entity prototype
+# 2026-09-25 Wolfmed
+ActionWolfmedCallForHelp: WFActionWolfmedCallForHelp
+ActionWolfmedCheckYourself: WFActionWolfmedCheckYourself
+ActionWolfmedLastWords: WFActionWolfmedLastWords
+ActionWolfmedPlayDead: WFActionWolfmedPlayDead
+ActionWolfmedSuccumb: WFActionWolfmedSuccumb
+ActionWolfmedWaitAsGhost: WFActionWolfmedWaitAsGhost
+AutodocAutofixModule: WFAutodocAutofixModule
+AutodocDefibModule: WFAutodocDefibModule
+AutodocMachineCircuitboard: WFAutodocMachineCircuitboard
+AutodocProgramDiskCavity: WFAutodocProgramDiskCavity
+AutodocProgramDiskLimb: WFAutodocProgramDiskLimb
+AutodocProgramDiskNeuro: WFAutodocProgramDiskNeuro
+AutodocProgramDiskTransplant: WFAutodocProgramDiskTransplant
+CrateAutodocPrograms: WFCrateAutodocPrograms
+CrateWolfmedDebug: WFCrateWolfmedDebug
+MachineAutodoc: WFMachineAutodoc
+SpaceacillinChemistryBottle: WFSpaceacillinChemistryBottle
+SurgeryCloseEvisceration: WFSurgeryCloseEvisceration
+SurgeryGraftSkin: WFSurgeryGraftSkin
+SurgeryHealAmputationConsequence: WFSurgeryHealAmputationConsequence
+SurgeryHealBrain: WFSurgeryHealBrain
+SurgeryHealEyes: WFSurgeryHealEyes
+SurgeryHealHeart: WFSurgeryHealHeart
+SurgeryHealKidneys: WFSurgeryHealKidneys
+SurgeryHealLiver: WFSurgeryHealLiver
+SurgeryHealLungs: WFSurgeryHealLungs
+SurgeryHealStomach: WFSurgeryHealStomach
+SurgeryMendFracture: WFSurgeryMendFracture
+SurgeryRelocateJoint: WFSurgeryRelocateJoint
+SurgeryRemoveEmbeddedObjects: WFSurgeryRemoveEmbeddedObjects
+SurgeryRepairArtery: WFSurgeryRepairArtery
+SurgeryRepairBrain: WFSurgeryRepairBrain
+SurgeryRepairCore: WFSurgeryRepairCore
+SurgeryRepairSynthCore: WFSurgeryRepairSynthCore
+SurgeryRepairTendon: WFSurgeryRepairTendon
+SurgeryReplaceServo: WFSurgeryReplaceServo
+SurgeryRewireChassis: WFSurgeryRewireChassis
+SurgeryStepClampArtery: WFSurgeryStepClampArtery
+SurgeryStepClampEvisceration: WFSurgeryStepClampEvisceration
+SurgeryStepCloseEvisceration: WFSurgeryStepCloseEvisceration
+SurgeryStepExtractEmbedded: WFSurgeryStepExtractEmbedded
+SurgeryStepGraftSkin: WFSurgeryStepGraftSkin
+SurgeryStepHealAmputationConsequence: WFSurgeryStepHealAmputationConsequence
+SurgeryStepHealBrain: WFSurgeryStepHealBrain
+SurgeryStepHealEyes: WFSurgeryStepHealEyes
+SurgeryStepHealHeart: WFSurgeryStepHealHeart
+SurgeryStepHealKidneys: WFSurgeryStepHealKidneys
+SurgeryStepHealLiver: WFSurgeryStepHealLiver
+SurgeryStepHealLungs: WFSurgeryStepHealLungs
+SurgeryStepHealStomach: WFSurgeryStepHealStomach
+SurgeryStepMendFracture: WFSurgeryStepMendFracture
+SurgeryStepRelocateJoint: WFSurgeryStepRelocateJoint
+SurgeryStepRepairArtery: WFSurgeryStepRepairArtery
+SurgeryStepRepairBrain: WFSurgeryStepRepairBrain
+SurgeryStepRepairCore: WFSurgeryStepRepairCore
+SurgeryStepRepairSynthCore: WFSurgeryStepRepairSynthCore
+SurgeryStepRepairTendon: WFSurgeryStepRepairTendon
+SurgeryStepReplaceServo: WFSurgeryStepReplaceServo
+SurgeryStepReseatCore: WFSurgeryStepReseatCore
+SurgeryStepRewireChassis: WFSurgeryStepRewireChassis
+SurgeryStepSeatChassisPlating: WFSurgeryStepSeatChassisPlating
+SurgeryStepSetBone: WFSurgeryStepSetBone
+SurgeryStepStopInternalBleeding: WFSurgeryStepStopInternalBleeding
+SurgeryStepSutureBleeding: WFSurgeryStepSutureBleeding
+SurgeryStepUnseatCore: WFSurgeryStepUnseatCore
+SurgeryStepWeldChassis: WFSurgeryStepWeldChassis
+SurgeryStepWeldChassisBreach: WFSurgeryStepWeldChassisBreach
+SurgeryStopBleeding: WFSurgeryStopBleeding
+SurgeryStopInternalBleeding: WFSurgeryStopInternalBleeding
+SurgeryTendWoundsBruteDeep: WFSurgeryTendWoundsBruteDeep
+SurgeryTendWoundsBurnDeep: WFSurgeryTendWoundsBurnDeep
+SurgeryWeldChassis: WFSurgeryWeldChassis
+SurgeryWeldChassisBreach: WFSurgeryWeldChassisBreach
+WolfmedAnalgesicPen: WFWolfmedAnalgesicPen
+WolfmedAnalgesicPill: WFWolfmedAnalgesicPill
+WolfmedAntisepticSpray: WFWolfmedAntisepticSpray
+WolfmedBloodMistLarge: WFWolfmedBloodMistLarge
+WolfmedBloodMistMedium: WFWolfmedBloodMistMedium
+WolfmedBloodMistSmall: WFWolfmedBloodMistSmall
+WolfmedBloodSplatWall: WFWolfmedBloodSplatWall
+WolfmedDebugBottleIbuprofen: WFWolfmedDebugBottleIbuprofen
+WolfmedDebugBottleKetorolac: WFWolfmedDebugBottleKetorolac
+WolfmedDebugBottleOsteogen: WFWolfmedDebugBottleOsteogen
+WolfmedDebugBottleOxycodone: WFWolfmedDebugBottleOxycodone
+WolfmedDebugBottleTramadol: WFWolfmedDebugBottleTramadol
+WolfmedHitSplatter: WFWolfmedHitSplatter
+WolfmedHydraulicFluidPack: WFWolfmedHydraulicFluidPack
+WolfmedNaloxonePen: WFWolfmedNaloxonePen
+WolfmedOpiateChemistryBottle: WFWolfmedOpiateChemistryBottle
+WolfmedOpiatePen: WFWolfmedOpiatePen
+WolfmedShrapnelFragment: WFWolfmedShrapnelFragment
+WolfmedSkinGraft: WFWolfmedSkinGraft
+WolfmedSparkBurstLarge: WFWolfmedSparkBurstLarge
+WolfmedSparkBurstMedium: WFWolfmedSparkBurstMedium
+WolfmedSparkBurstSmall: WFWolfmedSparkBurstSmall
+WolfmedSpentRound: WFWolfmedSpentRound
+WolfmedSplint: WFWolfmedSplint
+WolfmedSplintImprovised: WFWolfmedSplintImprovised
+WolfmedStimPen: WFWolfmedStimPen
+# WOLFGATE END
 
+# WOLFGATE(OldVessels) START: the classic Windreign gave way to the one Monolith brought back
+# 2026-09-25
+WFWindreignCarrierComputer: null
+# WOLFGATE END
+
+# WOLFGATE START: Monolith#4816 renamed the WL-01 suit and helmet without a migration
+# 2026-10-08
+ClothingOuterHardsuitMercenaryWarlord: ClothingOuterHardsuitWarlord
+ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord
+# WOLFGATE END
+
+
+# WOLFGATE(Avali) START: WF prefix on the Avali brain and bio-synthetic limbs
+# 2026-10-09
+OrganAvaliBrain: null  # WFOrganAvaliBrain is not an entity prototype
+BioSynthAvaliHeadEmpty: null  # WFBioSynthAvaliHeadEmpty is not an entity prototype
+BioSynthAvaliLeftArm: null  # WFBioSynthAvaliLeftArm is not an entity prototype
+BioSynthAvaliRightArm: null  # WFBioSynthAvaliRightArm is not an entity prototype
+BioSynthAvaliLeftHand: null  # WFBioSynthAvaliLeftHand is not an entity prototype
+BioSynthAvaliRightHand: null  # WFBioSynthAvaliRightHand is not an entity prototype
+BioSynthAvaliLeftLeg: null  # WFBioSynthAvaliLeftLeg is not an entity prototype
+BioSynthAvaliRightLeg: null  # WFBioSynthAvaliRightLeg is not an entity prototype
+BioSynthAvaliLeftFoot: null  # WFBioSynthAvaliLeftFoot is not an entity prototype
+BioSynthAvaliRightFoot: null  # WFBioSynthAvaliRightFoot is not an entity prototype
+# WOLFGATE END
+
+# WOLFGATE(ClownCosmetics) START: WF prefix on the ported clown and mime clothing
+ClothingHeadHatCircusClown: null  # WFClothingHeadHatCircusClown is not an entity prototype
+ClothingUniformCircusClown: null  # WFClothingUniformCircusClown is not an entity prototype
+ClothingUniformJokester: null  # WFClothingUniformJokester is not an entity prototype
+ClothingOuterCoatJokester: null  # WFClothingOuterCoatJokester is not an entity prototype
+ClothingUniformJesterEvil: null  # WFClothingUniformJesterEvil is not an entity prototype
+ClothingHeadJesterEvilHat: null  # WFClothingHeadJesterEvilHat is not an entity prototype
+ClothingNeckRuffle: null  # WFClothingNeckRuffle is not an entity prototype
+ClothingMaskClownNose: null  # WFClothingMaskClownNose is not an entity prototype
+ClothingShoesCircus: null  # WFClothingShoesCircus is not an entity prototype
+ClothingShoesJokester: null  # WFClothingShoesJokester is not an entity prototype
+ClothingShoesJesterEvilJanglers: null  # WFClothingShoesJesterEvilJanglers is not an entity prototype
+ClothingHeadHatMimeBowler: null  # WFClothingHeadHatMimeBowler is not an entity prototype
+ClothingOuterCoatPufferMime: null  # WFClothingOuterCoatPufferMime is not an entity prototype
+ClothingUniformJumpsuitMimeCropped: null  # WFClothingUniformJumpsuitMimeCropped is not an entity prototype
+ClothingUniformJumpskirtMimeCropped: null  # WFClothingUniformJumpskirtMimeCropped is not an entity prototype
+ClothingUniformJumpsuitMimeNouveau: null  # WFClothingUniformJumpsuitMimeNouveau is not an entity prototype
+ClothingUniformJumpskirtMimeNouveau: null  # WFClothingUniformJumpskirtMimeNouveau is not an entity prototype
+ClothingShoesMimeBoots: null  # WFClothingShoesMimeBoots is not an entity prototype
+CandyClownUniformSuit: null  # WFCandyClownUniformSuit is not an entity prototype
+StripedClownUniformSuit: null  # WFStripedClownUniformSuit is not an entity prototype
+SpottedClownUniformSuit: null  # WFSpottedClownUniformSuit is not an entity prototype
+ClothingUniformJumpsuitPerformerClown: null  # WFClothingUniformJumpsuitPerformerClown is not an entity prototype
+ClothingUniformJumpskirtPerformerClown: null  # WFClothingUniformJumpskirtPerformerClown is not an entity prototype
+ClothingUniformJumpsuitClownFormal: null  # WFClothingUniformJumpsuitClownFormal is not an entity prototype
+ClothingUniformJumpskirtClownFormal: null  # WFClothingUniformJumpskirtClownFormal is not an entity prototype
+ClothingUniformJumpsuitPerformerMime: null  # WFClothingUniformJumpsuitPerformerMime is not an entity prototype
+ClothingUniformJumpskirtPerformerMime: null  # WFClothingUniformJumpskirtPerformerMime is not an entity prototype
+ClothingUniformJumpsuitMimeSuaveWhite: null  # WFClothingUniformJumpsuitMimeSuaveWhite is not an entity prototype
+ClothingUniformJumpsuitMimeSuaveBlack: null  # WFClothingUniformJumpsuitMimeSuaveBlack is not an entity prototype
+MimeFrillsUniformSuit: null  # WFMimeFrillsUniformSuit is not an entity prototype
+ClothingMaskSusMime: null  # WFClothingMaskSusMime is not an entity prototype
+ClothingUnderSocksMime: null  # WFClothingUnderSocksMime is not an entity prototype
+ClothingMaskMimeSecurity: null  # WFClothingMaskMimeSecurity is not an entity prototype
+CoolCoyoteClothesSexyclown: null  # WFCoolCoyoteClothesSexyclown is not an entity prototype
+CoolCoyoteClothesSexymime: null  # WFCoolCoyoteClothesSexymime is not an entity prototype
+# WOLFGATE END
+
+# WOLFGATE(Xenoarch) START: wizden xenoarch rework replaced the old artifact types
+SimpleXenoArtifact: ComplexXenoArtifact
+MediumXenoArtifact: ComplexXenoArtifact
+SimpleXenoArtifactItem: ComplexXenoArtifactItem
+MediumXenoArtifactItem: ComplexXenoArtifactItem
+VariedXenoArtifactItem: ComplexXenoArtifactItem
+# WOLFGATE END
+
+# WOLFGATE(DecorImport) START: duplicate flesh wall art merged into the TauCeti meatland wall
+# 2026-10-26
+GoonSetpiecesBloodwall: null  # TauCetiMeatlandWall is not an entity prototype
+# WOLFGATE END
+
+# WOLFGATE(DecorImport) START: bamboo wall cut from the import
+TgMineralBamboo: null
+# WOLFGATE END
+
+# WOLFGATE(ShipArmor) START: adamantite walls renamed to durasteel
+# 2026-11-03
+WFWallAdamantite: WFWallDurasteel
+WFWallAdamantiteDiagonal: WFWallDurasteelDiagonal
+WFWallAdamantiteCapital: WFWallDurasteelCapital
+WFWallAdamantiteDiagonalCapital: WFWallDurasteelDiagonalCapital
+# WOLFGATE END
 # 2026-10-14
 PoweredLightSodium: PoweredlightSodium
 PoweredLightExterior: PoweredlightExterior

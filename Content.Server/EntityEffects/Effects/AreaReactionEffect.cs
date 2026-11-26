@@ -12,7 +12,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects;
 

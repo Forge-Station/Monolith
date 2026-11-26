@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By GitHub Mspaintwizard Discord 426969028796350485",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "xeno_curl",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spike",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spined",
+      "directions": 4
+    }
+  ]
+}

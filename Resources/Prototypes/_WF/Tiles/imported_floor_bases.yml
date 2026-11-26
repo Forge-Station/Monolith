@@ -1,0 +1,139 @@
+# Imported planet floors (Goon, Polaris, Nova, Aurora, Nebula, Chomp, Bay, Cit, RMC, Tg) were never
+# brought over as their own sprites. These parents let the Wolfgate biome tiles inherit a floor we do have:
+# dirt, grass, snow, ice, sand, basalt, or flesh. The biome children still add weather and subfloor.
+
+- type: tile
+  id: PolarisFloorOutdoorsDirt
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: PolarisFloorOutdoorsMud
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: CitFloorSpooktimeDirtpatch
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: FloorPlanetDirtCrocus
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: NebulaFloorDry
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: NebulaFloorClay
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: NebulaFloorShrouded
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: AuroraFloorCaveAdhomai
+  parent: FloorPlanetDirt
+
+- type: tile
+  id: FloorPlanetGrassCrocus
+  parent: FloorPlanetGrass
+
+- type: tile
+  id: NovaFloorGrassLavaland
+  parent: FloorPlanetGrass
+
+- type: tile
+  id: GoonFloorSwampgrass
+  parent: FloorPlanetGrass
+
+- type: tile
+  id: GoonFloorSnowrough
+  parent: FloorSnow
+
+- type: tile
+  id: GoonFloorSnowcalm
+  parent: FloorSnow
+
+- type: tile
+  id: GoonFloorWaterIceRough
+  parent: FloorIce
+
+- type: tile
+  id: RMCPlanetIce0
+  parent: FloorIce
+
+- type: tile
+  id: AuroraFloorExoplanetIceDark
+  parent: FloorIce
+
+- type: tile
+  id: BayFloorWaterShallowChlorineLiquid
+  parent: FloorIce
+
+- type: tile
+  id: NebulaFloorRockSand
+  parent: FloorDesert
+
+- type: tile
+  id: RMCPlanetSandWet
+  parent: FloorDesert
+
+- type: tile
+  id: ChompFloorOutdoorsRocksCetus
+  parent: FloorDesert
+
+- type: tile
+  id: ChompFloorOutdoorsDesertPlanetGravel
+  parent: FloorDesert
+
+- type: tile
+  id: RMCPlanetRedDesertBase
+  parent: FloorDesert
+
+- type: tile
+  id: RMCPlanetRedDesertRock
+  parent: FloorDesert
+
+- type: tile
+  id: RMCPlanetRedDesertRock1
+  parent: FloorDesert
+
+- type: tile
+  id: TgFloorSandstone
+  parent: FloorDesert
+
+- type: tile
+  id: NovaFloorPoolCobbleWateryrock
+  parent: FloorDesert
+
+- type: tile
+  id: ChompFloorOutdoorsLavalandAsh
+  parent: FloorBasalt
+
+- type: tile
+  id: ChompFloorOutdoorsLavalandAshrock
+  parent: FloorBasalt
+
+- type: tile
+  id: BayFloorWaterShallowTar
+  parent: FloorBasalt
+
+- type: tile
+  id: AuroraFloorExoplanetCrystal
+  parent: FloorBasalt
+
+- type: tile
+  id: NovaFloorMeatFresh
+  parent: FloorFlesh
+
+- type: tile
+  id: NovaFloorBoneMeaty
+  parent: FloorFlesh
+
+- type: tile
+  id: NovaFloorBoneSpine
+  parent: FloorFlesh
+
+- type: tile
+  id: NovaFloorBoneStraight
+  parent: FloorFlesh

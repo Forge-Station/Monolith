@@ -1,0 +1,6 @@
+# Inspection: the marked cargo aboard a stopped smuggler.
+- type: entity
+  parent: CrateGenericSteel
+  id: WFContractSmuggledCargo
+  name: suspect cargo crate
+  description: A crate with a doctored manifest. Inspectors want a look inside.

@@ -51,6 +51,15 @@ public sealed partial class HumanoidProfileEditor
         _ttsTab?.SetSelectedVoice(voiceId);
     }
 
+    private void SetVoice(string voiceId)
+    {
+        if (Profile == null)
+            return;
+
+        Profile = Profile.WithVoice(voiceId);
+        SetDirty();
+    }
+
     private void OnTTSPreviewRequested(string voiceId)
     {
         _entManager.System<TTSSystem>().RequestPreviewTTS(voiceId);

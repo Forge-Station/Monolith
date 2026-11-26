@@ -92,9 +92,24 @@ namespace Content.Shared.Chat
         Unspecified = 1 << 15,
 
         /// <summary>
+        ///     Event staff chat.
+        /// </summary>
+        EventChat = 1 << 16,
+
+        /// <summary>
+        ///     Subtle emote, heard only by people nearby who are paying attention.
+        /// </summary>
+        Subtle = 1 << 17,
+
+        /// <summary>
+        ///     Subtle out-of-character chat.
+        /// </summary>
+        SubtleOOC = 1 << 18,
+
+        /// <summary>
         ///     Channels considered to be IC.
         /// </summary>
-        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual | CollectiveMind | Notifications,
+        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual | CollectiveMind | Notifications | Subtle,
 
         AdminRelated = Admin | AdminAlert | AdminChat,
     }

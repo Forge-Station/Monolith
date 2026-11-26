@@ -2,7 +2,6 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.EffectConditions;
 

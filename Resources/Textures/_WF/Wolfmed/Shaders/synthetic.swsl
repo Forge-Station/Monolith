@@ -1,0 +1,32 @@
+// The screen pass behind the synthetic diagnostics readout: a red phosphor edge tint instead of the organic
+// vignette, an occasional single-frame slice tear, and the drained standby screen.
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp float tint;    // 0 none .. 1 full red rim
+uniform highp float glitch;  // 0..1 horizontal offset of one slice
+uniform highp float slice;   // where that slice sits, 0 top .. 1 bottom
+uniform highp float standby; // 0..1 dim blue standby screen
+
+void fragment() {
+    highp vec2 coord = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
+
+    // One narrow band of the image shifted sideways for a single frame.
+    highp float band = 1.0 - smoothstep(0.0, 0.03, abs(coord.y - slice));
+    coord.x += band * glitch * 0.035;
+    highp vec4 tex = zTextureSpec(SCREEN_TEXTURE, clamp(coord, vec2(0.001, 0.001), vec2(0.999, 0.999)));
+    highp vec3 colour = tex.rgb;
+
+    // Phosphor rim: the mechanical answer to the damage vignette.
+    highp float dist = length((coord - vec2(0.5, 0.5)) * vec2(1.0, 0.85));
+    highp float edge = smoothstep(0.30, 0.74, dist) * clamp(tint, 0.0, 1.0);
+    colour = mix(colour, vec3(0.65, 0.06, 0.03), edge * 0.5);
+    colour += vec3(0.18, 0.015, 0.008) * edge;
+
+    // A faint horizontal scan across the whole view, stronger the louder the tint.
+    colour += vec3(0.06, 0.008, 0.004) * edge * (0.5 + 0.5 * sin(coord.y * 420.0));
+
+    // Standby: everything drains to a dim blue-grey while the chassis reboots.
+    highp float grey = dot(colour, vec3(0.299, 0.587, 0.114));
+    colour = mix(colour, vec3(grey * 0.30, grey * 0.42, grey * 0.54), clamp(standby, 0.0, 1.0));
+
+    COLOR = vec4(colour, tex.a);
+}

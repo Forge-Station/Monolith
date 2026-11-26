@@ -72,100 +72,176 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_default_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_default_BEHIND: tail_default_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_default
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_default_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_default_BEHIND
 
 - type: marking
   id: HydrakinTailNub
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_nub_BEHIND: TailBehind
+    tail_nub_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_nub_BEHIND: tail_nub_FRONT
+    tail_nub_overlay_BEHIND: tail_nub_overlay_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_nub
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_nub_overlay
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_nub_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_nub_overlay_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_nub_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_nub_overlay_BEHIND
 
 - type: marking
   id: HydrakinTailFeathersUnpainted
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_feathers_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_feathers_BEHIND: tail_feathers_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_feathers
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_feathers_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_feathers_BEHIND
 
 - type: marking
   id: HydrakinTailFeathers
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_feathers_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_feathers_BEHIND: tail_feathers_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_feathers
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_feathers_FRONT
   - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
     state: tail_feathers_overlay
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_feathers_BEHIND
 
 - type: marking
   id: HydrakinTailSpinyUnpainted
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    tail_spiny_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_spiny_BEHIND: tail_spiny_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_spiny
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art, anatomy zone only
+    state: tail_spiny_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: tail_spiny_BEHIND
 
 - type: marking
   id: HydrakinTailSpiny
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    tail_spiny_BEHIND: TailBehind
+    tail_spiny_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_spiny_BEHIND: tail_spiny_FRONT
+    tail_spiny_overlay_BEHIND: tail_spiny_overlay_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_spiny
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_spiny_overlay
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art, anatomy zone only
+    state: tail_spiny_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art, anatomy zone only
+    state: tail_spiny_overlay_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: tail_spiny_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: tail_spiny_overlay_BEHIND
 
 - type: marking
   id: HydrakinTailFinsUnpainted
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_fins_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_fins_BEHIND: tail_fins_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_fins
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_fins_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_fins_BEHIND
 
 - type: marking
   id: HydrakinTailFins
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_fins_BEHIND: TailBehind
+    tail_fins_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_fins_BEHIND: tail_fins_FRONT
+    tail_fins_overlay_BEHIND: tail_fins_overlay_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_fins
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_fins_overlay
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_fins_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_fins_overlay_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_fins_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_fins_overlay_BEHIND
 
 - type: marking
   id: HydrakinHydraTailFeathers
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_feathers_seer_BEHIND: TailBehind
+    tail_feathers_seer_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_feathers_seer_BEHIND: tail_feathers_seer_FRONT
+    tail_feathers_seer_overlay_BEHIND: tail_feathers_seer_overlay_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_feathers_seer
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_feathers_seer_overlay
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_feathers_seer_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_feathers_seer_overlay_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_feathers_seer_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_feathers_seer_overlay_BEHIND
 
 - type: marking
   id: HydrakinHydraTailFeathersUnpainted
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Hydrakin]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_feathers_seer_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_feathers_seer_BEHIND: tail_feathers_seer_FRONT
   sprites:
-  - sprite: _Obelisk/Mobs/Customization/hydrakin_parts.rsi
-    state: tail_feathers_seer
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - split art
+    state: tail_feathers_seer_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Obelisk/Mobs/Customization/hydrakin_parts.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_feathers_seer_BEHIND
 
 # Ears
 - type: marking

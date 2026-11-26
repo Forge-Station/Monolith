@@ -35,10 +35,10 @@
     - Biological
     damage:
       types:
-        Heat: -5 # Forge-Change: 15>5
-        Cold: -5 # Forge-Change: 15>5
-        Shock: -5 # Forge-Change: 15>5
-        Caustic: -3.5 # Forge-Change: 10>3.5
+        Heat: -15
+        Cold: -15
+        Shock: -15
+        Caustic: -10 #Was 5 per type & 1.5 caustic, Buffed due to limb damage changes (Goobstation)
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
       params:
@@ -54,8 +54,6 @@
     count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
   - type: StackPrice
     price: 15 # Mono - 5->15
-  - type: StaticPrice # Forge-change  
-    vendPrice: 5500 # Forge-change
 
 - type: entity
   id: Ointment1
@@ -94,10 +92,10 @@
     - Biological
     damage:
       types:
-        Heat: -10 # Forge-Change: 20>10
-        Cold: -10 # Forge-Change: 20>10
-        Shock: -10 # Forge-Change: 20>10
-        Caustic: -10 # Forge-Change: 20>10
+        Heat: -20
+        Cold: -20
+        Shock: -20
+        Caustic: -20 #Was 10 per type, Buffed due to limb damage changes (Goobstation)
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
       params:
@@ -140,7 +138,10 @@
     - Biological
     damage:
       groups:
-        Brute: -15 # Forge-Change: 45>15
+        Brute: -45 # was 5 for each, Buffed due to limb damage changes (Goobstation)
+    # WOLFGATE(Wolfmed): W0: a bruise pack treats only Blunt damage.
+    # It never closes a cut or a puncture, so it never stops their bleeding either; gauze and sutures do that.
+    treatedDamageTypes: [ Blunt ]
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -156,7 +157,6 @@
     count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
   - type: StackPrice
     price: 15 # Mono - 5->15
-    vendPrice: 6000 # Forge-change
 
 - type: entity
   id: Brutepack1
@@ -178,7 +178,10 @@
 
 - type: entity
   name: medicated suture
-  description: A suture soaked in medicine, treats blunt-force trauma effectively and closes wounds.
+  # WOLFGATE(Wolfmed) START: W0: the medicated suture no longer treats bruises.
+  # description: A suture soaked in medicine, treats blunt-force trauma effectively and closes wounds.
+  description: A suture soaked in medicine. Closes cuts and punctures and stops their bleeding.
+  # WOLFGATE END
   parent: BaseHealingItem
   id: MedicatedSuture
   suffix: Full
@@ -191,12 +194,14 @@
   - type: Item
     heldPrefix: medicated-suture
     storedRotation: -90
+  - type: WolfmedSuture # WOLFGATE(Wolfmed): M2: P20, what it closes infects at the Sutured rate
   - type: Healing
     damageContainers:
     - Biological
     damage:
       groups:
-        Brute: -30 # Forge-Change: 60>30
+        Brute: -60 # was 10 for each, now 20 for each type in the group, Buffed due to surgery changes (Goobstation)
+    treatedDamageTypes: [ Slash, Piercing ] # WOLFGATE(Wolfmed): W0: a suture closes open wounds, not bruises.
     bloodlossModifier: -10 # a suture should stop ongoing bleeding
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
@@ -241,7 +246,7 @@
     damage:
       types:
         Bloodloss: -2.5 #lowers bloodloss damage, was .5 buffed to 5 due to Limb Damage Changes (Goobstation)
-    ModifyBloodLevel: 15 # Forge-Change: 30>15
+    ModifyBloodLevel: 30 #used to restore 5% blood per use, now restores about 10% blood per use on standard Buffed due to Limb Damage Changes (Goobstation)
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
       params:
@@ -257,19 +262,6 @@
     count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
   - type: StackPrice
     price: 25 # Mono - 10->25
-  - type: StaticPrice # Forge-change  
-    vendPrice: 3150 # Forge-change
-
-# Forge change
-- type: entity
-  parent: Bloodpack
-  id: Bloodpack1
-  suffix: Single
-  components:
-  - type: Stack
-    stackType: Bloodpack
-    count: 1
-# End Forge change
 
 - type: entity
   parent: Bloodpack
@@ -292,26 +284,34 @@
       state: tourniquet
     - type: Item
       heldPrefix: tourniquet
-    - type: Healing
-      damageContainers:
-        - Biological
+    # WOLFGATE(Wolfmed) START: PROTO D, P4-D9: the Healing block is replaced in place by the Tourniquet system.
+    # Same id, since Onyx patches this same upstream entity. Tourniquet tag deliberately not added (no such tag
+    # prototype in WG).
+    # - type: Healing
+    #   damageContainers:
+    #     - Biological
+    - type: Tourniquet
       damage:
-        groups:
-          Brute: 5 # Tourniquets HURT!
+        # groups:
+        #   Brute: 5 # Tourniquets HURT!
         types:
+          Blunt: 5 # Tourniquets HURT
           Asphyxiation: 5 # Essentially Stopping all blood reaching a part of your body
-      bloodlossModifier: -10 # Tourniquets stop bleeding
+      # bloodlossModifier: -10 # Tourniquets stop bleeding
       delay: 0.5
-      healingBeginSound:
+      # healingBeginSound:
+      beginSound:
         path: "/Audio/Items/Medical/brutepack_begin.ogg"
         params:
           volume: 1.0
           variation: 0.125
-      healingEndSound:
+      # healingEndSound:
+      endSound:
         path: "/Audio/Items/Medical/brutepack_end.ogg"
         params:
           volume: 1.0
           variation: 0.125
+    # WOLFGATE END
 
 - type: entity
   name: roll of gauze
@@ -333,8 +333,8 @@
     - Biological
     damage:
       types:
-        Slash: -5 # Forge-Change: 15>5
-        Piercing: -7.5 # Forge-Change: 20>7.5
+        Slash: -15 # Was 5
+        Piercing: -20 # Was 10, Buffed due to limb damage changes (Goobstation)
     bloodlossModifier: -10
     healingBeginSound:
       path: "/Audio/Items/Medical/brutepack_begin.ogg"
@@ -351,7 +351,6 @@
     count: 15 #Was 10, Buffed due to limb damage changes (Goobstation)
   - type: StackPrice
     price: 15 # Mono 10->15
-    vendPrice: 6000 # Forge-change
 
 - type: entity
   id: Gauze1

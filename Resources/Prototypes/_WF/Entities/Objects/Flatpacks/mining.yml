@@ -1,0 +1,22 @@
+# Flatpacks, sold by cargo, unpack into a ready laser to bolt onto a hardpoint.
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackMiningBeam
+  name: M40 Prospector flatpack
+  description: A flatpack used for constructing an M40 Prospector heavy mining laser. Mounts on a heavy energy hardpoint.
+  components:
+  - type: Flatpack
+    entity: WFWeaponTurretMiningBeam
+  - type: StaticPrice
+    price: 6000
+
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackMiningLaserSmall
+  name: M12 Prospector flatpack
+  description: A flatpack used for constructing an M12 Prospector light mining laser. Mounts on a light energy hardpoint.
+  components:
+  - type: Flatpack
+    entity: WFWeaponTurretMiningLaserSmall
+  - type: StaticPrice
+    price: 2000

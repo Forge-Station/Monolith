@@ -1,0 +1,35 @@
+# M4: the causes species and machine death bring (plan §3.11, §9, OD16). Same shape as causes.yml.
+
+# Thermal shutdown: a machine's positronic core past wolfmed.ipc_core_heat_k is losing health. Dying, like arrest,
+# so Succumb and Last Words are offered (OD3 (b)). Ends under wolfmed.ipc_core_heat_wake_k.
+- type: wolfmedConsciousnessCause
+  id: CoreHeat
+  alertOut: WFWolfmedOutCoreHeat
+  blockerName: wolfmed-cause-core-heat
+  titleOut: wolfmed-cause-core-heat-title
+  symptom: wolfmed-cause-core-heat-symptom
+  helpOut: wolfmed-cause-core-heat-help-out
+  out: wolfmed-cause-core-heat-out
+  syntheticHudLine: wolfmed-synthetic-cause-core-heat
+  dying: true
+  cardColour: "#d0343c" # playtest 3: red while Dying
+
+# Circulatory collapse (OD16): a heartless species' arrest. The same state, triggers and routes as Arrest, never from a
+# heart; read in place of Arrest's prototype for a body whose consciousness says it is heartless.
+- type: wolfmedConsciousnessCause
+  id: CirculatoryCollapse
+  alertOut: WFWolfmedOutCollapse
+  blockerName: wolfmed-cause-collapse
+  titleOut: wolfmed-cause-collapse-title
+  symptom: wolfmed-cause-collapse-symptom
+  helpOut: wolfmed-cause-collapse-help-out
+  out: wolfmed-cause-collapse-out
+  dying: true
+  cardColour: "#d0343c" # playtest 3: red while Dying
+  sources:
+    ArrestBlood: wolfmed-cause-arrest-source-blood
+    ArrestOxygen: wolfmed-cause-arrest-source-oxygen
+    ArrestHeart: wolfmed-cause-arrest-source-heart
+    ArrestSepsis: wolfmed-cause-arrest-source-sepsis
+    ArrestShock: wolfmed-cause-arrest-source-shock
+    ArrestOther: wolfmed-cause-arrest-source-other

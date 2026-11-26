@@ -85,6 +85,7 @@
     - NFEngineeringTechfabDeprecated
     - AtmosTools
     - RCD # Mono
+    - WFSectorBeaconPack # WOLFGATE(SectorControl): company claim beacons
   - type: PirateBountyItem # Mono
     id: Techfab
 

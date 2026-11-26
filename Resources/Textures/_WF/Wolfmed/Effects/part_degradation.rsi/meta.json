@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Derived from Resources/Textures/Mobs/Species/Human/parts.rsi (https://github.com/tgstation/tgstation/blob/8024397cc81c5f47f74cf4279e35728487d0a1a7/icons/mob/human_parts_greyscale.dmi and modified by DrSmugleaf), masked and redrawn for Wolfgate (Wolfmed) by Tools/_WF/Wolfmed/gen_part_degradation_rsi.py",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "Chest_muscle",
+      "directions": 4
+    },
+    {
+      "name": "Chest_bone",
+      "directions": 4
+    },
+    {
+      "name": "Chest_strut",
+      "directions": 4
+    },
+    {
+      "name": "Chest_wire",
+      "directions": 4
+    },
+    {
+      "name": "Chest_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "Head_muscle",
+      "directions": 4
+    },
+    {
+      "name": "Head_bone",
+      "directions": 4
+    },
+    {
+      "name": "Head_strut",
+      "directions": 4
+    },
+    {
+      "name": "Head_wire",
+      "directions": 4
+    },
+    {
+      "name": "Head_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "LArm_muscle",
+      "directions": 4
+    },
+    {
+      "name": "LArm_bone",
+      "directions": 4
+    },
+    {
+      "name": "LArm_strut",
+      "directions": 4
+    },
+    {
+      "name": "LArm_wire",
+      "directions": 4
+    },
+    {
+      "name": "LArm_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "RArm_muscle",
+      "directions": 4
+    },
+    {
+      "name": "RArm_bone",
+      "directions": 4
+    },
+    {
+      "name": "RArm_strut",
+      "directions": 4
+    },
+    {
+      "name": "RArm_wire",
+      "directions": 4
+    },
+    {
+      "name": "RArm_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "LHand_muscle",
+      "directions": 4
+    },
+    {
+      "name": "LHand_bone",
+      "directions": 4
+    },
+    {
+      "name": "LHand_strut",
+      "directions": 4
+    },
+    {
+      "name": "LHand_wire",
+      "directions": 4
+    },
+    {
+      "name": "LHand_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "RHand_muscle",
+      "directions": 4
+    },
+    {
+      "name": "RHand_bone",
+      "directions": 4
+    },
+    {
+      "name": "RHand_strut",
+      "directions": 4
+    },
+    {
+      "name": "RHand_wire",
+      "directions": 4
+    },
+    {
+      "name": "RHand_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "LLeg_muscle",
+      "directions": 4
+    },
+    {
+      "name": "LLeg_bone",
+      "directions": 4
+    },
+    {
+      "name": "LLeg_strut",
+      "directions": 4
+    },
+    {
+      "name": "LLeg_wire",
+      "directions": 4
+    },
+    {
+      "name": "LLeg_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "RLeg_muscle",
+      "directions": 4
+    },
+    {
+      "name": "RLeg_bone",
+      "directions": 4
+    },
+    {
+      "name": "RLeg_strut",
+      "directions": 4
+    },
+    {
+      "name": "RLeg_wire",
+      "directions": 4
+    },
+    {
+      "name": "RLeg_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "LFoot_muscle",
+      "directions": 4
+    },
+    {
+      "name": "LFoot_bone",
+      "directions": 4
+    },
+    {
+      "name": "LFoot_strut",
+      "directions": 4
+    },
+    {
+      "name": "LFoot_wire",
+      "directions": 4
+    },
+    {
+      "name": "LFoot_necrotic",
+      "directions": 4
+    },
+    {
+      "name": "RFoot_muscle",
+      "directions": 4
+    },
+    {
+      "name": "RFoot_bone",
+      "directions": 4
+    },
+    {
+      "name": "RFoot_strut",
+      "directions": 4
+    },
+    {
+      "name": "RFoot_wire",
+      "directions": 4
+    },
+    {
+      "name": "RFoot_necrotic",
+      "directions": 4
+    }
+  ]
+}

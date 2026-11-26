@@ -1,0 +1,9 @@
+# Shown while a Grab plant holds you; click it to struggle.
+- type: alert
+  id: WFFloraGrabbed
+  clickEvent: !type:WFFloraStruggleAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/ensnared.rsi
+    state: ensnared
+  name: alerts-wf-flora-grabbed-name
+  description: alerts-wf-flora-grabbed-desc

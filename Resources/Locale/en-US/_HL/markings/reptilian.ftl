@@ -1,0 +1,45 @@
+# Wolfgate: ported from HardLight
+marking-LizardTailAquaticAnimated = Lizard Tail (Aquatic) (Animated)
+marking-LizardTailLargeAnimated = Lizard Tail (Large) (Animated)
+marking-LizardTailSnakeAnimated = Snake Tail (Animated)
+marking-LizardTailSnakeDualAnimated = Snake Tail (Dual) (Animated)
+marking-LizardTailSnakeStripeAnimated = Snake Tail (Striped) (Animated)
+marking-LizardTailSnakeUnderAnimated = Snake Tail (Under) (Animated)
+marking-LizardTailSynthAnimated = Lizard Tail (Synth-Lizard) (Animated)
+marking-ReptilianChestFemaleAlternate = Female Reptilian Chest (Alternate)
+marking-ReptilianChestFemaleAlternate-chest = Chest
+marking-ReptilianChestFemaleAlternate-chest_secondary = Underbelly
+marking-ReptilianChestFemaleAlternate-nipples = Nipples
+marking-ReptilianChestUnderbellyFeminine = Reptilian Chest (Underbelly, Feminine)
+marking-ReptilianChestUnderbellyFeminine-body_underbelly = Reptilian Chest (Underbelly, Feminine)
+marking-ReptilianTailNaga = Naga
+marking-ReptilianTailNaga-naga_primary = Primary
+marking-ReptilianTailNaga-naga_secondary = Secondary
+marking-ReptilianTailNagaRattlesnake = Naga (Rattlesnake)
+marking-ReptilianTailNagaRattlesnake-naga_rattlesnake_primary = Primary
+marking-ReptilianTailNagaRattlesnake-naga_rattlesnake_secondary = Secondary
+marking-ReptilianTailNagaRattlesnake-naga_rattlesnake_tertiary = Tertiary
+marking-ReptilianTailNagaStriped = Naga (Striped)
+marking-ReptilianTailNagaStriped-naga_striped_primary = Primary
+marking-ReptilianTailNagaStriped-naga_striped_secondary = Secondary
+marking-ReptilianTailNagaStriped-naga_striped_tertiary = Tertiary
+marking-XenoSpineGorjira = Gorjira
+marking-XenoSpineGorjira-xeno_gorjira = Plates
+marking-XenoSpineOsteospines = Osteospines
+marking-XenoSpineOsteospines-xeno_osteospines = Spines
+marking-XenoSpineSpinosaurus = Spinosaurus Sail
+marking-XenoSpineSpinosaurus-xeno_spinosaurus = Sail
+marking-XenoSpineXenomorph = Xenomorph Spines
+marking-XenoSpineXenomorph-xeno_xenomorph = Spines
+marking-XenoTailCurl = Xeno Tail (Curl)
+marking-XenoTailCurl-xeno_curl = Tail
+marking-XenoTailSpike = Xeno Tail (Spike)
+marking-XenoTailSpike-xeno_spike = Tail
+marking-XenoTailSpined = Xeno Tail (Spined)
+marking-XenoTailSpined-xeno_spined = Tail
+
+# Wolfgate: ported from HardLight
+marking-LizardTailDTigerAnimated = Lizard Tail (Dark Tiger Stripes) (Animated)
+marking-LizardTailLTigerAnimated = Lizard Tail (Light Tiger Stripes) (Animated)
+marking-LizardTailSmoothAnimated = Lizard Tail (Smooth) (Animated)
+marking-LizardTailSpikesAnimated = Lizard Tail (Spiky) (Animated)

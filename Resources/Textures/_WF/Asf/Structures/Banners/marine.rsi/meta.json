@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "nfsd-banner and nfsd-flag created by Ghost Prince for Frontier Station (_NF/Structures/Decoration/banner.rsi); recoloured to ASF purple with silver trim for Wolfgate, with the ring-and-cross emblem redrawn after the original ASF emblem by sciamach (Aphelion community).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "asf-marine-banner"
+    },
+    {
+      "name": "asf-marine-flag"
+    }
+  ]
+}

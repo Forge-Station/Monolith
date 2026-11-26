@@ -1,0 +1,12 @@
+- type: soundCollection
+  id: WFVentInhale
+  files:
+  - /Audio/_WF/PlanetVents/inhale/gon_breath2.ogg
+  - /Audio/_WF/PlanetVents/inhale/gon_breath4.ogg
+
+- type: soundCollection
+  id: WFVentExhale
+  files:
+  - /Audio/_WF/PlanetVents/exhale/gas_hiss.ogg
+  - /Audio/_WF/PlanetVents/exhale/gon_breath1.ogg
+  - /Audio/_WF/PlanetVents/exhale/gon_breath3.ogg

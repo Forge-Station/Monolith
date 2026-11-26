@@ -1,0 +1,31 @@
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronics
+  suffix: ASF, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsf"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsBridge
+  suffix: ASF Bridge, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfBridge"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsSecurity
+  suffix: ASF Security, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfSecurity"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsCommand
+  suffix: ASF Command, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfCommand"]]

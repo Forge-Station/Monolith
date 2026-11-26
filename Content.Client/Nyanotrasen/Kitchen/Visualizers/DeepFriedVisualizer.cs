@@ -60,7 +60,7 @@ namespace Content.Client.Kitchen.Visualizers
 
             foreach (var key in args.RevealedLayers)
             {
-                if (!sprite.LayerMapTryGet(key, out var index) || sprite[index] is not Layer layer)
+                if (!SpriteSystem.LayerMapTryGet((uid, sprite), key, out var index, false) || sprite[index] is not Layer layer)
                     continue;
 
                 sprite.LayerSetShader(index, shader); // Frontier: ShaderName<shader
@@ -85,7 +85,7 @@ namespace Content.Client.Kitchen.Visualizers
 
             foreach (var key in args.RevealedLayers)
             {
-                if (!sprite.LayerMapTryGet(key, out var index) || sprite[index] is not Layer layer)
+                if (!SpriteSystem.LayerMapTryGet((uid, sprite), key, out var index, false) || sprite[index] is not Layer layer)
                     continue;
 
                 sprite.LayerSetShader(index, shader); // Frontier: ShaderName<shader

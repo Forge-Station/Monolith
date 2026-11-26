@@ -82,7 +82,7 @@ public sealed partial class NcHuntDungeonExteriorRockEntry
     public int Weight { get; set; } = 1;
 }
 
-[Prototype("ncHuntDungeonExteriorTilePreset")]
+[Prototype]
 public sealed partial class NcHuntDungeonExteriorTilePresetPrototype : IPrototype
 {
     public const string Default = "ForgeHuntDungeonExteriorTilesAsteroid";
@@ -93,7 +93,7 @@ public sealed partial class NcHuntDungeonExteriorTilePresetPrototype : IPrototyp
     [IdDataField] public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncHuntDungeonExteriorRockPreset")]
+[Prototype]
 public sealed partial class NcHuntDungeonExteriorRockPresetPrototype : IPrototype
 {
     public const string Default = "ForgeHuntDungeonExteriorRocksAsteroid";
@@ -141,7 +141,7 @@ public sealed partial class NcHuntSpawnData
     public int DebrisPlacementAttempts { get; set; }
 }
 
-[Prototype("ncHuntGroup")]
+[Prototype]
 public sealed partial class NcHuntGroupPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -159,7 +159,7 @@ public sealed partial class NcHuntGroupPrototype : IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncHuntContract")]
+[Prototype]
 public sealed partial class NcHuntContractPrototype : IPrototype
 {
     [DataField("name", required: true)]

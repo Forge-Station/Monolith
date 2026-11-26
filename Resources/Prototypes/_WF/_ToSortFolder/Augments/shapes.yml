@@ -1,0 +1,222 @@
+# Limb outlines bodies draw that differ from the human's, each with the base sprites that draw it.
+# Written by Tools/_WF/Augments/port.py; don't edit by hand.
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliLFoot
+  baseSprites:
+  - MobAvaliLFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliLHand
+  baseSprites:
+  - MobAvaliLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliLLeg
+  baseSprites:
+  - MobAvaliLLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliRFoot
+  baseSprites:
+  - MobAvaliRFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliRHand
+  baseSprites:
+  - MobAvaliRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeAvaliRLeg
+  baseSprites:
+  - MobAvaliRLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeChitinidLFoot
+  baseSprites:
+  - MobChitinidLFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeChitinidLHand
+  baseSprites:
+  - MobChitinidLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeChitinidRFoot
+  baseSprites:
+  - MobChitinidRFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeChitinidRHand
+  baseSprites:
+  - MobChitinidRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaLArm
+  baseSprites:
+  - MobDionaLArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaLFoot
+  baseSprites:
+  - MobDionaLFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaLHand
+  baseSprites:
+  - MobDionaLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaLLeg
+  baseSprites:
+  - MobDionaLLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaRArm
+  baseSprites:
+  - MobDionaRArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaRFoot
+  baseSprites:
+  - MobDionaRFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaRHand
+  baseSprites:
+  - MobDionaRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeDionaRLeg
+  baseSprites:
+  - MobDionaRLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeFelionoidLHand
+  baseSprites:
+  - MobFelionoidLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeFelionoidRHand
+  baseSprites:
+  - MobFelionoidRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeHarpyLLeg
+  baseSprites:
+  - MobHarpyLLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeHarpyRLeg
+  baseSprites:
+  - MobHarpyRLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeMothLFoot
+  baseSprites:
+  - MobMothLFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeMothLHand
+  baseSprites:
+  - MobMothLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeMothRFoot
+  baseSprites:
+  - MobMothRFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeMothRHand
+  baseSprites:
+  - MobMothRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeProtogenLLeg
+  baseSprites:
+  - MobProtogenLLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeProtogenRLeg
+  baseSprites:
+  - MobProtogenRLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiLArm
+  baseSprites:
+  - MobResomiLArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiLFoot
+  baseSprites:
+  - MobResomiLFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiLHand
+  baseSprites:
+  - MobResomiLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiLLeg
+  baseSprites:
+  - MobResomiLLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiRArm
+  baseSprites:
+  - MobResomiRArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiRFoot
+  baseSprites:
+  - MobResomiRFoot
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiRHand
+  baseSprites:
+  - MobResomiRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeResomiRLeg
+  baseSprites:
+  - MobResomiRLeg
+
+- type: wfAugmentShape
+  id: WFAugmentShapeShadekinLHand
+  baseSprites:
+  - MobShadekinLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeShadekinRHand
+  baseSprites:
+  - MobShadekinRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeSynthLArm
+  baseSprites:
+  - MobSynthLArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeSynthRArm
+  baseSprites:
+  - MobSynthRArm
+
+- type: wfAugmentShape
+  id: WFAugmentShapeThavenLHand
+  baseSprites:
+  - MobThavenLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeThavenRHand
+  baseSprites:
+  - MobThavenRHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeVoxLHand
+  baseSprites:
+  - MobVoxLHand
+
+- type: wfAugmentShape
+  id: WFAugmentShapeVoxRHand
+  baseSprites:
+  - MobVoxRHand

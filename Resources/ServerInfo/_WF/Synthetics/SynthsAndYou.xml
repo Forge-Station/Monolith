@@ -1,0 +1,143 @@
+<Document>
+
+# Synths and You
+
+A synthetic walks in with a dent in its arm and a battery light blinking. You have never repaired one. This page is for you.
+
+You do not need surgery for most of it. You need a few tools, a free pair of hands and the patience to read what the analyzer says.
+  <Box>
+    <GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
+    <GuideEntityEmbed Entity="Welder"/>
+    <GuideEntityEmbed Entity="Wrench"/>
+    <GuideEntityEmbed Entity="CableApcStack"/>
+    <GuideEntityEmbed Entity="Multitool"/>
+  </Box>
+
+## What a synthetic is
+
+A synthetic is anyone with the [bold]Synthetic[/bold] biotype, which a player picks in the character creator for any species, plus every IPC and Synth. It looks like whatever species it is. Underneath it is a chassis: hydraulic fluid instead of blood, a power cell, a coolant pump, and a positronic core or CCU where the brain would be.
+
+No medicine, topical, reagent or injection does anything to a chassis. A synth never bleeds out, never suffocates and never gets infected. It leaks, overheats, shorts and runs flat instead.
+
+Painkillers do nothing either. A synth's "pain" is sensor load: damage readings piling up in its diagnostics, which a reboot clears (see the end of this page). It is not a reason to reach for a pen.
+
+## Reading one
+
+A [bold]health analyzer[/bold] works on a synth and reports mechanical findings instead of wounds. The state line at the top says what is going on: [bold]ONLINE[/bold], [bold]LOW POWER: cell empty[/bold], or [bold]SHUTDOWN[/bold] with the reason. A medical HUD shows its health bar like anyone else's.
+
+The synth sees its own readout: a list of faults on its screen. You can see the same list. Put a [bold]multitool[/bold] on the body (two seconds, hold still) and you link into its [bold]chassis panel[/bold], the window it opens for itself, showing every part, every component and every control. It knows you are there.
+  <Box>
+    <GuideEntityEmbed Entity="HandheldHealthAnalyzer"/>
+    <GuideEntityEmbed Entity="Multitool"/>
+  </Box>
+
+## Repairs by hand
+
+None of this needs an incision. Scan, match the finding to the tool, and work.
+
+[bold]Dent:[/bold] a welder or a wrench. The wrench needs no fuel.
+
+[bold]Breach:[/bold] the leak. Hydraulic fluid is running out of a hole in the casing. If a round or a fragment is lodged in it, pull that out first with a [bold]hemostat[/bold]; nothing closes the hole while it is there. Then seal it with a welder.
+
+[bold]Cold and acid damage:[/bold] a welder, like a dent.
+
+[bold]Short circuit, electrical damage:[/bold] a cable coil.
+
+[bold]Servo damage:[/bold] a cut actuator, and a slow or lame limb. Welding does nothing for it. Lay the synth down and run [bold]Replace Damaged Servo[/bold] with a cable coil in hand. Nothing is opened, so a synth can do it to itself.
+
+[bold]Overheating:[/bold] nothing reaches it but time. A cold room helps, anything cold helps more, and an extinguisher helps most.
+
+[bold]Optics:[/bold] bright flashes and welding without eye protection blur the view. A [bold]sheet of glass[/bold] used on the chassis replaces the lenses. The Heal Eyes surgery does it too.
+
+[bold]Fluid:[/bold] a [bold]hydraulic fluid pack[/bold] used on the chassis refills it. So does an IV, and so does the autodoc. Never oil; a chassis refuses it. A standard chassis also regenerates fluid slowly by itself. Below half its fluid a synth is down; below about a third its pump has nothing to move and it shuts down ([bold]hydraulic pressure lost[/bold]) until refilled.
+
+A [bold]nanite applicator[/bold] does the welder's job on a chassis and runs on its own fuel. The [bold]autodoc[/bold] handles all of it, surgery included.
+  <Box>
+    <GuideEntityEmbed Entity="Welder"/>
+    <GuideEntityEmbed Entity="Wrench"/>
+    <GuideEntityEmbed Entity="CableApcStack"/>
+    <GuideEntityEmbed Entity="Hemostat"/>
+    <GuideEntityEmbed Entity="SheetGlass"/>
+    <GuideEntityEmbed Entity="FireExtinguisher"/>
+    <GuideEntityEmbed Entity="WFWolfmedHydraulicFluidPack"/>
+    <GuideEntityEmbed Entity="NaniteApplicator"/>
+  </Box>
+
+## The chassis bay
+
+The torso plating opens. Alt-click the synth and choose [bold]Open chassis bay[/bold]: three seconds, hold still. A synth can open its own from its chassis panel, which takes it six.
+
+While it is open, alt-click the synth again and every component shows up as a [bold]Pull[/bold] verb. Use one with an empty hand: two seconds, and the part comes out into your hand. The core, the pump, the optics, the cooling loop, the power cell and the rest all come out this way. To put one back, click it on the body: two seconds, and it seats in its own slot. Working on your own chassis takes twice as long.
+
+Know what you are pulling. Pull the [bold]pump[/bold] and the chassis shuts down. Pull the [bold]core[/bold] and the mind ends with it; put it back and it returns.
+
+While the bay is open the synth is slower, and every hit on its torso reaches the components inside instead of stopping at the plating. Close it when you are done: alt-click, [bold]Close chassis bay[/bold].
+  <Box>
+    <GuideEntityEmbed Entity="PowerCellMedium"/>
+  </Box>
+
+## Limbs
+
+Chassis limbs come off more readily than flesh does, and they keep: a limb that is off is just a part until somebody puts it back.
+
+To reattach one, click it on the body. Four seconds, or eight on yourself. It clicks in [bold]loose[/bold]: the limb works, but slowly and clumsily, and the analyzer reads [bold]loose coupling[/bold]. Use a [bold]cable coil[/bold] on it, aimed at that limb, to recouple it: it takes about fourteen passes of cable, and each pass says how many are left. Then it is as good as new.
+
+A hand comes off with its arm and goes back on the arm separately, so put the arm on first. A missing foot or leg slows the synth just as a disabled one would.
+  <Box>
+    <GuideEntityEmbed Entity="CableApcStack"/>
+  </Box>
+
+## Power
+
+An empty or missing cell is [bold]low power[/bold], not death. The synth stays up and conscious, but it crawls, and only one arm is powered. Its HUD says LOW POWER. The synth chooses which arm stays live from its own right-click menu (a few seconds to settle after each switch).
+
+Seat a charged cell through the bay and it is back to normal.
+
+Only a missing [bold]pump[/bold] shuts a synth down. A shut-down synth is unconscious, with nothing running out, until the pump is back.
+  <Box>
+    <GuideEntityEmbed Entity="PowerCellMedium"/>
+  </Box>
+
+## Radiation
+
+Radiation does not build up on a chassis. A [bold]radiation collector[/bold] in the torso soaks it up instead, and the synth notices nothing until it is full (about 300 rads). Its HUD then says RAD COLLECTOR FULL: more radiation strains the collector and leaks slowly into the positronic core.
+
+To empty it, pull it through the bay; out of the body it vents in about a minute. Examine it to see its charge and integrity. A [bold]welder[/bold] on a pulled collector restores its integrity. Run it at full for too long (around a thousand rads more) and it [bold]burns out[/bold] and is gone; print a new one at the exosuit fabricator and seat it.
+
+With no working collector every rad goes into the core, and a core corrupted to nothing is death.
+  <Box>
+    <GuideEntityEmbed Entity="WFOrganRadCollector"/>
+    <GuideEntityEmbed Entity="Welder"/>
+  </Box>
+
+## Death and revival
+
+A destroyed core is death, but not the end. A core that is only damaged (by hits, heat or radiation) is fixed the same way, before it gets there. Lay the synth down and run [bold]Repair Positronic Core[/bold] on the torso; a Synth's core, the [bold]CCU[/bold], sits in the head, and its surgery is [bold]Repair Synth Core[/bold] on the head. Unbolt the housing with a wrench, re-flash the core with a multitool, weld the housing shut. A destroyed core then needs a [bold]Reboot[/bold] (alt-click the body).
+
+The Reboot checks what the chassis needs to run and names whatever is still missing: a head, a core, a pump, a charged cell. Fix what it names and press it again.
+
+A repaired core is the same person. A replacement core is a new one. A chassis has no heartbeat to restart, so a defibrillator is not how you bring a dead one back.
+  <Box>
+    <GuideEntityEmbed Entity="Wrench"/>
+    <GuideEntityEmbed Entity="Multitool"/>
+    <GuideEntityEmbed Entity="Welder"/>
+  </Box>
+
+## What the synth does for itself
+
+So you know what you are looking at. Every synthetic has a [bold]chassis panel[/bold] action, and it works even while the synth is downed.
+
+[bold]Isolate a limb.[/bold] The synth cuts the servos and sensors to an arm, hand, leg or foot. The limb goes dead and stops hurting; the panel says ISOLATED. It is not damage and nobody should repair it. The synth restores it from the panel.
+
+[bold]Detach a limb.[/bold] The limb comes off whole, with no stump, and can be put back the same way you would any other.
+
+[bold]Disconnect a component.[/bold] Once the bay is open, the synth can pull its own parts from the panel.
+
+[bold]Reboot.[/bold] The chassis goes down for four seconds and spends a tenth of its charge. It comes back with its sensor load cleared and any lockup gone. A synth that is aching from a stack of old readings will use this.
+
+[bold]Overclock.[/bold] The servos run 25% faster and burn about three times their normal draw on top. They heat up as they go, and as they heat they throw sparks, then short out limbs, then cook the torso. It cuts out on its own at 15% charge or when the torso overheats, and it will not start on low power. Expect a synth that has overclocked for a while to need a welder, a cable coil and a cold room.
+
+[bold]Open its own bay.[/bold] See above.
+
+The synth's HUD beeps quietly when its chassis is close to going down.
+</Document>

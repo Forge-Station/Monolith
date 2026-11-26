@@ -45,6 +45,12 @@
   name: botanist EVA suit
   description: An EVA suit with a built-in helmet commonly issued to hydroponics workers.
   components:
+  # WOLFGATE(ArmorSpecialization): tendon guards and decon coating.
+  - type: WFDeconCoating
+  - type: WFWoundWard
+    examine: wf-armor-spec-tendon-ward-examine
+    blocks:
+    - WFWolfmedTendonCutWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -223,6 +229,11 @@
   name: overseer EVA suit
   description: An EVA suit with a built-in helmet issued to Colossus Central's overseer.
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward.
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -287,6 +298,9 @@
   name: captain EVA suit
   description: An EVA suit with a built-in helmet commonly issued to captains.
   components:
+  # WOLFGATE(ArmorSpecialization): plush lining.
+  - type: WFPainDampener
+    examine: wf-armor-spec-plush-lining-examine
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -351,6 +365,12 @@
   name: engineer EVA suit
   description: An EVA suit with a built-in helmet commonly issued to engineers.
   components:
+  # WOLFGATE(ArmorSpecialization): insulation.
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -414,6 +434,13 @@
   name: atmospheric technician EVA suit
   description: An EVA suit with a built-in helmet commonly issued to atmospheric technicians.
   components:
+  # WOLFGATE(ArmorSpecialization): fire rating.
+  - type: WFAblativeCoat
+    damageType: Heat
+    maxCharge: 80
+    charge: 80
+    regenRate: 10
+    examine: wf-armor-spec-fire-rated-examine
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -534,6 +561,12 @@
   name: salvage specialist EVA suit
   description: An EVA suit with a built-in helmet commonly issued to salvage specialists.
   components:
+  # WOLFGATE(ArmorSpecialization): ore sense.
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+  - type: MiningScanner
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -599,6 +632,9 @@
   name: medical specialist EVA suit
   description: An EVA suit with a built-in helmet commonly issued to medical specialists.
   components:
+  # WOLFGATE(ArmorSpecialization): plasma reserve and sterile weave.
+  - type: WFSterileWeave
+  - type: WFPlasmaReserve
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -662,6 +698,8 @@
   name: scientist EVA suit
   description: An EVA suit with a built-in helmet commonly issued to scientists.
   components:
+  # WOLFGATE(ArmorSpecialization): decon coating.
+  - type: WFDeconCoating
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -724,6 +762,9 @@
   name: janitor EVA suit
   description: An EVA suit with a built-in helmet commonly issued to janitors.
   components:
+  # WOLFGATE(ArmorSpecialization): anti-slip treads and decon coating.
+  - type: WFDeconCoating
+  - type: NoSlip
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1250,6 +1291,12 @@
   name: mercenary EVA suit
   description: An EVA suit with a built-in helmet commonly issued to mercenaries.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1314,6 +1361,12 @@
   name: private security EVA suit
   description: An EVA suit with a built-in helmet commonly issued to private security.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1379,6 +1432,12 @@
   name: TSFMC EVA suit
   description: An EVA suit with a built-in helmet commonly issued to TSFMC personnel.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1443,6 +1502,11 @@
   name: LVHI EVA suit
   description: An EVA suit with a built-in helmet commonly issued to Langstad-Voigt Heavy Industries (LVHI) personnel.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1513,6 +1577,11 @@
   name: arcadia EVA suit
   description: An EVA suit with a built-in helmet commonly issued to Arcadia Industries personnel.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Suits/eva_color.rsi
     layers:
@@ -1591,6 +1660,11 @@
   name: FSB EVA suit
   description: The standard issue EVA suit for Far Star Biotech corporation vessels. It comes with two cupholders.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Tag
     tags:
     - SuitEVA

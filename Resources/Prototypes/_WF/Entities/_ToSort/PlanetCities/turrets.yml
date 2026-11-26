@@ -1,0 +1,10 @@
+# Crocus's PDV base laser turret as a fixed city maps it: Mono's godmoded one without the godmode.
+- type: entity
+  id: WFWeaponTurretLaserPDV
+  parent: WeaponTurretLaserTSFMC
+  suffix: PDV
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - PirateNF

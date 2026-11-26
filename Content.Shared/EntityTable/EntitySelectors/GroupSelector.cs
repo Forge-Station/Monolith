@@ -1,28 +1,62 @@
+// WOLFGATE(Xenoarch) START: wizden's EntityTable upgrade, for the xenoarch trigger tables
+using System.Linq;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared.EntityTable.EntitySelectors;
 
 /// <summary>
 /// Gets the spawns from one of the child selectors, based on the weight of the children
 /// </summary>
-public sealed partial class GroupSelector : EntityTableSelector
+public sealed partial class GroupSelector : EntityTableSelectorWithChildrenBase
 {
-    [DataField(required: true)]
-    public List<EntityTableSelector> Children = new();
-
-    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(System.Random rand,
+    protected override IEnumerable<EntProtoId> GetSpawnsImplementation(IRobustRandom rand,
         IEntityManager entMan,
-        IPrototypeManager proto)
+        IPrototypeManager proto,
+        EntityTableContext ctx)
     {
+        using var scoped = ScopedConditions(ctx);
+
         var children = new Dictionary<EntityTableSelector, float>(Children.Count);
         foreach (var child in Children)
         {
+            // Don't include invalid groups
+            if (!child.CheckConditions(entMan, proto, ctx))
+                continue;
+
             children.Add(child, child.Weight);
         }
 
-        var pick = SharedRandomExtensions.Pick(children, rand);
+        if (children.Count == 0)
+            yield break;
 
-        return pick.GetSpawns(rand, entMan, proto);
+        var pick = rand.Pick(children); // WOLFGATE(Xenoarch): our weighted Pick takes IRobustRandom as the receiver
+
+        foreach (var spawn in pick.GetSpawns(rand, entMan, proto, ctx))
+        {
+            yield return spawn;
+        }
+    }
+
+    protected override IEnumerable<(EntProtoId spawn, double)> ListSpawnsImplementation(IEntityManager entMan, IPrototypeManager proto, EntityTableContext ctx)
+    {
+        var totalWeight = Children.Sum(x => x.Weight);
+
+        foreach (var child in Children)
+        {
+            var weightMod = child.Weight / totalWeight;
+            foreach (var (ent, prob) in child.ListSpawns(entMan, proto, ctx, weightMod))
+            {
+                yield return (ent, prob);
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return $"Group({string.Join(", ", Children.Select(x => $"{x}: {x.Weight}"))})";
     }
 }
+// WOLFGATE END

@@ -1,0 +1,109 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: ProtogenChestF
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/chestplate.rsi
+    state: chestplate_female_protogen
+
+- type: marking
+  id: ProtogenChestM
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/chestplate.rsi
+    state: chestplate_male_protogen
+
+- type: marking
+  id: ProtogenAltVisor
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/altvisor.rsi
+    state: altvisor_screen_protogen
+  - sprite: _HL/Mobs/Customization/Protogen/altvisor.rsi
+    state: altvisor_trim_protogen
+
+- type: marking
+  id: ProtogenLShoulder
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/leftshoulder.rsi
+    state: shoulderplates_left_trim_protogen
+  - sprite: _HL/Mobs/Customization/Protogen/leftshoulder.rsi
+    state: shoulderplates_left_screen_protogen
+
+- type: marking
+  id: ProtogenLShoulderGlow
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/leftshoulder.rsi
+    state: shoulderplates_left_glow_protogen
+
+- type: marking
+  id: ProtogenRShoulder
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/rightshoulder.rsi
+    state: shoulderplates_right_trim_protogen
+  - sprite: _HL/Mobs/Customization/Protogen/rightshoulder.rsi
+    state: shoulderplates_right_screen_protogen
+
+- type: marking
+  id: ProtogenRShoulderGlow
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/rightshoulder.rsi
+    state: shoulderplates_right_glow_protogen
+
+- type: marking
+  id: ProtogenLHip
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/lefthip.rsi
+    state: hipplates_left_trim_protogen
+  - sprite: _HL/Mobs/Customization/Protogen/lefthip.rsi
+    state: hipplates_left_screen_protogen
+
+- type: marking
+  id: ProtogenLHipGlow
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/lefthip.rsi
+    state: hipplates_left_glow_protogen
+
+- type: marking
+  id: ProtogenRHip
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/righthip.rsi
+    state: hipplates_right_trim_protogen
+  - sprite: _HL/Mobs/Customization/Protogen/righthip.rsi
+    state: hipplates_right_screen_protogen
+
+- type: marking
+  id: ProtogenRHipGlow
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Protogen]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Protogen/righthip.rsi
+    state: hipplates_right_glow_protogen

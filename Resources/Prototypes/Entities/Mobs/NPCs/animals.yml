@@ -1378,6 +1378,7 @@
     drawdepth: Mobs
     layers:
     # Shitmed Change Start
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - the south frame of a split tail draws here
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -1409,6 +1410,7 @@
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - split tail layers
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
     - map: [ "head" ]
@@ -1499,6 +1501,9 @@
   parent: MobBaseAncestor
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   components:
+  # WOLFGATE(Xenonids): RMC monkeys are hosts for facehuggers and can be devoured
+  - type: Infectable
+  - type: Devourable
   - type: NameIdentifier
     group: Monkey
   - type: Speech
@@ -1538,6 +1543,9 @@
   description: New church of neo-darwinists actually believe that EVERY animal evolved from a monkey. Tastes like pork, and killing them is both fun and relaxing.
   suffix: syndicate base
   components:
+  # WOLFGATE(Xenonids): RMC monkeys are hosts for facehuggers and can be devoured
+  - type: Infectable
+  - type: Devourable
   - type: NameIdentifier
     group: Monkey
   - type: SentienceTarget

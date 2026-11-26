@@ -1,0 +1,126 @@
+# Blunt trauma wounds (W3). All four are `ruleOnly`: the wolfmedWoundRule prototypes in wound_rules.yml
+# create them, the default per-damage-type pass never does.
+#
+# A concussion and a dislocated joint list no damage type at all, so no topical and no amount of damage
+# removal reaches them: a concussion fades on its own time (faster asleep), and a joint has to be set by
+# hand. The crush injury and the organ contusion are ordinary bruising records and heal like any wound.
+
+# What a heavy blunt hit leaves instead of an ordinary bruise. The limb penalty is the "function loss" the
+# spec asks for; it uses WolfmedLimbPenaltyBehavior rather than WoundFunctionalityBehavior because
+# wounds.body_part_functionality_enabled ships false (P2-3), which leaves Onyx's route inert.
+- type: wound
+  id: WFWolfmedCrushInjuryWound
+  name: wolfmed-wound-name-crush-injury
+  analyzerCategory: Blunt
+  ruleOnly: true
+  damageTypes:
+    Blunt:
+      reopenMinimumDamage: 25
+      severityMultiplier: 1
+  maximumSeverity: 140
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 1
+    minSeverity: 3
+  - !type:WoundScarBehavior
+    threshold: 8
+    chance: 1
+  stages:
+    Moderate:
+      name: wound-stage-moderate
+      severity: 0
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.8
+        manipulationModifier: 1.25
+    Severe:
+      name: wound-stage-severe
+      severity: 45
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.6
+        manipulationModifier: 1.6
+      - !type:WoundBleedingBehavior
+        rate: 0.1
+        minimumSeverity: 45
+
+# A rattled brain. No damage types at all: no item cures it, painkillers only mask what it hurts.
+# WolfmedConcussionSystem reads the per-stage behavior for the blur, the slur and the knockdown, and fades
+# the severity over time - four times faster while the patient sleeps or lies in a medical bed.
+- type: wound
+  id: WFWolfmedConcussionWound
+  name: wolfmed-wound-name-concussion
+  analyzerCategory: Blunt
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 60
+  healingMultiplier: 0
+  behaviors:
+  - !type:WolfmedConcussionBehavior
+    blur: 1.5
+    stutter: false
+    knockdown: 1.5
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.8
+    minSeverity: 2
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 14
+      behaviors:
+      - !type:WolfmedConcussionBehavior
+        blur: 3
+        stutter: true
+        knockdown: 2.5
+    Severe:
+      name: wound-stage-severe
+      severity: 28
+      behaviors:
+      - !type:WolfmedConcussionBehavior
+        blur: 5
+        stutter: true
+        knockdown: 4
+        recoveryPerMinute: 1.5
+
+# A joint out of its socket. Nothing heals it; the relocate verb is the only exit, and it hurts.
+- type: wound
+  id: WFWolfmedDislocationWound
+  name: wolfmed-wound-name-dislocation
+  analyzerCategory: Blunt
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 40
+  healingMultiplier: 0
+  behaviors:
+  - !type:WolfmedDislocationBehavior
+  - !type:WolfmedLimbPenaltyBehavior
+    movementModifier: 0.65
+    manipulationModifier: 1.6
+  - !type:WoundPainBehavior
+    painPerSeverity: 1.4
+    minSeverity: 1
+
+# A bruised organ under an unbroken torso. The behavior is read once per hit by
+# WolfmedOrganContusionSystem, which never takes an organ below minRemainingHealth.
+- type: wound
+  id: WFWolfmedOrganContusionWound
+  name: wolfmed-wound-name-organ-contusion
+  analyzerCategory: Internal
+  ruleOnly: true
+  damageTypes:
+    Blunt:
+      reopenMinimumDamage: 18
+      severityMultiplier: 1
+  maximumSeverity: 60
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WolfmedOrganContusionBehavior
+    damage: 4
+    minRemainingHealth: 1
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.6
+    minSeverity: 2

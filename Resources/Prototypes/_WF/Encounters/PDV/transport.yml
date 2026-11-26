@@ -1,0 +1,58 @@
+# A Dynasty supply run: a Layak corvette with materiel in its stern bay under gunboat escort. It holds its course whatever
+# happens, warns ships of the Dynasty's enemies off at a kilometre and fires on them inside four hundred metres.
+- type: wfEncounter
+  id: WFEncounterPdvTransport
+  avoidStations: [ TSF ]
+  name: wf-encounter-name-pdv-transport
+  announcement: wf-encounter-announce-pdv-transport
+  announceOnRadio: true
+  start: Scheduled
+  category: Patrol
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 3600
+  duration: 5400
+  route:
+    minStops: 1
+    maxStops: 2
+    dwellMin: 180
+    dwellMax: 300
+  manifests: [ WFManifestArms, WFManifestArms, WFManifestIndustrial, WFManifestIndustrial, WFManifestParts ]
+  ships:
+  - key: transport
+    navigation: WFCrewNavigationWarship
+    vessel: Layak
+    skill: Green
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    deckhands: 2
+    guards: 2
+    cargo: 16
+    flyRoute: true
+    evades: false
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 800
+    attackRange: 300
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 0
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: transport

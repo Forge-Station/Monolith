@@ -7,7 +7,13 @@
 
     <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">
         <changelog:ChangelogButton Access="Public" Name="ChangelogButton"/>
+        <!-- WOLFGATE(Roadmap): roadmap entry under the changelog -->
+        <Button Access="Public" Name="RoadmapButton" Text="{Loc 'wf-roadmap-button'}" />
+        <!-- WOLFGATE(SectorControl): sector map entry under the roadmap -->
+        <Button Access="Public" Name="SectorMapButton" Text="{Loc 'wf-sector-map-button'}" />
         <ui:VoteCallMenuButton />
+        <!-- WOLFGATE(InRoundCreator): opens the character creator over the round -->
+        <Button Access="Public" Name="CharacterButton" Text="{Loc 'wf-escape-character-creator'}" ToolTip="{Loc 'wf-escape-character-creator-tooltip'}" />
         <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" />
         <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" />
         <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" />

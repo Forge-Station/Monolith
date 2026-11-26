@@ -1,0 +1,145 @@
+# Derelict plating used by the Lattice anchor station. Standalone: DecorImportPlatingTileBase is not in this fork.
+# itemDrop is a steel tile stack so prying the floor does not spawn a missing item.
+
+- type: tile
+  id: CitadelRPFloorDerelict1
+  name: tiles-wf-citadel-rp-floor-derelict-1
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_1.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict2
+  name: tiles-wf-citadel-rp-floor-derelict-2
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_2.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict3
+  name: tiles-wf-citadel-rp-floor-derelict-3
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_3.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict4
+  name: tiles-wf-citadel-rp-floor-derelict-4
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_4.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict5
+  name: tiles-wf-citadel-rp-floor-derelict-5
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_5.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict6
+  name: tiles-wf-citadel-rp-floor-derelict-6
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_6.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelict7
+  name: tiles-wf-citadel-rp-floor-derelict-7
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_floor_7.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelictLight
+  name: tiles-wf-citadel-rp-floor-derelict-light
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_light.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelictVent
+  name: tiles-wf-citadel-rp-floor-derelict-vent
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_wall_floor.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: CitadelRPFloorDerelictPlating
+  name: tiles-wf-citadel-rp-floor-derelict-plating
+  sprite: /Textures/_WF/DecorImport/Tiles/citadelrp_derelict/derelict_plating.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true
+
+- type: tile
+  id: VoreFloorAlienPlatingHalf
+  name: tiles-wf-vore-floor-alien-plating-half
+  sprite: /Textures/_WF/DecorImport/Tiles/vore/alienplatinghalf.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepPlating
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+  allowRotationMirror: true

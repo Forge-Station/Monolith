@@ -182,7 +182,14 @@ public sealed partial class GuidebookUIController : UIController, IOnStateEntere
 
         if (guides == null)
         {
-            guides = _prototypeManager.EnumeratePrototypes<GuideEntryPrototype>()
+            // The ported primer stays in the lore book. The guidebook page BasicLore is the Forge lore.
+            var all = _prototypeManager.EnumeratePrototypes<GuideEntryPrototype>().ToList();
+            var loreIds = new HashSet<string>();
+            if (_prototypeManager.TryIndex<GuideEntryPrototype>("WFLorePrimer", out _))
+                CollectLore("WFLorePrimer", loreIds);
+
+            guides = all
+                .Where(x => !loreIds.Contains(x.ID))
                 .ToDictionary(x => new ProtoId<GuideEntryPrototype>(x.ID), x => (GuideEntry) x);
         }
         else if (includeChildren)
@@ -246,6 +253,16 @@ public sealed partial class GuidebookUIController : UIController, IOnStateEntere
             UIManager.ClickSound();
             _guideWindow.Close();
         }
+    }
+
+    /// <summary>The primer and every page under it. Those belong to the lore book.</summary>
+    private void CollectLore(string id, HashSet<string> ids)
+    {
+        if (!ids.Add(id) || !_prototypeManager.TryIndex<GuideEntryPrototype>(id, out var entry))
+            return;
+
+        foreach (var child in entry.Children)
+            CollectLore(child, ids);
     }
 
     private void RecursivelyAddChildren(GuideEntry guide, Dictionary<ProtoId<GuideEntryPrototype>, GuideEntry> guides)

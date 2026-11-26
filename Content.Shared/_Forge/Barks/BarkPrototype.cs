@@ -5,7 +5,7 @@ namespace Content.Shared._Forge.Barks;
 /// <summary>
 /// A prototype for the available barges.
 /// </summary>
-[Prototype("bark")]
+[Prototype]
 public sealed partial class BarkPrototype : IPrototype
 {
     [IdDataField]

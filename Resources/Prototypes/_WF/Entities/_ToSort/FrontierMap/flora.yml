@@ -1,0 +1,166 @@
+# Frontier map flora. Ported from Wolfgate.
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteWildPlantFlowerPurple
+  suffix: flower
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers_25x25.rsi
+    state: flower_purple
+    offset: "-0.109,-0.109"
+    layers:
+    - state: flower_purple
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteWildPlantFlowerRedTwo
+  suffix: two
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers_25x25.rsi
+    state: flower_red2
+    offset: "-0.109,-0.109"
+    layers:
+    - state: flower_red2
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteWildPlantFlowerWhite
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers_25x25.rsi
+    state: flower_white
+    offset: "-0.109,-0.109"
+    layers:
+    - state: flower_white
+
+- type: entity
+  parent: BaseFlora
+  id: DarkPackFloraDarkpackFlowerFlax
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    state: prairie_flax
+    offset: "0,0"
+    layers:
+    - state: prairie_flax
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshPodsneyzka
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    state: flower1
+    offset: "0,0"
+    layers:
+    - state: flower1
+
+- type: entity
+  parent: BaseFlora
+  id: OnyxBayFloraGlowFlowersYellow
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/glowflowers_onyxbay.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: ywflowers_1
+      map: [ "base" ]
+    - state: ywflowers_1-overlay
+      map: [ "glow" ]
+      shader: unshaded
+  - type: RandomSprite
+    available:
+    - base:
+        ywflowers_1: ""
+      glow:
+        ywflowers_1-overlay: ""
+    - base:
+        ywflowers_2: ""
+      glow:
+        ywflowers_2-overlay: ""
+    - base:
+        ywflowers_3: ""
+      glow:
+        ywflowers_3-overlay: ""
+    - base:
+        ywflowers_4: ""
+      glow:
+        ywflowers_4-overlay: ""
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+    color: "#E8D85A"
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/_WF/DecorImport/onyxbay/vegetation_hit.ogg
+
+- type: entity
+  parent: OnyxBayFloraGlowFlowersYellow
+  id: OnyxBayFloraGlowFlowersBlue
+  components:
+  - type: Sprite
+    layers:
+    - state: brflowers_1
+      map: [ "base" ]
+    - state: brflowers_1-overlay
+      map: [ "glow" ]
+      shader: unshaded
+  - type: RandomSprite
+    available:
+    - base:
+        brflowers_1: ""
+      glow:
+        brflowers_1-overlay: ""
+    - base:
+        brflowers_2: ""
+      glow:
+        brflowers_2-overlay: ""
+    - base:
+        brflowers_3: ""
+      glow:
+        brflowers_3-overlay: ""
+  - type: PointLight
+    color: "#6FC8FF"
+
+- type: entity
+  parent: OnyxBayFloraGlowFlowersYellow
+  id: OnyxBayFloraGlowFlowersPurple
+  components:
+  - type: Sprite
+    layers:
+    - state: ppflowers_1
+      map: [ "base" ]
+    - state: ppflowers_1-overlay
+      map: [ "glow" ]
+      shader: unshaded
+  - type: RandomSprite
+    available:
+    - base:
+        ppflowers_1: ""
+      glow:
+        ppflowers_1-overlay: ""
+    - base:
+        ppflowers_2: ""
+      glow:
+        ppflowers_2-overlay: ""
+    - base:
+        ppflowers_3: ""
+      glow:
+        ppflowers_3-overlay: ""
+  - type: PointLight
+    color: "#C77DFF"

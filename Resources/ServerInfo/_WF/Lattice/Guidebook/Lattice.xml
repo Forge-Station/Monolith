@@ -1,0 +1,48 @@
+<Document>
+  # The Lattice and Drift
+
+  Six reality anchors around Caelestinus Central hold the sector together. The further you fly from them, the worse things get, and the better the pickings. For the story behind it, see [lorelink="The Unmooring" link="WFLoreUnmooring"].
+
+  ## Bands
+
+  Your radar draws the band edges as rings, in place of the old drone zone rings. Crossing one shows a warning.
+
+  - [bold]Unison[/bold], up to about 18 km from the centre: safe. Drift fades here.
+  - [bold]Detune[/bold], 18 to 24 km: Drift builds slowly. Ore yields a little more.
+  - [bold]Dissonance[/bold], 24 to 31 km: Drift builds faster. Rocks start to drop exotic matter.
+  - [bold]Feedback[/bold], 31 to 40 km: Drift builds fast. FTL drives stop working. More ore, more exotic matter.
+  - [bold]the Coda[/bold], past 40 km: Drift climbs fastest of all, up to its cap. No FTL. Names and coordinates garble. Stay more than a few minutes and Remade hunters come aboard, more often the longer you stay; the hull rots unless a stabiliser runs; thrusters, gyroscopes and power cut out now and then; and the radar goes blind in patches. The best ore, the most exotic matter, and Monolith hulks.
+
+  If an anchor is destroyed, the bands move inward on its side.
+
+  ## Drift
+
+  Your ship builds Drift while you are aboard out in the bands; off a ship, you build your own. On a planet you take the band of the planet's place in the sector.
+
+  - From low Drift: whispers, voices on the common channel, contacts on the radar that are not there.
+  - From about a quarter: footsteps and knocks, false hails from ships that do not exist.
+  - From about a third: your screen starts to swim.
+  - From about half: things glimpsed in the corner of your eye.
+  - From about seventy: a Remade standing in the dark. It is gone when you walk up to it. Probably.
+
+  Only you see your hallucinations. In the Coda, a small animal aboard (a pet or a mouse) can die and rise as a Remade.
+
+  ## Protection
+
+  - [bold]Drift stabiliser[/bold]: an autolathe flatpack (5 exotic matter). Bolt it to your ship and give it 15 kW. It keeps 80% of Drift gain off the ship and stops the Coda taking your animals.
+  - [bold]Anchor charm[/bold]: an autolathe item (1 exotic matter). Wear it round your neck to keep half the Drift off yourself.
+
+  ## Exotic matter
+
+  Mined from asteroid rock in the Dissonance band and beyond, more of it the deeper you go. It sells for 3,000 a shard and builds the stabiliser, the charm and relay anchors.
+
+  ## Anchors
+
+  The six primary anchors are shielded stations about 3 km out from the centre. Attack one and drones come out to defend it. Destroying an anchor's core is a breach: the whole sector is told, anchored space shrinks, and the black hole looks worse for everyone.
+
+  A [bold]relay anchor[/bold] (autolathe flatpack, 20 exotic matter) pushes anchored space outward around it. Bolt it down with 30 kW of power on a hull that stays still for a minute and it takes hold. Move the hull or cut the power and it lets go. It burns exotic matter while it holds: feed it shards by hand (up to six), and each one keeps it holding for ten minutes. Run it dry and it lets go.
+
+  ## The Choir
+
+  Very high Drift can bring an offer to join the Choir, an antagonist faction. It appears as an action you can use for five minutes. Ignore it and nothing happens. Answering asks you twice, because it is a coin toss: half who answer join the Choir, and the other half die on the spot and rise as Remade. A Choir member can never be revived; when one dies, the body turns Remade and the player goes with it. Ghosts and admins see a white C on red over Choir members, and their PDAs carry red glyphs. A surgeon can cut the song out: open the head, saw the skull, then excise it with a shard of exotic matter. It hurts the brain, and three times in ten the patient dies on the table and rises as a Remade. It can't be done in the Coda. The server's antagonist rules apply if you answer.
+</Document>

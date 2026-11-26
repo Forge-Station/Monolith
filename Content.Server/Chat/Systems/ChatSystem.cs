@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server._WF.ChatWebhook; // WOLFGATE(ChatWebhook)
+using Content.Shared._WF.ChatFont; // WOLFGATE(ChatFont)
 using Content.Server.Chat.Managers;
 using Content.Server.Discord.DiscordLink;
-using Content.Server._Forge.Sponsor; // Forge-Change
-using Content.Server._Forge.Silicons.StationAi; // Forge-Change
-using Content.Server.Preferences.Managers; // Forge-Change
 using Content.Server.GameTicking;
 using Content.Server._EinsteinEngines.Language; // Einstein Engines - Language
 using Content.Server.Speech; // Einstein Engines - Language
@@ -17,7 +16,6 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
-using Content._Forge.Shared.Loudspeaker.Events; // Corvax-Forge
 using Content.Server.Station.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
@@ -73,14 +71,12 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private ExamineSystemShared _examineSystem = default!;
     [Dependency] private DiscordChatLink _discordLink = default!;
-    [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
-    [Dependency] private IServerPreferencesManager _preferencesManager = default!; // Forge-Change
     [Dependency] private LanguageSystem _language = default!; // Einstein Engines - Language
     [Dependency] private CollectiveMindUpdateSystem _collectiveMind = default!; // Goobstation - Starlight collective mind port
 
-    // public const int VoiceRange = 10; // how far voice goes in world units  /// Forge-Change
-    // public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units /// Forge-Change
-    // public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units /// Forge-Change
+    public const int VoiceRange = 10; // how far voice goes in world units
+    public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
+    public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
     public const string DefaultAnnouncementSound = "/Audio/Announcements/announce.ogg";
     public const float DefaultObfuscationFactor = 0.2f; // Percentage of symbols in a whispered message that can be seen even by "far" listeners
     public readonly Color DefaultSpeakColor = Color.White; // Einstein Engines - Language
@@ -249,6 +245,9 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
+        var prefix = _language.GetLanguageFromPrefix(source, ref message, out var parsed, true); // Starlight: Language prefixes
+        language = parsed && _language.CanSpeak(source, prefix) ? prefix : language;
+
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
         {
@@ -271,6 +270,15 @@ public sealed partial class ChatSystem : SharedChatSystem
             SendEntityDirect(source, message, range, nameOverride, targetEv.Targets, language);
             return;
         }
+
+        // WOLFGATE(Chimera) START: hivemind text from the channel selector has no + prefix, so it goes to the default mind
+        if (desiredType == InGameICChatType.CollectiveMind && !message.StartsWith(CollectiveMindPrefix))
+            message = $"{CollectiveMindPrefix} {message}";
+        // WOLFGATE END
+
+        // WOLFGATE(Xenonids): a xeno's radio prefix sends the message to its hive instead
+        if (checkRadioPrefix && EntityManager.System<Content.Server._WF.Xenonids.Hive.XenoHiveChatSystem>().TrySendHiveMessage(source, message))
+            return;
 
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
@@ -471,6 +479,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (_mobStateSystem.IsDead(uid))
                 continue;
 
+            _collectiveMind.UpdateCollectiveMind(uid, collectMindComp); // WOLFGATE(Chimera): members hear a mind before they've spoken
             if (collectMindComp.Minds.ContainsKey(collectiveMind.ID) || collectMindComp.HearAll)
             {
                 if (collectMindComp.SeeAllNames)
@@ -591,12 +600,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedObfuscated = WrapPublicMessage(source, name, obfuscated, language: language);
         // Einstein Engines - Language end
 
-        var speechOrigin = ResolveLocalSpeechOrigin(source); // Forge-Change
-        var recipients = SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, languageOverride: language, speechOrigin: speechOrigin); // Einstein Engines - Language
+        SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, languageOverride: language); // Einstein Engines - Language
 
-        // Forge-Change: keep speaker components on the AI while local acoustics originate from its camera.
-        var ev = new EntitySpokeEvent(speechOrigin, message, null, false, language); // Einstein Engines - Language
-        ev.Recipients = recipients; // Forge-Change: let TTS reuse the exact listener set the text went to.
+        var ev = new EntitySpokeEvent(source, message, null, false, language); // Einstein Engines - Language
         RaiseLocalEvent(source, ev, true);
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
@@ -636,6 +642,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
+        var prefix = _language.GetLanguageFromPrefix(source, ref originalMessage, out var parsed, true); // Starlight: Language prefixes
+        language = parsed && _language.CanSpeak(source, prefix) ? prefix : language;
+
         var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage), language); // Einstein Engines - Language
         if (message.Length == 0)
             return;
@@ -661,9 +670,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
 
 
-        var speechOrigin = ResolveLocalSpeechOrigin(source); // Forge-Change
-        var whisperRecipients = GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper, speechOrigin); // Forge-Change
-        foreach (var (session, data) in whisperRecipients)
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -685,7 +692,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 result = perceivedMessage;
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", name, result, language);
             }
-            else if (_examineSystem.InRangeUnOccluded(speechOrigin, data.HearingEntity ?? listener, WhisperMuffledRange)) // Forge-Change
+            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange)) // UNEDIT FROM Einstein Engines - Language // They are out of date, this has been reverted to current ChatSystem
             {
                 // Scenario 2: if the listener is too far, they only hear fragments of the message
                 result = ObfuscateMessageReadability(perceivedMessage);
@@ -698,16 +705,14 @@ public sealed partial class ChatSystem : SharedChatSystem
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-unknown-wrap-message", string.Empty, result, language);
             }
 
-            _chatManager.ChatMessageToOne(ChatChannel.Whisper, result, wrappedMessage, speechOrigin, false, session.Channel); // Forge-Change
+            _chatManager.ChatMessageToOne(ChatChannel.Whisper, result, wrappedMessage, source, false, session.Channel);
         }
 
         var replayWrap = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", name, message, language);
-        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, replayWrap, GetNetEntity(speechOrigin), null, MessageRangeHideChatForReplay(range))); // Forge-Change
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, replayWrap, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
         // Einstein Engines - Languages end
 
-        // Forge-Change: keep radio and voice components on the speaker while local acoustics use the camera.
-        var ev = new EntitySpokeEvent(speechOrigin, message, channel, true, language); // Einstein Engines - Languages
-        ev.Recipients = whisperRecipients; // Forge-Change: let TTS reuse the exact listener set the text went to.
+        var ev = new EntitySpokeEvent(source, message, channel, true, language); // Einstein Engines - Languages
         RaiseLocalEvent(source, ev, true);
         if (!hideLog)
             if (originalMessage == message)
@@ -760,7 +765,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
 
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.CollectiveMind))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -817,6 +822,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         var ent = Identity.Entity(source, EntityManager);
         string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
 
+        // WOLFGATE(Emotes) START: a typed trigger word like *salute shows that emote's own message
+        var typedAction = action;
+        if (checkEmote)
+            action = ResolveTypedEmote(source, action);
+        // WOLFGATE END
+
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
             ("entityName", name),
@@ -824,9 +835,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.RemoveMarkupOrThrow(action)));
 
         if (checkEmote)
-            TryEmoteChatInput(source, action);
-        var speechOrigin = ResolveLocalSpeechOrigin(source); // Forge-Change
-        SendInVoiceRange(ChatChannel.Emotes, name, action, wrappedMessage, obfuscated: "", obfuscatedWrappedMessage: "", source, range, author, speechOrigin: speechOrigin); // Einstein Engines - Language
+            TryEmoteChatInput(source, typedAction); // WOLFGATE(Emotes): match the trigger on what was typed
+        SendInVoiceRange(ChatChannel.Emotes, name, action, wrappedMessage, obfuscated: "", obfuscatedWrappedMessage: "", source, range, author); // Einstein Engines - Language
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
@@ -853,18 +863,6 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("entityName", name),
             ("message", FormattedMessage.EscapeText(message)));
 
-        // Forge-Change: color the LOOC name with the sponsor's chosen custom color, if any.
-        if (!_adminManager.IsAdmin(player)
-            && _sponsors.TryGetSponsor(player.UserId, out _)
-            && _preferencesManager.GetPreferencesOrNull(player.UserId) is { } loocPrefs
-            && loocPrefs.SponsorLOOCColor != Color.Transparent)
-        {
-            wrappedMessage = Loc.GetString("chat-manager-entity-looc-patron-wrap-message",
-                ("patronColor", loocPrefs.SponsorLOOCColor.ToHex()),
-                ("entityName", name),
-                ("message", FormattedMessage.EscapeText(message)));
-        }
-
         SendInVoiceRange(ChatChannel.LOOC, name, message, wrappedMessage,
             obfuscated: string.Empty,
             obfuscatedWrappedMessage: string.Empty, // will be skipped anyway
@@ -873,6 +871,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             player.UserId,
             languageOverride: LanguageSystem.Universal); // Einstein Engines - Language
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
+        RaiseLocalEvent(new ChatWebhookEvent(ChatWebhookChannel.Looc, $"{Identity.Name(source, EntityManager)} ({player.Name})", message)); // WOLFGATE(ChatWebhook): one-way Discord webhook copy
     }
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
@@ -904,6 +903,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // Format author name as "Character Name (Username)" for Discord
         var discordAuthor = $"{playerName} ({player.Name})";
         _discordLink.SendMessage(message, discordAuthor, ChatChannel.Dead);
+        RaiseLocalEvent(new ChatWebhookEvent(ChatWebhookChannel.Dead, discordAuthor, message)); // WOLFGATE(ChatWebhook): one-way Discord webhook copy
     }
     #endregion
 
@@ -963,14 +963,11 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
     /// </summary>
-    // Forge-Change: returns the recipient set it used so callers can hand it to EntitySpokeEvent.
-    private Dictionary<ICommonSession, ICChatRecipientData> SendInVoiceRange(ChatChannel channel, string name, string message, string wrappedMessage, string obfuscated, string obfuscatedWrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, LanguagePrototype? languageOverride = null, EntityUid? speechOrigin = null) // Einstein Engines - Language
+    private void SendInVoiceRange(ChatChannel channel, string name, string message, string wrappedMessage, string obfuscated, string obfuscatedWrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, LanguagePrototype? languageOverride = null) // Einstein Engines - Language
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
-        var transmissionSource = speechOrigin is { } origin && Exists(origin) ? origin : source; // Forge-Change
 
-        var recipients = GetRecipients(source, VoiceRange, channel, transmissionSource); // Forge-Change
-        foreach (var (session, data) in recipients)
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, channel))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
@@ -981,18 +978,17 @@ public sealed partial class ChatSystem : SharedChatSystem
             if (session.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
             EntityUid listener = session.AttachedEntity.Value;
+            var bubbleSource = channel is ChatChannel.Local or ChatChannel.Emotes ? data.BubbleSource ?? source : source; // WOLFGATE(Vehicles): a listener may see the speech bubble on another entity
 
             // If the channel does not support languages, or the entity can understand the message, send the original message, otherwise send the obfuscated version
             if (channel == ChatChannel.LOOC || channel == ChatChannel.Emotes || _language.CanUnderstand(listener, language.ID))
-                _chatManager.ChatMessageToOne(channel, message, wrappedMessage, transmissionSource, entHideChat, session.Channel, author: author); // Forge-Change
+                _chatManager.ChatMessageToOne(channel, message, wrappedMessage, bubbleSource, entHideChat, session.Channel, author: author); // WOLFGATE(Vehicles): bubbleSource in place of source
             else
-                _chatManager.ChatMessageToOne(channel, obfuscated, obfuscatedWrappedMessage, transmissionSource, entHideChat, session.Channel, author: author); // Forge-Change
+                _chatManager.ChatMessageToOne(channel, obfuscated, obfuscatedWrappedMessage, bubbleSource, entHideChat, session.Channel, author: author); // WOLFGATE(Vehicles): bubbleSource in place of source
             // Einstein Engines - Language end
         }
 
-        _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(transmissionSource), null, MessageRangeHideChatForReplay(range))); // Forge-Change
-
-        return recipients; // Forge-Change
+        _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
     }
 
     /// <summary>
@@ -1090,7 +1086,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         return message;
     }
 
-    public const string ChatSanitize_Accent = "chatsanitize";
+    public static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize_Accent = "chatsanitize";
 
     public string SanitizeMessageReplaceWords(string message)
     {
@@ -1145,7 +1141,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("color", color),
             ("entityName", entityName),
             ("verb", Loc.GetString(verbId)),
-            ("fontType", language.SpeechOverride.FontId ?? speech.FontId),
+            ("fontType", language.SpeechOverride.FontId ?? CompOrNull<WFChatFontComponent>(source)?.Font ?? speech.FontId), // WOLFGATE(ChatFont): the character's picked font, under a language's own
             ("fontSize", language.SpeechOverride.FontSize ?? speech.FontSize),
             ("message", message),
             ("language", languageDisplay));
@@ -1156,11 +1152,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(
-        EntityUid source,
-        float voiceGetRange,
-        ChatChannel channel,
-        EntityUid? speechOrigin = null)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, ChatChannel channel = ChatChannel.Local)
     {
         // TODO proper speech occlusion
 
@@ -1168,8 +1160,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var ghostHearing = GetEntityQuery<GhostHearingComponent>();
         var xforms = GetEntityQuery<TransformComponent>();
 
-        var origin = speechOrigin is { } requestedOrigin && Exists(requestedOrigin) ? requestedOrigin : source;
-        var transformSource = xforms.GetComponent(origin);
+        var transformSource = xforms.GetComponent(source);
         var sourceMapId = transformSource.MapID;
         var sourceCoords = transformSource.Coordinates;
 
@@ -1196,22 +1187,15 @@ public sealed partial class ChatSystem : SharedChatSystem
                 recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
-        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, origin, channel, voiceGetRange, recipients));
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients)
+        {
+            SpeechOrigin = source,
+            Channel = channel,
+        });
         return recipients;
     }
 
-    private EntityUid ResolveLocalSpeechOrigin(EntityUid speaker)
-    {
-        var ev = new ResolveLocalSpeechOriginEvent(speaker, speaker);
-        RaiseLocalEvent(speaker, ref ev);
-        return Exists(ev.Origin) ? ev.Origin : speaker;
-    }
-
-    public readonly record struct ICChatRecipientData(
-        float Range,
-        bool Observer,
-        bool? HideChatOverride = null,
-        EntityUid? HearingEntity = null)
+    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null, EntityUid? BubbleSource = null, EntityUid? HearingEntity = null) // WOLFGATE(Vehicles): BubbleSource, the entity this listener sees the bubble on
     {
     }
 
@@ -1252,13 +1236,22 @@ public sealed partial class ChatSystem : SharedChatSystem
 ///     This event is raised before chat messages are sent out to clients. This enables some systems to send the chat
 ///     messages to otherwise out-of view entities (e.g. for multiple viewports from cameras).
 /// </summary>
-public record ExpandICChatRecipientsEvent(
-    EntityUid Source,
-    EntityUid SpeechOrigin,
-    ChatChannel Channel,
-    float VoiceRange,
-    Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
+public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
+    public EntityUid SpeechOrigin { get; init; } = Source;
+    public ChatChannel Channel { get; init; }
+
+    public ExpandICChatRecipientsEvent(
+        EntityUid source,
+        EntityUid speechOrigin,
+        ChatChannel channel,
+        float voiceRange,
+        Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> recipients)
+        : this(source, voiceRange, recipients)
+    {
+        SpeechOrigin = speechOrigin;
+        Channel = channel;
+    }
 }
 
 /// <summary>
@@ -1310,14 +1303,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    /// <summary>
-    ///     Forge-Change: the recipient set ChatSystem already computed for this message, including
-    ///     camera/station-AI expansion. Handlers that need to reach the same listeners (e.g. TTS)
-    ///     should reuse this instead of recomputing it, so they agree with the delivered text and
-    ///     don't repeat the station-wide camera scan. Null when the event was raised by something
-    ///     other than the local say/whisper paths.
-    /// </summary>
-    public Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>? Recipients;
+    public Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>? Recipients { get; set; }
 
     public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype language) // Einstein Engines - Language
     {

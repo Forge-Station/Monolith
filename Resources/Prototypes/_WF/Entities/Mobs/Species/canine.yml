@@ -1,0 +1,31 @@
+# Wolfgate: Canine mobs. They inherit the Vulpkanin ones outright and only change which species they are,
+# so anything added to Vulpkanin - emotes, languages, body, inventory - follows automatically. The head
+# difference lives entirely in MobCanineSprites.
+- type: entity
+  save: false
+  name: Urist McCanine
+  parent: MobVulpkanin
+  id: MobCanine
+  components:
+  - type: HumanoidAppearance
+    species: Canine
+    # Snout is dropped from the hideable list on purpose. For a Vulpkanin the muzzle is drawn into the head
+    # so hiding this layer only takes the snout markings off, but for a Canine the marking IS the muzzle -
+    # a mask that hides it would leave a human face.
+    hideLayersOnEquip:
+    - Hair
+    - HeadTop
+
+- type: entity
+  save: false
+  name: Urist McCanine
+  parent: MobVulpkaninDummy
+  id: MobCanineDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy canine meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: Canine
+    hideLayersOnEquip:
+    - Hair
+    - HeadTop

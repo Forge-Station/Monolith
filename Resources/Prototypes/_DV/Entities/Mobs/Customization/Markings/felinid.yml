@@ -2,7 +2,7 @@
   id: FelinidFluffyTailRings
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Felinid, Tajaran, Human] # Goobstation - Tajaran
+  speciesRestriction: [Felinid, Tajaran, Human, ProtoFeline] # Goobstation - Tajaran
   sprites:
   - sprite: _DV/Mobs/Customization/Felinid/felinid_tails.rsi
     state: Felinid_fluffy_tail_full
@@ -13,7 +13,7 @@
   id: FelinidFluffyTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Felinid, Tajaran, Human] # Goobstation - Tajaran
+  speciesRestriction: [Felinid, Tajaran, Human, ProtoFeline] # Goobstation - Tajaran
   sprites:
   - sprite: _DV/Mobs/Customization/Felinid/felinid_tails.rsi
     state: Felinid_fluffy_tail_full
@@ -22,7 +22,35 @@
   id: FelinidAlternativeTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Felinid, Tajaran, Human] # Goobstation - Tajaran
+  speciesRestriction: [Felinid, Tajaran, Human, ProtoFeline] # Goobstation - Tajaran
   sprites:
     - sprite: _DV/Mobs/Customization/Felinid/alternative_tail.rsi
       state: m_waggingtail_cat_FRONT
+
+# Wolfgate: ported from HardLight
+- type: marking
+  id: FelinidTiger
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, ProtoFeline, Canine]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    m_tail_tiger_primary_BEHIND: TailBehind
+    m_tail_tiger_secondary_BEHIND: TailBehind
+    m_tail_tiger_tertiary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    m_tail_tiger_primary_BEHIND: m_tail_tiger_primary_FRONT
+    m_tail_tiger_secondary_BEHIND: m_tail_tiger_secondary_FRONT
+    m_tail_tiger_tertiary_BEHIND: m_tail_tiger_tertiary_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - split art
+      state: m_tail_tiger_primary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - split art
+      state: m_tail_tiger_secondary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - split art
+      state: m_tail_tiger_tertiary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - south frame on TailBehind
+      state: m_tail_tiger_primary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - south frame on TailBehind
+      state: m_tail_tiger_secondary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Felinid/tiger_tail.rsi # WOLFGATE - south frame on TailBehind
+      state: m_tail_tiger_tertiary_BEHIND

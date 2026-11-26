@@ -1,0 +1,80 @@
+# A Dynasty patrol against a RedSail crew in a shielded gunboat, the counterpart of the TSF's fight with the corsairs.
+- type: wfEncounter
+  id: WFEncounterSkirmishPdvCorsairs
+  leash: 2500
+  name: wf-encounter-name-skirmish-pdv-corsairs
+  announcement: wf-encounter-announce-skirmish-pdv-corsairs
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: pdv
+    spesos: 28000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort

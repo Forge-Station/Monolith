@@ -1,4 +1,4 @@
-﻿<tabs:MiscTab xmlns="https://spacestation14.io"
+<tabs:MiscTab xmlns="https://spacestation14.io"
               xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:ui="clr-namespace:Content.Client.Options.UI">
@@ -7,8 +7,11 @@
             <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
                 <Label Text="{Loc 'ui-options-general-ui-style'}"
                        StyleClasses="LabelKeyText"/>
+                <ui:OptionDropDown Name="DropDownWolfgateStyle" Title="{Loc 'ui-options-wf-ui-style'}" /> <!-- Forge-Change: the skin picker, its Wolfgate tab is not part of this menu -->
                 <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />
                 <ui:OptionDropDown Name="DropDownHudLayout" Title="{Loc 'ui-options-hud-layout'}" />
+                <CheckBox Name="SimplifiedUiCheckBox" Text="{Loc 'ui-options-forge-ui-simplified'}" /> <!-- Forge-Change: simplified interface for weak computers -->
+                <CheckBox Name="CockpitAutoEnterCheckBox" Text="{Loc 'ui-options-wf-cockpit-auto-enter'}" /> <!-- WOLFGATE(Cockpit): open the cockpit view automatically -->
                 <Label Text="{Loc 'ui-options-general-discord'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="DiscordRich" Text="{Loc 'ui-options-discordrich'}" />

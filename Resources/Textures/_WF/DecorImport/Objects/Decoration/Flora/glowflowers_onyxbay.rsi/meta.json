@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from OnyxBay at commit https://github.com/ChaoticOnyx/OnyxBay/commit/3cb893c92162f09aa91987e1e1a943221809e3d3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ywflowers_1"
+    },
+    {
+      "name": "ywflowers_1-overlay"
+    },
+    {
+      "name": "ywflowers_2"
+    },
+    {
+      "name": "ywflowers_2-overlay"
+    },
+    {
+      "name": "ywflowers_3"
+    },
+    {
+      "name": "ywflowers_3-overlay"
+    },
+    {
+      "name": "ywflowers_4"
+    },
+    {
+      "name": "ywflowers_4-overlay"
+    },
+    {
+      "name": "brflowers_1"
+    },
+    {
+      "name": "brflowers_1-overlay"
+    },
+    {
+      "name": "brflowers_2"
+    },
+    {
+      "name": "brflowers_2-overlay"
+    },
+    {
+      "name": "brflowers_3"
+    },
+    {
+      "name": "brflowers_3-overlay"
+    },
+    {
+      "name": "ppflowers_1"
+    },
+    {
+      "name": "ppflowers_1-overlay"
+    },
+    {
+      "name": "ppflowers_2"
+    },
+    {
+      "name": "ppflowers_2-overlay"
+    },
+    {
+      "name": "ppflowers_3"
+    },
+    {
+      "name": "ppflowers_3-overlay"
+    }
+  ]
+}

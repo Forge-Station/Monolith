@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by SuperJoelD00D, Protogen species by Malice-Risu. Busywork of chopping the sprite up into markings (and light editing on this one) by QuirkyTurtle",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "altvisor_screen_protogen",
+      "directions": 4
+    },
+    {
+      "name": "altvisor_trim_protogen",
+      "directions": 4
+    }
+  ]
+}

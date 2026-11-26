@@ -1,0 +1,96 @@
+# How players get into xenobiology on Wolfgate: a research tech unlocks the boards and tools, and cargo sells the
+# first slimes. Goob instead maps slime pens and gear onto the station.
+
+- type: technology
+  id: WFXenobiology
+  name: research-technology-wf-xenobiology
+  entityIcon: SlimeScannerXenobio
+  discipline: Experimental
+  tier: 1
+  cost: 15000
+  recipeUnlocks:
+  - SlimeGrinderMachineCircuitboard
+  - XenobiologyBountyComputerCircuitboard
+  - SlimeScannerXenobio
+  - ClothingBackpackXenoBioTank
+  - WeaponXenoVacNozzle
+  technologyPrerequisites:
+  - BasicParts
+  position: 2, -5
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SlimeGrinderMachineCircuitboard
+  result: SlimeGrinderMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: XenobiologyBountyComputerCircuitboard
+  result: XenobiologyBountyComputerCircuitboard
+
+- type: latheRecipe
+  id: SlimeScannerXenobio
+  result: SlimeScannerXenobio
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Glass: 500
+    Steel: 500
+
+- type: latheRecipe
+  id: ClothingBackpackXenoBioTank
+  result: ClothingBackpackXenoBioTank
+  categories:
+  - Tools
+  completetime: 8
+  materials:
+    Steel: 1500
+    Plastic: 500
+    Glass: 500
+
+- type: latheRecipe
+  id: WeaponXenoVacNozzle
+  result: WeaponXenoVacNozzle
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Steel: 500
+    Plastic: 300
+
+- type: latheRecipePack
+  id: WFXenobiologyBoards
+  recipes:
+  - SlimeGrinderMachineCircuitboard
+  - XenobiologyBountyComputerCircuitboard
+
+- type: latheRecipePack
+  id: WFXenobiologyTools
+  recipes:
+  - SlimeScannerXenobio
+  - ClothingBackpackXenoBioTank
+  - WeaponXenoVacNozzle
+
+- type: entity
+  id: WFCrateXenobiologyStarter
+  parent: CrateScience
+  name: xenobiology starter crate
+  description: Two grey slimes, a slime scanner and a xenovac with its nozzle. The slimes are hungry.
+  components:
+  - type: StorageFill
+    contents:
+    - id: MobSlimeXenobioBabyGrey
+      amount: 2
+    - id: SlimeScannerXenobio
+    - id: ClothingBackpackXenoBioTankFilled
+
+- type: cargoProduct
+  id: WFXenobiologyStarter
+  icon:
+    sprite: _WF/Xenobiology/Mobs/slimesBaby.rsi
+    state: base
+  product: WFCrateXenobiologyStarter
+  cost: 4000
+  category: cargoproduct-category-name-science
+  group: market

@@ -1,0 +1,361 @@
+# The Underkarst's cave life, zone by zone: dripstone halls, flooded grottos and mushroom hollows
+# (Biomes/asclepiu.yml). Names and descriptions are in Locale/en-US/_WF/Caverns/life_asclepiu.ftl.
+
+# ---- Produce ----
+
+# Eat it for bicaridine and kelotane, or cut it into a poultice (WFHealingHerbBase).
+- type: entity
+  parent: WFHealingHerbBase
+  id: WFCaveDropletLichen
+  components:
+  - type: Sprite
+    color: "#a8e6ee"
+
+# Cook two with water in a big bowl.
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFCaveCapMushroom
+  components:
+  - type: Sprite
+    color: "#d6cdbb"
+
+- type: entity
+  parent: FoodSoupMushroom
+  id: WFFoodSoupCaveCap
+
+- type: microwaveMealRecipe
+  id: RecipeWFCaveCapSoup
+  name: wf-recipe-cave-cap-soup
+  result: WFFoodSoupCaveCap
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFCaveCapMushroom: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# ---- Plants ----
+
+# Not woody: nothing to log when one is trampled.
+- type: entity
+  abstract: true
+  parent: BaseFlora
+  id: WFCavePlantBase
+  components:
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 12
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Dripstone halls: pale lichen on the flowstone; pick it for a healing herb.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCaveLichenPatch
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: shrub1
+      map: [ "plant" ]
+      color: "#c4eef2"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.65,0.65", color: "#8a9ea2" }
+          False: { scale: "1,1", color: "#c4eef2" }
+  - type: WFRegrowingHarvest
+    regrowTime: 720
+    harvestTime: 1.5
+    table: !type:AllSelector
+      children:
+      - id: WFCaveDropletLichen
+
+# Dripstone halls, rare: roots that close on whoever walks past, for two seconds. Cut it free or struggle.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCaveGraspingRoot
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: plantbot1
+      map: [ "plant" ]
+      color: "#b9ad98"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#b9ad98", scale: "1,1" }
+          Armed: { color: "#ffd9a0", scale: "1.1,1.1" }
+          Spent: { color: "#b9ad98", scale: "1,1" }
+  - type: WFReactiveFlora
+    behaviour: Grab
+    range: 1.1
+    cooldown: 10
+    checkInterval: 0.5
+    holdTime: 2
+    heldSpeed: 0
+    cutFreeDamage: 12
+    damage:
+      types:
+        Blunt: 2
+    ignoreFactions: [ Passive, SimpleHostile, SimpleNeutral, Dragon ]
+    sound:
+      collection: WFFloraGrab
+    releaseSound:
+      collection: WFFloraVineSnap
+    popup: wf-cave-root-grabs
+
+# Flooded grottos: reeds in the shallows; cut them for plant fibre.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCavePaleReeds
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_water_plants.rsi
+    layers:
+    - state: water_stalks
+      map: [ "plant" ]
+      color: "#dfe9d4"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    regrowTime: 480
+    harvestTime: 1.5
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFPlantFibre
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Flooded grottos, rare: a pitcher that spits acid at anyone it sees within five metres.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCavePitcherPod
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_water_plants.rsi
+    layers:
+    - state: plant-3
+      map: [ "plant" ]
+      color: "#b8e0a8"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#b8e0a8", scale: "1,1" }
+          Armed: { color: "#f2ff8a", scale: "1.15,1.15" }
+          Spent: { color: "#b8e0a8", scale: "1,1" }
+  - type: WFReactiveFlora
+    behaviour: Spit
+    range: 5
+    cooldown: 8
+    checkInterval: 0.75
+    projectile: WFCaveAcidGlob
+    projectileSpeed: 8
+    ignoreFactions: [ Passive, SimpleHostile, SimpleNeutral, Dragon ]
+    sound:
+      collection: WFFloraSpit
+
+- type: entity
+  parent: BaseBullet
+  id: WFCaveAcidGlob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: bullet
+      shader: unshaded
+      color: "#a8e06a"
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 6
+  - type: TimedDespawn
+    lifetime: 2.5
+
+# Mushroom hollows: pale cave caps; pick them for the pot.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCaveCapPatch
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms_goonstation.rsi
+    layers:
+    - state: mushroom5
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.55,0.55", color: "#9a948a" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 600
+    harvestTime: 1
+    table: !type:AllSelector
+      children:
+      - id: WFCaveCapMushroom
+        amount: !type:RangeNumberSelector
+          range: 1, 3
+
+# Mushroom hollows, rare: a green puffball that swells and breathes out a cloud of spores, a poison and a haze.
+- type: entity
+  parent: WFCavePlantBase
+  id: WFCaveSporePuff
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+    layers:
+    - state: fake_stillcap_green
+      map: [ "plant" ]
+      scale: "0.6,0.6"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#d8ffd0", scale: "0.6,0.6" }
+          Armed: { color: "#ffffa8", scale: "0.8,0.8" }
+          Spent: { color: "#a8b898", scale: "0.55,0.55" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.3
+    cooldown: 20
+    checkInterval: 0.75
+    activeTime: 1.5
+    ignoreFactions: [ Passive, SimpleHostile, SimpleNeutral, Dragon ]
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-cave-sporepuff-puff
+    cloudPrototype: Smoke
+    cloudDuration: 5
+    cloudSpread: 3
+    solution:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 3
+      - ReagentId: SpaceDrugs
+        Quantity: 3
+
+# ---- Wildlife ----
+# Reskins of the surface animals, blind and pale from the dark. Their recoloured sprites are made by
+# Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py.
+
+- type: entity
+  parent: MobBat
+  id: WFMobCavePaleBat
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bat
+      sprite: _WF/Caverns/Life/asclepiu/pale_bat.rsi
+
+- type: entity
+  parent: MobFrog
+  id: WFMobCaveFrog
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base", "movement" ]
+      state: frog
+      sprite: _WF/Caverns/Life/asclepiu/cave_frog.rsi
+
+- type: entity
+  parent: MobCrab
+  id: WFMobCaveCrab
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base", "movement" ]
+      state: crab
+      sprite: _WF/Caverns/Life/asclepiu/cave_crab.rsi
+
+- type: entity
+  parent: MobGiantSpider
+  id: WFMobCaveSpider
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base", "movement" ]
+      state: tarantula
+      sprite: _WF/Caverns/Life/asclepiu/cave_spider.rsi
+
+# ---- Fauna tables ----
+# One marker per zone, placed in the zone's chambers (HideSpawnMenu markers, like WFCavernFaunaAsclepiu).
+
+# Dripstone halls: bats on the ceiling and crabs among the stalagmites.
+- type: entityTable
+  id: WFCavernFaunaAsclepiuHalls
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCavePaleBat
+      weight: 5
+    - id: WFMobCaveCrab
+      weight: 3
+
+- type: entity
+  id: WFCavernFaunaAsclepiuHalls
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAsclepiuHalls
+
+# Flooded grottos: frogs and crabs by the water.
+- type: entityTable
+  id: WFCavernFaunaAsclepiuGrottos
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCaveFrog
+      weight: 5
+    - id: WFMobCaveCrab
+      weight: 3
+
+- type: entity
+  id: WFCavernFaunaAsclepiuGrottos
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAsclepiuGrottos
+
+# Mushroom hollows: spiders in the webs, a bat or two.
+- type: entityTable
+  id: WFCavernFaunaAsclepiuHollows
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCaveSpider
+      weight: 4
+    - id: WFMobCavePaleBat
+      weight: 2
+
+- type: entity
+  id: WFCavernFaunaAsclepiuHollows
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAsclepiuHollows

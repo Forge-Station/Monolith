@@ -3,10 +3,26 @@
 ## Avoid random deathmatch (RDM).
 
 [italic][color=yellow]Faction Conflict:[/color][/italic]
-- Faction conflict is allowed at all times, due to the RP reason of [color=red][bold]active war[/bold][/color].
+<!-- WOLFGATE(ColdWar) START: faction conflict follows the war level; was "allowed at all times, due to the RP reason of active war" -->- TSF and PDV are in a [color=cyan][bold]cold war[/bold][/color]. Check your PDA: [color=cyan][bold]WAR LEVEL: COLD[/bold][/color] means there is a ceasefire, [color=red][bold]WAR LEVEL: HOT[/bold][/color] means [textlink="war has been declared" link="WFRuleConflictFiveDeclaringWar"].
 
-- Any conflict is allowed with a [color=red][bold]proper, reasonable RP reason[/bold][/color]. A stolen magazine may be a reason for a fistfight, but not a meatgrinder.
--- Using metaknowledge (external knowledge) of companies and antagonists (ADS/Chimera/Asakim Etc.,) found in the [color=blue]Discord or Guidebook[/color] [color=green][bold]is allowed[/bold][/color]. For example, the [color=red]RedSail Corsairs[/color] may be [color=red][bold]Killed On Sight[/bold][/color] (per line 5) as they are known pirates. Although the [color=yellow]Viper Group[/color] requires escalation, as they do contracting, not pirate work.
+- While [color=cyan][bold]COLD[/bold][/color], being in the other faction is [color=red][bold]not[/bold][/color] a reason to attack. You need an RP reason and escalation like in any other conflict.
+-- You don't need escalation if they shoot first, or board or hack your ship.
+-- Or if they stay within [color=yellow][bold]512 meters[/bold][/color] of your base for [color=yellow][bold]30 seconds[/bold][/color] after being warned.
+-- Or if you catch them spying or sabotaging on your ship or base (that person only).
+
+- Event POIs (vaults, weapons caches, wrecks and other bluespace events), PDV drop pods and Monolithic Fragments are [color=red][bold]conflict zones[/bold][/color], even while COLD. TSF and PDV can fight each other within [color=yellow][bold]512 meters[/bold][/color] of one without escalation.
+-- The fight stays there. Do not hunt them down once they leave.
+
+- [bold]An incident is not a war.[/bold] Force stays with the people and ships involved and ends when one side breaks off.
+
+- [bold]NPCs are fair game.[/bold] Attacking NPC ships, crews or turrets is never a rulebreak.
+-- Attacking the other faction's NPCs while COLD counts as shooting first, so their players can come after you.
+-- Base turrets ignore the ceasefire and shoot the other faction on sight.
+
+- While [color=red][bold]HOT[/bold][/color], faction conflict is allowed at all times.
+
+<!-- WOLFGATE END -->- Any conflict is allowed with a [color=red][bold]proper, reasonable RP reason[/bold][/color]. A stolen magazine may be a reason for a fistfight, but not a meatgrinder.
+<!-- WOLFGATE: was color=blue, unreadable on the dark background -->-- Using metaknowledge (external knowledge) of companies and antagonists (ADS/Chimera/Asakim Etc.,) found in the [color=cornflowerblue]Discord or Guidebook[/color] [color=green][bold]is allowed[/bold][/color]. For example, the [color=red]RedSail Corsairs[/color] may be [color=red][bold]Killed On Sight[/bold][/color] (per line 5) as they are known pirates. Although the [color=yellow]Viper Group[/color] requires escalation, as they do contracting, not pirate work.
 
 - Combat escalation should be stated in local, shortband, or broadband chat/radio channels and must be [color=green]clearly declared[/color] to those involved. (ex. "It's over Jackson, die fucker!!" in local chat, or shortband) 
 

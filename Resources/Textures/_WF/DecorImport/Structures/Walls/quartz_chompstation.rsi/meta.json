@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CHOMPStation at commit https://github.com/CHOMPStation2/CHOMPStation2/commit/ca24d940aa4a6eb0d58d32b85ddc830f44459264.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hull-r_titanium0",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium1",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium2",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium3",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium4",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium5",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium6",
+      "directions": 4
+    },
+    {
+      "name": "hull-r_titanium7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

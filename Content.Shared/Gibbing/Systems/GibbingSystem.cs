@@ -120,9 +120,15 @@ public sealed partial class GibbingSystem : EntitySystem
         var gibContentsAttempt =
             new AttemptEntityContentsGibEvent(gibbable, gibContentsOption, allowedContainers, excludedContainers);
         RaiseLocalEvent(gibbable, ref gibContentsAttempt);
+        excludedContainers = gibContentsAttempt.ExcludedContainers; // WOLFGATE(Wolfmed): let subscribers veto containers (Wolfmed keeps wounds with the part)
 
         foreach (var container in _containerSystem.GetAllContainers(gibbable))
         {
+            // WOLFGATE(Wolfmed) START: a solution entity is not a thing to drop: it has no physics to fling and goes with its owner.
+            var id = container.ID;
+            if (id.StartsWith("solution@"))
+                continue;
+            // WOLFGATE END
             var valid = true;
             if (allowedContainers != null)
                 valid = allowedContainers.Contains(container.ID);
@@ -327,6 +333,12 @@ public sealed partial class GibbingSystem : EntitySystem
         var scatterAngle = direction?.ToAngle() ?? _random.NextAngle();
         var scatterVector = _random.NextAngle(scatterAngle - scatterConeAngle / 2, scatterAngle + scatterConeAngle / 2)
             .ToVec() * (impulse + _random.NextFloat(impulseVariance));
+        // WOLFGATE START: bodiless dropped contents are skipped instead of flung.
+        // Dropped container contents can be bodiless (an organ's solution entity); flinging one only logs a
+        // resolve error per giblet, which floods the log every time a landing grid crushes a mob.
+        if (!HasComp<PhysicsComponent>(target))
+            return;
+        // WOLFGATE END
         _physicsSystem.ApplyLinearImpulse(target, scatterVector);
     }
 

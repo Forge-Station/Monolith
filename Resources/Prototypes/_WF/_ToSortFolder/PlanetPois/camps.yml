@@ -1,0 +1,111 @@
+# Armed camps round ships set down on planets (a table's `camps`, WFPlanetPoiSystem.Camps): the ship lands intact and
+# square to the world, its crew stand guard on the deck and round the hull behind a ring of cover, and the hold has
+# something worth taking. Every world has one of each.
+
+# The Ashfall Reavers: a black-market raider set down on open ground, guarded by riflemen and hardsuited bruisers.
+- type: wfPlanetCamp
+  id: WFCampReavers
+  name: wf-poi-reaver-encampment
+  vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+  profile: WFCrewProfilePirate
+  faction: PirateNF
+  skill: Regular
+  minDeckGuards: 2
+  maxDeckGuards: 3
+  minGroundGuards: 3
+  maxGroundGuards: 5
+  cover: [ CMBarricadeSandbag, CMBarricadeSandbag, RMCBarricadeWood, CMBarricadeMetal ]
+  props:
+  - ids: [ AU14PropTent3, AU14PropTent4, AU14PropTent5, AU14PropTent6 ]
+    min: 2
+    max: 3
+    distance: 6
+    footprint: "-1,-1.5,2,2.5"
+  - ids: [ Bonfire ]
+    min: 1
+    max: 2
+    distance: 5
+  - ids: [ AU14TallFloodlight, AU14TallFloodlight, AU14FloodlightBroken ]
+    min: 2
+    max: 3
+    distance: 4
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+# An ADS control site: a node or picket hull set down to hold ground, its automatons standing sentry behind plasteel.
+- type: wfPlanetCamp
+  id: WFCampAds
+  name: wf-poi-ads-control-site
+  vessels: [ WFAdsNebula, WFAdsWyrm ]
+  profile: WFCrewProfileAds
+  faction: WFAds
+  skill: Veteran
+  minDeckGuards: 2
+  maxDeckGuards: 3
+  minGroundGuards: 3
+  maxGroundGuards: 4
+  cover: [ RMCBarricadePlasteel, CMBarricadeMetal ]
+  props:
+  - ids: [ AU14PropTent1, AU14PropTent6 ]
+    min: 1
+    max: 2
+    distance: 6
+    footprint: "-1,-1.5,2,2.5"
+  - ids: [ AU14TallFloodlight ]
+    min: 3
+    max: 4
+    distance: 4
+  loot: !type:NestedSelector
+    tableId: WFWreckGunneryChips
+
+# A crazy camp: no ship, just a few tents round a fire, and whoever's odd enough to live out here (_WF/Strangers).
+- type: wfPlanetCamp
+  id: WFCampCrazies
+  name: wf-poi-crazy-camp
+  props:
+  - ids: [ Bonfire ]
+    min: 1
+    max: 1
+    distance: 0
+  - ids: [ AU14PropTent3, AU14PropTent4, AU14PropTent5 ]
+    min: 2
+    max: 4
+    distance: 4
+    footprint: "-1,-1.5,2,2.5"
+  residents: !type:NestedSelector
+    tableId: WFStrangersCamp
+  home: WFStrangerCampHome
+  minResidents: 2
+  maxResidents: 4
+
+# A small xenonid hive, Aerumna's: a hive core in a broken ring of resin with a few doors, a nest of dormant eggs round
+# it and a few drones and runners about. No ship and no guards; the core spreads its own weeds once the ground exists.
+- type: wfPlanetCamp
+  id: WFCampXenoHive
+  name: wf-poi-xeno-hive
+  roadside: false
+  props:
+  - ids: [ HiveCoreXeno ]
+    min: 1
+    max: 1
+    distance: 0
+  - ids: [ WFXenoEggWild ]
+    min: 3
+    max: 4
+    distance: 2
+  - ids: [ WFXenoEggWild ]
+    min: 2
+    max: 3
+    distance: 3
+  - ids: [ WallXenoResin, WallXenoResin, WallXenoResinThick ]
+    min: 16
+    max: 22
+    distance: 5
+  - ids: [ DoorXenoResin ]
+    min: 2
+    max: 3
+    distance: 5
+  residents: !type:NestedSelector
+    tableId: WFFaunaAerumnaHive
+  minResidents: 2
+  maxResidents: 4

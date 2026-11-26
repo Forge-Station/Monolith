@@ -1,0 +1,165 @@
+- type: entity
+  parent: ShipPlasmaProjectileScylla
+  id: WFLatticeLanceProjectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 10
+        Structural: 50
+        Heat: 80
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Projectiles/energybolts.rsi
+    layers:
+    - state: mediumstun
+      color: "#d070ff"
+    scale: 1.6, 1.6
+  - type: RadarBlip
+    radarColor: "#d070ff"
+    scale: 1.6
+    shape: arrow
+  - type: TimedDespawn
+    lifetime: 6
+  - type: PointLight
+    color: "#b040e0"
+    radius: 2
+    energy: 2
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 40
+    intensitySlope: 4
+    maxIntensity: 5
+
+- type: entity
+  parent: WeaponTurretScylla
+  id: WFLatticeWardenLance
+  suffix: Lattice
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/ShuttleWeapons/scylla.rsi
+    layers:
+    - state: space_artillery
+      color: "#c070ff"
+  - type: PointLight
+    radius: 2.5
+    energy: 1.5
+    color: "#b040e0"
+  - type: Battery
+    maxCharge: 1000000
+    startingCharge: 1000000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 1000000
+  - type: Gun
+    damageModifier: 1
+    projectileSpeed: 500
+    minAngle: 0
+    maxAngle: 3
+    fireRate: 1
+    recoil: 0
+    burstCooldown: 4
+    burstFireRate: 10
+    shotsPerBurst: 10
+    selectedMode: Burst
+    availableModes: Burst
+    shootThermalSignature: 500000
+    soundGunshot:
+      path: /Audio/Weapons/Xeno/alien_spitacid.ogg
+      params:
+        volume: -4
+        variation: 0.12
+    soundEmpty:
+      path: /Audio/Weapons/click.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: WFLatticeLanceProjectile
+    fireCost: 100
+  - type: FireControllable
+    ignoreLos: true
+  - type: RadarBlip
+    radarColor: "#C070FF"
+    scale: 1.5
+    gridConfig:
+      color: "#C070FF"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1.4,-1.4,1.4,1.4"
+  - type: StaticPrice
+    price: 0
+  - type: WFLatticeDefenceWeapon
+
+- type: entity
+  parent: BaseBullet
+  id: WFLatticeFlechette
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    state: buckshot
+    color: "#d070ff"
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 14
+        Slash: 12
+    armorPenetration: 0.6
+  - type: Tracer
+    color: "#d070ffff"
+    length: 2
+
+- type: entity
+  parent: WFLatticeFlechette
+  id: WFLatticeFlechetteVolley
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: WFLatticeFlechette
+    count: 5
+    spread: 12
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WFLatticeSpireTurret
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Decoration/intruder_spire_goon.rsi
+    noRot: true
+    layers:
+    - state: spire-old
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: BasicEntityAmmoProvider
+    proto: WFLatticeFlechetteVolley
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      RotateSpeed: !type:Single
+        12
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+  - type: MouseRotator
+    angleTolerance: 15
+    rotationSpeed: 720
+    simple4DirMode: false
+  - type: Gun
+    fireRate: 3
+    projectileSpeed: 70
+    minAngle: 2
+    maxAngle: 8
+    angleIncrease: 0.5
+    angleDecay: 8
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Xeno/alien_spitacid.ogg
+      params:
+        volume: -2
+        pitch: 1.4
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#b040e0"

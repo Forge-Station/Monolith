@@ -1,2 +1,43 @@
 - type: Tag
   id: ReactorPart
+
+# Wolfgate: ported from HardLight - species tags the Protogen subspecies carry.
+# Thaven, Avali, Felionoid and SpiderCraft already exist elsewhere in this fork.
+- type: Tag
+  id: Protogen
+
+- type: Tag
+  id: Vulpkanin
+
+- type: Tag
+  id: Vox
+
+- type: Tag
+  id: SlimePerson
+
+- type: Tag
+  id: Shadekin
+
+- type: Tag
+  id: Resomi
+
+- type: Tag
+  id: Reptilian
+
+- type: Tag
+  id: Moth
+
+- type: Tag
+  id: Human
+
+- type: Tag
+  id: Dwarf
+
+- type: Tag
+  id: Diona
+
+- type: Tag
+  id: Arachnid
+
+- type: Tag
+  id: RamChip

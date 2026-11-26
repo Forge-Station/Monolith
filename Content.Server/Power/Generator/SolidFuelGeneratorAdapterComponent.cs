@@ -1,6 +1,5 @@
 ﻿using Content.Shared.Materials;
 using Content.Shared.Power.Generator;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Prototypes; // Frontier
 
 namespace Content.Server.Power.Generator;

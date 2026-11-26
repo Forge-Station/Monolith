@@ -1,0 +1,133 @@
+# WOLFGATE(Species): ported from HardLight
+# TODO: Add descriptions (many)
+# TODO BODY: Part damage
+- type: entity
+  id: PartSynth
+  parent: [WFWolfmedPartIpc, BaseItem, BasePart] # WOLFGATE(Wolfmed): M4: OD16 Synth is mechanical, chassis wound profile; WFWolfmedPartIpc must stay FIRST (RT first-parent-wins)
+  name: "synth body part"
+  abstract: true
+  components:
+  # WOLFGATE(Wolfmed): playtest 5, the IPC part container (as PartIPCBase), so the welder and the applicator repair a synth
+  # BasePart's Inorganic is on no repair tool's list, which left "nothing needs the welder" on a synth with three chassis
+  # breaches; WFInorganicWolfmed also carries the Cold and Caustic that Inorganic drops.
+  - type: Damageable
+    damageContainer: WFInorganicWolfmed
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Nanites
+        Quantity: 3
+      - ReagentId: Blood
+        Quantity: 10
+
+- type: entity
+  id: HeadSynth
+  name: "synth head"
+  parent: [ PartSynth, BaseHead ]
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "head"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Nanites
+        Quantity: 5
+      - ReagentId: Blood
+        Quantity: 10
+
+- type: entity
+  id: TorsoSynth
+  name: "synth torso"
+  parent: [ PartSynth, BaseTorso ]
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "torso"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Nanites
+        Quantity: 10
+      - ReagentId: Blood
+        Quantity: 20
+
+- type: entity
+  id: LeftArmSynth
+  name: "left synth arm"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartSynth, BaseEdibleCyberneticLimb, BaseLeftArm ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "l_arm"
+
+- type: entity
+  id: RightArmSynth
+  name: "right synth arm"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartSynth, BaseEdibleCyberneticLimb, BaseRightArm ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "r_arm"
+
+- type: entity
+  id: LeftHandSynth
+  name: "left synth hand"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartSynth, BaseEdibleCyberneticLimb, BaseLeftHand ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: RightHandSynth
+  name: "right synth hand"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartSynth, BaseEdibleCyberneticLimb, BaseRightHand ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: LeftLegSynth
+  name: "left synth leg"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartSynth, BaseEdibleCyberneticLimb, BaseLeftLeg ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "l_leg"
+
+- type: entity
+  id: RightLegSynth
+  name: "right synth leg"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartSynth, BaseEdibleCyberneticLimb, BaseRightLeg ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "r_leg"
+
+- type: entity
+  id: LeftFootSynth
+  name: "left synth foot"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartSynth, BaseEdibleCyberneticLimb, BaseLeftFoot ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "l_foot"
+
+- type: entity
+  id: RightFootSynth
+  name: "right synth foot"
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartSynth, BaseEdibleCyberneticLimb, BaseRightFoot ] # WOLFGATE(Wolfmed): metallic edible profile
+  components:
+  - type: Sprite
+    sprite: _HL/Mobs/Species/Synth/parts.rsi
+    state: "r_foot"

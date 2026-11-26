@@ -1,0 +1,119 @@
+# Slash and bite wounds (W2). All three are `ruleOnly`: wolfmedWoundRule prototypes in wound_rules.yml
+# create them, the default per-damage-type pass never does. They keep their damage types listed so that
+# sutures and damage removal can still close them once whatever is blocking treatment has been dealt with.
+
+# A cut that reached an artery. WolfmedArterialBleedBehavior is the whole of its special handling:
+# a dressing only slows the rate, a dressing cannot take its severity, and nothing closes it while it is
+# still pumping. A tourniquet on a limb stops it while it is on; the surgery clamps then sutures it.
+- type: wound
+  id: WFWolfmedArterialBleedWound
+  name: wolfmed-wound-name-arterial-bleed
+  analyzerCategory: Cut
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 20
+      severityMultiplier: 1
+    Piercing:
+      reopenMinimumDamage: 24
+      severityMultiplier: 1
+  maximumSeverity: 120
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WolfmedArterialBleedBehavior
+  # W4: a stray laser closes a nicked artery. A severed one has to be held against something hot on
+  # purpose, which is what the "Cauterise wound" verb is for.
+  - !type:WolfmedCauteryResistBehavior
+    maxIncidentalSeverity: 12
+  - !type:WoundPainBehavior
+    painPerSeverity: 1.2
+    minSeverity: 2
+  - !type:WoundScarBehavior
+    threshold: 6
+    chance: 1
+  # One band, no stages: an artery is either cut or it is not. The rate is roughly four times a critical
+  # slash wound's, and clottingMultiplier 0 means it never gets a clotting deadline.
+  - !type:WoundBleedingBehavior
+    rate: 0.8
+    minimumSeverity: 1
+    clottingMultiplier: 0
+
+# A severed tendon. No bleeding of its own; the damage is that the limb stops answering.
+# WolfmedLimbPenaltyBehavior feeds the fracture branch of FractureEffectSystem, so a leg or foot limps and
+# an arm or hand works slowly - the same two multipliers a fracture uses. Onyx's WoundFunctionalityBehavior
+# is deliberately not used: wounds.body_part_functionality_enabled ships false (P2-3).
+# healingMultiplier 0 keeps gauze, sutures and damage removal out of it: a tendon is repaired in surgery.
+- type: wound
+  id: WFWolfmedTendonCutWound
+  name: wolfmed-wound-name-tendon-cut
+  analyzerCategory: Cut
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 18
+      severityMultiplier: 1
+  maximumSeverity: 60
+  healingMultiplier: 0
+  behaviors:
+  # W5: infection risk. A deep cut with nothing to drain it.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 1.3
+  - !type:WolfmedLimbPenaltyBehavior
+    movementModifier: 0.7
+    manipulationModifier: 1.5
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.5
+    minSeverity: 2
+  - !type:WoundScarBehavior
+    threshold: 5
+    chance: 1
+
+# Tissue torn away by a bite. Scars from almost nothing, and carries the infection-risk flag W5 reads.
+- type: wound
+  id: WFWolfmedAvulsionWound
+  name: wolfmed-wound-name-avulsion
+  analyzerCategory: Cut
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 10
+      severityMultiplier: 1
+    Piercing:
+      reopenMinimumDamage: 10
+      severityMultiplier: 1
+  maximumSeverity: 150
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 2.5
+    dirty: true # playtest 5: a bite goes bad whatever covers it
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.9
+    minSeverity: 3
+  - !type:WoundScarBehavior
+    threshold: 4
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.2
+        minimumSeverity: 4
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.25
+        minimumSeverity: 4
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WoundFunctionalityBehavior
+        state: Impaired
+      - !type:WoundBleedingBehavior
+        rate: 0.3
+        minimumSeverity: 4

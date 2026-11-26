@@ -1,0 +1,163 @@
+# One cavern under each world, built at depth -1 with its planet network while wf.caverns is on.
+# Mouths: each hole is grown from its own seed to the world's style and size range (CAVERNS_DESIGN.md 3.3).
+# Avoid also lists each world's rock-outcrop spawner, so no mouth is walled in by an outcrop.
+
+- type: wfCavern
+  id: WFCavernAsclepiu
+  surface: WFSurfaceAsclepiu
+  name: wf-cavern-asclepiu-name
+  level: WFCavernAsclepiuLevel
+  seedOffset: 7901
+  roofColor: "#070a08"
+  shaftLight: 0.5
+  ambience: WFCavernAmbienceAsclepiu
+  mouths:
+    style: Blob
+    minTiles: 14
+    maxTiles: 30
+    elongation: 1.6
+    roughness: 0.35
+    cellSize: 96
+    groundTiles: [FloorPlanetGrass, FloorPlanetDirt, FloorSnow, WFFloorVerdaMeadowGrass, WFFloorVerdaForestGrass, WFFloorVerdaSnowRough]
+    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreBase, MonoPlanetmapOreSnow]
+    landingTile: WFCavernFloorPoolbed
+    landingEntity: MonoFloorWaterEntity
+    shade: WFCavernShadeAsclepiu
+    stairs: WFCavernStairsAsclepiu
+    rim: [FloraRockSolid]
+    rimCount: 2
+
+- type: wfCavern
+  id: WFCavernFervidus
+  surface: WFSurfaceFervidus
+  name: wf-cavern-fervidus-name
+  level: WFCavernFervidusLevel
+  seedOffset: 7919
+  roofColor: "#1c0803"
+  shaftLight: 0.45
+  ambience: WFCavernAmbienceFervidus
+  mouths:
+    style: Blob
+    minTiles: 8
+    maxTiles: 18
+    elongation: 1.8
+    roughness: 0.3
+    cellSize: 96
+    groundTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    avoid:
+    - FloorLavaEntity
+    - MonoPlanetmapOreBasalt
+    - CoyoteFloraBurnedtree1
+    #- CoyoteFloraBurnedtree2
+    - CoyoteFloraBurnedtree3
+    #- CoyoteFloraBurnedtree5
+    #- ShiptestTreeDeadHell
+    #- GoonFakeobjectRockpile
+    #- GoonFakeobjectRockpileBig
+    #- CMRockBlackGroundDense
+    #- CMRockBlackGroundDense3
+    #- TgFloraRockVolcano
+    #- TgFloraRockSideriteGrowth
+    landingTile: WFCavernFloorAsh
+    shade: WFCavernShadeFervidus
+    stairs: WFCavernStairsFervidus
+    rim: [BasaltOne, BasaltThree]
+
+- type: wfCavern
+  id: WFCavernMerak
+  surface: WFSurfaceMerak
+  name: wf-cavern-merak-name
+  level: WFCavernMerakLevel
+  seedOffset: 7927
+  roofColor: "#120d07"
+  shaftLight: 0.55
+  ambience: WFCavernAmbienceMerak
+  mouths:
+    style: Round
+    minTiles: 12
+    maxTiles: 28
+    elongation: 1.25
+    roughness: 0.1
+    cellSize: 96
+    groundTiles: [WFFloorMerakDuneSand, WFFloorMerakGoldSand, WFFloorMerakPaleSand, WFFloorMerakDarkSand, WFFloorMerakRedDesertSand, WFFloorMerakDesertGravel]
+    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreSandRich, WFMerakSpittingCactus]
+    landingTile: WFCavernFloorSandDrift
+    shade: WFCavernShadeMerak
+    stairs: WFCavernStairsMerak
+    rim: [FloraRockSolidPlanet]
+    rimCount: 2
+
+- type: wfCavern
+  id: WFCavernAerumna
+  surface: WFSurfaceAerumna
+  name: wf-cavern-aerumna-name
+  level: WFCavernAerumnaLevel
+  seedOffset: 7933
+  roofColor: "#050408"
+  ambience: WFPlanetAmbienceAerumnaCavern
+  shaftLight: 0.3
+  mouths:
+    style: Rift
+    minTiles: 9
+    maxTiles: 22
+    riftWidth: 2
+    cellSize: 128
+    groundTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk, WFFloorAerumnaShroud, WFFloorAerumnaHive]
+    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreChromite, GoonSetpiecesRootwall, WallXenoResin, DoorXenoResin]
+    landingTile: WFCavernFloorChromiteScree
+    shade: WFCavernShadeAerumna
+    stairs: WFCavernStairsAerumna
+    rim: [ShadowBasaltOne, ShadowBasaltThree, CrystalPink]
+
+- type: wfCavern
+  id: WFCavernThrascias
+  surface: WFSurfaceThrascias
+  name: wf-cavern-thrascias-name
+  level: WFCavernThrasciasLevel
+  seedOffset: 7937
+  roofColor: "#060c12"
+  ambience: WFPlanetAmbienceThrasciasCavern
+  shaftLight: 0.5
+  mouths:
+    style: Round
+    minTiles: 7
+    maxTiles: 14
+    elongation: 1.5
+    roughness: 0.3
+    cellSize: 96
+    groundTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    avoid: [FloorLiquidPlasmaEntity, MonoPlanetmapOreSnow, BayCrystal, ChompQuartz]
+    landingTile: WFCavernFloorSnowdrift
+    shade: WFCavernShadeThrascias
+    stairs: WFCavernStairsThrascias
+    rim: [CrystalCyan]
+
+- type: wfCavern
+  id: WFCavernCarcinoma
+  surface: WFSurfaceCarcinoma
+  name: wf-cavern-carcinoma-name
+  level: WFCavernCarcinomaLevel
+  seedOffset: 7949
+  roofColor: "#140306"
+  ambience: WFPlanetAmbienceCarcinomaCavern
+  shaftLight: 0.4
+  mouths:
+    style: Blob
+    minTiles: 8
+    maxTiles: 20
+    elongation: 1.5
+    roughness: 0.45
+    cellSize: 80
+    groundTiles: [WFFloorFlesh]
+    avoid: [WFBloodRiver, WallMeat, GoonSetpiecesHive, ChompResin, PolarisResin, WFCarcinomaBoneLumpOne, WFCarcinomaBoneLumpTwo, WFCarcinomaBoneLumpThree, WFCarcinomaPimple, WFCarcinomaTendonVine, WFCarcinomaWeepingPolyp]
+    landingTile: WFCavernFloorGut
+    shade: WFCavernShadeCarcinoma
+    stairs: WFCavernStairsCarcinoma
+    rim: [WFFleshPolyp]

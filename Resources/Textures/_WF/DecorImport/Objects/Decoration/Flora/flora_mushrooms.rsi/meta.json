@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Bubberstation at commit https://github.com/Bubberstation/Bubberstation/commit/792301a70da075679790652676e6774e746df81d, Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76, NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blue_mushroom1"
+    },
+    {
+      "name": "fake_stillcap_blue"
+    },
+    {
+      "name": "fake_stillcap_green"
+    },
+    {
+      "name": "fake_stillcap_red"
+    },
+    {
+      "name": "fungus_bush"
+    },
+    {
+      "name": "glowshroom"
+    },
+    {
+      "name": "green_mushroom1"
+    },
+    {
+      "name": "l_mushroom1"
+    },
+    {
+      "name": "l_mushroom_blue1"
+    },
+    {
+      "name": "l_mushroom_green1"
+    },
+    {
+      "name": "l_mushroom_red1"
+    },
+    {
+      "name": "mush1"
+    },
+    {
+      "name": "r_mushroom1"
+    },
+    {
+      "name": "r_mushroom_blue1"
+    },
+    {
+      "name": "r_mushroom_green1"
+    },
+    {
+      "name": "r_mushroom_red1"
+    },
+    {
+      "name": "red_mushroom1"
+    },
+    {
+      "name": "s_mushroom1"
+    },
+    {
+      "name": "s_mushroom_blue1"
+    },
+    {
+      "name": "s_mushroom_green1"
+    },
+    {
+      "name": "s_mushroom_red1"
+    },
+    {
+      "name": "seraka_mushroom1"
+    },
+    {
+      "name": "t_mushroom1"
+    },
+    {
+      "name": "t_mushroom_blue1"
+    },
+    {
+      "name": "t_mushroom_green1"
+    },
+    {
+      "name": "t_mushroom_red1"
+    }
+  ]
+}

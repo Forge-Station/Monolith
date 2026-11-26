@@ -5,7 +5,6 @@ using Content.Shared.Access.Systems;
 using Content.Shared.APC;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Emp; // Frontier: Upstream - #28984
-using Content.Shared.Emp;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Rounding;

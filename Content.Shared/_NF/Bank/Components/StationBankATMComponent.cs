@@ -42,4 +42,5 @@ public enum SectorBankAccount : byte
 ///    BlackMarket, /// Forge-change-del
     Imperial, /// Forge-change-start
     Renegates, /// Forge-change-end
+    BlackMarket,
 }

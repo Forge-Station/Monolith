@@ -1,0 +1,15 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: FelionoidTailAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felionoid, ProtoFeline] # Wolfgate: was [], which stripped it from every species including Felionoid
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_wagging_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_wagging_BEHIND: tail_wagging_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_Starlight/Mobs/Customization/felionoid_parts.rsi # WOLFGATE - split art
+      state: tail_wagging_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_Starlight/Mobs/Customization/felionoid_parts.rsi # WOLFGATE - south frame on TailBehind
+      state: tail_wagging_BEHIND

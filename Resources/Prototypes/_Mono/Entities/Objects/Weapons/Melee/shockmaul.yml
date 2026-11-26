@@ -4,6 +4,17 @@
   name: tintreach
   description: A heafty hammer designed for violent application of blunt force, and swift application of electrocution after. In a pinch it can serve as a defib, good for saving allies...or taking your time with a hated foe.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Melee/shockmaul.rsi
     state: icon

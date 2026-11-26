@@ -9,10 +9,11 @@ namespace Content.Shared._EinsteinEngines.Silicon.Components;
 /// <summary>
 ///     Component for defining a mob as a robot.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // WOLFGATE(Wolfmed): playtest 1: ChargeState networked
 public sealed partial class SiliconComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
+    [AutoNetworkedField] // WOLFGATE(Wolfmed): playtest 1: the client predicts the low-power crawl from it; it sat at 10 there
     public short ChargeState = 10;
 
     [ViewVariables(VVAccess.ReadOnly)]

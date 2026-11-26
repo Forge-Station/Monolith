@@ -1,0 +1,15 @@
+- type: entity
+  id: WFActionToggleStealth
+  name: Toggle stealth
+  description: Switches your suit's stealth field on and off.
+  components:
+  - type: InstantAction
+    useDelay: 1
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi
+      state: icon
+    iconOn:
+      sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi
+      state: icon-flash
+    event: !type:WFToggleStealthEvent

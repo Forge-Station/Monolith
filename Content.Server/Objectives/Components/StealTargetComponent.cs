@@ -1,6 +1,5 @@
 using Content.Server.Objectives.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Objectives.Components.Targets;
 

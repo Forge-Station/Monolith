@@ -51,11 +51,11 @@
     powerLoad: 12000
     needsPower: true # Frontier: false<true - changes power draw when idle
   - type: ArtifactAnalyzer
-  - type: TraversalDistorter
+  # - type: TraversalDistorter # WOLFGATE(Xenoarch): removed by the wizden xenoarch rework
   - type: ItemPlacer
     whitelist:
       components:
-      - Artifact
+      - XenoArtifact # WOLFGATE(Xenoarch): the xenoarch rework renamed Artifact
   - type: DeviceNetwork
     deviceNetId: Wired
     receiveFrequencyId: BasicDevice
@@ -90,7 +90,7 @@
   - type: ArtifactCrusher
     crushingWhitelist:
       components:
-      - Artifact
+      - XenoArtifact # WOLFGATE(Xenoarch): the xenoarch rework renamed Artifact
     crushingDamage:
       types:
         Blunt: 10
@@ -127,7 +127,7 @@
     capacity: 1
     whitelist:
       components:
-      - Artifact
+      - XenoArtifact # WOLFGATE(Xenoarch): the xenoarch rework renamed Artifact
   - type: Appearance
   - type: GenericVisualizer
     visuals:

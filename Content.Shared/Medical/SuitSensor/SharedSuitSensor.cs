@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
@@ -38,7 +39,8 @@ public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
     public int? TotalDamageThreshold;
     public float? DamagePercentage => TotalDamageThreshold == null || TotalDamage == null ? null : TotalDamage / (float) TotalDamageThreshold;
     public NetCoordinates? Coordinates;
-    public string LocationName;
+	public string LocationName;
+    public int WFCompanyRank; // WOLFGATE(Companies): rank whose custom icon replaces JobIcon
 
     public bool Equals(SuitSensorStatus other)
     {
@@ -47,11 +49,14 @@ public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
                && Name == other.Name
                && Job == other.Job
                && JobIcon == other.JobIcon
+               && (JobDepartments == other.JobDepartments
+                   || JobDepartments != null && other.JobDepartments != null && JobDepartments.SequenceEqual(other.JobDepartments))
                && IsAlive == other.IsAlive
                && TotalDamage == other.TotalDamage
                && TotalDamageThreshold == other.TotalDamageThreshold
                && Nullable.Equals(Coordinates, other.Coordinates)
-               && LocationName == other.LocationName;
+               && LocationName == other.LocationName
+               && WFCompanyRank == other.WFCompanyRank;
     }
 
     public override bool Equals(object? obj)
@@ -67,11 +72,18 @@ public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
         hashCode.Add(Name);
         hashCode.Add(Job);
         hashCode.Add(JobIcon);
+        if (JobDepartments != null)
+        {
+            hashCode.Add(JobDepartments.Count);
+            foreach (var department in JobDepartments)
+                hashCode.Add(department);
+        }
         hashCode.Add(IsAlive);
         hashCode.Add(TotalDamage);
         hashCode.Add(TotalDamageThreshold);
         hashCode.Add(Coordinates);
         hashCode.Add(LocationName);
+        hashCode.Add(WFCompanyRank);
         return hashCode.ToHashCode();
     }
 
@@ -108,6 +120,24 @@ public enum SuitSensorMode : byte
     /// Sensor sends vitals status and GPS position
     /// </summary>
     SensorCords = 3
+}
+
+public static class SuitSensorConstants
+{
+    public const string NET_NAME = "name";
+    public const string NET_JOB = "job";
+    public const string NET_JOB_ICON = "jobIcon";
+    public const string NET_WF_COMPANY_RANK = "wfCompanyRank"; // WOLFGATE(Companies)
+    public const string NET_JOB_DEPARTMENTS = "jobDepartments";
+    public const string NET_IS_ALIVE = "alive";
+    public const string NET_TOTAL_DAMAGE = "vitals";
+    public const string NET_TOTAL_DAMAGE_THRESHOLD = "vitalsThreshold";
+    public const string NET_COORDINATES = "coords";
+    public const string NET_SUIT_SENSOR_UID = "uid";
+	public const string NET_LOCATION_NAME = "location"; // Frontier modification
+
+    ///Used by the CrewMonitoringServerSystem to send the status of all connected suit sensors to each crew monitor
+    public const string NET_STATUS_COLLECTION = "suit-status-collection";
 }
 
 [Serializable, NetSerializable]

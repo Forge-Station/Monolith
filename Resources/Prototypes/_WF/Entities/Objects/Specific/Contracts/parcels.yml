@@ -1,0 +1,102 @@
+# Hand-carried parcels.
+- type: entity
+  parent: BaseItem
+  id: WFContractParcel
+  name: sealed parcel
+  description: A tamper-sealed parcel with a contract barcode. Only the addressee can open it.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Specific/Mail/mail_large.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _NF/Objects/Specific/Mail/mail_large.rsi
+  - type: StaticPrice
+    price: 0
+
+- type: entity
+  parent: WFContractParcel
+  id: WFContractParcelFragile
+  name: fragile parcel
+  description: A tamper-sealed parcel stamped FRAGILE in three languages. Only the addressee can open it.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Specific/Mail/mail_large.rsi
+    layers:
+    - state: icon
+    - state: fragile
+
+- type: entity
+  parent: WFContractParcel
+  id: WFContractParcelPriority
+  name: priority parcel
+  description: A tamper-sealed parcel with a red priority band. Only the addressee can open it.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Specific/Mail/mail_large.rsi
+    layers:
+    - state: icon
+    - state: priority
+
+- type: entity
+  parent: WFContractParcel
+  id: WFContractDataCase
+  name: encrypted data case
+  description: A hard case of storage cores under a courier seal. Reading it without the key wipes it.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/diskcases.rsi
+    state: icon_cc
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: WFContractParcel
+  id: WFContractSampleCase
+  name: sample case
+  description: A sealed, shock-mounted case of specimens, humming faintly.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/artifact_fragments.rsi
+    state: ancientball2
+  - type: Item
+    size: Small
+
+# Cargo for the second batch of contracts.
+
+- type: entity
+  parent: WFContractParcel
+  id: WFContractDiplomaticPouch
+  name: diplomatic pouch
+  description: A locked leather pouch under a diplomatic seal. Its carrier is protected by treaty; its contents are none of their business.
+  components:
+  - type: Sprite
+    sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightLivestock
+  name: contract livestock crate
+  description: A ventilated crate of live animals under a contract manifest. It shuffles and smells.
+  components:
+  - type: Sprite
+    sprite: Structures/Storage/Crates/livestock.rsi
+    layers:
+    - state: base
+    - state: closed
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightPlasma
+  name: contract plasma canister crate
+  description: Racked plasma canisters under a contract manifest. Heavy, volatile, and not for sale.
+  components:
+  - type: Sprite
+    layers:
+    - state: chems-volatile
+  - type: WFCargoMass
+    class: Bulk

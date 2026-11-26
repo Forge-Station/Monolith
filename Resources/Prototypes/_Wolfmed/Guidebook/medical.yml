@@ -1,0 +1,14 @@
+- type: guideEntry
+  id: WFWounds
+  name: guide-entry-wounds
+  text: "/ServerInfo/_WF/Wolfmed/Guidebook/Medical/Wounds.xml"
+
+- type: guideEntry
+  id: WFWoundTreatment
+  name: guide-entry-wound-treatment
+  text: "/ServerInfo/_WF/Wolfmed/Guidebook/Medical/WoundTreatment.xml"
+
+- type: guideEntry
+  id: WFWolfmedAutodoc
+  name: guide-entry-wolfmed-autodoc
+  text: "/ServerInfo/_WF/Wolfmed/Guidebook/Medical/Autodoc.xml"

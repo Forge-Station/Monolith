@@ -1,0 +1,38 @@
+# Single and double cones. The textures were already in Textures/Effects/LightMasks.
+# Direction 0 points south; the source image points north, so north is 180.
+- type: lightMask
+  id: ConeSingle
+  maskPath: /Textures/Effects/LightMasks/cone.png
+  lightCones:
+  - direction: 0
+    innerWidth: 30
+    outerWidth: 60
+
+- type: lightMask
+  id: ConeDouble
+  maskPath: /Textures/Effects/LightMasks/double_cone.png
+  lightCones:
+  - direction: 0
+    innerWidth: 30
+    outerWidth: 60
+  - direction: 180
+    innerWidth: 30
+    outerWidth: 60
+
+# CMU's four-way floodlight mask, under the id CMU uses.
+- type: lightMask
+  id: ConeQuad
+  maskPath: /Textures/_WF/Streets/Effects/LightMasks/quad_cone.png
+  lightCones:
+  - direction: 0
+    innerWidth: 30
+    outerWidth: 60
+  - direction: 90
+    innerWidth: 30
+    outerWidth: 60
+  - direction: 180
+    innerWidth: 30
+    outerWidth: 60
+  - direction: 270
+    innerWidth: 30
+    outerWidth: 60

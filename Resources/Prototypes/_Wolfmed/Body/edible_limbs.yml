@@ -1,0 +1,20 @@
+# Metallic limbs a synth stomach can chew. Humans cannot: digestion is special-only.
+- type: entity
+  id: BaseEdibleCyberneticLimb
+  abstract: true
+  components:
+  - type: Food
+    requiresSpecialDigestion: true
+    delay: 3
+  - type: FlavorProfile
+    flavors:
+    - metallic
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Steel
+          Quantity: 6
+        - ReagentId: Iron
+          Quantity: 2

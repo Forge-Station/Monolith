@@ -90,7 +90,7 @@ public abstract partial class SharedCorticalBorerSystem : EntitySystem
                     continue;
 
                 var newComp = (Component) _serManager.CreateCopy(compReg.Component, notNullableOverride: true);
-                EntityManager.AddComponent(ent, newComp, true);
+                AddComp(ent, newComp, true);
             }
         }
 
@@ -134,7 +134,7 @@ public abstract partial class SharedCorticalBorerSystem : EntitySystem
                     continue;
 
                 var newComp = (Component) _serManager.CreateCopy(compReg.Component, notNullableOverride: true);
-                EntityManager.AddComponent(ent, newComp, true);
+                AddComp(ent, newComp, true);
             }
         }
 

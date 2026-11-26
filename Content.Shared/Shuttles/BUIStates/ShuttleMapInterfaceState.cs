@@ -1,3 +1,4 @@
+using Content.Shared._WF.Shuttles; // WOLFGATE(Shuttles)
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Shuttles.UI.MapObjects;
 using Content.Shared.Timing;
@@ -27,45 +28,23 @@ public sealed class ShuttleMapInterfaceState
 
     public List<ShuttleExclusionObject> Exclusions;
 
-    public StartEndTime BioScanTime; // Forge-Change - BioScan
-    public ShuttleBioScanStatus BioScanStatus; // Forge-Change - BioScan
-    public bool BioScanAvailable; // Forge-Change - BioScan
-    public StartEndTime CloakingTimeActive; // Forge-Change - Cloaking
-    public StartEndTime CloakingTimeCooldown; // Forge-Change - Cloaking
-    public ShuttleCloakingStatus CloakingStatus; // Forge-Change - Cloaking
-    public ShuttleConsoleMapScreenMode MapScreenMapScreenMode; // Forge-Change - Cloaking
-
     /// <summary>
-    /// When false, <see cref="Destinations"/> and <see cref="Exclusions"/> are empty and the client should keep prior lists.
+    /// Whether the ship has an FTL drive that can jump.
     /// </summary>
-    public readonly bool IncludeBeaconExclusionLists;
+    public readonly WFFtlDriveStatus FtlDrive; // WOLFGATE(Shuttles): the FTL page warns before a jump is tried
 
     public ShuttleMapInterfaceState(
         FTLState ftlState,
         StartEndTime ftlTime,
         List<ShuttleBeaconObject> destinations,
-        List<ShuttleExclusionObject> exclusions,
-        StartEndTime bioScanTime, // Forge-Change - BioScan
-        ShuttleBioScanStatus bioScanStatus, // Forge-Change - BioScan
-        bool bioScanAvailable, // Forge-Change - BioScan
-        StartEndTime cloakingTimeActive, // Forge-Change - Cloaking
-        StartEndTime cloakingTimeCooldown, // Forge-Change - Cloaking
-        ShuttleCloakingStatus cloakingStatus, // Forge-Change - Cloaking
-        ShuttleConsoleMapScreenMode mapScreenMapScreenMode, // Forge-Change - Cloaking
-        bool includeBeaconExclusionLists = true)
+        List<ShuttleExclusionObject> exclusions, // WOLFGATE(Shuttles): the drive status is a required argument
+        WFFtlDriveStatus ftlDrive)
     {
         FTLState = ftlState;
         FTLTime = ftlTime;
         Destinations = destinations;
         Exclusions = exclusions;
-        BioScanTime = bioScanTime; // Forge-Change - BioScan
-        BioScanStatus = bioScanStatus; // Forge-Change - BioScan
-        BioScanAvailable = bioScanAvailable; // Forge-Change - BioScan
-        CloakingTimeActive = cloakingTimeActive; // Forge-Change - Cloaking
-        CloakingTimeCooldown = cloakingTimeCooldown; // Forge-Change - Cloaking
-        CloakingStatus = cloakingStatus; // Forge-Change - Cloaking
-        MapScreenMapScreenMode = mapScreenMapScreenMode; // Forge-Change - Cloaking
-        IncludeBeaconExclusionLists = includeBeaconExclusionLists;
+        FtlDrive = ftlDrive; // WOLFGATE(Shuttles)
     }
 }
 

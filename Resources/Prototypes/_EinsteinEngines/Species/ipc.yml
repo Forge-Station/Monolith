@@ -31,8 +31,12 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     Hair: MobHumanoidMarkingMatchSkin
     Chest: MobIPCTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
     LArm: MobIPCLArm
     RArm: MobIPCRArm
     LHand: MobIPCLHand

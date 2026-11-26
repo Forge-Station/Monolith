@@ -1,0 +1,296 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DarkPack at commit https://github.com/DarkPack13/SecondCity/commit/2a1e8fd0ccf64a5fd40504b20b1e1f76774f5ecc.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall-0"
+    },
+    {
+      "name": "wall-1"
+    },
+    {
+      "name": "wall-2"
+    },
+    {
+      "name": "wall-3"
+    },
+    {
+      "name": "wall-4"
+    },
+    {
+      "name": "wall-5"
+    },
+    {
+      "name": "wall-6"
+    },
+    {
+      "name": "wall-7"
+    },
+    {
+      "name": "wall-8"
+    },
+    {
+      "name": "wall-9"
+    },
+    {
+      "name": "wall-10"
+    },
+    {
+      "name": "wall-11"
+    },
+    {
+      "name": "wall-12"
+    },
+    {
+      "name": "wall-13"
+    },
+    {
+      "name": "wall-14"
+    },
+    {
+      "name": "wall-15"
+    },
+    {
+      "name": "wall-21"
+    },
+    {
+      "name": "wall-23"
+    },
+    {
+      "name": "wall-29"
+    },
+    {
+      "name": "wall-31"
+    },
+    {
+      "name": "wall-38"
+    },
+    {
+      "name": "wall-39"
+    },
+    {
+      "name": "wall-46"
+    },
+    {
+      "name": "wall-47"
+    },
+    {
+      "name": "wall-55"
+    },
+    {
+      "name": "wall-63"
+    },
+    {
+      "name": "wall-74"
+    },
+    {
+      "name": "wall-75"
+    },
+    {
+      "name": "wall-78"
+    },
+    {
+      "name": "wall-79"
+    },
+    {
+      "name": "wall-95"
+    },
+    {
+      "name": "wall-110"
+    },
+    {
+      "name": "wall-111"
+    },
+    {
+      "name": "wall-127"
+    },
+    {
+      "name": "wall-137"
+    },
+    {
+      "name": "wall-139"
+    },
+    {
+      "name": "wall-141"
+    },
+    {
+      "name": "wall-143"
+    },
+    {
+      "name": "wall-157"
+    },
+    {
+      "name": "wall-159"
+    },
+    {
+      "name": "wall-175"
+    },
+    {
+      "name": "wall-191"
+    },
+    {
+      "name": "wall-203"
+    },
+    {
+      "name": "wall-207"
+    },
+    {
+      "name": "wall-223"
+    },
+    {
+      "name": "wall-239"
+    },
+    {
+      "name": "wall-255"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "frill-0"
+    },
+    {
+      "name": "frill-1"
+    },
+    {
+      "name": "frill-2"
+    },
+    {
+      "name": "frill-3"
+    },
+    {
+      "name": "frill-4"
+    },
+    {
+      "name": "frill-5"
+    },
+    {
+      "name": "frill-6"
+    },
+    {
+      "name": "frill-7"
+    },
+    {
+      "name": "frill-8"
+    },
+    {
+      "name": "frill-9"
+    },
+    {
+      "name": "frill-10"
+    },
+    {
+      "name": "frill-11"
+    },
+    {
+      "name": "frill-12"
+    },
+    {
+      "name": "frill-13"
+    },
+    {
+      "name": "frill-14"
+    },
+    {
+      "name": "frill-15"
+    },
+    {
+      "name": "frill-21"
+    },
+    {
+      "name": "frill-23"
+    },
+    {
+      "name": "frill-29"
+    },
+    {
+      "name": "frill-31"
+    },
+    {
+      "name": "frill-38"
+    },
+    {
+      "name": "frill-39"
+    },
+    {
+      "name": "frill-46"
+    },
+    {
+      "name": "frill-47"
+    },
+    {
+      "name": "frill-55"
+    },
+    {
+      "name": "frill-63"
+    },
+    {
+      "name": "frill-74"
+    },
+    {
+      "name": "frill-75"
+    },
+    {
+      "name": "frill-78"
+    },
+    {
+      "name": "frill-79"
+    },
+    {
+      "name": "frill-95"
+    },
+    {
+      "name": "frill-110"
+    },
+    {
+      "name": "frill-111"
+    },
+    {
+      "name": "frill-127"
+    },
+    {
+      "name": "frill-137"
+    },
+    {
+      "name": "frill-139"
+    },
+    {
+      "name": "frill-141"
+    },
+    {
+      "name": "frill-143"
+    },
+    {
+      "name": "frill-157"
+    },
+    {
+      "name": "frill-159"
+    },
+    {
+      "name": "frill-175"
+    },
+    {
+      "name": "frill-191"
+    },
+    {
+      "name": "frill-203"
+    },
+    {
+      "name": "frill-207"
+    },
+    {
+      "name": "frill-223"
+    },
+    {
+      "name": "frill-239"
+    },
+    {
+      "name": "frill-255"
+    }
+  ]
+}

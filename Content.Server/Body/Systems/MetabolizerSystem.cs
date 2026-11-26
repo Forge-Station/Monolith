@@ -1,3 +1,4 @@
+using Content.Shared._HL.Railroading.Events; // WOLFGATE
 using Content.Server.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Administration.Logs;
@@ -20,6 +21,7 @@ namespace Content.Server.Body.Systems
     public sealed partial class MetabolizerSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
@@ -95,6 +97,7 @@ namespace Content.Server.Body.Systems
                     continue;
 
                 metab.NextUpdate += metab.UpdateInterval;
+                if (_wfDormancy.BodySleeps(uid)) continue; // WOLFGATE(Dormancy): an NPC body no player is near on a planet skips its upkeep
                 TryMetabolize((uid, metab));
             }
         }
@@ -192,6 +195,12 @@ namespace Content.Server.Body.Systems
 
                     var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
                     var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale);
+
+                    // WOLFGATE - ported from HardLight: lets Synths convert metabolised Nutriment
+                    // into battery charge.
+                    var metabolized = new RailroadingReagentMetabolizedEvent(new ReagentQuantity(reagent, mostToRemove));
+                    RaiseLocalEvent(actualEntity, ref metabolized);
+                    // End WOLFGATE
 
                     // do all effects, if conditions apply
                     foreach (var effect in entry.Effects)

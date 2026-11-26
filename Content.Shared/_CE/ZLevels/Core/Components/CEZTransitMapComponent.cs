@@ -30,4 +30,22 @@ public sealed partial class CEZTransitMapComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? PrimaryGrid;
+
+    /// <summary>
+    /// Transit map of the convoy layer directly above this one, if this map is part of a z-network convoy.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? TransitAbove;
+
+    /// <summary>
+    /// Transit map of the convoy layer directly below this one, if any.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? TransitBelow;
+
+    /// <summary>
+    /// True on the single convoy layer that drives gravity and pilot integration for the whole stack.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ConvoyLead;
 }

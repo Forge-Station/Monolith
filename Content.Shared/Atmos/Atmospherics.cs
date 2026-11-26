@@ -236,7 +236,7 @@ namespace Content.Shared.Atmos
         /// <summary>
         ///     Total number of gases. Increase this if you want to add more!
         /// </summary>
-        public const int TotalNumberOfGases = 17; //Forge-change
+        public const int TotalNumberOfGases = 18; // Forge gases through V903, then Smoke
 
         /// <summary>
         ///     This is the actual length of the gases arrays in mixtures.
@@ -442,5 +442,6 @@ namespace Content.Shared.Atmos
         N611P = 14,
         A517  = 15,
         V903  = 16, // Forge-change end
+        Smoke = 17,
     }
 }

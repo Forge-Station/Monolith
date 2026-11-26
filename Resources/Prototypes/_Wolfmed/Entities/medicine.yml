@@ -1,0 +1,94 @@
+# Dispensed antibiotics (W7). W5 shipped spaceacillin as a reaction only, so the one cure for a spreading
+# infection existed but nothing stocked it. This is the bottle medbay pulls off a shelf while chemistry
+# catches up, on the same base and the same 30u fill as every other shipped reagent bottle.
+
+- type: entity
+  id: WFSpaceacillinChemistryBottle
+  name: spaceacillin bottle
+  suffix: spaceacillin
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-spaceacillin
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: Spaceacillin
+          Quantity: 30
+
+# The practical way to clean a wound: antiseptics work by touch, and a spray is the touch a medic has to hand.
+- type: entity
+  parent: SprayBottle
+  id: WFWolfmedAntisepticSpray
+  name: antiseptic spray
+  description: Medical alcohol in a spray bottle. Spray it on an open wound to clean it before it festers.
+  suffix: Filled
+  components:
+  # Playtest 5: a click on a person, yourself included, sprays them rather than making them drink from the bottle.
+  - type: WolfmedAntisepticSpray
+  - type: Tag
+    tags:
+    - Spray
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 100
+        reagents:
+        - ReagentId: Ethanol
+          Quantity: 100
+
+# Playtest 5, ITEMS: osteogen knits a Simple or lesser fracture without surgery (MendFractures), and until now only
+# chemistry could make it. At 1 severity a second while it metabolises, one 15 u pill mends a whole simple break.
+- type: entity
+  parent: Pill
+  id: WFWolfmedOsteogenPill
+  name: osteogen pill
+  description: Bone-knitting medicine. Mends a simple fracture from the inside; a worse break still needs a bonesetter.
+  components:
+  - type: Pill
+    pillType: 14
+  - type: Sprite
+    sprite: _DV/Objects/Specific/Chemistry/pills.rsi
+    state: pill15
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Osteogen
+          Quantity: 15
+
+- type: entity
+  parent: PillCanister
+  id: WFWolfmedOsteogenPillCanister
+  name: osteogen pill canister
+  suffix: Osteogen 15u, 5
+  components:
+  - type: Label
+    currentLabel: reagent-name-osteogen
+  - type: StorageFill
+    contents:
+    - id: WFWolfmedOsteogenPill
+      amount: 5
+  - type: StaticPrice
+    price: 0
+    vendPrice: 300
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedOsteogenChemistryBottle
+  name: osteogen bottle
+  suffix: osteogen
+  components:
+  - type: Label
+    currentLabel: reagent-name-osteogen
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: Osteogen
+          Quantity: 30
+

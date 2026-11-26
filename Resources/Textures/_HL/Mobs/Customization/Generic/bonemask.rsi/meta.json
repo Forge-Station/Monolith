@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "copyright": "themageofmicrosoftpaints on Discord",
+  "license": "CC-BY-SA-3.0",
+  "states": [
+    {
+      "name": "beakBonemask-marking-head",
+      "directions": 4
+    },
+    {
+      "name": "FlatBonemask-marking-head",
+      "directions": 4
+    },
+    {
+      "name": "SocketsBonemask-marking-head",
+      "directions": 4
+    }
+  ]
+}

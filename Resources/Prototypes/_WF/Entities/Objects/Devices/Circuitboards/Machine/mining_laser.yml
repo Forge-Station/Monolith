@@ -1,0 +1,48 @@
+- type: entity
+  id: WFWeaponTurretMiningBeamCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M40 Prospector mining laser machine board
+  description: A machine printed circuit board for an M40 Prospector mining laser.
+  suffix: Machine Board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFWeaponTurretMiningBeam
+    requirements:
+      MatterBin: 2
+      Manipulator: 4
+    stackRequirements:
+      Steel: 10
+      Plasma: 5
+      CableHV: 2
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 2
+        defaultPrototype: MicroprocessorEconomy1
+      MotorEconomy1:
+        amount: 1
+        defaultPrototype: MotorEconomy1
+
+- type: entity
+  id: WFWeaponTurretMiningLaserSmallCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M12 Prospector mining laser machine board
+  description: A machine printed circuit board for an M12 Prospector mining laser.
+  suffix: Machine Board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFWeaponTurretMiningLaserSmall
+    requirements:
+      MatterBin: 1
+      Manipulator: 2
+    stackRequirements:
+      Steel: 5
+      Plasma: 2
+      CableHV: 1
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 1
+        defaultPrototype: MicroprocessorEconomy1

@@ -1,0 +1,4 @@
+- type: shader
+  id: WFWarmthScreen
+  kind: source
+  path: "/Textures/_WF/Warmth/Shaders/warmth_screen.swsl"

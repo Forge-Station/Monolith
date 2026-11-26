@@ -126,13 +126,20 @@
                 <gfx:StyleBoxFlat BackgroundColor="#111820" BorderColor="#334252" BorderThickness="2"/>
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" Margin="8">
-                <Label Text="{Loc ammo-loader-window-linked-turrets}" StyleClasses="LabelKeyText" FontColorOverride="#c6e7ff" Margin="0 0 0 4"/>
+                <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                    <Label Text="{Loc ammo-loader-window-linked-turrets}" StyleClasses="LabelKeyText" FontColorOverride="#c6e7ff" VerticalAlignment="Center"/>
+                    <Control HorizontalExpand="True"/>
+                    <Button Name="ReplenishButton"
+                            Text="{Loc ammo-loader-window-replenish}"
+                            MinWidth="150"
+                            MinHeight="32"/>
+                </BoxContainer>
                 <ScrollContainer VerticalExpand="False"
                                  HorizontalExpand="True"
                                  VScrollEnabled="True"
                                  HScrollEnabled="False"
                                  MinHeight="56"
-                                 MaxHeight="112">
+                                 MaxHeight="160">
                     <GridContainer Name="TurretGrid"
                                    Columns="16"
                                    HSeparationOverride="4"

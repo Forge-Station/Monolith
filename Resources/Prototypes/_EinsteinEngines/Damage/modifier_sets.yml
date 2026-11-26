@@ -3,6 +3,11 @@
   coefficients:
     Poison: 0
     Cold: 0.2
-    Heat: 1.25 #Forge-Change 1.5 => 1.25
-    Shock: 2.5
+    # WOLFGATE(Synthetics) START: the chassis is plated. Heat and shock still hurt it more than flesh, not half again;
+    # blunt and slash a little less. Playtest: a synthetic went down in a third of the hits a human took.
+    Heat: 1.1
+    Shock: 1.6
+    Blunt: 0.85
+    Slash: 0.9
+    # WOLFGATE END
     Radiation: 0.5 # RIP

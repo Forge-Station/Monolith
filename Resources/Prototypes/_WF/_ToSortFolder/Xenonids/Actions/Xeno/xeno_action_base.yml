@@ -1,0 +1,6 @@
+- type: entity
+  id: ActionXenoBase
+  categories: [ HideSpawnMenu ]
+  components:
+  # WOLFGATE: no shared Action component here; each action sets its own type and toggled background
+  - type: ActionReducedUseDelay   # to keep track of cooldown reductions

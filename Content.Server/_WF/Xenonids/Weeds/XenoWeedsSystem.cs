@@ -1,0 +1,256 @@
+using System.Linq;
+using System.Numerics;
+using Content.Server.Atmos.Components;
+using Content.Server.Spreader;
+using Content.Shared._WF.Barricades;
+using Content.Shared._WF.Xenonids;
+
+using Content.Shared._WF.RMCCore.Map;
+using Content.Shared._WF.Xenonids.Construction.Nest;
+using Content.Shared._WF.Xenonids.Hive;
+using Content.Shared._WF.Xenonids.Weeds;
+using Content.Shared.Atmos;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Maps;
+using Content.Shared.Physics;
+using Content.Shared.Tag;
+using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+
+namespace Content.Server._WF.Xenonids.Weeds;
+
+public sealed partial class XenoWeedsSystem : SharedXenoWeedsSystem
+{
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionBlocker = default!;
+    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+
+    private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
+
+    private readonly List<EntityUid> _anchored = new();
+    private readonly List<Entity<XenoWeedsComponent>> _spread = new();
+
+    private EntityQuery<AirtightComponent> _airtightQuery;
+    private EntityQuery<BarricadeComponent> _barricadeQuery;
+    private EntityQuery<AllowWeedSpreadComponent> _allowWeedSpreadQuery;
+    private EntityQuery<MapGridComponent> _mapGridQuery;
+    private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
+    private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
+    private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
+
+    private TimeSpan _maxProcessTime;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _airtightQuery = GetEntityQuery<AirtightComponent>();
+        _barricadeQuery = GetEntityQuery<BarricadeComponent>();
+        _allowWeedSpreadQuery = GetEntityQuery<AllowWeedSpreadComponent>();
+        _mapGridQuery = GetEntityQuery<MapGridComponent>();
+        _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
+        _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
+        _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+
+        Subs.CVar(
+            _config,
+            WFXenoCVars.RMCWeedSpreadMaxProcessTimeMilliseconds,
+            v => _maxProcessTime = TimeSpan.FromMilliseconds(v),
+            true
+        );
+    }
+
+    /// <summary>Whether a barricade sits just across the tile edge in a grid-relative cardinal direction.</summary>
+    private bool IsBarricadeBlocked(EntityUid origin, AtmosDirection cardinal)
+    {
+        // RMC's BarricadeImpassable layer doesn't exist here; barricades share TableLayer with tables, machines and weeds.
+        var xform = Transform(origin);
+        var rotation = _transform.GetWorldRotation(xform.GridUid ?? xform.ParentUid);
+        var direction = rotation.RotateVec((Vector2) cardinal.CardinalToIntVec());
+        var ray = new CollisionRay(_transform.GetWorldPosition(xform), direction, (int) CollisionGroup.MidImpassable);
+        var hits = _physics.IntersectRayWithPredicate(xform.MapID, ray, 0.6f, e => !_barricadeQuery.HasComp(e) || !Transform(e).Anchored);
+        return hits.Any();
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+        for (var i = _spread.Count - 1; i >= 0; i--)
+        {
+            if (_timing.CurTime - time > _maxProcessTime)
+                return;
+
+            var (uid, weeds) = _spread[i];
+            _spread.RemoveAt(i);
+
+            if (_transform.GetGrid(uid) is not { } gridId ||
+                !_mapGridQuery.TryComp(gridId, out var gridComp))
+            {
+                continue;
+            }
+
+            var grid = new Entity<MapGridComponent>(gridId, gridComp);
+            var indices = _map.CoordinatesToTile(gridId, gridComp, uid.ToCoordinates());
+            foreach (var cardinal in _rmcMap.AtmosCardinalDirections)
+            {
+                var blocked = false;
+                EntityUid? weedsToReplace = null;
+                var neighbor = indices.Offset(cardinal);
+                var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid, neighbor);
+                while (anchored.MoveNext(out var anchoredId))
+                {
+                    if (_airtightQuery.TryGetComponent(anchoredId, out var airtight) &&
+                        airtight.AirBlocked &&
+                        !_tag.HasTag(anchoredId, IgnoredTag) &&
+                        !_allowWeedSpreadQuery.HasComp(anchoredId))
+                    {
+                        blocked = true;
+                        continue;
+                    }
+
+                    if (!_map.TryGetTileRef(grid, grid, neighbor, out var tileRef) ||
+                        tileRef.Tile.IsEmpty ||
+                        _turf.IsSpace(tileRef))
+                    {
+                        blocked = true;
+                        continue;
+                    }
+
+                    if (_xenoWeedsQuery.TryComp(anchoredId, out var otherWeeds))
+                    {
+                        if (otherWeeds.Level >= weeds.Level)
+                            blocked = true;
+                        else
+                            weedsToReplace = anchoredId;
+                    }
+                }
+
+                if (IsBarricadeBlocked(uid, cardinal))
+                    blocked = true;
+
+                if (blocked)
+                    continue;
+
+                var source = weeds.IsSource ? uid : weeds.Source;
+                var sourceWeeds = CompOrNull<XenoWeedsComponent>(source);
+
+                if (source != null && sourceWeeds != null)
+                    Dirty(source.Value, sourceWeeds);
+
+                if (!Exists(source) ||
+                    !TryComp(source, out TransformComponent? transform) ||
+                    weeds.Spawns.Id is not { } prototype)
+                {
+                    continue;
+                }
+
+                var sourceLocal = _map.CoordinatesToTile(grid, gridComp, transform.Coordinates);
+                var diff = Vector2.Abs(neighbor - sourceLocal);
+                if (diff.X >= weeds.Range || diff.Y >= weeds.Range)
+                {
+                    if (sourceWeeds != null && !sourceWeeds.HasHealed)
+                    {
+                        sourceWeeds.HasHealed = true;
+                        _damageable.TryChangeDamage(source, sourceWeeds.HealOnStopSpreading, true);
+                        Dirty(source.Value, sourceWeeds);
+                    }
+
+                    break;
+                }
+
+                if (!CanSpreadWeedsPopup(grid, neighbor, null, null, weeds.SpreadsOnSemiWeedable))
+                    continue;
+
+                if (weedsToReplace != null)
+                    QueueDel(weedsToReplace.Value);
+
+                var coords = _map.GridTileToLocal(grid, grid, neighbor);
+                var neighborWeeds = Spawn(prototype, coords);
+                var neighborWeedsEnt = AssignSource(neighborWeeds, (source.Value, sourceWeeds));
+
+                _hive.SetSameHive(uid, neighborWeeds);
+
+                EnsureComp<ActiveEdgeSpreaderComponent>(neighborWeeds);
+
+                for (var j = 0; j < 4; j++)
+                {
+                    var dir = (AtmosDirection)(1 << j);
+                    var pos = neighbor.Offset(dir);
+                    if (!_map.TryGetTileRef(grid, grid, pos, out var adjacent))
+                        continue;
+
+                    _anchored.Clear();
+                    _map.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
+                    foreach (var anchoredId in _anchored)
+                    {
+                        if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
+                            !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
+                            !weedableTransform.Anchored ||
+                            weedable.Entity != null)
+                        {
+                            continue;
+                        }
+
+                        if (source != null)
+                        {
+                            var ev = new AfterEntityWeedingEvent(neighborWeeds, anchoredId);
+                            RaiseLocalEvent(source.Value, ref ev);
+                        }
+
+                        neighborWeedsEnt.Comp.LocalWeeded.Add(anchoredId);
+
+                        // WOLFGATE: communications towers are cut
+                        _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
+
+
+                        if (weedable.Spawn == null)
+                            continue;
+
+                        weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
+                        var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
+                        wallWeeds.Weeds = source;
+                        Dirty(weedable.Entity.Value, wallWeeds);
+
+                        if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
+                        {
+                            surface.Weedable = anchoredId;
+                            Dirty(weedable.Entity.Value, surface);
+                        }
+
+                        sourceWeeds?.Spread.Add(weedable.Entity.Value);
+                    }
+                }
+            }
+        }
+
+        if (_spread.Count > 0)
+            return;
+
+        var spreadingQuery = EntityQueryEnumerator<XenoWeedsSpreadingComponent, XenoWeedsComponent>();
+        while (spreadingQuery.MoveNext(out var uid, out var spreading, out var weeds))
+        {
+            if (time < spreading.SpreadAt)
+                continue;
+
+            RemCompDeferred<XenoWeedsSpreadingComponent>(uid);
+            _spread.Add((uid, weeds));
+        }
+    }
+}

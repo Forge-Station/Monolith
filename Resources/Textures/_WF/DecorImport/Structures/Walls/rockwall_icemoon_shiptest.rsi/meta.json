@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 40,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "rockwall_icemoon-0"
+    },
+    {
+      "name": "rockwall_icemoon-1"
+    },
+    {
+      "name": "rockwall_icemoon-2"
+    },
+    {
+      "name": "rockwall_icemoon-3"
+    },
+    {
+      "name": "rockwall_icemoon-4"
+    },
+    {
+      "name": "rockwall_icemoon-5"
+    },
+    {
+      "name": "rockwall_icemoon-6"
+    },
+    {
+      "name": "rockwall_icemoon-7"
+    },
+    {
+      "name": "rockwall_icemoon-8"
+    },
+    {
+      "name": "rockwall_icemoon-9"
+    },
+    {
+      "name": "rockwall_icemoon-10"
+    },
+    {
+      "name": "rockwall_icemoon-11"
+    },
+    {
+      "name": "rockwall_icemoon-12"
+    },
+    {
+      "name": "rockwall_icemoon-13"
+    },
+    {
+      "name": "rockwall_icemoon-14"
+    },
+    {
+      "name": "rockwall_icemoon-15"
+    },
+    {
+      "name": "rockwall_icemoon-21"
+    },
+    {
+      "name": "rockwall_icemoon-23"
+    },
+    {
+      "name": "rockwall_icemoon-29"
+    },
+    {
+      "name": "rockwall_icemoon-31"
+    },
+    {
+      "name": "rockwall_icemoon-38"
+    },
+    {
+      "name": "rockwall_icemoon-39"
+    },
+    {
+      "name": "rockwall_icemoon-46"
+    },
+    {
+      "name": "rockwall_icemoon-47"
+    },
+    {
+      "name": "rockwall_icemoon-55"
+    },
+    {
+      "name": "rockwall_icemoon-63"
+    },
+    {
+      "name": "rockwall_icemoon-74"
+    },
+    {
+      "name": "rockwall_icemoon-75"
+    },
+    {
+      "name": "rockwall_icemoon-78"
+    },
+    {
+      "name": "rockwall_icemoon-79"
+    },
+    {
+      "name": "rockwall_icemoon-95"
+    },
+    {
+      "name": "rockwall_icemoon-110"
+    },
+    {
+      "name": "rockwall_icemoon-111"
+    },
+    {
+      "name": "rockwall_icemoon-127"
+    },
+    {
+      "name": "rockwall_icemoon-137"
+    },
+    {
+      "name": "rockwall_icemoon-139"
+    },
+    {
+      "name": "rockwall_icemoon-141"
+    },
+    {
+      "name": "rockwall_icemoon-143"
+    },
+    {
+      "name": "rockwall_icemoon-157"
+    },
+    {
+      "name": "rockwall_icemoon-159"
+    },
+    {
+      "name": "rockwall_icemoon-175"
+    },
+    {
+      "name": "rockwall_icemoon-191"
+    },
+    {
+      "name": "rockwall_icemoon-203"
+    },
+    {
+      "name": "rockwall_icemoon-207"
+    },
+    {
+      "name": "rockwall_icemoon-223"
+    },
+    {
+      "name": "rockwall_icemoon-239"
+    },
+    {
+      "name": "rockwall_icemoon-255"
+    }
+  ]
+}

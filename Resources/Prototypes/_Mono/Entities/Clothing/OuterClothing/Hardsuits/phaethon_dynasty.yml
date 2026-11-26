@@ -1,9 +1,11 @@
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie ] # Forge-Change-delete: BaseFactionGearPDVT2
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearPDVT2 ]
   id: ClothingOuterHardsuitPirateScaf
   name: PDV SCAF hardsuit
-  description: An old SCAF suit painted in an PDV tan color scheme. The armor feels degraded, but lighter.
+  description: An old SCAF suit painted in a PDV tan color scheme. The armor feels degraded, but lighter. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): ablative coat.
+  - type: WFAblativeCoat
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/scaf_pirate.rsi
   - type: Item
@@ -18,10 +20,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.65
-        Slash: 0.65
-        Piercing: 0.55
-        Heat: 0.7
+        # WOLFGATE(ArmorBalance): sidegrade pass.
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.65
+        Heat: 0.45
         Radiation: 0.5
         Caustic: 0.9
   - type: StaminaDamageResistance # Mono - Stamres
@@ -46,11 +49,17 @@
     - RogueHardsuit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie ] # Forge-Change-delete: BaseFactionGearPDVT2
+  parent: [ ClothingOuterHardsuitSyndie, BaseFactionGearPDVT2 ]
   id: ClothingOuterHardsuitAshen
   name: PDV CV-32 combat hardsuit
-  description: A combat hardsuit designed by the Phaethon Dynasty. A heavier but still general-purpose hardsuit. Sacrifices most of its protection for reinforced ballistic platings.
+  description: A combat hardsuit designed by the Phaethon Dynasty. Heavier, but still general-purpose, it sacrifices some of its protection for reinforced ballistic plating. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: Clothing
@@ -66,17 +75,18 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.75
-        Piercing: 0.35
-        Heat: 0.75
+        # WOLFGATE(ArmorBalance): sidegrade pass.
+        Blunt: 0.75
+        Slash: 0.65
+        Piercing: 0.4
+        Heat: 0.7
         Radiation: 0.7
         Caustic: 0.9
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: ExplosionResistance
-    damageCoefficient: 0.7
+    damageCoefficient: 0.5
   - type: Tag
     tags:
     - RogueHardsuit
@@ -84,11 +94,15 @@
     coefficient: 0.75
 
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndie ] # Forge-Change-delete: BaseFactionGearPDVT2
+  parent: [ ClothingOuterHardsuitBase, BaseFactionGearPDVT3 ]
   id: ClothingOuterHardsuitPDVMedic
   name: PDV CV-82 combat tacsuit
-  description: A field medic combat hardsuit designed by the Phaethon Dynasty. The armor features various reinforced plating in vital areas.
+  description: A fast combat hardsuit designed by the Phaethon Dynasty. The armor features reinforced plating in vital areas. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): auto-tourniquet, plasma reserve and steady hands.
+  - type: WFSteadyHands
+  - type: WFPlasmaReserve
+  - type: WFAutoTourniquet
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_medic.rsi
   - type: Item
@@ -103,17 +117,17 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.67
-        Slash: 0.34
-        Piercing: 0.625
-        Heat: 0.55
-        Radiation: 0.1
+        Blunt: 0.65
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.6
+        Radiation: 0.6
         Caustic: 0.1
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.67
   - type: ClothingSpeedModifier
-    walkModifier: 1.05
-    sprintModifier: 1.05
+    walkModifier: 1.15
+    sprintModifier: 1.15
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -136,6 +150,12 @@
   name: PDV CV-67 combat tacsuit
   description: An adorned tacsuit designed with an imperfect nanolaminate composition. High maneuverability, sturdy armor.
   components:
+  # WOLFGATE(ArmorSpecialization): commander's weave.
+  - type: WFWoundWard
+    examine: wf-armor-spec-commander-examine
+    blocks:
+    - WFWolfmedConcussionWound
+    - WFWolfmedArterialBleedWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_vizier.rsi
   - type: Clothing
@@ -153,15 +173,24 @@
     - RogueHardsuit
 
 - type: entity
-  parent: [ ClothingOuterHardsuitSyndieElite, EnergyShieldClothing ]
+  parent: [ ClothingOuterHardsuitBaseNoPlateholder, MonoEnergyShieldClothing ]
   id: ClothingOuterHardsuitAshenElite
   name: PDV CV-53 combat tacsuit
-  description: Originally based off of the CV-32 hardsuit, the CV-53 tacsuit sacrifices conventional armor plating for environmental protection, and a rechargeable hard-shield.
+  description: Originally based on the CV-32 hardsuit, the CV-53 tacsuit sacrifices conventional armor plating for environmental protection and a rechargeable soft shield. # WOLFGATE(SoftShield): soft shield
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndieelite.rsi
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndieelite.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: HeldSpeedModifier
+  - type: StaminaDamageResistance # Mono - Stamres
+    coefficient: 0.45
   - type: ToggleableClothing
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false
@@ -171,56 +200,53 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.2
   - type: FireProtection
     reduction: 0.8
   - type: Armor # Mono - Armor Value Changes
     modifiers:
       coefficients:
+        # WOLFGATE(ArmorBalance): sidegrade pass.
         Blunt: 0.75
         Slash: 0.75
         Piercing: 0.7
-        Heat: 0.2
+        Heat: 0.7
         Radiation: 0.1
         Caustic: 0.5
   - type: Item
     size: Huge
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0 # 0.9-> 1 Mono
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: Tag
     tags:
     - RogueHardsuit
+  - type: WFSoftShield # WOLFGATE(SoftShield): brute damage bleeds through the field dampened.
   # Shielding
-  - type: Blocking
-    passiveBlockModifier:
-      coefficients:
-        Blunt: 0.1
-        Slash: 0.1
-        Piercing: 0.1
-        Heat: 0.1
-    activeBlockModifier:
-      coefficients:
-        Blunt: 0.1
-        Slash: 0.1
-        Piercing: 0.1
-        Heat: 0.1
-      flatReductions:
-        Heat: 5
-    passiveBlockFraction: 1.0
-    activeBlockFraction: 1.0
-    isClothing: true
-  - type: Damageable
-    damageContainer: Shield
+  - type: PersonalShield
+    visuals:
+      color: "#FF5F1F"
+      scale: 2
+      fillLevel: 0.1
+      coreFade: 0.85
+    shield:
+      maxCharge: 100
+      regenRate: 5
+      spinupTime: 0.5
+      breakCooldown: 17
+      powerDraw: 1
+      blockModifier:
+        coefficients:
+          Piercing: 0.5
+          Heat: 1.5
+          Radiation: 2.5
+          Shock: 2.5
   - type: Battery
-    maxCharge: 10
-    startingCharge: 10
+    maxCharge: 100
+    startingCharge: 100
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargeRate: 1
-  - type: RechargeableBlocking
-    chargedRechargeRate: 0
-    dischargedRechargeRate: 0.3
+    autoRechargeRate: 5
   - type: UseDelay
     delay: 10
   - type: PointLight
@@ -228,13 +254,24 @@
     radius: 1.4
     energy: 2
     color: "#5dd439"
+  - type: ExtendDescription
+    descriptionList:
+    - description: Alt-click or otherwise interact to toggle additional shielding.
+      color: "#4f94ad"
+      requireDetailRange: true
+    - description: The CV-53 soft-shield lets blows and rounds through but bleeds off much of their force, and keeps its wearer from bleeding while it holds. It does nothing against lasers or fire. # WOLFGATE(SoftShield): soft shield
+      color: "#94768c"
+      requireDetailRange: true
 
 - type: entity
   parent: ClothingOuterHardsuitAshen
   id: ClothingOuterHardsuitTarkhan
   name: "PDV CV-280 'Basilisk' combat hardsuit"
-  description: A combat hardsuit designed by the Phaethon Dynasty for Tarkhans. Utilizes an imperfect nanolaminate composition like the CV-67 to save weight, and an installed hydraulic rig for more mobility, and painted in a royal Tarkhan white palette. A rare sight.
+  description: A combat hardsuit designed by the Phaethon Dynasty for Tarkhans. Like the CV-67, it uses an imperfect nanolaminate composition to save weight, and a hydraulic rig adds mobility. Painted in the royal Tarkhan white palette, it is a rare sight. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): limb lock.
+  - type: WFLimbLock
+    breakthrough: 40
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/basilisk.rsi
   - type: Clothing
@@ -249,12 +286,12 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55
-        Slash: 0.45
-        Piercing: 0.375
+        # WOLFGATE(ArmorBalance): sidegrade pass.
+        Blunt: 0.7
+        Slash: 0.65
+        Piercing: 0.6
         Shock: 0.95
-        Heat: 0.7
-        Poison: 0.825
+        Heat: 0.75
         Radiation: 0.5
         Caustic: 0.6
   - type: ClothingSpeedModifier

@@ -4,6 +4,17 @@
   id: Kanabou
   description: The classic oni weapon, for those that forgo subtlety.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: Nyanotrasen/Objects/Weapons/Melee/kanabou.rsi
     state: icon

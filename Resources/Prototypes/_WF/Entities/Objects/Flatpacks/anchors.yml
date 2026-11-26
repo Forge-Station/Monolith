@@ -1,0 +1,8 @@
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackLatticeRelay
+  components:
+  - type: Flatpack
+    entity: WFLatticeRelayAnchor
+  - type: StaticPrice
+    price: 25000

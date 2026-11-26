@@ -1,9 +1,15 @@
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT2, ClothingFlightProfileMedium ] # Forge-change add ClothingFlightProfile
+  parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContrabandT2 ]
   id: ClothingOuterHardsuitUIEnforcer
   name: U.I. ENFORCER combat tacsuit
-  description: Infamously one of the most reliable combat tacsuits that the Black Market has to offer, developed by Ullman Industries. "Heads up display sold seperately!"
+  description: Infamously one of the most reliable combat tacsuits the black market has to offer, developed by Ullman Industries. "Heads-up display sold separately!" # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): insulation.
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_enforcer.rsi
   - type: Clothing
@@ -12,20 +18,19 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.6 # Forge-change 0.65->0.6
+    damageCoefficient: 0.65
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.5
-        Slash: 0.5 # Forge-change 0.45->0.5
-        Piercing: 0.4
-        Heat: 0.45 # Forge-change 0.65->0.45
-        Radiation: 0.55 # Forge-change 0.65->0.55
-        Shock: 0.9 # Forge-change
-        Caustic: 0.5 # Forge-change 0.65 -> 0.5
+        Slash: 0.45
+        Piercing: 0.40
+        Heat: 0.65
+        Radiation: 0.65
+        Caustic: 0.65
   - type: ClothingSpeedModifier
     walkModifier: 0.85
-    sprintModifier: 0.85 # Forge-change 0.825->0.85
+    sprintModifier: 0.825
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -36,13 +41,13 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance
-    coefficient: 0.3 # Forge-change 0.55->0.3
+    coefficient: 0.55
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBaseWithoutArmorPlates, MonoEnergyShieldClothing, BaseFactionGearOtherFactionT2, ClothingFlightProfileMedium ] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
+  parent: [ ClothingOuterHardsuitBaseNoPlateholder, MonoEnergyShieldClothing, BaseC3SyndicateContrabandT3 ]
   id: ClothingOuterHardsuitUIEnforcerMKII
   name: U.I. ENFORCER MKII combat tacsuit
-  description: Based off of the infamous MKI design with versatility in mind. This is Ullman Industries' top of the line combat suit. Whether it be slipping away from the feds, taking out the competition, or serving your corporate overlords, this marvel of engineering will make sure that you get it done.
+  description: Based on the infamous MKI design, with versatility in mind. This is Ullman Industries' top-of-the-line combat suit. Whether it be slipping away from the feds, taking out the competition, or serving your corporate overlords, this marvel of engineering will make sure that you get it done. # WOLFGATE(ArmorBalance): grammar pass.
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_enforcermkii.rsi
@@ -52,42 +57,33 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.45 # Forge-change
+    damageCoefficient: 0.5
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.75 # Forge-change 0.7->0.75
+        Blunt: 0.7
         Slash: 0.75
-        Piercing: 0.65 # Forge-change 0.6->0.65
-        Heat: 0.65 # Forge-change 0.5->0.65
-        Radiation: 0.4 # Forge-change 0.6->0.4
-        Shock: 0.8 # Forge-change
-        Caustic: 0.6 # Forge-change 0.7 -> 0.6
+        Piercing: 0.6
+        Heat: 0.5
+        Radiation: 0.6
+        Caustic: 0.7
+  - type: WFSoftShield # WOLFGATE(SoftShield): hard shields are retired; brute damage bleeds through the field dampened.
   - type: PersonalShield
     shield:
-      maxCharge: 665 # Forge-change 600->665
-      regenRate: 10.8 # Forge-change 6->10.8
+      maxCharge: 300
+      regenRate: 6
       spinupTime: 1
-      breakCooldown: 17.5 # Forge-change 30->17.5
-      powerDraw: 0.1 # Forge-change 0.5->0.1
-      blockModifier: # Forge-change
-        coefficients: # Forge-change
-          Blunt: 1 # Forge-change
-          Slash: 1 # Forge-change
-          Piercing: 1 # Forge-change
-          Heat: 1.25 # Forge-change
-          Radiation: 0.25 # Forge-change
+      breakCooldown: 30
+      powerDraw: 0.5
   - type: Battery
-    maxCharge: 100 # Forge-change 60->100
-    startingCharge: 100 # Forge-change 60->100
+    maxCharge: 60
+    startingCharge: 60
   - type: BatterySelfRecharger
     autoRecharge: true
-    autoRechargePause: true # Forge-change
-    autoRechargePauseTime: 8 # Forge-change
-    autoRechargeRate: 100 # Forge-change 3->100
+    autoRechargeRate: 0.1
   - type: ClothingSpeedModifier
-    walkModifier: 0.875 # Forge-change 1->0.875
-    sprintModifier: 0.875 # Forge-change 0.85->0.875
+    walkModifier: 1
+    sprintModifier: 0.65 # SIX FIVE SIX FIVE!!
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -98,37 +94,53 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance
-    coefficient: 0.2 # Forge-change 0.45->0.2
+    coefficient: 0.45
+  - type: ExtendDescription
+    descriptionList:
+    - description: Alt-click or otherwise interact to toggle additional shielding.
+      color: "#4f94ad"
+      requireDetailRange: true
+    # WOLFGATE(SoftShield): the soft shield it now has, described like the others.
+    - description: The ENFORCER MKII soft-shield lets blows and rounds through but bleeds off much of their force, and keeps its wearer from bleeding while it holds. It does nothing against lasers or fire.
+      color: "#94768c"
+      requireDetailRange: true
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT0, ClothingFlightProfileEasy ] # Forge-change add ClothingFlightProfile
+  parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContraband ]
   id: ClothingOuterHardsuitUllmanEngineer
   name: U.I. engineering hardsuit
   description: A protective hardsuit worn by black market engineering specialists. Developed by Ullman Industries.
   components:
+  # WOLFGATE(ArmorSpecialization): insulation and crush rating.
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-crush-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
+    hardens:
+      InternalBleedingWound: 2
+      WFWolfmedCrushInjuryWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_engineer.rsi # Ullman sprites
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_engineer.rsi #Ullman sprites
-  - type: Item # Forge-change
-    size: Huge # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.6 # Forge-change 0.2->0.6
+    damageCoefficient: 0.2
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55 # Forge-change 0.8->0.55
-        Slash: 0.55 # Forge-change 0.8->0.55
-        Piercing: 0.6 # Forge-change 0.7->0.6
-        Heat: 0.55 # Forge-change 0.6->0.55
-        Radiation: 0.5 # Forge-change 0.1->0.5
-        Caustic: 0.75 # Forge-change 0.7 -> 0.75
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.65
+        Heat: 0.6
+        Radiation: 0.1
+        Caustic: 0.7
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 # Forge-change 1->0.9
-    sprintModifier: 0.9 # Forge-change 0.8->0.9
+    walkModifier: 1
+    sprintModifier: 0.8
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -139,38 +151,42 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance
-    coefficient: 0.3 # Forge-change 0.8->0.3
+    coefficient: 0.8
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBase, BaseFactionGearOtherFactionT0, ClothingFlightProfileEasy] # Forge-change add ClothingFlightProfile
+  parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContraband ]
   id: ClothingOuterHardsuitUIPilot
   name: U.I. pilot voidsuit
-  description: A voidsuit made for black market pilots. Developed by Ullman Industries
+  description: A voidsuit made for black-market pilots. Developed by Ullman Industries. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): shock absorbers.
+  - type: WFWoundWard
+    examine: wf-armor-spec-shock-absorbers-examine
+    hardens:
+      WFWolfmedConcussionWound: 2
+      WFWolfmedOrganContusionWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_pilot.rsi
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_pilot.rsi
-  - type: Item # Forge-change
-    size: Huge # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.85 # Forge-change 0.6->0.85
+    damageCoefficient: 0.6
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.75 # Forge-change 0.8->0.75
-        Slash: 0.75 # Forge-change 0.8->0.75
-        Piercing: 0.625 # Forge-change 0.85->0.625
-        Heat: 0.55 # Forge-change 0.6->0.55
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.65
+        Heat: 0.6
         Shock: 0.8
-        Radiation: 0.6 # Forge-change 0.5->0.6
-        Caustic: 0.75 # Forge-change 0.5 -> 0.75
+        Radiation: 0.5
+        Caustic: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.925 # Forge-change 0.95->0.925
-    sprintModifier: 0.925 # Forge-change 0.9->0.925
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -181,14 +197,16 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance
-    coefficient: 0.5 # Forge-change 0.7->0.5
+    coefficient: 0.7
 
 - type: entity
-  parent: [ ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT2, ClothingFlightProfileHard ] # Forge-change add ClothingFlightProfile and replace ClothingOuterHardsuitBase by ClothingOuterHardsuitBaseWithoutArmorPlates
+  parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContrabandT3 ]
   id: ClothingOuterHardsuitUIDirector
   name: U.I. VK-1 experimental hardsuit
-  description: Felix Ullman's top of the line personal hardsuit. A warning label engraved on the chestplate reads "Theft of this suit has a high chance of death! Seriously, I will find you. You will die."
+  description: Felix Ullman's top-of-the-line personal hardsuit. A warning label engraved on the chestplate reads "Theft of this suit has a high chance of death! Seriously, I will find you. You will die." # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): ricochet plating.
+  - type: WFArmorDeflect # WOLFGATE(ArmorDeflection): light rounds ricochet off the plate.
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/ullman_industries_director.rsi # Ullman sprites
   - type: Clothing
@@ -197,22 +215,19 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.3 # Forge-change 0.1->0.3
-  - type: FireProtection # Forge-change
-    reduction: 0.85 # Forge-change
+    damageCoefficient: 0.1
   - type: Armor
     modifiers:
       coefficients:
         Blunt: 0.35
         Slash: 0.35
-        Piercing: 0.3 # Forge-change 0.45->0.3
-        Heat: 0.4 # Forge-change 0.5->0.4
-        Radiation: 0.225 # Forge-change 0->0.225
-        Caustic: 0.4 # Forge-change 0.2 -> 0.4
-        Shock: 0.6 # Forge-change
+        Piercing: 0.45
+        Heat: 0.5
+        Radiation: 0
+        Caustic: 0.2
   - type: ClothingSpeedModifier
-    walkModifier: 0.625 # Forge-change 0.8->0.625
-    sprintModifier: 0.625 # Forge-change 0.8->0.625
+    walkModifier: 0.80
+    sprintModifier: 0.80
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
@@ -223,7 +238,7 @@
       helmetcover: ClothingHeadHelmetCoverBlock
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaminaDamageResistance
-    coefficient: 0.2 # Forge-change 0.35->0.2
+    coefficient: 0.35
 
 
 

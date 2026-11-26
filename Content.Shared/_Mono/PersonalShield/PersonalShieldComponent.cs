@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Damage;
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -25,6 +26,10 @@ public sealed partial class PersonalShieldComponent : Component
 
     /// <summary>Is the shield actually on?</summary>
     public bool IsUp => Runtime.Form >= 1f && Runtime.Shatter <= 0f;
+
+    /// <summary>Rendering parameters the shield system reads for flares and the shatter.</summary>
+    [DataField, AutoNetworkedField]
+    public PersonalShieldVisuals Visuals = new();
 
     #region Appearance
 
@@ -114,6 +119,9 @@ public sealed partial class PersonalShieldComponent : Component
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class PersonalShieldSettings
 {
+    [DataField]
+    public SlotFlags RequiredSlot = SlotFlags.OUTERCLOTHING;
+
     /// <summary>How much damage the shield can take before it blows up.</summary>
     [DataField]
     public float MaxCharge = 60f;
@@ -181,4 +189,28 @@ public struct PersonalShieldRuntime
 
     [ViewVariables] // Forge-Change
     public bool WasFracture; // Forge-Change
+
+    /// <summary>Time at which the current damage flare finishes settling.</summary>
+    public TimeSpan DamageFlareUntil;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class PersonalShieldVisuals
+{
+    [DataField] public Color Color = Color.FromHex("#00AAFF").WithAlpha(0.95f);
+    [DataField] public float Brightness = 1.0f;
+    [DataField] public float MinimumBrightness = 0.25f;
+    [DataField] public float PixelGrid = 96f;
+    [DataField] public float HexDensity = 4.0f;
+    [DataField] public float Scale = 2.2f;
+    [DataField] public float CoreFade = 0.85f;
+    [DataField] public float FillLevel = 0.08f;
+    [DataField] public float LineLevel = 0.50f;
+    [DataField] public float RimLevel = 0.75f;
+    [DataField] public float AlphaBands = 6f;
+    [DataField] public float BreathDepth = 0.08f;
+    [DataField] public Vector2 FormOrigin = new(0f, 0f);
+    [DataField] public float DamageFlareTime = 0.5f;
+    [DataField] public float ShardScale = 5f;
+    [DataField] public float ShatterTime = 1.0f;
 }

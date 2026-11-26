@@ -1,0 +1,114 @@
+# Glowing plants, one kind per cavern, and the main light below ground. Each draws its plant shaded with an unshaded
+# glow layer on top, so it reads in the dark before its light reaches you. The sprites are recoloured from existing
+# plants by Tools/_WF/Caverns/gen_flavour.py.
+
+- type: entity
+  id: WFCavernGlowFloraBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _WF/Caverns/glow_flora.rsi
+    drawdepth: FloorObjects
+    noRot: true
+  - type: PointLight
+    radius: 5.5
+    energy: 1.2
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Asclepiu: bioluminescent fungi along the wet limestone.
+- type: entity
+  id: WFCavernGlowcaps
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: glowcaps
+    - state: glowcaps_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#6dffc8"
+
+# Fervidus: shelf lichen that stores the magma's heat and gives it back as an ember glow.
+- type: entity
+  id: WFCavernEmberLichen
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: ember_lichen
+    - state: ember_lichen_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#ff8a3a"
+    energy: 1.4
+
+# Merak: a phosphorescent desert succulent that lights the sandstone halls amber.
+- type: entity
+  id: WFCavernLampAgave
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: lamp_agave
+    - state: lamp_agave_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#ffbe55"
+
+# Aerumna: faint violet blooms, few and dim, so the Umbral Deeps stay the darkest cavern.
+- type: entity
+  id: WFCavernShadowBloom
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: shadow_bloom
+    - state: shadow_bloom_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#b65cff"
+    radius: 4
+    energy: 0.9
+
+# Thrascias: frost thistles whose glassy spines hold a pale blue light.
+- type: entity
+  id: WFCavernRimeThistle
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: rime_thistle
+    - state: rime_thistle_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#9fdcff"
+    energy: 1
+
+# Carcinoma: a pulsing knot of nerves grown up through the flesh.
+- type: entity
+  id: WFCavernNerveCluster
+  parent: WFCavernGlowFloraBase
+  components:
+  - type: Sprite
+    layers:
+    - state: nerve_cluster
+    - state: nerve_cluster_glow
+      shader: unshaded
+  - type: PointLight
+    color: "#ff4d72"

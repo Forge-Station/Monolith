@@ -1,0 +1,12 @@
+- type: department
+  id: WFAsf
+  name: wf-asf-department
+  description: wf-asf-department-description
+  color: "#A66BE0"
+  weight: 60
+  roles:
+  - WFAsfEnvoy
+  - WFAsfEnforcer
+  - WFAsfFieldResearcher
+  - WFAsfColonist
+  primary: false

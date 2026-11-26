@@ -31,6 +31,9 @@ namespace Content.Client.Clickable
         [ViewVariables] private readonly Dictionary<RSI, RsiClickMapData> _rsiMaps =
             new();
 
+        // WOLFGATE: memo for HasOpaquePixels, since a frame's emptiness never changes once loaded.
+        private readonly Dictionary<(RSI, RSI.StateId, RsiDirection, int), bool> _opaqueFrames = new();
+
         public void PostInject()
         {
             _resourceCache.OnRawTextureLoaded += OnRawTextureLoaded;
@@ -93,6 +96,65 @@ namespace Content.Client.Clickable
 
             var offset = dirDat[frame];
             return SampleClickMap(rsiData.ClickMap, pos, rsi.Size, offset);
+        }
+
+        // WOLFGATE: whether a frame draws anything at all. The character creator uses it to avoid
+        // previewing a sprite in a direction it is empty in, e.g. a tail seen from the front.
+        public bool HasOpaquePixels(RSI rsi, RSI.StateId state, RsiDirection dir, int frame)
+        {
+            // No click map means the RSI is not loaded or was skipped; claim it draws so nothing is hidden wrongly.
+            if (!_rsiMaps.TryGetValue(rsi, out var rsiData))
+                return true;
+
+            var key = (rsi, state, dir, frame);
+            if (_opaqueFrames.TryGetValue(key, out var cached))
+                return cached;
+
+            var result = true;
+            if (rsiData.Offsets.TryGetValue(state, out var stateDat)
+                && stateDat.Length > (int) dir
+                && stateDat[(int) dir].Length > frame)
+            {
+                result = AnyOccluded(rsiData.ClickMap, rsi.Size, stateDat[(int) dir][frame]);
+            }
+
+            _opaqueFrames[key] = result;
+            return result;
+        }
+
+        /// <summary>Whether one pixel of a frame is opaque. Unlike IsOccluding, pixels near it don't count.</summary>
+        public bool IsOpaque(RSI rsi, RSI.StateId state, RsiDirection dir, int frame, Vector2i pos)
+        {
+            if (pos.X < 0 || pos.Y < 0 || pos.X >= rsi.Size.X || pos.Y >= rsi.Size.Y
+                || !_rsiMaps.TryGetValue(rsi, out var rsiData)
+                || !rsiData.Offsets.TryGetValue(state, out var stateDat)
+                || stateDat.Length <= (int) dir
+                || stateDat[(int) dir].Length <= frame)
+                return false;
+
+            var (x, y) = pos + stateDat[(int) dir][frame];
+            return x >= 0 && y >= 0 && x < rsiData.ClickMap.Width && y < rsiData.ClickMap.Height
+                   && rsiData.ClickMap.IsOccluded(x, y);
+        }
+
+        private static bool AnyOccluded(ClickMap map, Vector2i size, Vector2i offset)
+        {
+            var (width, height) = size;
+            for (var y = 0; y < height; y++)
+            {
+                var oy = y + offset.Y;
+                if (oy < 0 || oy >= map.Height)
+                    continue;
+
+                for (var x = 0; x < width; x++)
+                {
+                    var ox = x + offset.X;
+                    if (ox >= 0 && ox < map.Width && map.IsOccluded(ox, oy))
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         private static bool SampleClickMap(ClickMap map, Vector2i pos, Vector2i bounds, Vector2i offset)
@@ -213,5 +275,10 @@ namespace Content.Client.Clickable
         public bool IsOccluding(Texture texture, Vector2i pos);
 
         public bool IsOccluding(RSI rsi, RSI.StateId state, RsiDirection dir, int frame, Vector2i pos);
+
+        // WOLFGATE: see ClickMapManager.HasOpaquePixels.
+        public bool HasOpaquePixels(RSI rsi, RSI.StateId state, RsiDirection dir, int frame);
+
+        public bool IsOpaque(RSI rsi, RSI.StateId state, RsiDirection dir, int frame, Vector2i pos);
     }
 }

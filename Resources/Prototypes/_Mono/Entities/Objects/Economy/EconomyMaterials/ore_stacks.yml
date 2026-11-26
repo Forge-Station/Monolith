@@ -31,11 +31,11 @@
 - type: ore
   id: LithiumOre
   oreEntity: LithiumOre1
-  minOreYield: 1
-  maxOreYield: 3
+  minOreYield: 0 # WOLFGATE(Mining): lithium paces mining, 1-3 -> 0-2
+  maxOreYield: 2 # WOLFGATE(Mining)
 
 - type: ore
   id: CopperOre
   oreEntity: CopperOre1
   minOreYield: 1
-  maxOreYield: 5
+  maxOreYield: 3 # WOLFGATE(Mining): copper 1-5 -> 1-3

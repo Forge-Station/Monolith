@@ -1,3 +1,4 @@
+using Content.Client._WF.CombatConsole;
 using Content.Shared._Forge.Shuttles.Components;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
@@ -19,7 +20,7 @@ public sealed partial class MapScreen
         {
             if (_lastMapMarkerSignature != 0)
             {
-                MapMarkerList.DisposeAllChildren();
+                MapMarkerList.RemoveAllChildren();
                 MapMarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
                     ("current", 0),
                     ("max", ShuttleNavMarkerComponent.MaxMarkers));
@@ -39,7 +40,7 @@ public sealed partial class MapScreen
             return;
 
         _lastMapMarkerSignature = signature;
-        MapMarkerList.DisposeAllChildren();
+        MapMarkerList.RemoveAllChildren();
         MapMarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
             ("current", markers.Markers.Count),
             ("max", ShuttleNavMarkerComponent.MaxMarkers));
@@ -84,6 +85,7 @@ public sealed partial class MapScreen
             row.AddChild(focus);
             row.AddChild(autopilot);
             row.AddChild(remove);
+            WFInstrumentTheme.Apply(row); // rows are built after the helm was themed, so they are styled as they are added
             MapMarkerList.AddChild(row);
         }
     }

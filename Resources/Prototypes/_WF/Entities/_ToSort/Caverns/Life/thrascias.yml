@@ -1,0 +1,357 @@
+# The Rime Galleries' own life. Drift hollows: rime bats, frost weavers, rime caps and hearth lichen. Frozen falls: ice
+# slimes, crystal crabs, frost pods and hanging icicles. Plasma shores: plasma crabs, watchers and plasma blooms. Names
+# are in Locale/en-US/_WF/Caverns/life_thrascias.ftl; WFThrasciasNoBreath is in Planets/Life/thrascias.yml.
+
+# ---- Wildlife ---------------------------------------------------------------------------------------------------
+
+# A white bat with no use for eyes. It only flutters about.
+- type: entity
+  parent: [MobBat, WFThrasciasNoBreath]
+  id: WFMobCavernRimeBat
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bat
+      sprite: _WF/Caverns/Life/rime_bat.rsi
+
+# A pale spider that hunts by the tremble of the web; it bites whatever walks in.
+- type: entity
+  parent: [MobSpiderSpace, WFThrasciasNoBreath]
+  id: WFMobCavernFrostWeaver
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Sprite
+    sprite: _WF/Planets/Life/Thrascias/snow_spider.rsi
+    color: "#a8c8ff"
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      70: Critical
+      110: Dead
+
+# A slime of clear ice that creeps over the frozen falls and numbs what it touches.
+- type: entity
+  parent: [MobAdultSlimesBlue, WFThrasciasNoBreath]
+  id: WFMobCavernRimeSlime
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: blue_adult_slime
+      sprite: _WF/Caverns/Life/rime_slime.rsi
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 4
+        Cold: 6
+
+# ---- Spawner tables, one per hall -------------------------------------------------------------------------------
+
+- type: entityTable
+  id: WFCavernFaunaThrasciasHollows
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCavernRimeBat
+      weight: 4
+    - id: WFMobCavernFrostWeaver
+      weight: 3
+    - id: MobArgocyteSlurva
+      weight: 2
+    - id: MobBearSpace
+      weight: 0.5
+
+- type: entity
+  id: WFCavernFaunaThrasciasHollows
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaThrasciasHollows
+
+- type: entityTable
+  id: WFCavernFaunaThrasciasFalls
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCavernRimeSlime
+      weight: 5
+    - id: WFMobThrasciasCrystalCrab
+      weight: 2
+    - id: WFMobCavernRimeBat
+      weight: 2
+    - id: MobArgocyteBarrier
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaThrasciasFalls
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaThrasciasFalls
+
+- type: entityTable
+  id: WFCavernFaunaThrasciasLake
+  table: !type:GroupSelector
+    children:
+    - id: MobPlasmaCrabNF
+      weight: 4
+    - id: WFMobThrasciasCrystalCrab
+      weight: 2
+    - id: MobWatcherIcewing
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaThrasciasLake
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaThrasciasLake
+
+# ---- Produce ----------------------------------------------------------------------------------------------------
+
+# Two cook into the same warming soup as frozen fungus (below).
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFRimeCap
+  components:
+  - type: Sprite
+    color: "#9ec8ff"
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: WFWarmBroth
+          Quantity: 2
+
+- type: microwaveMealRecipe
+  id: RecipeWFRimeCapSoup
+  name: rime cap soup recipe
+  result: WFFoodSoupFrozenFungus
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFRimeCap: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# Eaten raw it warms a body that has gone cold.
+- type: entity
+  parent: WFWildProduceBase
+  id: WFHearthLichen
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/lingzhi.rsi
+    state: produce
+    color: "#ffb866"
+  - type: FlavorProfile
+    flavors:
+    - spicy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: WFWarmBroth
+          Quantity: 6
+  - type: Tag
+    tags:
+    - Vegetable
+
+# ---- Plants -----------------------------------------------------------------------------------------------------
+
+# A cave mushroom in the drift hollows; pick it and cook it.
+- type: entity
+  parent: NebulaFloraPlantMushroom
+  id: WFCavernRimeCapPlant
+  components:
+  - type: Sprite
+    layers:
+    - state: blue_mushroom1
+      color: "#c4dcff"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    harvestTime: 1.5
+    regrowTime: 600
+    table: !type:AllSelector
+      children:
+      - id: WFRimeCap
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Lichen that keeps a little of the warmth the rock once had; it spreads over the tunnel walls.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernHearthLichenPlant
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: gardenarid
+      color: "#ffc58a"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#8a7560" }
+          False: { scale: "1,1", color: "#ffc58a" }
+  - type: WFRegrowingHarvest
+    tool: Slicing
+    harvestTime: 1.5
+    regrowTime: 720
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFHearthLichen
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# A long spike of ice hanging in the dark. Walk under it and it comes down in shards.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernHangingIcicle
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_rocks.rsi
+    layers:
+    - state: bsc
+      color: "#e4f6ff"
+      map: ["spike"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        spike:
+          Idle: { scale: "1,1" }
+          Armed: { scale: "1.15,1.15", color: "#ffffff" }
+          Spent: { scale: "1,1" }
+  - type: WFReactiveFlora
+    behaviour: Explode
+    range: 1.1
+    checkInterval: 0.4
+    armDelay: 1.2
+    armSound:
+      collection: WFFloraCrystalCharge
+    armPopup: wf-cavern-icicle-creaks
+    sound:
+      collection: GlassBreak
+    popup: wf-cavern-icicle-falls
+    burstRadius: 1.4
+    burstDamage:
+      types:
+        Piercing: 14
+        Cold: 4
+    burstSpawns:
+    - ShardCrystalCyan
+    burstOnDamage: false
+    ignoreFactions: [SimpleHostile, Passive]
+
+# Swells with frost, and a cloud of freezing mist leaves whoever comes near it numb. It grows back.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernFrostBulb
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: xpod1
+      color: "#bfe6ff"
+      map: ["pod"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        pod:
+          Idle: { scale: "1,1", color: "#bfe6ff" }
+          Armed: { scale: "1.25,1.25", color: "#ffffff" }
+          Spent: { scale: "0.8,0.8", color: "#7f97a8" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.2
+    cooldown: 30
+    activeTime: 3
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-flora-frostpod-burst
+    solution:
+      reagents:
+      - ReagentId: FrostOil
+        Quantity: 10
+    cloudDuration: 3
+    cloudSpread: 2
+    ignoreFactions: [SimpleHostile, Passive]
+
+# A bulb at the edge of a plasma lake that has drunk too deep. A touch and it vents a cloud of plasma.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernPlasmaBloom
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: lunar_plant3
+      color: "#d6a0ff"
+      map: ["bloom"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        bloom:
+          Idle: { scale: "1,1", color: "#d6a0ff" }
+          Armed: { scale: "1.3,1.3", color: "#f4d6ff" }
+          Spent: { scale: "0.85,0.85", color: "#8a7aa0" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.1
+    cooldown: 45
+    activeTime: 3
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-cavern-plasma-bloom-vents
+    solution:
+      reagents:
+      - ReagentId: Plasma
+        Quantity: 12
+    cloudDuration: 4
+    cloudSpread: 2
+    ignoreFactions: [SimpleHostile, Passive]

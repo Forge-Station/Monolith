@@ -1,0 +1,452 @@
+# Fervidus's wild slimes: the cinder slime and the obsidian slime bred from it. They need no air, shrug off heat and fire,
+# and steam and burn in water. They live in patches of see-through obsidian glass on the surface, each over a vault of the
+# Cinder Vaults lit red by a magma pool. A sparse zone noise picks where they may be and a blob noise lays the patches.
+# The surface layers (from WFBiomeFervidus) and the cavern layers (from WFCavernBiomeFervidus) share both noises: the
+# cavern's seed is the surface's plus 7919, so each cavern noise seed is the surface one less 7919, and lower thresholds
+# make each vault a little wider than its patch.
+
+# ---- Breeds ------------------------------------------------------------------------------------------------------
+
+- type: breed
+  breedName: cinder slime
+  id: WFCinderMutation
+  producedExtract: WFCinderSlimeExtract
+  components:
+  - type: Slime
+    breed: WFCinderMutation
+    slimeColor: "#ff7a2a"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 4
+    mutationChance: 0.1
+    potentialMutations:
+    - WFObsidianMutation
+  # Grows and splits only in Fervidus's heat.
+  - type: WFSlimeClimate
+    minTemperature: 340
+    maxTemperature: 480
+  - type: Damageable
+    damageModifierSet: WFCinderSlime
+    damageContainer: Biological
+  - type: BreathingImmunity
+  - type: Temperature
+    currentTemperature: 373.15
+    heatDamageThreshold: 5000
+    coldDamageThreshold: 200
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 1
+  - type: PointLight
+    radius: 2
+    energy: 1.2
+    color: "#ff7a2a"
+    castShadows: false
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 12
+      - !type:XenobioSmoke
+        smokePrototype: Smoke
+        duration: 3
+        spreadAmount: 3
+        sound:
+          path: /Audio/Effects/extinguish.ogg
+        probability: 0.5
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - wf-cinder-slime-steam-popup
+        probability: 0.25
+
+# Bred only from cinder slimes; it breeds back to them.
+- type: breed
+  breedName: obsidian slime
+  id: WFObsidianMutation
+  producedExtract: WFObsidianSlimeExtract
+  components:
+  - type: Slime
+    breed: WFObsidianMutation
+    slimeColor: "#2a2030"
+    shouldHaveShader: true
+    shader: XenoMetallic
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 3
+    mutationChance: 0.3
+    potentialMutations:
+    - WFCinderMutation
+  # Grows and splits only in Fervidus's heat.
+  - type: WFSlimeClimate
+    minTemperature: 340
+    maxTemperature: 480
+  - type: Damageable
+    damageModifierSet: WFCinderSlime
+    damageContainer: Biological
+  - type: BreathingImmunity
+  - type: Temperature
+    currentTemperature: 373.15
+    heatDamageThreshold: 5000
+    coldDamageThreshold: 200
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 1
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 12
+      - !type:XenobioSmoke
+        smokePrototype: Smoke
+        duration: 3
+        spreadAmount: 3
+        sound:
+          path: /Audio/Effects/extinguish.ogg
+        probability: 0.5
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - wf-cinder-slime-steam-popup
+        probability: 0.25
+
+# The base slime's resistances, but heat and fire don't hurt. Water's harm ignores resistances.
+- type: damageModifierSet
+  id: WFCinderSlime
+  coefficients:
+    Blunt: 0.6
+    Slash: 1.2
+    Piercing: 1.2
+    Heat: 0
+    Cold: 1.5
+    Poison: 0.8
+    Cellular: 0.2
+
+# ---- Slimes ------------------------------------------------------------------------------------------------------
+
+# Admin and mapper spawners; neither is sold or bred from anything else.
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyCinder
+  name: cinder slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFCinderMutation
+
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyObsidian
+  name: obsidian slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFObsidianMutation
+
+# ---- Extracts ----------------------------------------------------------------------------------------------------
+
+# Plasma grows welding fuel and a burn salve, blood grows ore, and water bursts into flame.
+- type: entity
+  id: WFCinderSlimeExtract
+  parent: BaseSlimeExtract
+  name: cinder slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff7a2a"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: WeldingFuel
+          amount: 15
+        - !type:XenobioAdjustSolution
+          reagent: Dermaline
+          amount: 10
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SteelOre1
+          number: 3
+        - !type:XenobioSpawnEntity
+          entity: Coal1
+          number: 2
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioRelayNearby
+          compName: Flammable
+          range: 3
+          effect: !type:XenobioReaction
+            base: Ignite5
+            once: false
+  - type: Tag
+    tags:
+    - WFXenobiologyCinderExtract
+
+# Plasma grows sharp obsidian, blood grows richer ore, and water bursts into a wider fire.
+- type: entity
+  id: WFObsidianSlimeExtract
+  parent: BaseSlimeExtract
+  name: obsidian slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#2a2030"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: WFShardObsidian
+          number: 4
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: GoldOre1
+          number: 2
+        - !type:XenobioSpawnEntity
+          entity: SilverOre1
+          number: 2
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioRelayNearby
+          compName: Flammable
+          range: 5
+          effect: !type:XenobioReaction
+            base: Ignite5
+            once: false
+  - type: Tag
+    tags:
+    - WFXenobiologyObsidianExtract
+
+# A shard of black volcanic glass, sharper than window glass; weld it into a glass sheet.
+- type: entity
+  parent: ShardGlass
+  id: WFShardObsidian
+  name: obsidian shard
+  description: A wicked sliver of black volcanic glass.
+  components:
+  - type: Sprite
+    color: "#3a2c44"
+  - type: DamageUserOnTrigger
+    damage:
+      types:
+        Piercing: 6
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 6
+
+- type: Tag
+  id: WFXenobiologyCinderExtract
+
+- type: Tag
+  id: WFXenobiologyObsidianExtract
+
+- type: xenobiologyBounty
+  id: WFBountyCinderExtract
+  pointsAwarded: 15000
+  entries:
+  - name: bounty-item-wf-cinder-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyCinderExtract
+
+- type: xenobiologyBounty
+  id: WFBountyObsidianExtract
+  pointsAwarded: 40000
+  entries:
+  - name: bounty-item-wf-obsidian-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyObsidianExtract
+
+# ---- Habitat -----------------------------------------------------------------------------------------------------
+
+- type: wfWildSlimeHabitat
+  id: WFWildSlimesFervidus
+  surface: WFSurfaceFervidus
+  breed: WFCinderMutation
+  babyPrototype: WFMobSlimeTranslucentBaby
+  adultPrototype: WFMobSlimeTranslucentAdult
+  adultChance: 0.3
+  patchTemplate: WFFervidusSlimeZone
+  patchTile: WFFloorFervidusObsidianGlass
+  grottoTile: WFCavernFloorFervidusObsidianGlass
+  minPatchTiles: 24
+  surfaceSlimes: 3
+  grottoSlimes: 2
+  respawnDelay: 600
+
+# The ids name no colouring word, so the planet map reads the glass as rock like the ash crust round it.
+- type: tile
+  id: WFFloorFervidusObsidianGlass
+  parent: WFFloorFervidusAshRock
+  name: tiles-wf-fervidus-obsidian-glass
+  sprite: /Textures/_WF/WildSlimes/Fervidus/obsidian_glass.png
+  variants: 8
+  placementVariants: [1, 1, 1, 1, 1, 1, 1, 1]
+  weather: true
+  transparent: true
+
+# The vault floor: the same glass, solid, since nothing lies below the Cinder Vaults.
+- type: tile
+  id: WFCavernFloorFervidusObsidianGlass
+  parent: WFFloorFervidusObsidianGlass
+  sprite: /Textures/_WF/WildSlimes/Fervidus/obsidian_glass_cavern.png
+  transparent: false
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: biomeTemplate
+  id: WFFervidusSlimeZone
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFFervidusSlimePatch
+    threshold: 0.86
+    noise: { seed: 231, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeZoneFervidus
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeGrottoFervidus
+    threshold: 0.83
+    noise: { seed: -7688, noiseType: OpenSimplex2, frequency: 0.03 }
+
+# Glass with obsidian rubble, ember lichen and the odd orange crystal on it.
+- type: biomeTemplate
+  id: WFFervidusSlimePatch
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusObsidianGlass
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusObsidianGlass]
+    entities: [TGMCObsidian]
+    threshold: 0.9
+    noise: { seed: 233, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusObsidianGlass]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.94
+    noise: { seed: 234, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusObsidianGlass]
+    entities: [CrystalOrange]
+    threshold: 0.97
+    noise: { seed: 235, noiseType: OpenSimplex2, frequency: 1 }
+
+# The vault: glass round a magma pool that lights it red, with ember lichen and rubble.
+- type: biomeTemplate
+  id: WFCavernSlimeGrottoFervidus
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorFervidusObsidianGlass
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFervidusObsidianGlass]
+    entities: [TGMCObsidian]
+    threshold: 0.92
+    noise: { seed: 236, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFervidusObsidianGlass]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.9
+    noise: { seed: 237, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFervidusObsidianGlass]
+    entities: [FloorLavaEntity]
+    threshold: 0.6
+    noise: { seed: 238, noiseType: OpenSimplex2, frequency: 0.12 }

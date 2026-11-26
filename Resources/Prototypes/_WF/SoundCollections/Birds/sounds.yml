@@ -1,0 +1,63 @@
+# Bird calls, imported from the owner's Black Mesa sounds by Tools/_WF/LivingWorld/import_bms.py (--birds).
+# BirdTest checks every file under /Audio/_WF/Birds is used by one of these.
+
+- type: soundCollection
+  id: WFBirdTakeoff
+  files:
+  - /Audio/_Mono/Voice/Hydrakin/hydrakin-flap1.ogg
+  - /Audio/_Mono/Voice/Hydrakin/hydrakin-flap2.ogg
+
+- type: soundCollection
+  id: WFBirdSongbirdCall
+  files:
+  - /Audio/_WF/Birds/songbird/boid_chirp01.ogg
+  - /Audio/_WF/Birds/songbird/boid_chirp02.ogg
+
+- type: soundCollection
+  id: WFBirdSongbirdChatter
+  files:
+  - /Audio/_WF/Birds/songbird/xen_bird1.ogg
+
+- type: soundCollection
+  id: WFBirdSwiftCall
+  files:
+  - /Audio/_WF/Birds/swift/boid_chirp03.ogg
+  - /Audio/_WF/Birds/swift/boid_chirp04.ogg
+
+- type: soundCollection
+  id: WFBirdSwiftChatter
+  files:
+  - /Audio/_WF/Birds/swift/xen_bird2.ogg
+
+- type: soundCollection
+  id: WFBirdGrouseChatter
+  files:
+  - /Audio/_WF/Birds/grouse/xen_bird3.ogg
+
+- type: soundCollection
+  id: WFBirdHawkCall
+  files:
+  - /Audio/_WF/Birds/hawk/hawk2.ogg
+  - /Audio/_WF/Birds/hawk/hawk3.ogg
+
+- type: soundCollection
+  id: WFBirdHawkDive
+  files:
+  - /Audio/_WF/Birds/hawk/eagle2.ogg
+
+- type: soundCollection
+  id: WFBirdCarrionCall
+  files:
+  - /Audio/_WF/Birds/carrion/boid_call01.ogg
+  - /Audio/_WF/Birds/carrion/boid_call03.ogg
+
+- type: soundCollection
+  id: WFBirdFleshCall
+  files:
+  - /Audio/_WF/Birds/flesh/boid_call04.ogg
+  - /Audio/_WF/Birds/flesh/boidcall2b.ogg
+
+- type: soundCollection
+  id: WFBirdGullCall
+  files:
+  - /Audio/_WF/Birds/gull/boid_call02.ogg

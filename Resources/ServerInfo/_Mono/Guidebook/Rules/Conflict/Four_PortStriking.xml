@@ -1,13 +1,15 @@
 <Document>
 # Conflict Rule 4
 ## Outpost striking is not allowed.
-[bold]See the [textlink="Safe Zones rule" link="MonolithRuleRoleplayEightSafeZones"] for areas that are always protected from strikes.[/bold]
+<!-- WOLFGATE: fixed broken link, was MonolithRuleRoleplayEightSafeZones -->[bold]See the [textlink="Safe Zones rule" link="MonolithRuleRoleplaySevenSafeZones"] for areas that are always protected from strikes.[/bold]
 
-Faction outposts (e.g., [color=blue]Halcyon[/color]) are [color=red][bold]not allowed[/bold][/color] to be striked until [color=yellow]a High Command announcement[/color] allowing it has been given, or if [color=yellow]admin permission[/color] has been given.
+<!-- WOLFGATE: was color=blue, unreadable on the dark background -->Faction outposts (e.g., [color=cyan]Halcyon[/color]) are [color=red][bold]not allowed[/bold][/color] to be striked until [color=yellow]a High Command announcement[/color] allowing it has been given, or if [color=yellow]admin permission[/color] has been given.
+<!-- WOLFGATE(ColdWar): the announcement is the war level going HOT -->-- The announcement is the war level going [color=red][bold]HOT[/bold][/color] (see [textlink="Conflict Rule 5" link="WFRuleConflictFiveDeclaringWar"]). Strikes stop if it goes back to COLD.
 -- For clarity, a "strike" in this context refers to any (organized or unorganized) hostile action intended to damage outposts, seize control, eliminate its occupants, or damage docked/undocked ships within a range of 256 meters that were not recently ([color=yellow][bold]2 minutes[/bold][/color]) in combat.
 -- Action should be taken to avoid camping spawn areas inside the outposts if possible.
 
-Mobile bases (e.g., [color=maroon]PDV Jupiter[/color]) do [color=red][bold]not[/bold][/color] fall under these rules.
+<!-- WOLFGATE: was color=maroon, unreadable on the dark background -->Mobile bases (e.g., [color=tan]PDV Jupiter[/color]) do [color=red][bold]not[/bold][/color] fall under these rules.
+<!-- WOLFGATE(ColdWar): mobile bases are still covered by the ceasefire -->-- While the war level is COLD, [textlink="Conflict Rule 1" link="MonolithRuleConflictOneRandomDeathmatch"] still applies to them.
 
 [color=yellow]Ships are [bold]exempted[/bold] from this rule when they escape combat to their port. It is permitted to attack docked ships if they were in combat within the last two minutes, though you should [/color][color=red]minimize[/color][color=yellow] damage to the port itself.[/color]
 

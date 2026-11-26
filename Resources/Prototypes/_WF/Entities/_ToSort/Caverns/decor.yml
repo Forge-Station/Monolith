@@ -1,0 +1,33 @@
+# Light the rock gives off by itself. Neither has a sprite: all you see is the glow.
+
+- type: entity
+  id: WFCavernGlowBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: PointLight
+
+# Glow-worm colonies on the Underkarst's chamber ceilings.
+- type: entity
+  id: WFCavernGlowworms
+  parent: WFCavernGlowBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: PointLight
+    color: "#7dffb4"
+    radius: 4
+    energy: 0.7
+
+# Bioluminescent membrane in the Gut's stomachs.
+- type: entity
+  id: WFCavernGutGlow
+  parent: WFCavernGlowBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: PointLight
+    color: "#ff4a5a"
+    radius: 3
+    energy: 0.8

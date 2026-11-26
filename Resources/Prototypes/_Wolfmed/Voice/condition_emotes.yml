@@ -1,0 +1,65 @@
+# Playtest 4, SEPSIS: what a sick body does on its own. WolfmedConditionEmoteSystem plays these for choking,
+# coughing, wheezing, retching and shivering; they are ordinary vocal emotes, so the emote menu has them too.
+# No sounds here: the emote sound sets add them against these ids. No chat triggers either, so typing "coughs"
+# still plays upstream's Cough and not two emotes at once.
+
+- type: emote
+  id: WFWolfmedChoke
+  name: wolfmed-emote-name-choke
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-choke"]
+
+- type: emote
+  id: WFWolfmedCough
+  name: wolfmed-emote-name-cough
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-cough"]
+
+# The cough when the lungs are the reason. Its own id so the chat line can say so; it shares the cough's sounds.
+- type: emote
+  id: WFWolfmedCoughBlood
+  name: wolfmed-emote-name-cough-blood
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-cough-blood"]
+
+- type: emote
+  id: WFWolfmedWheeze
+  name: wolfmed-emote-name-wheeze
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-wheeze"]
+
+- type: emote
+  id: WFWolfmedRetch
+  name: wolfmed-emote-name-retch
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-retch"]
+
+- type: emote
+  id: WFWolfmedShiver
+  name: wolfmed-emote-name-shiver
+  category: Vocal
+  icon: Interface/Emotes/vocal.png
+  whitelist:
+    components:
+    - Respirator
+  chatMessages: ["wolfmed-emote-msg-shiver"]

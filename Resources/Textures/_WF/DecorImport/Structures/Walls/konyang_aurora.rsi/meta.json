@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "map_white0",
+      "directions": 4
+    },
+    {
+      "name": "map_white1",
+      "directions": 4
+    },
+    {
+      "name": "map_white2",
+      "directions": 4
+    },
+    {
+      "name": "map_white3",
+      "directions": 4
+    },
+    {
+      "name": "map_white4",
+      "directions": 4
+    },
+    {
+      "name": "map_white5",
+      "directions": 4
+    },
+    {
+      "name": "map_white6",
+      "directions": 4
+    },
+    {
+      "name": "map_white7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

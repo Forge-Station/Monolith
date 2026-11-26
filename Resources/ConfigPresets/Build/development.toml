@@ -38,3 +38,8 @@ see_own_notes = true
 
 [mono]
 company_whitelist = false
+
+# WOLFGATE(Planets) START: planet networks are on in development builds.
+[wf]
+planet_networks = true
+# WOLFGATE END

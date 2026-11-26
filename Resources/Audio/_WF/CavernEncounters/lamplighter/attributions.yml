@@ -1,0 +1,17 @@
+- files:
+  - moan1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/zombie/moan1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - moan3.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/zombie/moan3.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - claw_strike1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/zombie/claw_strike1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

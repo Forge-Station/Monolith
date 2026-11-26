@@ -13,6 +13,7 @@
                 <ui:OptionSlider Name="SliderVolumeAmbience" Title="{Loc 'ui-options-ambience-volume'}" />
                 <ui:OptionSlider Name="SliderVolumeLobby" Title="{Loc 'ui-options-lobby-volume'}" />
                 <ui:OptionSlider Name="SliderVolumeInterface" Title="{Loc 'ui-options-interface-volume'}" />
+                <ui:OptionSlider Name="SliderVolumeVoices" Title="{Loc 'ui-options-speech-voices-volume'}" /> <!-- WOLFGATE(Voice): volume for character voices -->
                 <ui:OptionSlider Name="SliderMaxAmbienceSounds" Title="{Loc 'ui-options-ambience-max-sounds'}"
                                  Margin="0 0 0 8" />
                 <!-- Corvax-Frontier-Barks-start -->
@@ -27,6 +28,7 @@
                 <ui:OptionSlider Name="SliderWindUpCombatMusic" Title="{Loc 'ui-options-combat-music-windup'}" />
                 <ui:OptionSlider Name="SliderWindDownCombatMusic" Title="{Loc 'ui-options-combat-music-winddown'}" />
                 <CheckBox Name="CombatMusicCheckBox" Text="{Loc 'ui-options-combat-music'}" />
+                <CheckBox Name="SpeechVoicesCheckBox" Text="{Loc 'ui-options-speech-voices'}" /> <!-- WOLFGATE(Voice): toggle for character voices -->
                 <CheckBox Name="LobbyMusicCheckBox" Text="{Loc 'ui-options-lobby-music'}" />
                 <CheckBox Name="RestartSoundsCheckBox" Text="{Loc 'ui-options-restart-sounds'}" />
                 <CheckBox Name="EventMusicCheckBox" Text="{Loc 'ui-options-event-music'}" />

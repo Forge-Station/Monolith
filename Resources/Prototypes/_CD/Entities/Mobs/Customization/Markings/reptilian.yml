@@ -1,0 +1,171 @@
+# Snake Tails
+# Wolfgate: ported from HardLight
+- type: marking
+  id: LizardTailSnake
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_primary_BEHIND: TailBehind
+    tail_snake_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_primary_BEHIND: tail_snake_primary_FRONT
+    tail_snake_secondary_BEHIND: tail_snake_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - split art
+    state: tail_snake_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - split art
+    state: tail_snake_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeStripe
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_primary_BEHIND: TailBehind
+    tail_snake_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_primary_BEHIND: tail_snake_primary_FRONT
+    tail_snake_secondary_BEHIND: tail_snake_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - split art
+    state: tail_snake_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - split art
+    state: tail_snake_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeUnder
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_primary_BEHIND: TailBehind
+    tail_snake_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_primary_BEHIND: tail_snake_primary_FRONT
+    tail_snake_secondary_BEHIND: tail_snake_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - split art
+    state: tail_snake_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - split art
+    state: tail_snake_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeDual
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_primary_BEHIND: TailBehind
+    tail_snake_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_primary_BEHIND: tail_snake_primary_FRONT
+    tail_snake_secondary_BEHIND: tail_snake_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - split art
+    state: tail_snake_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - split art
+    state: tail_snake_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_secondary_BEHIND
+
+# Animated Snake Tails
+
+- type: marking
+  id: LizardTailSnakeAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_wag_primary_BEHIND: TailBehind
+    tail_snake_wag_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_wag_primary_BEHIND: tail_snake_wag_primary_FRONT
+    tail_snake_wag_secondary_BEHIND: tail_snake_wag_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - split art
+    state: tail_snake_wag_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - split art
+    state: tail_snake_wag_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketail.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeStripeAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_wag_primary_BEHIND: TailBehind
+    tail_snake_wag_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_wag_primary_BEHIND: tail_snake_wag_primary_FRONT
+    tail_snake_wag_secondary_BEHIND: tail_snake_wag_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - split art
+    state: tail_snake_wag_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - split art
+    state: tail_snake_wag_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailstripe.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeUnderAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_wag_primary_BEHIND: TailBehind
+    tail_snake_wag_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_wag_primary_BEHIND: tail_snake_wag_primary_FRONT
+    tail_snake_wag_secondary_BEHIND: tail_snake_wag_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - split art
+    state: tail_snake_wag_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - split art
+    state: tail_snake_wag_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketailunder.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_secondary_BEHIND
+
+- type: marking
+  id: LizardTailSnakeDualAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_snake_wag_primary_BEHIND: TailBehind
+    tail_snake_wag_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_snake_wag_primary_BEHIND: tail_snake_wag_primary_FRONT
+    tail_snake_wag_secondary_BEHIND: tail_snake_wag_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - split art
+    state: tail_snake_wag_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - split art
+    state: tail_snake_wag_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_CD/Mobs/Customization/snaketaildual.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_snake_wag_secondary_BEHIND

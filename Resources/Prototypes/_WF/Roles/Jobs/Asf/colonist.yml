@@ -1,0 +1,28 @@
+- type: job
+  id: WFAsfColonist
+  name: wf-asf-job-colonist
+  description: wf-asf-job-colonist-description
+  playTimeTracker: JobWFAsfColonist
+  startingGear: WFAsfColonistGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfColonist
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 10
+  displayWeight: 10
+  accessGroups:
+  - GeneralAccess
+  - WFAsfCrew
+
+- type: startingGear
+  id: WFAsfColonistGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfColonistPDA
+    belt: ClothingBeltUtilityFilled
+  storage:
+    back:
+    - RadioHandheldNF

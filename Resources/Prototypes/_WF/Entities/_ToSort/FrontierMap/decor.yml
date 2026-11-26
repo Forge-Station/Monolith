@@ -1,0 +1,414 @@
+# Prototypes referenced by the Frontier map. Ported from Wolfgate.
+# Construction graphs named DecorBuild* are not in this repo, so those components are omitted.
+
+- type: entity
+  parent: Bed
+  id: AuroraBunkBed
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/bunk_beds.rsi
+    state: zbunkbed
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: Bed
+  id: AuroraBunkBedGreen
+  suffix: green
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/bunk_beds.rsi
+    state: zbunkbed3
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: ChairBase
+  id: NovaBenchSolo
+  suffix: solo
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Bench/bench_nova.rsi
+    state: bench_solo
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: Dresser
+  id: GoonDecorationBookcase
+  suffix: decoration
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/bookshelf_goonstation.rsi
+    noRot: true
+    granularLayersRendering: true
+    enableOverrideDir: true
+    overrideDir: South
+    layers:
+    - state: bookcase
+      renderingStrategy: Default
+    snapCardinals: false
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: GoonDecorationBookcase
+  id: GoonDecorationBookcase2
+  suffix: decoration
+  components:
+  - type: Sprite
+    overrideDir: North
+
+- type: entity
+  parent: ChairBase
+  id: TgChairPlastic
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/chairs.rsi
+    state: plastic_chair_tgstation
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: Dresser
+  id: PolarisTableRack
+  suffix: table
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/racks.rsi
+    state: rack_polaris
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: Dresser
+  id: VoreTableRackGlamour
+  suffix: glamour
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/racks.rsi
+    state: rack_table_glamour
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: TableBase
+  id: ShiptestTableWood
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Tables/table_wood_shiptest.rsi
+    snapCardinals: false
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Furniture/Tables/table_wood_shiptest.rsi
+    state: full
+  - type: IconSmooth
+    key: ShiptestTableWood
+    base: state_
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: TableBase
+  id: CoyoteTableWasteland
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Tables/table_wasteland.rsi
+    snapCardinals: false
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Furniture/Tables/table_wasteland.rsi
+    state: full
+  - type: IconSmooth
+    key: CoyoteTableWasteland
+    base: state_
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: ChairBase
+  id: ShiptestRedOldRight
+  suffix: red right
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Bench/sofa_old_shiptest.rsi
+    state: red_oldsofa_end_right
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: ChairBase
+  id: ShiptestSofaRedOld
+  suffix: red
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Bench/sofa_old_shiptest.rsi
+    state: red_oldsofa_middle
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: ChairBase
+  id: ShiptestRedOldCorner
+  suffix: red corner
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Bench/sofa_old_shiptest.rsi
+    state: red_oldsofa_corner
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  parent: ChairBase
+  id: ShiptestRedOldLeft
+  suffix: red left
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Furniture/Bench/sofa_old_shiptest.rsi
+    state: red_oldsofa_end_left
+    snapCardinals: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: StaticPrice
+    price: 30.0
+
+- type: entity
+  id: TableReinforcedBlack
+  parent: TableReinforced
+  name: reinforced table
+  description: A square piece of metal standing on four metal legs. Extra robust.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/reinforcedblack.rsi
+  - type: Icon
+    sprite: Structures/Furniture/Tables/reinforcedblack.rsi
+  - type: IconSmooth
+    key: metalreinforcedtable
+
+- type: entity
+  parent: TableBase
+  id: CMTableReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
+    snapCardinals: false
+  #- type: VehicleSmashable
+  - type: Damageable
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
+    state: full
+
+- type: entity
+  parent: Bed
+  id: RMCBedBunkBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_blue
+    snapCardinals: false
+  #- type: VehicleSmashable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: HealOnBuckle
+    damage: {}
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_blue
+
+- type: entity
+  parent: Bed
+  id: RMCBedBunkBrown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_brown
+    snapCardinals: false
+  #- type: VehicleSmashable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: HealOnBuckle
+    damage: {}
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bunk_brown
+
+- type: entity
+  parent: [GasPipeLayerAlt1, GasVolumePumpOn]
+  id: GasVolumePumpAlt1On
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/pump_alt1.rsi
+    layers:
+    - sprite: Structures/Piping/Atmospherics/pipe_alt1.rsi
+      state: pipeStraight
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: pumpVolume
+      map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+
+- type: entity
+  parent: BaseGreeble
+  id: GreebleAntenna3
+  name: antenna
+  description: Like antennas to hell. Usually part of a ship or station's UHF communication systems.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    offset: 1,0
+    sprite: _Mono/Structures/Decoration/Greeble/32x96.rsi
+    layers:
+    - state: antenna3
+    - state: antenna3_unshaded
+      shader: unshaded

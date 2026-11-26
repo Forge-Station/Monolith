@@ -1,0 +1,53 @@
+# Wolfgate: HardLight's OrganCrescentDummy placeholders for the cybernetic_anchor and
+# dermis slots are dropped - no Wolfgate body uses those slots.
+# Skrell body prototype, based on human
+- type: body
+  id: Skrell
+  name: "skrell"
+  root: torso
+  slots:
+    head:
+      part: HeadSkrell
+      connections:
+      - torso
+      organs:
+        brain: OrganSkrellBrain # Hardlight: Added due to organ recoloring to match server lore
+        eyes: OrganSkrellEyes # Hardlight: Added due to organ recoloring to match server lore
+    torso:
+      part: TorsoSkrell
+      organs:
+        heart: OrganSkrellHeart # Hardlight (Start): Added due to organ recoloring to match server lore
+        lungs: OrganSkrellLungs
+        stomach: OrganSkrellStomach
+        liver: OrganSkrellLiver
+        kidneys: OrganSkrellKidneys # Hardlight (End)
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+      - head
+    right arm:
+      part: RightArmSkrell
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmSkrell
+      connections:
+      - left hand
+    right hand:
+      part: RightHandSkrell
+    left hand:
+      part: LeftHandSkrell
+    right leg:
+      part: RightLegSkrell
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegSkrell
+      connections:
+      - left foot
+    right foot:
+      part: RightFootSkrell
+    left foot:
+      part: LeftFootSkrell

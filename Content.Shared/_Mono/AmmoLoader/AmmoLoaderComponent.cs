@@ -1,5 +1,6 @@
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -42,5 +43,25 @@ public sealed partial class AmmoLoaderComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int MaxCapacity = 1;
+
+    // Forge-Change-Start: feed every anchored ship gun on this grid without a multitool link.
+    /// <summary>
+    /// When anchored, the loader lists every ship gun on its grid and can load them.
+    /// </summary>
+    [DataField]
+    public bool AutoAssign = true;
+
+    /// <summary>
+    /// Top up assigned guns from storage on a timer.
+    /// </summary>
+    [DataField]
+    public bool AutoReplenish = true;
+
+    /// <summary>
+    /// Ship guns currently on this loader's grid. Server-only, refreshed by the loader.
+    /// </summary>
+    [ViewVariables]
+    public List<EntityUid> GridGuns = new();
+    // Forge-Change-End
 }
 

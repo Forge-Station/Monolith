@@ -479,6 +479,8 @@
   recognizable: true
   boilingPoint: 100.0
   meltingPoint: 0.0
+  tileReactions: # WOLFGATE(Wolfmed): GORE: a mop's water takes Wolfmed's blood off the tile, wall splats and its own floor decals
+    - !type:WolfmedCleanSplats {} # WOLFGATE(Wolfmed)
   friction: 0.4
   metabolisms:
     Drink:

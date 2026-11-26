@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22. Recoloured to bleached bone for Wolfgate.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "lbone"
+    },
+    {
+      "name": "lribs"
+    },
+    {
+      "name": "lribs1"
+    },
+    {
+      "name": "lskull_wood"
+    }
+  ]
+}

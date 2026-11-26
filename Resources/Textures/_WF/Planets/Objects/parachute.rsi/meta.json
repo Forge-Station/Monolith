@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Nova Sector at https://github.com/NovaSector/NovaSector/blob/8c128b570678a836ec267fc3325ae3a4d1b1e390/icons/obj/fulton.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "folded"
+    }
+  ]
+}

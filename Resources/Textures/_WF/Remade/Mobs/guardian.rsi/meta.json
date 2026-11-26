@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/guardian.dmi)",
+  "size": {
+    "x": 70,
+    "y": 70
+  },
+  "states": [
+    {
+      "name": "guardian_inert",
+      "directions": 4
+    },
+    {
+      "name": "tentacles",
+      "directions": 4
+    },
+    {
+      "name": "tentacle_1",
+      "directions": 4,
+      "delays": [
+        [
+          1.0,
+          0.5
+        ],
+        [
+          1.0,
+          0.5
+        ],
+        [
+          1.0,
+          0.5
+        ],
+        [
+          1.0,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "tentacle_2",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "tentacle_3",
+      "directions": 4,
+      "delays": [
+        [
+          0.8,
+          0.7
+        ],
+        [
+          0.8,
+          0.7
+        ],
+        [
+          0.8,
+          0.7
+        ],
+        [
+          0.8,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "tentacle_4",
+      "directions": 4,
+      "delays": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "guardian_growth",
+      "directions": 4,
+      "delays": [
+        [
+          0.8,
+          0.8
+        ],
+        [
+          0.8,
+          0.8
+        ],
+        [
+          0.8,
+          0.8
+        ],
+        [
+          0.8,
+          0.8
+        ]
+      ]
+    }
+  ]
+}

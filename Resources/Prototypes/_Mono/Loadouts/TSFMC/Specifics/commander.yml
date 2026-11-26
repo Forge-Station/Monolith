@@ -4,9 +4,97 @@
   minLimit: 1
   loadouts:
   - TsfmcClothingNeckIFFCyan
+  - SheriffClothingNeckMantleSheriff
   - TsfClothingNeckColonelCloak
   - TsfClothingNeckCaptainCloak
   - TsfClothingNeckCloak
+  - TsfmcClothingNeckWearableCameraTSF
+  # WOLFGATE(RMCClothing) START: RMC-14 military clothing, written by Tools/_WF/RMCClothing/port.py
+  - WFRMCLoadoutNeckScarfAlpha
+  - WFRMCLoadoutNeckScarfBlack
+  - WFRMCLoadoutNeckScarfBravo
+  - WFRMCLoadoutNeckScarfCharlie
+  - WFRMCLoadoutNeckScarfDelta
+  - WFRMCLoadoutNeckScarfEcho
+  - WFRMCLoadoutNeckScarfGray
+  - WFRMCLoadoutNeckScarfGreen
+  - WFRMCLoadoutNeckScarfTan
+  - WFRMCLoadoutNeckNeckerchiefAlpha
+  - WFRMCLoadoutNeckNeckerchiefBlack
+  - WFRMCLoadoutNeckNeckerchiefBravo
+  - WFRMCLoadoutNeckNeckerchiefCharlie
+  - WFRMCLoadoutNeckNeckerchiefDelta
+  - WFRMCLoadoutNeckNeckerchiefEcho
+  - WFRMCLoadoutNeckNeckerchiefGray
+  - WFRMCLoadoutNeckNeckerchiefGreen
+  - WFRMCLoadoutNeckNeckerchiefTan
+  - WFRMCLoadoutNeckNeckerchiefWhite
+  - WFRMCLoadoutNeckSmock
+  - WFRMCLoadoutNeckTornScarfBlack
+  - WFRMCLoadoutNeckTornScarfDesert
+  - WFRMCLoadoutNeckTornScarfGreen
+  - WFRMCLoadoutNeckTornScarfGrey
+  - WFRMCLoadoutNeckTornScarfSnow
+  - WFRMCLoadoutNeckTornScarfUrban
+  - WFRMCLoadoutPoncho
+  - WFRMCLoadoutNeckGuard
+  - WFRMCLoadoutTieBlack
+  - WFRMCLoadoutTieBlue
+  - WFRMCLoadoutTieGold
+  - WFRMCLoadoutTieGreen
+  - WFRMCLoadoutTieHorrible
+  - WFRMCLoadoutTiePurple
+  - WFRMCLoadoutTieRed
+  - WFRMCLoadoutArmbandRedArmband
+  - WFRMCLoadoutArmbandAlphaArmband
+  - WFRMCLoadoutArmbandBravoArmband
+  - WFRMCLoadoutArmbandCharlieArmband
+  - WFRMCLoadoutArmbandDeltaArmband
+  - WFRMCLoadoutArmbandEchoArmband
+  - WFRMCLoadoutArmbandFoxtrotArmband
+  - WFRMCLoadoutArmbandSquadArmband
+  - WFRMCLoadoutArmbandMedArmband
+  - WFRMCLoadoutArmbandMedGreenArmband
+  - WFRMCLoadoutArmbandEngiArmband
+  - WFRMCLoadoutArmbandMpArmband
+  - WFRMCLoadoutDropPouchDropPouch
+  - WFRMCLoadoutDropPouchDropPouchBlack
+  - WFRMCLoadoutDropPouchDropPouchRcm
+  - WFRMCLoadoutDropPouchGrenadePouch
+  - WFRMCLoadoutDropPouchMl66aPouch
+  - WFRMCLoadoutLegPouch
+  - WFRMCLoadoutArmorPouchesMag
+  - WFRMCLoadoutArmorPouchesDrum
+  - WFRMCLoadoutArmorPouchesNade
+  - WFRMCLoadoutArmorPouchesShell
+  - WFRMCLoadoutArmorPouchesPouch
+  - WFRMCLoadoutShoulderPads
+  - WFRMCLoadoutBracers
+  - WFRMCLoadoutThighGuards
+  - WFRMCLoadoutShinGuards
+  - WFRMCLoadoutGroinPlate
+  - WFRMCLoadoutArmorPaintSkull
+  - WFRMCLoadoutArmorPaintCross
+  - WFRMCLoadoutArmorPaintHeart
+  - WFRMCLoadoutArmorPaintMedic
+  - WFRMCLoadoutArmorPaintTarget
+  - WFRMCLoadoutArmorPaintSmiley
+  - WFRMCLoadoutArmorPaintMixtape
+  - WFRMCLoadoutArmorPaintInscription
+  - WFRMCLoadoutArmorPaintNeutral
+  - WFRMCLoadoutPatchTSFMC
+  - WFRMCLoadoutPatchTSFMCRecon
+  - WFRMCLoadoutPatchTSFFlag
+  - WFRMCLoadoutPatchTSFFlagSquare
+  - WFRMCLoadoutPatchTSFMCSenior
+  - WFRMCLoadoutPatchTSFMCDevils
+  - WFRMCLoadoutPatchTSFMCFalcons
+  - WFRMCLoadoutPatchTSFMCFalconsLarge
+  - WFRMCLoadoutPatchMedic
+  - WFRMCLoadoutPatchOlive
+  - WFRMCLoadoutPatchPeace
+  - WFRMCLoadoutCloakGeneral
+  # WOLFGATE END
   fallbacks:
   - TsfmcClothingNeckIFFCyan
 
@@ -19,6 +107,93 @@
   - TsfClothingNeckCaptainCloak
   - TsfClothingNeckCloak
   - TsfClothingNeckCaptainFormal
+  - TsfmcClothingNeckWearableCameraTSF
+  # WOLFGATE(RMCClothing) START: RMC-14 military clothing, written by Tools/_WF/RMCClothing/port.py
+  - WFRMCLoadoutNeckScarfAlpha
+  - WFRMCLoadoutNeckScarfBlack
+  - WFRMCLoadoutNeckScarfBravo
+  - WFRMCLoadoutNeckScarfCharlie
+  - WFRMCLoadoutNeckScarfDelta
+  - WFRMCLoadoutNeckScarfEcho
+  - WFRMCLoadoutNeckScarfGray
+  - WFRMCLoadoutNeckScarfGreen
+  - WFRMCLoadoutNeckScarfTan
+  - WFRMCLoadoutNeckNeckerchiefAlpha
+  - WFRMCLoadoutNeckNeckerchiefBlack
+  - WFRMCLoadoutNeckNeckerchiefBravo
+  - WFRMCLoadoutNeckNeckerchiefCharlie
+  - WFRMCLoadoutNeckNeckerchiefDelta
+  - WFRMCLoadoutNeckNeckerchiefEcho
+  - WFRMCLoadoutNeckNeckerchiefGray
+  - WFRMCLoadoutNeckNeckerchiefGreen
+  - WFRMCLoadoutNeckNeckerchiefTan
+  - WFRMCLoadoutNeckNeckerchiefWhite
+  - WFRMCLoadoutNeckSmock
+  - WFRMCLoadoutNeckTornScarfBlack
+  - WFRMCLoadoutNeckTornScarfDesert
+  - WFRMCLoadoutNeckTornScarfGreen
+  - WFRMCLoadoutNeckTornScarfGrey
+  - WFRMCLoadoutNeckTornScarfSnow
+  - WFRMCLoadoutNeckTornScarfUrban
+  - WFRMCLoadoutPoncho
+  - WFRMCLoadoutNeckGuard
+  - WFRMCLoadoutTieBlack
+  - WFRMCLoadoutTieBlue
+  - WFRMCLoadoutTieGold
+  - WFRMCLoadoutTieGreen
+  - WFRMCLoadoutTieHorrible
+  - WFRMCLoadoutTiePurple
+  - WFRMCLoadoutTieRed
+  - WFRMCLoadoutArmbandRedArmband
+  - WFRMCLoadoutArmbandAlphaArmband
+  - WFRMCLoadoutArmbandBravoArmband
+  - WFRMCLoadoutArmbandCharlieArmband
+  - WFRMCLoadoutArmbandDeltaArmband
+  - WFRMCLoadoutArmbandEchoArmband
+  - WFRMCLoadoutArmbandFoxtrotArmband
+  - WFRMCLoadoutArmbandSquadArmband
+  - WFRMCLoadoutArmbandMedArmband
+  - WFRMCLoadoutArmbandMedGreenArmband
+  - WFRMCLoadoutArmbandEngiArmband
+  - WFRMCLoadoutArmbandMpArmband
+  - WFRMCLoadoutDropPouchDropPouch
+  - WFRMCLoadoutDropPouchDropPouchBlack
+  - WFRMCLoadoutDropPouchDropPouchRcm
+  - WFRMCLoadoutDropPouchGrenadePouch
+  - WFRMCLoadoutDropPouchMl66aPouch
+  - WFRMCLoadoutLegPouch
+  - WFRMCLoadoutArmorPouchesMag
+  - WFRMCLoadoutArmorPouchesDrum
+  - WFRMCLoadoutArmorPouchesNade
+  - WFRMCLoadoutArmorPouchesShell
+  - WFRMCLoadoutArmorPouchesPouch
+  - WFRMCLoadoutShoulderPads
+  - WFRMCLoadoutBracers
+  - WFRMCLoadoutThighGuards
+  - WFRMCLoadoutShinGuards
+  - WFRMCLoadoutGroinPlate
+  - WFRMCLoadoutArmorPaintSkull
+  - WFRMCLoadoutArmorPaintCross
+  - WFRMCLoadoutArmorPaintHeart
+  - WFRMCLoadoutArmorPaintMedic
+  - WFRMCLoadoutArmorPaintTarget
+  - WFRMCLoadoutArmorPaintSmiley
+  - WFRMCLoadoutArmorPaintMixtape
+  - WFRMCLoadoutArmorPaintInscription
+  - WFRMCLoadoutArmorPaintNeutral
+  - WFRMCLoadoutPatchTSFMC
+  - WFRMCLoadoutPatchTSFMCRecon
+  - WFRMCLoadoutPatchTSFFlag
+  - WFRMCLoadoutPatchTSFFlagSquare
+  - WFRMCLoadoutPatchTSFMCSenior
+  - WFRMCLoadoutPatchTSFMCDevils
+  - WFRMCLoadoutPatchTSFMCFalcons
+  - WFRMCLoadoutPatchTSFMCFalconsLarge
+  - WFRMCLoadoutPatchMedic
+  - WFRMCLoadoutPatchOlive
+  - WFRMCLoadoutPatchPeace
+  - WFRMCLoadoutCloakGeneral
+  # WOLFGATE END
   fallbacks:
   - TsfmcClothingNeckIFFCyan
 
@@ -29,6 +204,92 @@
   loadouts:
   - TsfmcClothingNeckIFFCyan
   - TsfClothingNeckCloak
+  - TsfmcClothingNeckWearableCameraTSF
+  # WOLFGATE(RMCClothing) START: RMC-14 military clothing, written by Tools/_WF/RMCClothing/port.py
+  - WFRMCLoadoutNeckScarfAlpha
+  - WFRMCLoadoutNeckScarfBlack
+  - WFRMCLoadoutNeckScarfBravo
+  - WFRMCLoadoutNeckScarfCharlie
+  - WFRMCLoadoutNeckScarfDelta
+  - WFRMCLoadoutNeckScarfEcho
+  - WFRMCLoadoutNeckScarfGray
+  - WFRMCLoadoutNeckScarfGreen
+  - WFRMCLoadoutNeckScarfTan
+  - WFRMCLoadoutNeckNeckerchiefAlpha
+  - WFRMCLoadoutNeckNeckerchiefBlack
+  - WFRMCLoadoutNeckNeckerchiefBravo
+  - WFRMCLoadoutNeckNeckerchiefCharlie
+  - WFRMCLoadoutNeckNeckerchiefDelta
+  - WFRMCLoadoutNeckNeckerchiefEcho
+  - WFRMCLoadoutNeckNeckerchiefGray
+  - WFRMCLoadoutNeckNeckerchiefGreen
+  - WFRMCLoadoutNeckNeckerchiefTan
+  - WFRMCLoadoutNeckNeckerchiefWhite
+  - WFRMCLoadoutNeckSmock
+  - WFRMCLoadoutNeckTornScarfBlack
+  - WFRMCLoadoutNeckTornScarfDesert
+  - WFRMCLoadoutNeckTornScarfGreen
+  - WFRMCLoadoutNeckTornScarfGrey
+  - WFRMCLoadoutNeckTornScarfSnow
+  - WFRMCLoadoutNeckTornScarfUrban
+  - WFRMCLoadoutPoncho
+  - WFRMCLoadoutNeckGuard
+  - WFRMCLoadoutTieBlack
+  - WFRMCLoadoutTieBlue
+  - WFRMCLoadoutTieGold
+  - WFRMCLoadoutTieGreen
+  - WFRMCLoadoutTieHorrible
+  - WFRMCLoadoutTiePurple
+  - WFRMCLoadoutTieRed
+  - WFRMCLoadoutArmbandRedArmband
+  - WFRMCLoadoutArmbandAlphaArmband
+  - WFRMCLoadoutArmbandBravoArmband
+  - WFRMCLoadoutArmbandCharlieArmband
+  - WFRMCLoadoutArmbandDeltaArmband
+  - WFRMCLoadoutArmbandEchoArmband
+  - WFRMCLoadoutArmbandFoxtrotArmband
+  - WFRMCLoadoutArmbandSquadArmband
+  - WFRMCLoadoutArmbandMedArmband
+  - WFRMCLoadoutArmbandMedGreenArmband
+  - WFRMCLoadoutArmbandEngiArmband
+  - WFRMCLoadoutArmbandMpArmband
+  - WFRMCLoadoutDropPouchDropPouch
+  - WFRMCLoadoutDropPouchDropPouchBlack
+  - WFRMCLoadoutDropPouchDropPouchRcm
+  - WFRMCLoadoutDropPouchGrenadePouch
+  - WFRMCLoadoutDropPouchMl66aPouch
+  - WFRMCLoadoutLegPouch
+  - WFRMCLoadoutArmorPouchesMag
+  - WFRMCLoadoutArmorPouchesDrum
+  - WFRMCLoadoutArmorPouchesNade
+  - WFRMCLoadoutArmorPouchesShell
+  - WFRMCLoadoutArmorPouchesPouch
+  - WFRMCLoadoutShoulderPads
+  - WFRMCLoadoutBracers
+  - WFRMCLoadoutThighGuards
+  - WFRMCLoadoutShinGuards
+  - WFRMCLoadoutGroinPlate
+  - WFRMCLoadoutArmorPaintSkull
+  - WFRMCLoadoutArmorPaintCross
+  - WFRMCLoadoutArmorPaintHeart
+  - WFRMCLoadoutArmorPaintMedic
+  - WFRMCLoadoutArmorPaintTarget
+  - WFRMCLoadoutArmorPaintSmiley
+  - WFRMCLoadoutArmorPaintMixtape
+  - WFRMCLoadoutArmorPaintInscription
+  - WFRMCLoadoutArmorPaintNeutral
+  - WFRMCLoadoutPatchTSFMC
+  - WFRMCLoadoutPatchTSFMCRecon
+  - WFRMCLoadoutPatchTSFFlag
+  - WFRMCLoadoutPatchTSFFlagSquare
+  - WFRMCLoadoutPatchTSFMCSenior
+  - WFRMCLoadoutPatchTSFMCDevils
+  - WFRMCLoadoutPatchTSFMCFalcons
+  - WFRMCLoadoutPatchTSFMCFalconsLarge
+  - WFRMCLoadoutPatchMedic
+  - WFRMCLoadoutPatchOlive
+  - WFRMCLoadoutPatchPeace
+  # WOLFGATE END
   fallbacks:
   - TsfmcClothingNeckIFFCyan
 
@@ -41,19 +302,16 @@
 
 - type: loadout
   id: TsfmcCommanderHeadset
-  name: loadout-tsfmc-commander-headset
   equipment:
     ears: ClothingHeadsetAltTsfmcCommander
 
 - type: loadout
   id: TsfClothingNeckColonelCloak
-  name: loadout-tsfmc-colonel-cloak
   equipment:
     neck: ClothingNeckColonelCloak
 
 - type: loadout
   id: TsfClothingNeckCaptainCloak
-  name: loadout-tsfmc-captain-cloak
   equipment:
     neck: ClothingNeckCaptainCloak
 

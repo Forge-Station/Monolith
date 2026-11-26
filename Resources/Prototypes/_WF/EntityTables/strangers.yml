@@ -1,0 +1,38 @@
+- type: entityTable
+  id: WFStrangersHouse
+  table: !type:GroupSelector
+    children:
+    - id: WFStrangerDealer
+      weight: 3
+    - id: WFStrangerConspiracist
+      weight: 2
+    - id: WFStrangerStalker
+      weight: 1
+
+- type: entityTable
+  id: WFStrangersCamp
+  table: !type:GroupSelector
+    children:
+    - id: WFStrangerMugger
+      weight: 2
+    - id: WFStrangerPreacher
+      weight: 2
+    - id: WFStrangerBeggar
+      weight: 3
+
+- type: entityTable
+  id: WFStrangers
+  table: !type:GroupSelector
+    children:
+    - id: WFStrangerDealer
+      weight: 3
+    - id: WFStrangerMugger
+      weight: 2
+    - id: WFStrangerPreacher
+      weight: 2
+    - id: WFStrangerConspiracist
+      weight: 2
+    - id: WFStrangerBeggar
+      weight: 3
+    - id: WFStrangerStalker
+      weight: 1

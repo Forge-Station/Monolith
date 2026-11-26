@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518. Recoloured to bleached bone for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "rib",
+      "directions": 4
+    },
+    {
+      "name": "skull"
+    },
+    {
+      "name": "skull-half",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+# WOLFGATE: Wolfgate jobs have no inheritance, isCM, isXeno or hidden; the shared CMJobXenoBase fields are inlined.
+# WOLFGATE: the tracker id starts with CMJobXeno so xeno playtime counts it.
+- type: job
+  id: CMXenoSelectableXeno
+  name: cm-job-name-selectable-xenonid
+  playTimeTracker: CMJobXenoSelectable
+  icon: RMCJobIconXeno
+  supervisors: cm-job-supervisors-queen
+  joinNotifyCrew: false
+  canBeAntag: false
+  setPreference: false
+  accessGroups:
+  - CMAccessXeno
+  jobPreviewEntity: RMCPlayerXenoLarvaPreview
+
+- type: playTimeTracker
+  id: CMJobXenoSelectable
+
+- type: entity
+  id: RMCPlayerXenoLarvaPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Larva/larva.rsi
+    layers:
+    - state: alive
+      scale: 0.5, 0.5

@@ -4,6 +4,11 @@ using Content.Shared.VendingMachines;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
 using System.Linq;
+using Content.Client._Mono.Economy;
+// WOLFGATE(EngineCompat) START: Engine v291 serialization generation cannot use a namespace named Component.
+// using Content.Shared._Mono.Economy.Component; // Mono
+using Content.Shared._Mono.Economy.Components; // Mono
+// WOLFGATE END
 using Robust.Client.GameObjects;
 using Content.Shared._NF.Bank.Components; // Frontier
 using Content.Shared.Containers.ItemSlots; // Frontier
@@ -11,8 +16,10 @@ using Content.Shared.Stacks; // Frontier
 
 namespace Content.Client.VendingMachines
 {
-    public sealed class VendingMachineBoundUserInterface : BoundUserInterface
+    public sealed partial class VendingMachineBoundUserInterface : BoundUserInterface
     {
+        [Dependency] private CreditReceiverSystem _credit = default!; // Mono
+
         [ViewVariables]
         private VendingMachineMenu? _menu;
 
@@ -57,29 +64,44 @@ namespace Content.Client.VendingMachines
                 _menu.Title = Loc.GetString("vending-machine-nf-fallback-title");
             // End Frontier: no exceptions
             _menu.OnItemSelected += OnItemSelected;
-            Refresh();
+            _menu.WfVendor = Owner; // WOLFGATE(TradeGoods): the menu reads the vendor's live trade-good prices
+            Update();
         }
 
-        public void Refresh()
-                {
-                    var enabled = EntMan.TryGetComponent(Owner, out VendingMachineComponent? bendy) && !bendy.Ejecting;
-                    _requiresCash = bendy?.RequiresCash ?? false;
+        public override void Update()
+        {
+            // WOLFGATE: skip updates queued before Open(), _uiSystem is still null and the NRE crashes state handling
+            // The engine lists a BUI as open a tick before it calls Open(), so vending/cash state can land in between.
+            if (!IsOpened)
+                return;
 
-                    var system = EntMan.System<VendingMachineSystem>();
-                    _cachedInventory = system.GetAllInventory(Owner);
+            var system = EntMan.System<VendingMachineSystem>();
+            _cachedInventory = system.GetAllInventory(Owner);
 
-                    // Frontier: state, market modifier, balance status
-                    if (EntMan.TryGetComponent<BankAccountComponent>(PlayerManager.LocalEntity, out var bank))
-                        _balance = bank.Balance;
-                    else
-                        _balance = 0;
-                    int? cashSlotValue = null;
-                    if (TryUpdateCashSlotBalance())
-                        cashSlotValue = _cashSlotBalance;
-                    // End Frontier
+            // Frontier: state, market modifier, balance status
+            var uiUsers = _uiSystem.GetActors(Owner, UiKey);
+            foreach (var uiUser in uiUsers)
+            {
+                if (EntMan.TryGetComponent<BankAccountComponent>(uiUser, out var bank))
+                    _balance = bank.Balance;
+            }
+            if (EntMan.TryGetComponent<VendingMachineComponent>(Owner, out var vendingMachine) // Mono start - Separation of Cash from VendingMachineComp
+                && EntMan.TryGetComponent<CreditReceiverComponent>(Owner, out var creditReceiver))
+            {
+                _credit.TryGetCash(Owner, out _, out var cash);
+                _cashSlotBalance = cash;
+                _requiresCash = vendingMachine.RequiresCash; // Mono end - Separation of Cash from VendingMachineComp
+            }
+            else
+            {
+                _cashSlotBalance = 0;
+            }
+            // End Frontier
 
-                    _menu?.Populate(_cachedInventory, enabled, _mod, _balance, cashSlotValue, _requiresCash); // Frontier: add _mod, _balance, cashSlotValue
-                }
+            _menu?.Populate(_cachedInventory, true, _mod, _balance, _cashSlotBalance, _requiresCash);
+        }
+
+        public void Refresh() => Update();
 
         private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
         {
@@ -113,21 +135,5 @@ namespace Content.Client.VendingMachines
             _menu.OnClose -= Close;
             _menu.Dispose();
         }
-
-        // Forge-Change-Start: update cash slot balance from frontier
-        public bool TryUpdateCashSlotBalance()
-        {
-            if (EntMan.TryGetComponent<VendingMachineComponent>(Owner, out var vendingMachine))
-            {
-                _cashSlotBalance = vendingMachine.CashSlotBalance;
-                return true;
-            }
-            else
-            {
-                _cashSlotBalance = 0;
-                return false;
-            }
-        }
-        // Forge-Change-End
     }
 }

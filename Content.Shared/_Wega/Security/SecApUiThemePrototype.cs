@@ -8,7 +8,7 @@ namespace Content.Shared.SecApartment;
 /// <summary>
 /// Косметика UI планшета SecApartment. Все значения задаются в YAML.
 /// </summary>
-[Prototype("secApUiTheme")]
+[Prototype]
 public sealed partial class SecApUiThemePrototype : IPrototype
 {
     [IdDataField]

@@ -82,6 +82,11 @@ public abstract partial class SharedEmitSoundSystem : EntitySystem
         TryEmitSound(uid, component, predict: false);
     }
 
+    // WOLFGATE(Audio) START: landing-sound budget, a handful a second on each grid.
+    // A skidding hull throws every loose item aboard at once, and one source each empties the client's pool.
+    private readonly Content.Shared._WF.Audio.WFSoundBudget _wfLandSounds = new(8, TimeSpan.FromSeconds(1));
+    // WOLFGATE END
+
     private void OnEmitSoundOnLand(EntityUid uid, BaseEmitSoundComponent component, ref LandEvent args)
     {
         if (!args.PlaySound ||
@@ -95,6 +100,9 @@ public abstract partial class SharedEmitSoundSystem : EntitySystem
 
         // Handle maps being grids (we'll still emit the sound).
         if (xform.GridUid != xform.MapUid && _turf.IsSpace(tile))
+            return;
+
+        if (!_wfLandSounds.Allow(xform.GridUid.Value, Timing.CurTime)) // WOLFGATE(Audio): landing sounds are capped per second on each grid; a silent landing spends nothing.
             return;
 
         // hand throwing not predicted sadly

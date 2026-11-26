@@ -22,6 +22,14 @@ public sealed partial class CargoBountyPrototype : IPrototype
     [DataField(required: true)]
     public int Reward;
 
+    /// <summary>Stack entity paid out for the bounty.</summary>
+    [DataField]
+    public EntProtoId RewardProto = "SpaceCash";
+
+    /// <summary>Suffix shown after the reward amount.</summary>
+    [DataField]
+    public string RewardSuffix = "VSC$";
+
     /// <summary>
     /// A description for flava purposes.
     /// </summary>

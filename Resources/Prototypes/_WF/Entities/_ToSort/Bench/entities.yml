@@ -1,0 +1,131 @@
+# The Bench PDA app, installed on judges' PDAs at spawn: write tickets, read the ledger, post ordinances.
+- type: entity
+  parent: NFBasePDACartridge
+  id: WFBenchCartridge
+  name: bench cartridge
+  description: A PDA program holding the Common Writ, for writing tickets against it.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-sec
+  - type: Icon
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-sec
+  - type: UIFragment
+    ui: !type:BenchUi
+  - type: Cartridge
+    programName: wf-bench-program-name
+    icon:
+      sprite: Objects/Misc/books.rsi
+      state: icon_law
+    readonly: true
+  - type: WFBenchCartridge
+
+# The Bench terminal: the same tools as the app, for Central's court.
+- type: entity
+  id: WFBenchTerminal
+  name: bench terminal
+  description: The Bench's record of the round's tickets and posted ordinances.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: security
+      shader: unshaded
+    - state: security_key
+      shader: unshaded
+  - type: Icon
+    sprite: Structures/Machines/computers.rsi
+    state: computer
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ActivatableUI
+    key: enum.WFBenchTerminalUiKey.Key
+    requireActiveHand: false
+  - type: UserInterface
+    interfaces:
+      enum.WFBenchTerminalUiKey.Key:
+        type: WFBenchTerminalBoundUserInterface
+  - type: WFBenchTerminal
+  - type: GuideHelp
+    guides:
+    - WFCommonWrit
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#37946e"
+    lightMask: ConeSingle
+    autoRot: true
+    offset: "0, 0.4"
+    castShadows: false
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+      params:
+        volume: -1
+        variation: 0.10
+        pitch: 1.10
+
+# The ticket a judge hands over: the charges, the fine and what was taken.
+- type: entity
+  parent: Paper
+  id: WFBenchTicket
+  name: bench ticket
+  description: A stamped ticket from the Bench of Caelestinus.
+
+- type: guideEntry
+  id: WFCommonWrit
+  name: guide-entry-wf-common-writ
+  text: "/ServerInfo/_WF/Bench/Guidebook/CommonWrit.xml"
+
+# The Common Writ as a book; opens its page in the lore book. Judges spawn with one.
+- type: entity
+  id: WFBookCommonWrit
+  parent: BaseGuidebook
+  name: the Common Writ
+  description: The sector's law, bound in green by the Bench of Caelestinus.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_strong
+      color: "#1f4a3a"
+    - state: decor_wingette
+      color: "#d4c38a"
+    - state: icon_law
+      color: "#d4c38a"
+  - type: GuideHelp
+    openOnActivation: true
+    guides:
+    - WFCommonWrit
+  - type: Tag
+    tags:
+    - Book
+
+# The Bench's ARACHNE: the hacking harpoon, issued to judges' ships, drawing a fresh dart two minutes after each shot.
+- type: entity
+  id: WFBenchHarpoonGun
+  parent: WFHackHarpoonGunRaider
+  name: WRIT disabler harpoon
+  suffix: Small, Bench
+  description: The Bench's issue of the ARACHNE. Its dart cuts the target's FTL and locks it down on a 250 m cable, and your own guns hold fire until the cable is gone. A fresh dart is drawn two minutes after each shot.
+  components:
+  - type: WFBenchHarpoon

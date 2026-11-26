@@ -1,0 +1,8 @@
+- type: entity
+  parent: AirlockScienceGlass
+  id: WFAsfAirlockGlass
+  suffix: ASF, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronics ]

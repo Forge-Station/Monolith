@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hexacrete0",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete1",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete2",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete3",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete4",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete5",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete6",
+      "directions": 4
+    },
+    {
+      "name": "hexacrete7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

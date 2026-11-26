@@ -1,0 +1,61 @@
+- type: entity
+  id: ActionXenoRest
+  parent: ActionXenoBase
+  name: Rest
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
+  components:
+  - type: InstantAction
+    backgroundOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: template_active_big
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: resting
+    useDelay: 1
+    event: !type:XenoRestActionEvent
+
+- type: entity
+  id: ActionXenoWatch
+  parent: ActionXenoBase
+  name: Watch Xenonid
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: watch_xeno
+    event: !type:XenoWatchActionEvent
+
+- type: entity
+  id: ActionXenoZoom
+  parent: ActionXenoBase
+  name: Toggle Long-Range Sight
+  components:
+  - type: InstantAction
+    backgroundOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: template_active_big
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: toggle_long_range
+    useDelay: 0.2
+    event: !type:XenoZoomActionEvent
+
+- type: entity
+  id: ActionXenoResinWalker
+  parent: ActionXenoBase
+  name: Resin Walker (50) # TODO RMC14 proper plasma costs
+  description: Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
+  components:
+  - type: InstantAction
+    backgroundOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: template_active_big
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: toggle_speed
+    useDelay: 0.25
+    event: !type:XenoResinWalkerActionEvent

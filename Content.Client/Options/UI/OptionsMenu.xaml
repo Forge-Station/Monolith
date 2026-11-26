@@ -1,6 +1,7 @@
 <DefaultWindow xmlns="https://spacestation14.io"
             xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
             xmlns:dtabs="clr-namespace:Content.Client._DV.Options.UI.Tabs"
+            xmlns:wftabs="clr-namespace:Content.Client._WF.Options.UI.Tabs"
             Title="{Loc 'ui-options-title'}"
             MinSize="800 450">
     <TabContainer Name="Tabs" Access="Public">
@@ -11,5 +12,6 @@
         <tabs:AccessibilityTab Name="AccessibilityTab" />
         <tabs:AdminOptionsTab Name="AdminOptionsTab" />
         <dtabs:DeltaTab Name="ExtraTab" /> <!-- Delta-V -->
+        <wftabs:WolfgateConsentTab Name="ConsentTab" /> <!-- WOLFGATE: appended, so existing tab indices stay valid -->
     </TabContainer>
 </DefaultWindow>

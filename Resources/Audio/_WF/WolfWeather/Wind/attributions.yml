@@ -1,0 +1,69 @@
+- files: ["wind_light_helton_10.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Light Wind Whistle 10)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_light_mixkit2658.ogg"]
+  license: "Custom"
+  copyright: '"Wind blowing ambience" from Mixkit (Mixkit Sound Effects Free License: free for commercial use including games, no attribution required, no standalone redistribution). Mixkit asset 2658.'
+  source: "https://mixkit.co/free-sound-effects/"
+
+- files: ["wind_moderate_helton_8.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Light Wind Whistle 8)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_moderate_helton_4.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Light Wind Whistle 4)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_moderate_girardot_1.ogg", "wind_moderate_girardot_2.ogg"]
+  license: "Custom"
+  copyright: '"Desert Soundscape - Wind - Loop" from Sonniss GDC Game Audio Bundle 2019 - Olivier Girardot - Natural Disasters, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["wind_moderate_ivo_1.ogg", "wind_moderate_ivo_2.ogg"]
+  license: "Custom"
+  copyright: '"38 Wind in grass_Velebit mountain" from Sonniss GDC Game Audio Bundle 2019 - Ivo Vicic - Natural ambiences vol.1, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["wind_moderate_soundrangers.ogg"]
+  license: "Custom"
+  copyright: '"wind_desert_01_60_loop" from Sonniss GDC Game Audio Bundle 2018 - Soundrangers - Wind, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["wind_moderate_synth.ogg"]
+  license: "CC0-1.0"
+  copyright: 'Synthesised for Wolfgate.'
+  source: "https://github.com/VanguardControl/Wolfgate"
+
+- files: ["wind_strong_344_1.ogg", "wind_strong_344_2.ogg"]
+  license: "Custom"
+  copyright: '"WINDDsgn_EXT, Eye Of The Storm_344 Audio_Extreme Winds Vol 1" from Sonniss GDC Game Audio Bundle 2026 - 344 Audio - Extreme Winds Vol. 1, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["wind_strong_helton_2.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Heavy Wind Whistle 2)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_strong_helton_4.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Heavy Wind Whistle 4)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_strong_helton_8.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Heavy Wind Whistle 8)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_strong_helton_10.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Free Weather SFX by Helton Yan (WE Heavy Wind Whistle 10)."
+  source: "https://heltonyan.itch.io/weatherelements"
+
+- files: ["wind_strong_synth.ogg"]
+  license: "CC0-1.0"
+  copyright: 'Synthesised for Wolfgate.'
+  source: "https://github.com/VanguardControl/Wolfgate"

@@ -89,6 +89,7 @@ public sealed partial class CargoSystem
             return;
 
         ev.PushMarkup(Loc.GetString("trade-crate-destination-station", ("destination", metadata.EntityName)));
+        WfExamineCrateHub(ent.Comp.DestinationStation, ev); // WOLFGATE(PlanetCargoHubs): a planetside depot names its world
 
         if (ent.Comp.ExpressDeliveryTime == null)
             return;

@@ -1,0 +1,30 @@
+# Playtest 5, ITEMS: the two Wolfmed structures as flatpacks, so a crew without a medical lathe can buy them. They
+# wear the medical_lathe box like Frontier's other medical flatpacks (StasisBedFlatpack, CryoPodFlatpack). A flatpack
+# only needs its target to have fixtures, so the wheeled IV drip unpacks onto the tile like the janicart does.
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFMachineAutodocFlatpack
+  name: autodoc flatpack
+  description: A flatpack used for constructing an autodoc.
+  components:
+  - type: Flatpack
+    entity: WFMachineAutodoc
+  - type: Sprite
+    layers:
+    - state: medical_lathe
+  # Above what the unpacked pod appraises at: its 2500 plus the board, parts and the tools it spawns with, about
+  # 3,140. Under that, buying one and selling the pod pays.
+  - type: StaticPrice
+    price: 3200
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFWolfmedIvDripFlatpack
+  name: IV drip flatpack
+  description: A flatpack used for constructing an IV drip.
+  components:
+  - type: Flatpack
+    entity: WFWolfmedIvDrip
+  - type: Sprite
+    layers:
+    - state: medical_lathe

@@ -1,0 +1,681 @@
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3Jungle
+    - name: desert
+      look: WFRMCLookArmorM3Desert
+    - name: snow
+      look: WFRMCLookArmorM3Snow
+    - name: urban
+      look: WFRMCLookArmorM3Urban
+    - name: classic
+      look: WFRMCLookArmorM3Classic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorM3L
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3LJungle
+    - name: desert
+      look: WFRMCLookArmorM3LDesert
+    - name: snow
+      look: WFRMCLookArmorM3LSnow
+    - name: urban
+      look: WFRMCLookArmorM3LUrban
+    - name: classic
+      look: WFRMCLookArmorM3LClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3EOD
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3EODJungle
+    - name: desert
+      look: WFRMCLookArmorM3EODDesert
+    - name: snow
+      look: WFRMCLookArmorM3EODSnow
+    - name: urban
+      look: WFRMCLookArmorM3EODUrban
+    - name: classic
+      look: WFRMCLookArmorM3EODClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3T
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3TJungle
+    - name: desert
+      look: WFRMCLookArmorM3TDesert
+    - name: snow
+      look: WFRMCLookArmorM3TSnow
+    - name: urban
+      look: WFRMCLookArmorM3TUrban
+    - name: classic
+      look: WFRMCLookArmorM3TClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorB12
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorB12Jungle
+    - name: desert
+      look: WFRMCLookArmorB12Desert
+    - name: snow
+      look: WFRMCLookArmorB12Snow
+    - name: urban
+      look: WFRMCLookArmorB12Urban
+    - name: classic
+      look: WFRMCLookArmorB12Classic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3G4
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3G4Jungle
+    - name: desert
+      look: WFRMCLookArmorM3G4Desert
+    - name: snow
+      look: WFRMCLookArmorM3G4Snow
+    - name: urban
+      look: WFRMCLookArmorM3G4Urban
+    - name: classic
+      look: WFRMCLookArmorM3G4Classic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM35
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM35Jungle
+    - name: desert
+      look: WFRMCLookArmorM35Desert
+    - name: snow
+      look: WFRMCLookArmorM35Snow
+    - name: urban
+      look: WFRMCLookArmorM35Urban
+    - name: classic
+      look: WFRMCLookArmorM35Classic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorML66A
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorML66AJungle
+    - name: desert
+      look: WFRMCLookArmorML66ADesert
+    - name: snow
+      look: WFRMCLookArmorML66ASnow
+    - name: urban
+      look: WFRMCLookArmorML66AUrban
+    - name: classic
+      look: WFRMCLookArmorML66AClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorXM4
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorXM4Jungle
+    - name: desert
+      look: WFRMCLookArmorXM4Desert
+    - name: snow
+      look: WFRMCLookArmorXM4Snow
+    - name: urban
+      look: WFRMCLookArmorXM4Urban
+    - name: classic
+      look: WFRMCLookArmorXM4Classic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3CO
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3COJungle
+    - name: desert
+      look: WFRMCLookArmorM3CODesert
+    - name: snow
+      look: WFRMCLookArmorM3COSnow
+    - name: urban
+      look: WFRMCLookArmorM3COUrban
+    - name: classic
+      look: WFRMCLookArmorM3COClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorM3XL
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3XLJungle
+    - name: desert
+      look: WFRMCLookArmorM3XLDesert
+    - name: snow
+      look: WFRMCLookArmorM3XLSnow
+    - name: urban
+      look: WFRMCLookArmorM3XLUrban
+    - name: classic
+      look: WFRMCLookArmorM3XLClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorM3Scout
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3ScoutJungle
+    - name: desert
+      look: WFRMCLookArmorM3ScoutDesert
+    - name: snow
+      look: WFRMCLookArmorM3ScoutSnow
+    - name: urban
+      look: WFRMCLookArmorM3ScoutUrban
+    - name: classic
+      look: WFRMCLookArmorM3ScoutClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorM70Flak
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM70FlakJungle
+    - name: snow
+      look: WFRMCLookArmorM70FlakSnow
+    - name: urban
+      look: WFRMCLookArmorM70FlakUrban
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorM3Officer
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookArmorM3OfficerJungle
+    - name: desert
+      look: WFRMCLookArmorM3OfficerDesert
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatService
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookCoatServiceJungle
+    - name: desert
+      look: WFRMCLookCoatServiceDesert
+    - name: snow
+      look: WFRMCLookCoatServiceSnow
+    - name: classic
+      look: WFRMCLookCoatServiceClassic
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatTanker
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_tanker.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_tanker.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCCoatPilot
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_pilot.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_pilot.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatDressEnlisted
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_enlisted.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_enlisted.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatDressSenior
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_senior.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_senior.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatDressGeneral
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_general.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_dress_general.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorUM5
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_um5.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_um5.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorB80
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b80.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b80.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorUM5CU
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_um5_cu.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_um5_cu.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorUH7
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_uh7.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_uh7.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorUL6
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ul6.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ul6.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorCCC5
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorCCC5Heavy
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5_heavy.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5_heavy.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestMedium
+  id: WFRMCArmorCCC5Plated
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5_plated.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ccc5_plated.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatUL4
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_ul4.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_ul4.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatOfficer
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_officer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_officer.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatSenior
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_senior.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_senior.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatPCG
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_pcg.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_pcg.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatKommissarBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_black.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatKommissarBlackLong
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_black_long.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_black_long.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatKommissarWhite
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_white.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatKommissarWhiteLong
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_white_long.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_kommissar_white_long.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: WFRMCCoatSnowSoviet
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_soviet.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_soviet.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorMilitiaHauberk
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_hauberk.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_hauberk.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorMilitiaPartial
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_partial.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_partial.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorMilitiaBrace
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_brace.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_brace.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCArmorMilitiaVest
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_vest.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_militia_vest.rsi
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCGhillie
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/jungle.rsi
+  - type: WFGhillieSuit
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookGhillieJungle
+    - name: desert
+      look: WFRMCLookGhillieDesert
+    - name: snow
+      look: WFRMCLookGhillieSnow
+    - name: urban
+      look: WFRMCLookGhillieUrban
+    - name: classic
+      look: WFRMCLookGhillieClassic
+
+- type: entity
+  parent: ClothingOuterArmorBPVestLight
+  id: WFRMCGhillieUDEP
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie_udep.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie_udep.rsi
+  - type: WFGhillieSuit
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: WFRMCCoatSnow
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: WFRMCCoatSnowGreen
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_green.rsi
+
+- type: entity
+  parent: ClothingOuterWinterCoat
+  id: WFRMCCoatSnowNavy
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_navy.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_snow_navy.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatWindbreaker
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatWindbreakerBrown
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_brown.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_brown.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatWindbreakerGrey
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_grey.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_grey.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFRMCCoatWindbreakerExpedition
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_expedition.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_windbreaker_expedition.rsi

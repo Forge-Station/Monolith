@@ -37,7 +37,7 @@ public sealed partial class SpawnCountSystem : EntitySystem
         var bound = 1;
         var stackCount = count;
 
-        if (entProto.TryGetComponent<StackComponent>(out var stack))
+        if (entProto.TryComp<StackComponent>(out var stack, EntityManager.ComponentFactory))
         {
             stackCount = stack.Count * count;
             var stackPrototype = _proto.Index<StackPrototype>(stack.StackTypeId);

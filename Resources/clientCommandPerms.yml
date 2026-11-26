@@ -37,6 +37,8 @@
     - replay_stop
     - replay_load
     - saveconfig
+    # WOLFGATE(SectorControl): client-only command that opens the sector map window
+    - wf_sectormap
 
 - Flags: DEBUG
   Commands:

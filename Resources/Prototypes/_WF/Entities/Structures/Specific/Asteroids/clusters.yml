@@ -1,0 +1,75 @@
+# region Clusters
+# Worldgen swaps each ore tile asteroid for one of these (see replacement.yml). It fills its mass budget with rocks
+# of its kind, a few of them rare metallic ones, then removes itself. Spawned by hand it fills the default budget.
+- type: entity
+  id: WFAsteroidClusterBase
+  abstract: true
+  name: asteroid cluster
+  description: Fills itself with asteroids of its kind, then disappears.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: green
+  - type: WFAsteroidCluster
+    composition: WFAsteroidRock
+    rareComposition: WFAsteroidMetallic
+    # Inside 30 km only about a third of fields appear. Past 30 km a cluster is heavier and 15% more often metallic.
+    rareChance: 0.01
+    rareChancePerKm: 0.0035
+    # By count: medium and large rocks lead, so a cluster is a few big grids rather than many small ones.
+    sizes:
+      WFAsteroidSmall: 2
+      WFAsteroidMedium: 4
+      WFAsteroidLarge: 3
+      WFAsteroidHuge: 1
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterRock
+  suffix: Rock
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidRock
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterIce
+  suffix: Ice
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidIce
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterBasalt
+  suffix: Basalt
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidBasalt
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterSand
+  suffix: Sand
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidSand
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterChromite
+  suffix: Chromite
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidChromite
+
+- type: entity
+  parent: WFAsteroidClusterBase
+  id: WFAsteroidClusterAndesite
+  suffix: Andesite
+  components:
+  - type: WFAsteroidCluster
+    composition: WFAsteroidAndesite
+# endregion

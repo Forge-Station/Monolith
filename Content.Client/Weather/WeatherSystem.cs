@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._WF.WolfWeather; // WOLFGATE(WolfWeather)
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Audio;
@@ -40,7 +41,8 @@ public sealed partial class WeatherSystem : SharedWeatherSystem
         var entXform = Transform(ent.Value);
 
         // Maybe have the viewports manage this?
-        if (mapUid == null || entXform.MapUid != mapUid)
+        // WOLFGATE(WolfWeather): a map with WolfWeather state plays WolfWeather's loops instead, never both.
+        if (mapUid == null || entXform.MapUid != mapUid || HasComp<WolfWeatherMapComponent>(uid))
         {
             weather.Stream = _audio.Stop(weather.Stream);
             return;

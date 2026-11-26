@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: WFAsfClothingShoesBoots
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Shoes/boots.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Shoes/boots.rsi

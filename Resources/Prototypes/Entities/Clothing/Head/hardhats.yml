@@ -144,6 +144,7 @@
   - type: Clothing
     sprite: Clothing/Head/Hardhats/armored.rsi
   - type: Armor #Copied from the sec helmet, as it's hard to give these sane values without locational damage existing.
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.8

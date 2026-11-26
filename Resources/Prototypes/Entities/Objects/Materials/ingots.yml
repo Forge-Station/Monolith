@@ -9,7 +9,9 @@
   - type: Item
     sprite: Objects/Materials/ingots.rsi
     size: Normal
-  - type: BulkMaterial # Forge-change
+  # WOLFGATE(CargoLoad): ingots weigh down the ship carrying them
+  - type: WFCargoMass
+    perUnit: 0.05
   - type: StaticPrice
     price: 0
   - type: Tag

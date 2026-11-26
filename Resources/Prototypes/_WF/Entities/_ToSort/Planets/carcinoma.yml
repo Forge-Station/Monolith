@@ -1,0 +1,369 @@
+# Carcinoma's living world: region wildlife and plants that do something. Names and descriptions live in
+# Resources/Locale/en-US/_WF/Planets/carcinoma_life.ftl. Everything here is of the flesh: the pimple's ignore list
+# (Chimera, AberrantFleshExpeditionNF) is the one every plant and mob below follows.
+
+# --- Wildlife ---------------------------------------------------------------------------------------------------
+
+# Bone fields: a pale burrower that goes with the bones.
+- type: entity
+  parent: MobXeno
+  id: WFMobCarcinomaBurrower
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AberrantFleshExpeditionNF
+  - type: Sprite
+    color: "#e0cdb8"
+  - type: Bloodstream
+    bloodReagent: Blood
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: FoodMeat
+      amount: 3
+    - id: MaterialBones1
+      amount: 1
+
+# Hive pockets: a giant spider gone meat-red.
+- type: entity
+  parent: MobGiantSpider
+  id: WFMobCarcinomaSpider
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AberrantFleshExpeditionNF
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Sprite
+    color: "#c4505c"
+  - type: Bloodstream
+    bloodReagent: Blood
+
+# Scab shores: a harmless grazer, scab-coloured.
+- type: entity
+  parent: MobArgocyteSlurva
+  id: WFMobCarcinomaSlurva
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AberrantFleshExpeditionNF
+  - type: Sprite
+    color: "#c98275"
+  - type: Bloodstream
+    bloodReagent: Blood
+
+# Each region keeps the planet's usual wildlife and adds its own. Spawner positions repeat the planet-wide
+# layer's noise where they replace it, so a region adds no extra sites unless its layer asks for more.
+- type: entityTable
+  id: WFFaunaCarcinomaBone
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFFaunaCarcinoma
+      weight: 6
+    - id: WFMobCarcinomaBurrower
+      weight: 4
+
+- type: entity
+  id: WFFaunaCarcinomaBone
+  parent: MarkerBase
+  name: bone field wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaCarcinomaBone
+
+- type: entityTable
+  id: WFFaunaCarcinomaMarsh
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFFaunaCarcinoma
+      weight: 3
+    - !type:NestedSelector
+      tableId: WFCarcinomaNewbornFlesh
+      weight: 7
+
+- type: entity
+  id: WFFaunaCarcinomaMarsh
+  parent: MarkerBase
+  name: meat marsh wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaCarcinomaMarsh
+
+- type: entityTable
+  id: WFFaunaCarcinomaHive
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFFaunaCarcinoma
+      weight: 3
+    - id: WFMobCarcinomaSpider
+      weight: 7
+
+- type: entity
+  id: WFFaunaCarcinomaHive
+  parent: MarkerBase
+  name: hive pocket wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaCarcinomaHive
+
+- type: entityTable
+  id: WFFaunaCarcinomaShore
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFFaunaCarcinoma
+      weight: 3
+    - id: WFMobCarcinomaSlurva
+      weight: 7
+
+- type: entity
+  id: WFFaunaCarcinomaShore
+  parent: MarkerBase
+  name: scab shore wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaCarcinomaShore
+
+# --- Produce and items -------------------------------------------------------------------------------------------
+
+# A weak dose of vitae: five beads in quick succession make the fountain's dose.
+- type: entity
+  parent: WFWildProduceBase
+  id: WFVitaeBead
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/berries.rsi
+    color: "#ffd678"
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: WFVitae
+          Quantity: 2
+        - ReagentId: Nutriment
+          Quantity: 1
+
+# Eaten raw it heals and seeds a mild mould in the gut; cut with a knife it makes a clean poultice.
+- type: entity
+  parent: WFHealingHerbBase
+  id: WFMeatFruit
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/blood_tomato.rsi
+    state: produce
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bitter
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 14
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 4
+        - ReagentId: Kelotane
+          Quantity: 2
+        - ReagentId: Mold
+          Quantity: 4
+        - ReagentId: Nutriment
+          Quantity: 2
+
+# A splinter of bone with an edge: it cuts, barely, and does for lancing a blister.
+- type: entity
+  parent: BaseKnife
+  id: WFBoneShard
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/shiv.rsi
+    state: icon
+    color: "#e6d8c2"
+  - type: Item
+    size: Small
+    sprite: Objects/Weapons/Melee/shiv.rsi
+  - type: MeleeWeapon
+    attackRate: 1.2
+    damage:
+      types:
+        Slash: 6
+  - type: Scalpel
+    speed: 0.3
+
+# --- Plants -----------------------------------------------------------------------------------------------------
+
+# Meat marsh: lance it with a blade for a bead of vitae.
+- type: entity
+  parent: BaseFlora
+  id: WFCarcinomaVitaeBlister
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Mono/Mobs/Aliens/cortical_borer_egg.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: icon
+      color: "#f2d98a"
+      map: ["blister"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        blister:
+          True: { scale: "0.6,0.6", color: "#a88a6a" }
+          False: { scale: "1,1", color: "#f2d98a" }
+  - type: WFRegrowingHarvest
+    tool: Slicing
+    regrowTime: 1800
+    harvestTime: 3
+    harvestSound:
+      collection: WFFloraWetSquelch
+    table: !type:AllSelector
+      children:
+      - id: WFVitaeBead
+
+# Bone fields: a pile with marrow-stained shards, loose enough to pull by hand.
+- type: entity
+  parent: WFCarcinomaBoneLong
+  id: WFCarcinomaBonePile
+  components:
+  - type: Sprite
+    layers:
+    - state: lbone
+      color: "#e6c3b3"
+      map: ["pile"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        pile:
+          True: { color: "#cfc8bd" }
+          False: { color: "#e6c3b3" }
+  - type: WFRegrowingHarvest
+    regrowTime: 900
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFBoneShard
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Groves: a bush of meat-fruit.
+- type: entity
+  parent: GoonShrub
+  id: WFCarcinomaMeatFruitBush
+  components:
+  - type: Sprite
+    layers:
+    - state: shrub
+      color: "#b8505f"
+      map: ["bush"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        bush:
+          True: { color: "#7d4a52" }
+          False: { color: "#b8505f" }
+  - type: WFRegrowingHarvest
+    regrowTime: 900
+    harvestSound:
+      collection: WFFloraWetSquelch
+    table: !type:AllSelector
+      children:
+      - id: WFMeatFruit
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Tendon forest: a strand that coils round whoever walks onto it and holds them for two seconds.
+- type: entity
+  parent: WFCarcinomaTendons
+  id: WFCarcinomaTendonVine
+  components:
+  - type: Sprite
+    layers:
+    - state: kudzu_11
+      color: "#c0506a"
+      map: ["vine"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        vine:
+          Idle: { scale: "1,1", color: "#c0506a" }
+          Armed: { scale: "1.15,1.15", color: "#ff7186" }
+          Spent: { scale: "1,1", color: "#c0506a" }
+  - type: WFReactiveFlora
+    behaviour: Grab
+    range: 1.2
+    cooldown: 10
+    checkInterval: 0.5
+    holdTime: 2
+    heldSpeed: 0
+    cutFreeDamage: 12
+    damage:
+      types:
+        Blunt: 2
+    sound:
+      collection: WFFloraGrab
+    releaseSound:
+      collection: WFFloraVineSnap
+    popup: wf-flora-vine-grabs
+    ignoreFactions: [Chimera, AberrantFleshExpeditionNF]
+
+# Scab shores: a polyp that weeps a short mist of blood with a thin toxin in it.
+- type: entity
+  parent: BaseFlora
+  id: WFCarcinomaWeepingPolyp
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/flesh_decoration.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: closed
+      color: "#d98a9a"
+      map: ["polyp"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        polyp:
+          Idle: { state: closed, color: "#d98a9a" }
+          Armed: { state: open, color: "#ff8fa0" }
+          Spent: { state: closed, color: "#d98a9a" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.5
+    cooldown: 12
+    checkInterval: 0.5
+    activeTime: 1.5
+    solution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 6
+      - ReagentId: Toxin
+        Quantity: 2
+    cloudDuration: 3
+    cloudSpread: 2
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-flora-weeping-polyp-puffs
+    ignoreFactions: [Chimera, AberrantFleshExpeditionNF]

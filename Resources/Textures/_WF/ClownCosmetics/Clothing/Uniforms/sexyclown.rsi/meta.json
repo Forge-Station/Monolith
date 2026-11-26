@@ -1,0 +1,15 @@
+{
+    "license": "CC-BY-SA-3.0",
+    "copyright": "coyote-bayou",
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "sexyclown",
+            "directions": 4
+        }
+    ]
+}

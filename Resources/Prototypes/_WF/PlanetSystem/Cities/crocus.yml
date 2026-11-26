@@ -1,0 +1,100 @@
+# Monolith's Crocus (Jianghui Industrial) on Asclepiu: a random spot each round, joinable through its own station.
+- type: wfFixedCity
+  id: WFCityCrocus
+  surface: WFSurfaceAsclepiu
+  gameMap: CrocusJianghuiIndustrial
+  station: Jianghui
+  name: wf-city-crocus
+  # The map's boundary rock and walls are indestructible on Crocus; here the whole city can be broken into.
+  replace:
+    N14WallRockIndestructible: WallRock
+    WallConcreteIndestructible: WallConcrete
+    N14WallRoughScrapSlantedIndestructible: N14WallRoughScrapSlanted
+    PlastitaniumWindowIndestructible: PlastitaniumWindow
+    BlastDoorIndestructible: BlastDoor
+    N14BlastDoorExteriorIndestructible: BlastDoor
+    # Ghosts start where the round's own map puts them, not in Crocus.
+    SpawnPointObserver: null
+    # Admin markers: warp points and Crocus's region definitions.
+    WarpPoint: null
+    WarpPointAdmin: null
+    BiomeSourceFallbackCrocusUnderground: null
+    BiomeSourceFallbackJianghuiCity: null
+    BiomeSourceFallbackJianghuiIndustrial: null
+    BiomeSourceFallbackJianghuiPort: null
+    # The ground war's time-lock seals and objectives.
+    WindowTimedSeal10Minutes: null
+    PDVThiefBeacon: null
+    TSFThiefBeacon: null
+    TSFNaniteCanisterLarge: null
+    CrocusBeaconBroken: null
+    # The factions' base turrets stay, without Crocus's godmode; their vendors and overwatch consoles stay as mapped.
+    SpawnMobWeaponTurretLaserPDVCrocus: WFWeaponTurretLaserPDV
+    SpawnMobWeaponTurretLaserTSFMCCrocus: WeaponTurretLaserTSFMC
+    SpawnMobWeaponTurretPDV: WeaponTurretPDV
+  # Crocus's streets get the world's road surface.
+  replaceTiles:
+    FloorAsphalt: RMCPlanetHybrisaAsphalt
+  entrances:
+  # North out of the park, west off the main avenue; as wide as a world road with its shoulders.
+  - start: -40,71
+    direction: North
+    width: 7
+    tile: RMCPlanetHybrisaAsphalt
+  - start: -79,39
+    direction: West
+    width: 7
+    tile: RMCPlanetHybrisaAsphalt
+  # Below the street, the world's own rock fills in around the bunker.
+  terrain:
+  - N14WallRockIndestructible
+  # Every level's tiles, Crocus's own coordinates; the underground rock is left out (terrain below).
+  footprint: -105,-46,176,94
+  # Civilians in its rooms on every level, whatever has become of the city.
+  residents:
+    spawns: !type:NestedSelector
+      tableId: WFCityResidents
+    min: 24
+    max: 36
+  # What's become of the city this round. Indoor groups settle on roofed floor, upstairs too where upperLevels is set.
+  fates:
+  - name: safe
+    weight: 3
+  - name: zombies
+    spawns: !type:EntSelector
+      id: WFWreckZombieVerda
+    minGroups: 6
+    maxGroups: 10
+    minGroupSize: 2
+    maxGroupSize: 4
+    indoorShare: 0.5
+    upperLevels: true
+  - name: spiders
+    spawns: !type:EntSelector
+      id: MobGiantSpiderAngry
+    minGroups: 5
+    maxGroups: 8
+    minGroupSize: 1
+    maxGroupSize: 3
+    indoorShare: 0.4
+    upperLevels: true
+  - name: crazies
+    weight: 2
+    spawns: !type:NestedSelector
+      tableId: WFStrangersCamp
+    minGroups: 3
+    maxGroups: 5
+    minGroupSize: 2
+    maxGroupSize: 4
+    indoorShare: 0.25
+    upperLevels: true
+    gathering: [ WFStrangerCampHome, Bonfire ]
+  - name: flesh
+    spawns: !type:NestedSelector
+      tableId: WFCarcinomaAberrantFlesh
+    minGroups: 5
+    maxGroups: 8
+    minGroupSize: 2
+    maxGroupSize: 3
+    indoorShare: 0.5
+    upperLevels: true

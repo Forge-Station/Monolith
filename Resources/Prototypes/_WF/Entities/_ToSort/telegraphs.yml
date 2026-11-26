@@ -1,0 +1,12 @@
+# What gives an encounter away before it is in sight (WFCavernTelegraphSystem). Creatures carry their own
+# WFCavernTelegraph (horrors.yml, people.yml); these are the props.
+
+# A lantern burning at the edge of the Lamplighter's lair, which dies with a fizzle as a player comes near.
+- type: entity
+  parent: GoonLantern
+  id: WFCavernOmenLantern
+  suffix: Lamplighter omen
+  components:
+  - type: WFCavernOmenLight
+    sound:
+      collection: WFCavernEncounterOmenFizzle

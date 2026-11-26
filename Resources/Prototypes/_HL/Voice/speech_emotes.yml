@@ -1,0 +1,23 @@
+# Wolfgate: ported from HardLight
+- type: emote
+  id: Marr
+  name: chat-emote-name-marr
+  icon: Interface/Emotes/vocal.png # Wolfgate: was the default scream icon
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["chat-emote-msg-marr"]
+  chatTriggers:
+    - marr
+    - marr.
+    - marr!
+    - marr?
+    - marrs
+    - marrs.
+    - marrs!
+    - marrs?

@@ -1,5 +1,8 @@
-using Content.Client._Mono.Shipyard;
+// using Content.Client._Mono.Shipyard; // WOLFGATE - unused now
 using Content.Client._NF.Shipyard.UI;
+// WOLFGATE - the Wolfgate ship previewer replaces the Mono preview-map flow for this button.
+using Content.Client._WF.ShipPreview.UI;
+using Content.Shared._WF.Traders; // WOLFGATE
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared._NF.Shipyard.BUI;
 using Content.Shared._NF.Shipyard.Events;
@@ -10,7 +13,11 @@ namespace Content.Client._NF.Shipyard.BUI;
 public sealed partial class ShipyardConsoleBoundUserInterface : BoundUserInterface
 {
     private ShipyardConsoleMenu? _menu;
-    [Dependency] private ShipyardPreviewSystem _preview = default!;
+    private ShipyardRulesPopup? _rulesWindow;
+    // WOLFGATE - no longer used by PreviewShip; kept only for the Mono mind-visit preview flow this button used to trigger.
+    // [Dependency] private ShipyardPreviewSystem _preview = default!;
+    // WOLFGATE - one shared previewer window per BUI instance, reused across Preview button presses.
+    private ShipPreviewWindow? _previewWindow;
     public int Balance { get; private set; }
 
     public int? ShipSellValue { get; private set; }
@@ -42,6 +49,13 @@ public sealed partial class ShipyardConsoleBoundUserInterface : BoundUserInterfa
         _menu.OnRenameShip += RenameShip;
         _menu.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("ShipyardConsole-targetId"));
         _menu.OnPreviewShip += PreviewShip;
+
+        // WOLFGATE - an NPC dealer only sells; the card is theirs to hold and the server refuses both buttons.
+        if (EntMan.HasComponent<TraderComponent>(Owner))
+        {
+            _menu.HideSellControls();
+            _menu.TargetIdButton.Disabled = true;
+        }
     }
 
     private void Populate(List<string> availablePrototypes, List<string> unavailablePrototypes, bool freeListings, bool validId)
@@ -76,6 +90,8 @@ public sealed partial class ShipyardConsoleBoundUserInterface : BoundUserInterfa
         if (!disposing) return;
 
         _menu?.Dispose();
+        // WOLFGATE - close the shared previewer window along with the console menu, so it releases its preview map.
+        _previewWindow?.Close();
     }
 
     private void ApproveOrder(ButtonEventArgs args)
@@ -113,10 +129,17 @@ public sealed partial class ShipyardConsoleBoundUserInterface : BoundUserInterfa
         }
 
         var vessel = row.Vessel;
-        // Load the client-side grid first. Visiting the preview map with no grid looks like a black screen.
-        if (!_preview.TryPreviewGrid(vessel))
-            return;
 
-        SendMessage(new ShipyardConsolePreviewMessage());
+        // WOLFGATE - open the client-side ship previewer instead of visiting a server-side preview map.
+        // SendMessage(new ShipyardConsolePreviewMessage());
+        // _preview.TryPreviewGrid(vessel);
+        if (_previewWindow is not { IsOpen: true })
+        {
+            _previewWindow = ShipPreviewWindow.Open(vessel);
+            return;
+        }
+
+        _previewWindow.SetVessel(vessel);
+        _previewWindow.MoveToFront();
     }
 }

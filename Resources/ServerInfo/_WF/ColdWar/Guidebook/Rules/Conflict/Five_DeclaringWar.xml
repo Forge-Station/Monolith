@@ -1,0 +1,21 @@
+<Document>
+# Conflict Rule 5
+## Declaring war
+
+[italic][color=yellow]Every round starts with a TSF/PDV ceasefire. Your PDA shows the war level.[/color][/italic]
+
+- Only the [color=cyan]Colonel[/color] and the [color=tan]Grand Vizier[/color] can declare war, using their [bold]war declarators[/bold].
+-- War starts when [bold]both[/bold] have declared. The war level is then [color=red][bold]HOT[/bold][/color].
+-- If only one side declares, nothing changes. They can use the declarator again to take it back.
+
+- You need an [color=green]RP reason[/color] to declare war, and you should make demands or try to talk first.
+-- Declaring with no reason falls under the [textlink="commander rule" link="MonolithRuleRoleplayNineCommandingRoles"].
+
+- Ending a war works the same way: both sides use their declarators again and the war level goes back to [color=cyan][bold]COLD[/bold][/color].
+-- When that happens, stop fighting and stop [textlink="striking outposts" link="MonolithRuleConflictFourPortStriking"].
+
+- While COLD, factions can hire contractors for escort, transport and info, but [color=red][bold]not[/bold][/color] to attack the other faction for them.
+
+- No Colonel or Grand Vizier this round? Ahelp if the war level needs to change.
+
+</Document>

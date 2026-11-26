@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate, following the layout of the Monolith faction job icons (_Mono/Interface/Misc/job_icons.rsi).",
+  "size": {
+    "x": 8,
+    "y": 8
+  },
+  "states": [
+    {
+      "name": "Envoy"
+    },
+    {
+      "name": "Researcher"
+    },
+    {
+      "name": "Colonist"
+    },
+    {
+      "name": "Enforcer"
+    }
+  ]
+}

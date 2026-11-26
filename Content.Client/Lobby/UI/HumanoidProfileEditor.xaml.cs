@@ -2,7 +2,9 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Client.Humanoid;
-using Content.Client.Lobby.UI.Company; // Forge-Change: company whitelist
+using Content.Client._WF.Humanoid; // WOLFGATE(Humanoid)
+using Content.Shared._WF.Biotype; // WOLFGATE(Biotype)
+using Content.Shared._WF.Species; // WOLFGATE(Species)
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
@@ -10,7 +12,8 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._Forge.CCVars;
+using Content.Client._WF.UserInterface.Controls; // WOLFGATE(UserInterface)
+using Content.Shared._Mono.Persistence; // Mono
 using Content.Shared._Mono.Company;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -34,12 +37,12 @@ using Robust.Client.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Enums;
+using Robust.Shared.EntitySerialization.Systems; // Mono
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
-using Content.Shared._EE.Contractors.Prototypes;
-using Content.Shared._Forge.Company;
-using Content.Client._Mono.Company; // Forge-change: take _EE nationality
+using Content.Client._Mono.Company;
+using LoadoutWindow = Content.Client._WF.Loadouts.WolfgateLoadoutWindow; // WOLFGATE(Loadouts): the editor opens the Wolfgate loadout window in place of the stock one
 
 namespace Content.Client.Lobby.UI
 {
@@ -58,17 +61,33 @@ namespace Content.Client.Lobby.UI
         private readonly LobbyUIController _controller;
         private readonly EntityWhitelistSystem _whitelist; // Frontier
         private readonly CompanyManager _companyManager; // Mono
+        private List<CompanyPrototype> _companyCatalog = new();
+        // Mono start
+        private readonly MapLoaderSystem _mapLoader;
+        private readonly BoxContainer _savedItemsTab = new()
+        {
+            Orientation = LayoutOrientation.Vertical,
+            Margin = new Thickness(10),
+        };
+        private readonly BoxContainer _savedItemsList = new()
+        {
+            Orientation = LayoutOrientation.Vertical,
+        };
+        private readonly List<EntityUid> _savedItemEntities = [];
+        // Mono end
 
-        private FlavorText.FlavorText? _flavorText;
-        private TextEdit? _flavorTextEdit;
+        // WOLFGATE(Humanoid) START: no flavor text tab; the description has its own editor window
+        // upstream original, kept for merges:
+        // private FlavorText.FlavorText? _flavorText;
+        // private TextEdit? _flavorTextEdit;
+        private WolfgateDescriptionWindow? _descriptionWindow;
+        // WOLFGATE END
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
-        private CompanyWindow? _companyWindow; // Forge-Change: company whitelist
 
         private bool _exporting;
         private bool _imaging;
-        private string? _preferredNonFactionCompany; // Forge-Change: company whitelist
 
         /// <summary>
         /// If we're attempting to save.
@@ -96,28 +115,18 @@ namespace Content.Client.Lobby.UI
         public HumanoidCharacterProfile? Profile;
 
         private List<SpeciesPrototype> _species = new();
-        private List<NationalityPrototype> _nationalies = new(); // Forge-change: take _EE nationality
-        private List<(JobPrototype Job, RequirementsSelector Selector)> _jobPriorities = new();
+
+        private List<(string, RequirementsSelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
         private Direction _previewRotation = Direction.North;
 
-        private ColorSelectorSliders _rgbSkinColorSelector;
-
+        private WolfgateColorPicker _rgbSkinColorSelector; // WOLFGATE(UserInterface): swatches + sliders
 
         private bool _isDirty;
 
-        /// <summary>
-        /// Forge-Change
-        /// Инста снимок персонажа
-        /// Изменённое состояние тперь сравнивается с этим, а не с "IClientPreferencesManager.Preferences"
-        /// </summary>
-        private HumanoidCharacterProfile? _dirtyCompareBaseline;
-
-        private bool _profileEditorInitializing;
-
-        private const string DefaultSpeciesGuidebook = "Species";
+        private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
@@ -148,8 +157,14 @@ namespace Content.Client.Lobby.UI
             _companyManager = manager; // Mono
             _resManager = resManager;
             _requirements = requirements;
-            _requirements.Updated += OnJobRequirementsUpdated;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
+            // Mono start
+            _mapLoader = _entManager.System<MapLoaderSystem>();
+
+            var savedItemsScroll = new ScrollContainer { VerticalExpand = true };
+            savedItemsScroll.AddChild(_savedItemsList);
+            _savedItemsTab.AddChild(savedItemsScroll);
+            // Mono end
 
             _whitelist = _entManager.System<EntityWhitelistSystem>(); // Frontier
 
@@ -175,7 +190,7 @@ namespace Content.Client.Lobby.UI
 
             ResetButton.OnPressed += args =>
             {
-                SetProfile((HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, _preferencesManager.Preferences?.SelectedCharacterIndex);
+                ResetToDefault(); // WOLFGATE(InRoundCreator): was SetProfile(SelectedCharacter, SelectedCharacterIndex)
             };
 
             SaveButton.OnPressed += args =>
@@ -196,15 +211,45 @@ namespace Content.Client.Lobby.UI
 
             #region Appearance
 
-            TabContainer.SetTabTitle(0, Loc.GetString("humanoid-profile-editor-appearance-tab"));
+            TabContainer.SetTabTitle(0, Loc.GetString("wf-creator-species-tab")); // WOLFGATE(Humanoid)
+            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-appearance-tab")); // WOLFGATE(Humanoid): shifted by the species tab
 
             #region Sex
 
-            SexButton.OnItemSelected += args =>
+            // WOLFGATE(Humanoid) START: sex icon selector replaces the dropdown
+            // upstream original, kept for merges:
+            // SexButton.OnItemSelected += args =>
+            // {
+            //     SexButton.SelectId(args.Id);
+            //     SetSex((Sex) args.Id);
+            // };
+            SexSelector.OnSexSelected += SetSex;
+            // WOLFGATE END
+
+            // WOLFGATE(Humanoid) START: species name override; blank falls back to the species' own name
+            CustomSpeciesNameEdit.IsValid = value => value.Length <= HumanoidCharacterProfile.MaxCustomSpeciesNameLength;
+            CustomSpeciesNameEdit.OnTextChanged += args =>
             {
-                SexButton.SelectId(args.Id);
-                SetSex((Sex) args.Id);
+                if (Profile == null || args.Text.Length > HumanoidCharacterProfile.MaxCustomSpeciesNameLength)
+                    return;
+
+                Profile = Profile.WithCustomSpeciesName(args.Text);
+                SetDirty();
+                ReloadPreview();
             };
+            // WOLFGATE END
+
+            // WOLFGATE(Humanoid) START: description box under the preview, plus a full-size editor for longer text
+            DescriptionEdit.Placeholder = new Rope.Leaf(Loc.GetString("flavor-text-placeholder"));
+            DescriptionEdit.OnTextChanged += _ => OnFlavorTextChange(Rope.Collapse(DescriptionEdit.TextRope).Trim());
+            DescriptionEdit.OnTextChanged += _ => UpdateDescriptionStatus(Rope.Collapse(DescriptionEdit.TextRope));
+            DescriptionExpand.OnPressed += _ => OpenDescriptionWindow();
+            // WOLFGATE END
+
+            InitializeEmoteVoices(); // WOLFGATE(EmoteVoices)
+            InitializeSpeechVoice(); // WOLFGATE(Voice)
+            InitializeSizePercent(); // WOLFGATE(Humanoid): typed percentages for height and width
+            InitializeBloodColour(); // WOLFGATE(BloodColour)
 
             #endregion Sex
 
@@ -237,6 +282,8 @@ namespace Content.Client.Lobby.UI
 
             RefreshSpecies();
 
+            SpeciesPicker.OnSpeciesSelected += SetSpecies; // WOLFGATE(Humanoid)
+            SpeciesPicker.OnSpeciesInfoRequested += OpenSpeciesGuidebook; // WOLFGATE(Humanoid)
             SpeciesButton.OnItemSelected += args =>
             {
                 SpeciesButton.SelectId(args.Id);
@@ -245,20 +292,6 @@ namespace Content.Client.Lobby.UI
                 OnSkinColorOnValueChanged();
             };
 
-            // Forge-change-start: take _EE nationality
-            #region Contractors
-
-            RefreshNationalities();
-
-            NationalityButton.OnItemSelected += args =>
-            {
-                NationalityButton.SelectId(args.Id);
-                SetNationality(_nationalies[args.Id].ID);
-            };
-
-            #endregion Contractors
-            // Forge-change-end
-
             #region Skin
 
             Skin.OnValueChanged += _ =>
@@ -266,7 +299,7 @@ namespace Content.Client.Lobby.UI
                 OnSkinColorOnValueChanged();
             };
 
-            RgbSkinColorContainer.AddChild(_rgbSkinColorSelector = new ColorSelectorSliders());
+            RgbSkinColorContainer.AddChild(_rgbSkinColorSelector = new WolfgateColorPicker()); // WOLFGATE(UserInterface)
             _rgbSkinColorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
             _rgbSkinColorSelector.OnColorChanged += _ =>
             {
@@ -290,9 +323,8 @@ namespace Content.Client.Lobby.UI
             {
                 if (Profile is null)
                     return;
-                var hairColorList = new List<Robust.Shared.Maths.Color>(newColor.marking.MarkingColors); // Forge-Change Corvax-Wega-Hair-Extended
                 Profile = Profile.WithCharacterAppearance(
-                    Profile.Appearance.WithHairColor(hairColorList));// Forge-Change Corvax-Wega-Hair-Extended
+                    Profile.Appearance.WithHairColor(new List<Color> { newColor.marking.MarkingColors[0] }));
                 UpdateCMarkingsHair();
                 ReloadPreview();
             };
@@ -345,8 +377,11 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var hair = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Hair, Profile.Species).Keys
-                    .FirstOrDefault();
+                // WOLFGATE(Species) START: the first style the option allows
+                // var hair = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Hair, Profile.Species).Keys
+                //     .FirstOrDefault();
+                var hair = HairStyleChoices(MarkingCategories.Hair).Keys.FirstOrDefault();
+                // WOLFGATE END
 
                 if (string.IsNullOrEmpty(hair))
                     return;
@@ -365,8 +400,11 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
 
-                var hair = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, Profile.Species).Keys
-                    .FirstOrDefault();
+                // WOLFGATE(Species) START: the first style the option allows
+                // var hair = _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, Profile.Species).Keys
+                //     .FirstOrDefault();
+                var hair = HairStyleChoices(MarkingCategories.FacialHair).Keys.FirstOrDefault();
+                // WOLFGATE END
 
                 if (string.IsNullOrEmpty(hair))
                     return;
@@ -425,16 +463,6 @@ namespace Content.Client.Lobby.UI
 
             #endregion Width
 
-            #region Barks
-            // Corvax-Frontier-Barks-Start
-            if (_cfgManager.GetCVar(ForgeCCVars.BarksEnabled))
-            {
-                BarksContainer.Visible = true;
-                InitializeBarkVoice();
-            }
-            // Corvax-Frontier-Barks-End
-            #endregion Barks
-
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -453,7 +481,7 @@ namespace Content.Client.Lobby.UI
 
             #region Jobs
 
-            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-jobs-tab"));
+            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-jobs-tab")); // WOLFGATE(Humanoid): shifted by the species tab
 
             PreferenceUnavailableButton.AddItem(
                 Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
@@ -484,11 +512,27 @@ namespace Content.Client.Lobby.UI
 
             RefreshTraits();
 
-            // #endregion Company
+            #region Company
+
+            TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-company-tab")); // WOLFGATE(Humanoid): shifted by the species tab
+
+            RebuildCompanyCatalog();
+            _companyManager.CatalogUpdated += OnCompanyCatalogUpdated;
+
+            CompanyButton.OnItemSelected += args =>
+            {
+                CompanyButton.SelectId(args.Id);
+                if (args.Id < 0 || args.Id >= _companyCatalog.Count)
+                    return;
+
+                ShowCompanyCatalogEntry(_companyCatalog[args.Id], tryJoin: true);
+            };
+
+            #endregion Company
 
             #region Markings
 
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-markings-tab")); // Forge-Change: company whitelist
+            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-markings-tab")); // WOLFGATE(Humanoid): shifted by the species tab
 
             Markings.OnMarkingAdded += OnMarkingChange;
             Markings.OnMarkingRemoved += OnMarkingChange;
@@ -498,7 +542,13 @@ namespace Content.Client.Lobby.UI
             #endregion Markings
 
             RefreshFlavorText();
-            RefreshTTS(); // Corvax-TTS
+            InitializeCustomMarkings(); // WOLFGATE(CustomMarkings)
+            InitializeMismatchedParts(); // WOLFGATE(Species)
+            InitializeBiotype(); // WOLFGATE(Biotype)
+            InitializeChatFont(); // WOLFGATE(ChatFont)
+            InitializeTypingBubble(); // WOLFGATE(TypingBubble)
+            InitializeLegStyle(); // WOLFGATE(LegStyle)
+            InitializeAugments(); // WOLFGATE(Augments)
 
             #region Dummy
 
@@ -525,7 +575,7 @@ namespace Content.Client.Lobby.UI
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
 
             UpdateSpeciesGuidebookIcon();
-            // UpdateCompanyControls(); // Forge-Change: company whitelist
+            UpdateCompanyControls();
             IsDirty = false;
         }
 
@@ -534,30 +584,34 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshFlavorText()
         {
-            if (_cfgManager.GetCVar(CCVars.FlavorText))
-            {
-                if (_flavorText != null)
-                    return;
-
-                _flavorText = new FlavorText.FlavorText();
-                TabContainer.AddChild(_flavorText);
-                TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
-                _flavorTextEdit = _flavorText.CFlavorTextInput;
-
-                _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
-            }
-            else
-            {
-                if (_flavorText == null)
-                    return;
-
-                TabContainer.RemoveChild(_flavorText);
-                _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
-                _flavorText.Dispose();
-                _flavorTextEdit?.Dispose();
-                _flavorTextEdit = null;
-                _flavorText = null;
-            }
+            // WOLFGATE(Humanoid) START: the description lives under the preview now, so this only shows or hides that box.
+            // upstream original, kept for merges:
+            // if (_cfgManager.GetCVar(CCVars.FlavorText))
+            // {
+            //     if (_flavorText != null)
+            //         return;
+            //
+            //     _flavorText = new FlavorText.FlavorText();
+            //     TabContainer.AddChild(_flavorText);
+            //     TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
+            //     _flavorTextEdit = _flavorText.CFlavorTextInput;
+            //
+            //     _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+            // }
+            // else
+            // {
+            //     if (_flavorText == null)
+            //         return;
+            //
+            //     TabContainer.RemoveChild(_flavorText);
+            //     _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
+            //     _flavorText.Dispose();
+            //     _flavorTextEdit?.Dispose();
+            //     _flavorTextEdit = null;
+            //     _flavorText = null;
+            // }
+            DescriptionBox.Visible = _cfgManager.GetCVar(CCVars.FlavorText);
+            // WOLFGATE END
         }
 
         /// <summary>
@@ -565,12 +619,12 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshTraits()
         {
-            TraitsList.DisposeAllChildren();
+            TraitsList.RemoveAllChildren();
 
             EnforceSpeciesTraitRestrictions();
 
             var traits = _prototypeManager.EnumeratePrototypes<TraitPrototype>().OrderBy(t => Loc.GetString(t.Name)).ToList();
-            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-traits-tab"));
+            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-traits-tab")); // WOLFGATE(Humanoid): shifted by the species tab
 
             if (traits.Count < 1)
             {
@@ -598,6 +652,7 @@ namespace Content.Client.Lobby.UI
 
                 Profile = Profile.WithoutAllTraitPreferences();
                 SetDirty();
+                UpdateAugments(); // WOLFGATE(Augments): clearing a limb trait frees its slots
                 RefreshTraits();
             };
             TraitsList.AddChild(clearAllButton);
@@ -722,6 +777,14 @@ namespace Content.Client.Lobby.UI
                                 tooltipParts.Add($"You must not be: {string.Join(", ", names)}");
                         }
 
+                        // WOLFGATE(Biotype) START: the biotypes a trait can't be taken by
+                        if (BiotypeBlacklistTooltip(trait) is { } biotypeTooltip)
+                            tooltipParts.Add(biotypeTooltip);
+                        // WOLFGATE END
+
+                        if (trait.NewbieBlocked) // WOLFGATE(Newbie): say why a newbie's saved pick won't apply
+                            tooltipParts.Add(Loc.GetString("wf-newbie-trait-blocked"));
+
                         if (tooltipParts.Count > 0)
                             selector.SetTooltip(string.Join("\n", tooltipParts));
                     }
@@ -771,6 +834,7 @@ namespace Content.Client.Lobby.UI
                         }
 
                         SetDirty();
+                        UpdateAugments(); // WOLFGATE(Augments): a trait with its own limbs takes those slots
 
                         UpdateTraitIncompatibilityVisibility(allSelectors);
 
@@ -942,10 +1006,12 @@ namespace Content.Client.Lobby.UI
             foreach (var (traitId, selector) in allSelectors)
             {
                 var hide = false;
+                var greyOut = false; // WOLFGATE(Traits)
 
                 if (selected.Contains(traitId))
                 {
                     selector.Visible = true;
+                    selector.SetExcluded(false); // WOLFGATE(Traits)
                     continue;
                 }
 
@@ -964,6 +1030,13 @@ namespace Content.Client.Lobby.UI
                     }
                 }
 
+                // WOLFGATE(Biotype): a biotype the trait lists hides it like a listed species
+                if (!hide && Profile != null && WFBiotypeGates.TraitBlocked(thisProto, Profile, _prototypeManager))
+                    hide = true;
+
+                if (!hide && WfNewbieTraitBlocked(thisProto)) // WOLFGATE(Newbie): new players can't take kill-target traits
+                    hide = true;
+
                 if (!hide)
                 {
                     foreach (var sel in selected)
@@ -973,6 +1046,14 @@ namespace Content.Client.Lobby.UI
 
                         if (selProto.MutuallyExclusiveTraits.Contains(traitId) || thisProto.MutuallyExclusiveTraits.Contains(sel))
                         {
+                            // WOLFGATE(Traits) START: opted-in traits stay visible and are greyed out
+                            if (thisProto.GreyOutWhenExcluded)
+                            {
+                                greyOut = true;
+                                break;
+                            }
+                            // WOLFGATE END
+
                             hide = true;
                             break;
                         }
@@ -980,6 +1061,7 @@ namespace Content.Client.Lobby.UI
                 }
 
                 selector.Visible = !hide;
+                selector.SetExcluded(greyOut); // WOLFGATE(Traits)
             }
         }
 
@@ -991,11 +1073,7 @@ namespace Content.Client.Lobby.UI
             SpeciesButton.Clear();
             _species.Clear();
 
-            _species.AddRange(
-                _prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
-                .Where(o => o.RoundStart)
-                .OrderBy(o => Loc.GetString(o.Name)) //Forge-Change-add: Add alphabet sorting in species choice
-            );
+            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
             var speciesIds = _species.Select(o => o.ID).ToList();
 
             for (var i = 0; i < _species.Count; i++)
@@ -1009,6 +1087,15 @@ namespace Content.Client.Lobby.UI
                 }
             }
 
+            // WOLFGATE(Humanoid) START: populate the species picker and sync its selection
+            SpeciesPicker.Populate();
+            if (Profile != null)
+            {
+                SpeciesPicker.SetSelected(Profile.Species);
+                CustomSpeciesNameEdit.Text = Profile.CustomSpeciesName;
+            }
+            // WOLFGATE END
+
             // If our species isn't available then reset it to default.
             if (Profile != null)
             {
@@ -1019,49 +1106,11 @@ namespace Content.Client.Lobby.UI
             }
         }
 
-        // Forge-change start: take _EE nationality
-        public void RefreshNationalities()
-        {
-            NationalityButton.Clear();
-            _nationalies.Clear();
-
-            _nationalies.AddRange(_prototypeManager.EnumeratePrototypes<NationalityPrototype>()
-                .Where(o =>
-                    (!o.Hidden || Profile?.Nationality == o.ID) && _requirements.CheckRoleRequirements(
-                    o.Requirements?.ToHashSet(),
-                    Profile ?? HumanoidCharacterProfile.DefaultWithSpecies(),
-                    out _)));
-
-            var nationalityIds = _nationalies.Select(o => o.ID).ToList();
-
-            for (var i = 0; i < _nationalies.Count; i++)
-            {
-                NationalityButton.AddItem(Loc.GetString(_nationalies[i].NameKey), i);
-
-                if (Profile?.Nationality == _nationalies[i].ID)
-                    NationalityButton.SelectId(i);
-            }
-
-            // If our nationality isn't available, reset it to default
-            if (Profile != null && !nationalityIds.Contains(Profile.Nationality))
-                SetNationality(SharedHumanoidAppearanceSystem.DefaultNationality);
-
-            if (Profile != null)
-                UpdateNationalityDescription(Profile.Nationality);
-        }
-
-        private void UpdateNationalityDescription(string nationality)
-        {
-            var prototype = _prototypeManager.Index<NationalityPrototype>(nationality);
-            NationalityDescriptionLabel.SetMessage(Loc.GetString(prototype.DescriptionKey));
-        }
-        // Forge-change end
-
         public void RefreshAntags()
         {
             // Frontier: no antags
             /*
-            AntagList.DisposeAllChildren();
+            AntagList.RemoveAllChildren();
             var items = new[]
             {
                 ("humanoid-profile-editor-antag-preference-yes-button", 0),
@@ -1090,7 +1139,7 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                if (!_requirements.CheckRoleRequirements(requirements, SavedProfile(), out var reason)) // WOLFGATE(InRoundCreator): was SelectedCharacter
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -1125,27 +1174,31 @@ namespace Content.Client.Lobby.UI
 
         private void SetDirty()
         {
+            // If profile is null, we can't be dirty
             if (Profile == null)
             {
                 IsDirty = false;
                 return;
             }
 
-            if (_profileEditorInitializing)
-                return;
-
-            if (_dirtyCompareBaseline != null)
+            // If we have no selected character to compare against, we're dirty
+            // WOLFGATE(InRoundCreator) START: compares against the edited slot, was Preferences.SelectedCharacter
+            var selectedCharacter = SavedProfile();
+            if (selectedCharacter == null)
             {
-                IsDirty = !Profile.MemberwiseEquals(_dirtyCompareBaseline);
+                IsDirty = true;
                 return;
             }
+            // WOLFGATE END
 
-            if (_preferencesManager.Preferences?.SelectedCharacter is not HumanoidCharacterProfile selectedCharacter)
+            // Check explicitly if company changed
+            if (selectedCharacter.Company != Profile.Company)
             {
                 IsDirty = true;
                 return;
             }
 
+            // Check if entire profile matches
             IsDirty = !selectedCharacter.MemberwiseEquals(Profile);
         }
 
@@ -1155,6 +1208,7 @@ namespace Content.Client.Lobby.UI
         public void RefreshLoadouts()
         {
             _loadoutWindow?.Dispose();
+            CloseCustomJobTitle(); // WOLFGATE(Roles)
         }
 
         /// <summary>
@@ -1184,76 +1238,163 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void ResetToDefault()
         {
-            SetProfile(
-                (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
-                _preferencesManager.Preferences?.SelectedCharacterIndex);
+            // WOLFGATE(InRoundCreator): was SetProfile(SelectedCharacter, SelectedCharacterIndex)
+            SetProfile(SavedProfile(), CharacterSlot ?? _preferencesManager.Preferences?.SelectedCharacterIndex);
         }
 
-        // Forge-Change-Start
+        // WOLFGATE(InRoundCreator) START: the saved copy of the slot being edited
+        /// <summary>
+        /// In the lobby this is the selected character. In a round another slot can be open without being selected.
+        /// </summary>
+        private HumanoidCharacterProfile? SavedProfile()
+        {
+            var prefs = _preferencesManager.Preferences;
+
+            if (prefs != null && CharacterSlot is { } slot && prefs.Characters.TryGetValue(slot, out var saved))
+                return saved as HumanoidCharacterProfile;
+
+            return prefs?.SelectedCharacter as HumanoidCharacterProfile;
+        }
+        // WOLFGATE END
+
+        /// <summary>
+        /// Sets the editor to the specified profile with the specified slot.
+        /// </summary>
         public void SetProfile(HumanoidCharacterProfile? profile, int? slot)
         {
-            _profileEditorInitializing = true;
-            _dirtyCompareBaseline = null;
+            Profile = profile?.Clone();
+            CharacterSlot = slot;
             IsDirty = false;
-            try
+            JobOverride = null;
+
+            UpdateNameEdit();
+            UpdateFlavorTextEdit();
+            UpdateCustomMarkings(); // WOLFGATE(CustomMarkings)
+            UpdateMismatchedParts(); // WOLFGATE(Species)
+            UpdateBiotype(); // WOLFGATE(Biotype)
+            UpdateLegStyle(); // WOLFGATE(LegStyle)
+            UpdateAugments(); // WOLFGATE(Augments)
+            UpdateChatFont(); // WOLFGATE(ChatFont)
+            UpdateTypingBubble(); // WOLFGATE(TypingBubble)
+            UpdateSexControls();
+            UpdateGenderControls();
+            UpdateSkinColor();
+            UpdateSpawnPriorityControls();
+            UpdateHeightControls();
+            UpdateWidthControls();
+            UpdateAgeEdit();
+            UpdateEyePickers();
+            UpdateEmoteVoiceControls(); // WOLFGATE(EmoteVoices)
+            UpdateSpeechVoiceControls(); // WOLFGATE(Voice)
+            UpdateBloodColour(); // WOLFGATE(BloodColour)
+            UpdateSaveButton();
+            UpdateMarkings();
+            UpdateHairPickers();
+            UpdateCMarkingsHair();
+            UpdateCMarkingsFacialHair();
+            UpdateCompanyControls();
+
+            RefreshAntags();
+            RefreshJobs();
+            RefreshLoadouts();
+            RefreshSpecies();
+            RefreshTraits();
+            RefreshFlavorText();
+            RefreshSavedItems(); // Mono
+            ReloadPreview();
+
+            if (Profile != null)
             {
-                Profile = profile?.Clone();
-                // Forge-Change-start: company whitelist
-                if (Profile != null)
-                {
-                    var forcedCompany = FactionCompanyResolver.GetForcedCompanyFromProfile(Profile, _prototypeManager);
-                    if (forcedCompany == null)
-                        _preferredNonFactionCompany = FactionCompanyResolver.IsFactionCompany(Profile.Company) ? "None" : Profile.Company;
-                    else if (Profile.Company != forcedCompany)
-                        _preferredNonFactionCompany = FactionCompanyResolver.IsFactionCompany(Profile.Company) ? "None" : Profile.Company;
-                }
-
-                TryApplyForcedFactionCompany(markDirty: false);
-                // Forge-Change-end: company whitelist
-                CharacterSlot = slot;
-                JobOverride = null;
-
-                UpdateNameEdit();
-                UpdateFlavorTextEdit();
-                UpdateSexControls();
-                UpdateGenderControls();
-                UpdateSkinColor();
-                UpdateSpawnPriorityControls();
-                UpdateHeightControls();
-                UpdateWidthControls();
-                UpdateBarkVoicesControls(); // Corvax-Frontier-Barks
-                UpdateAgeEdit();
-                UpdateEyePickers();
-                UpdateMarkings();
-                UpdateHairPickers();
-                UpdateCMarkingsHair();
-                UpdateCMarkingsFacialHair();
-                // UpdateCompanyControls(); // Forge-Change: company whitelist
-
-                RefreshAntags();
-                RefreshJobs();
-                RefreshLoadouts();
-                RefreshSpecies();
-                RefreshNationalities(); // Forge-change: _EE nationality
-                RefreshTraits();
-                RefreshFlavorText();
-                RefreshTTS(); // Corvax-TTS
-                UpdateTTSControls(); // Corvax-TTS
-                ReloadPreview();
-
-                if (Profile != null)
-                {
-                    PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
-                }
-            }
-            finally
-            {
-                _profileEditorInitializing = false;
-                _dirtyCompareBaseline = Profile?.Clone();
-                SetDirty();
+                PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
             }
         }
-        // Forge-Change-End
+
+        // Mono start
+        private void RefreshSavedItems()
+        {
+            foreach (var entity in _savedItemEntities)
+                _entManager.DeleteEntity(entity);
+
+            _savedItemEntities.Clear();
+            _savedItemsList.RemoveAllChildren();
+
+            var previews = new List<(PersistentProfileItem Item, EntityUid Entity)>();
+            foreach (var item in Profile?.Items ?? [])
+            {
+                using var reader = new StringReader(item.Data);
+                if (!_mapLoader.TryLoadEntity(reader, "persistent profile item", out var entity))
+                    continue;
+
+                previews.Add((item, entity.Value.Owner));
+                _savedItemEntities.Add(entity.Value.Owner);
+            }
+
+            if (previews.Count == 0)
+            {
+                if (_savedItemsTab.Parent == TabContainer)
+                    TabContainer.RemoveChild(_savedItemsTab);
+
+                return;
+            }
+
+            if (_savedItemsTab.Parent == null)
+                TabContainer.AddChild(_savedItemsTab);
+
+            TabContainer.SetTabTitle(
+                _savedItemsTab,
+                Loc.GetString("humanoid-profile-editor-saved-items-tab"));
+
+            _savedItemsList.AddChild(new Label
+            {
+                Text = Loc.GetString("humanoid-profile-editor-saved-items-header"),
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
+            foreach (var (item, entity) in previews)
+            {
+                var row = new BoxContainer
+                {
+                    Orientation = LayoutOrientation.Horizontal,
+                    Margin = new Thickness(0, 0, 0, 5),
+                };
+
+                var sprite = new SpriteView
+                {
+                    MinSize = new Vector2(64, 64),
+                    Scale = new Vector2(3, 3),
+                };
+                sprite.SetEntity(entity);
+                row.AddChild(sprite);
+                row.AddChild(new Label
+                {
+                    Text = _entManager.GetComponent<MetaDataComponent>(entity).EntityName,
+                    VerticalAlignment = VAlignment.Center,
+                    HorizontalExpand = true,
+                    Margin = new Thickness(10, 0),
+                });
+
+                var notes = new List<string>();
+                if (item.Sticky)
+                    notes.Add(Loc.GetString("humanoid-profile-editor-saved-item-sticky"));
+                else if (_entManager.HasComponent<PersistAtRoundEndComponent>(entity))
+                    notes.Add(Loc.GetString("humanoid-profile-editor-saved-item-round-end"));
+
+                if (notes.Count > 0)
+                {
+                    row.AddChild(new Label
+                    {
+                        Text = "(!)",
+                        FontColorOverride = Color.Yellow,
+                        MouseFilter = MouseFilterMode.Stop,
+                        ToolTip = string.Join("\n", notes),
+                        VerticalAlignment = VAlignment.Center,
+                    });
+                }
+
+                _savedItemsList.AddChild(row);
+            }
+        }
+        // Mono end
 
 
         /// <summary>
@@ -1272,12 +1413,22 @@ namespace Content.Client.Lobby.UI
 
         private void OnSpeciesInfoButtonPressed(BaseButton.ButtonEventArgs args)
         {
+            // WOLFGATE(Humanoid) START: body split out so the species tab's per-card info buttons can reach it
+            OpenSpeciesGuidebook(Profile?.Species ?? SharedHumanoidAppearanceSystem.DefaultSpecies);
+        }
+
+        /// <summary>Opens the guidebook page for a species.</summary>
+        private void OpenSpeciesGuidebook(string species)
+        {
+            // WOLFGATE END
             // TODO GUIDEBOOK
             // make the species guide book a field on the species prototype.
             // I.e., do what jobs/antags do.
 
             var guidebookController = UserInterfaceManager.GetUIController<GuidebookUIController>();
-            var species = Profile?.Species ?? SharedHumanoidAppearanceSystem.DefaultSpecies;
+            // WOLFGATE(Humanoid) START: species is now a parameter, computed by the caller instead
+            // var species = Profile?.Species ?? SharedHumanoidAppearanceSystem.DefaultSpecies;
+            // WOLFGATE END
             var page = DefaultSpeciesGuidebook;
             if (_prototypeManager.HasIndex<GuideEntryPrototype>(species))
                 page = species;
@@ -1296,7 +1447,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshJobs()
         {
-            JobList.DisposeAllChildren();
+            JobList.RemoveAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
             var firstCategory = true;
@@ -1365,10 +1516,8 @@ namespace Content.Client.Lobby.UI
                     JobList.AddChild(category);
                 }
 
-                var jobs = department.Roles
-                    .Select(jobId => _prototypeManager.TryIndex(jobId, out JobPrototype? job) ? job : null)
-                    .Where(job => job is { SetPreference: true })
-                    .Cast<JobPrototype>()
+                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
+                    .Where(job => job.SetPreference)
                     .ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);
@@ -1395,7 +1544,7 @@ namespace Content.Client.Lobby.UI
                     icon.Texture = jobIcon.Icon.Frame0();
                     selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
 
-                    if (!_requirements.IsAllowed(job, Profile, out var reason))
+                    if (!_requirements.IsAllowed(job, SavedProfile(), out var reason)) // WOLFGATE(InRoundCreator): was SelectedCharacter
                     {
                         selector.LockRequirements(reason);
                     }
@@ -1407,71 +1556,24 @@ namespace Content.Client.Lobby.UI
                     selector.OnSelected += selectedPrio =>
                     {
                         var selectedJobPrio = (JobPriority) selectedPrio;
-
-                        if (selectedJobPrio != JobPriority.Never &&
-                            !_requirements.IsAllowed(job, Profile, out var blockReason))
-                        {
-                            selector.Select((int) JobPriority.Never);
-                            selector.LockRequirements(blockReason);
-                            return;
-                        }
-
                         Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
-                        // Forge-Change-start: company whitelist
-                        var selectedFactionCompany = GetForcedFactionCompany(job.ID);
 
-                        if (selectedJobPrio != JobPriority.Never &&
-                            FactionCompanyResolver.JobForcesCompany(job) &&
-                            Profile != null &&
-                            Profile.Company != job.AssignedCompany.ToString())
-                        {
-                            Profile = Profile.WithCompany(job.AssignedCompany.ToString());
-                        }
-                        // Forge-Change-end: company whitelist
-
-                        foreach (var (otherJob, other) in _jobPriorities)
+                        foreach (var (jobId, other) in _jobPriorities)
                         {
                             // Sync other selectors with the same job in case of multiple department jobs
-                            if (otherJob.ID == job.ID)
+                            if (jobId == job.ID)
                             {
                                 other.Select(selectedPrio);
                                 continue;
                             }
 
-                            // Forge-Change-start: company whitelist
-
-                            // Faction rough-check:
-                            // If a faction role is selected, every role outside that faction becomes Never.
-                            // If a non-faction role is selected, all faction roles become Never.
-                            if (selectedJobPrio != JobPriority.Never && Profile != null)
-                            {
-                                var otherPrio = (JobPriority)other.Selected;
-                                if (otherPrio != JobPriority.Never)
-                                {
-                                    var otherFactionCompany = GetForcedFactionCompany(otherJob.ID);
-                                    var incompatible = selectedFactionCompany != null
-                                        ? otherFactionCompany != selectedFactionCompany
-                                        : otherFactionCompany != null;
-
-                                    if (incompatible)
-                                    {
-                                        other.Select((int)JobPriority.Never);
-                                        Profile = Profile.WithJobPriority(otherJob.ID, JobPriority.Never);
-                                        continue;
-                                    }
-                                }
-                            }
-
-                            if (selectedJobPrio != JobPriority.High || (JobPriority)other.Selected != JobPriority.High)
-                            // Forge-Change-end: company whitelist
+                            if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
                                 continue;
 
                             // Lower any other high priorities to medium.
                             other.Select((int)JobPriority.Medium);
-                            Profile = Profile?.WithJobPriority(otherJob.ID, JobPriority.Medium);
+                            Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
                         }
-
-                        TryApplyForcedFactionCompany(markDirty: false); // Forge-Change: company whitelist
 
                         // TODO: Only reload on high change (either to or from).
                         ReloadPreview();
@@ -1487,18 +1589,6 @@ namespace Content.Client.Lobby.UI
                         VerticalAlignment = VAlignment.Center,
                         Margin = new Thickness(3f, 3f, 0f, 0f),
                     };
-
-                    // Forge-Change-start: company whitelist
-                    var companyWindowBtn = new Button()
-                    {
-                        Text = Loc.GetString("humanoid-profile-editor-company-tab"),
-                        HorizontalAlignment = HAlignment.Right,
-                        VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(3f, 3f, 0f, 0f),
-                    };
-                    companyWindowBtn.OnPressed += _ => OpenCompanyWindow();
-                    companyWindowBtn.Visible = !FactionCompanyResolver.JobForcesCompany(job);
-                    // Forge-Change-end: company whitelist
 
                     var collection = IoCManager.Instance!;
                     var protoManager = collection.Resolve<IPrototypeManager>();
@@ -1529,27 +1619,22 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
-                    _jobPriorities.Add((job, selector));
+                    _jobPriorities.Add((job.ID, selector));
                     jobContainer.AddChild(selector);
                     jobContainer.AddChild(loadoutWindowBtn);
-                    jobContainer.AddChild(companyWindowBtn); // Forge-Change: company whitelist
+                    AddCustomJobTitleButton(job, jobContainer); // WOLFGATE(Roles)
                     category.AddChild(jobContainer);
                 }
             }
 
             UpdateJobPriorities();
-            RefreshJobRequirementLocks();
-        }
-
-        private void OnJobRequirementsUpdated()
-        {
-            RefreshJobRequirementLocks();
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
         {
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
+            CloseCustomJobTitle(); // WOLFGATE(Roles): it edits the same role loadout
             var collection = IoCManager.Instance;
 
             if (collection == null || _playerManager.LocalSession == null || Profile == null)
@@ -1590,6 +1675,16 @@ namespace Content.Client.Lobby.UI
                 ReloadPreview();
             };
 
+            // WOLFGATE(Gags) START: colours picked for a recolourable item
+            _loadoutWindow.OnLoadoutColorsChanged += (loadoutGroup, loadoutProto, colors) =>
+            {
+                roleLoadout.SetWFGagsColors(loadoutGroup, loadoutProto, colors);
+                _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
+                Profile = Profile?.WithLoadout(roleLoadout);
+                ReloadPreview();
+            };
+            // WOLFGATE END
+
             JobOverride = jobProto;
             ReloadPreview();
 
@@ -1605,46 +1700,29 @@ namespace Content.Client.Lobby.UI
             UpdateJobPriorities();
         }
 
-        // Forge-Change-start: company whitelist
-        private void OpenCompanyWindow()
+        // WOLFGATE(Humanoid) START: full-size description editor
+        /// <summary>Opens the big description editor, kept in step with the small box.</summary>
+        private void OpenDescriptionWindow()
         {
-            _companyWindow?.Dispose();
-            _companyWindow = null;
-
-            if (Profile is null)
-                return;
-
-            var username = _playerManager.LocalPlayer?.Session?.Name;
-            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
-                .OrderBy(c => c.Name)
-                .ToList();
-            var selectableCompanies = companies
-                .Where(c => !c.Whitelisted || _requirements.IsCompanyWhitelisted(c.ID))
-                .Select(c => c.ID)
-                .ToHashSet();
-
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
-            if (noneIndex != -1)
+            if (_descriptionWindow is { Disposed: false })
             {
-                var none = companies[noneIndex];
-                companies.RemoveAt(noneIndex);
-                companies.Insert(0, none);
+                _descriptionWindow.MoveToFront();
+                return;
             }
 
-            _companyWindow = new CompanyWindow
+            _descriptionWindow = new WolfgateDescriptionWindow(
+                Rope.Collapse(DescriptionEdit.TextRope),
+                Loc.GetString("flavor-text-placeholder"));
+
+            _descriptionWindow.OnTextChanged += text =>
             {
-                Title = Loc.GetString("humanoid-profile-editor-company-tab"),
+                DescriptionEdit.TextRope = new Rope.Leaf(text);
+                OnFlavorTextChange(text.Trim());
             };
-            _companyWindow.Populate(companies, selectableCompanies, Profile.Company);
-            _companyWindow.OnCompanySelected += companyId =>
-            {
-                Profile = Profile?.WithCompany(companyId);
-                _preferredNonFactionCompany = companyId;
-                SetDirty();
-            };
-            _companyWindow.OpenCenteredLeft();
+            _descriptionWindow.OnClose += () => _descriptionWindow = null;
+            _descriptionWindow.OpenCentered();
         }
-        // Forge-Change-end: company whitelist
+        // WOLFGATE END
 
         private void OnFlavorTextChange(string content)
         {
@@ -1654,6 +1732,42 @@ namespace Content.Client.Lobby.UI
             Profile = Profile.WithFlavorText(content);
             SetDirty();
         }
+
+        // WOLFGATE(Humanoid) START: live description counter and warnings
+        /// <summary>
+        /// Live character count, plus a warning when the text holds square brackets (stripped as formatting
+        /// tags when saved) or runs past the limit (cut when saved).
+        /// </summary>
+        private void UpdateDescriptionStatus(string content)
+        {
+            var max = HumanoidCharacterProfile.MaxDescLength;
+            DescriptionCounter.Text = Loc.GetString("wf-creator-description-counter",
+                ("count", content.Length), ("max", max));
+            SetDangerClass(DescriptionCounter, content.Length > max);
+
+            var brackets = content.Contains('[') || content.Contains(']');
+            var tooLong = content.Length > max;
+            DescriptionWarning.Visible = brackets || tooLong;
+            if (!DescriptionWarning.Visible)
+                return;
+
+            DescriptionWarning.Text = Loc.GetString(tooLong
+                ? "wf-creator-description-too-long"
+                : "wf-creator-description-brackets");
+            DescriptionWarning.ToolTip = Loc.GetString(tooLong
+                ? "wf-creator-description-too-long-tooltip"
+                : "wf-creator-description-brackets-tooltip", ("max", max));
+        }
+
+        /// <summary>Toggles the Danger style class without disturbing the control's other classes.</summary>
+        private static void SetDangerClass(Control control, bool danger)
+        {
+            if (danger)
+                control.StyleClasses.Add("Danger");
+            else
+                control.StyleClasses.Remove("Danger");
+        }
+        // WOLFGATE END
 
         private void OnMarkingChange(MarkingSet markings)
         {
@@ -1668,7 +1782,7 @@ namespace Content.Client.Lobby.UI
         {
             if (Profile is null) return;
 
-            var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration;
+            var skin = MismatchedPartsRules.SkinColoration(_prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration, Profile.MismatchedParts); // WOLFGATE(Species): any colour with Mismatched parts
 
             switch (skin)
             {
@@ -1701,23 +1815,24 @@ namespace Content.Client.Lobby.UI
                         Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithSkinColor(color));
                         break;
                     }
-                // Forge-Change-Start wega ariral
-                case HumanoidSkinColor.AriralPale:
-                {
-                    if (!Skin.Visible)
-                    {
-                        Skin.Visible = true;
-                        RgbSkinColorContainer.Visible = false;
-                    }
-
-                    var color = SkinColor.AriralColor((int)Skin.Value);
-
-                    Markings.CurrentSkinColor = color;
-                    Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithSkinColor(color));
-                    break;
-                }
-                // Forge-Change-End wega ariral
                 // Goobstation Section End - Tajaran
+
+                // WOLFGATE(Species) START: ported from HardLight, unrestricted skin colour
+                case HumanoidSkinColor.AnyColour:
+                    {
+                        if (!RgbSkinColorContainer.Visible)
+                        {
+                            Skin.Visible = false;
+                            RgbSkinColorContainer.Visible = true;
+                        }
+
+                        var anyColor = _rgbSkinColorSelector.Color;
+
+                        Markings.CurrentSkinColor = anyColor;
+                        Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithSkinColor(anyColor));
+                        break;
+                    }
+                // WOLFGATE END
                 case HumanoidSkinColor.Hues:
                 {
                     if (!RgbSkinColorContainer.Visible)
@@ -1769,12 +1884,18 @@ namespace Content.Client.Lobby.UI
             if (!disposing)
                 return;
 
-            _requirements.Updated -= OnJobRequirementsUpdated;
-
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
-            _companyWindow?.Dispose(); // Forge-Change: company whitelist
-            _companyWindow = null; // Forge-Change: company whitelist
+            CloseCustomJobTitle(); // WOLFGATE(Roles): close the custom job title window
+            CloseCustomMarkings(); // WOLFGATE(CustomMarkings)
+            _companyManager.CatalogUpdated -= OnCompanyCatalogUpdated;
+
+            // Mono start
+            foreach (var entity in _savedItemEntities)
+                _entManager.DeleteEntity(entity);
+
+            _savedItemEntities.Clear();
+            // Mono end
         }
 
         protected override void EnteredTree()
@@ -1788,12 +1909,12 @@ namespace Content.Client.Lobby.UI
             base.ExitedTree();
             _entManager.DeleteEntity(PreviewDummy);
             PreviewDummy = EntityUid.Invalid;
+            StopEmoteVoicePreview(); // WOLFGATE(EmoteVoices): a closed editor stops its voice preview
         }
 
         private void SetAge(int newAge)
         {
             Profile = Profile?.WithAge(newAge);
-            RefreshJobRequirementLocks();
             ReloadPreview();
         }
 
@@ -1816,7 +1937,6 @@ namespace Content.Client.Lobby.UI
 
             UpdateGenderControls();
             Markings.SetSex(newSex);
-            RefreshJobRequirementLocks();
             ReloadPreview();
         }
 
@@ -1829,7 +1949,28 @@ namespace Content.Client.Lobby.UI
         private void SetSpecies(string newSpecies)
         {
             Profile = Profile?.WithSpecies(newSpecies);
+            Profile = Profile?.WithBiotype(WFBiotype.Default); // WOLFGATE(Biotype): a new species starts on its own biotype
+            UpdateBiotype(); // WOLFGATE(Biotype)
+            UpdateLegStyle(); // WOLFGATE(LegStyle): legs the new species lacks fall back to its own
+            UpdateAugments(); // WOLFGATE(Augments): augments the new species can't take are dropped
+            UpdateTypingBubble(); // WOLFGATE(TypingBubble): the species' own bubble changes with it
+            // WOLFGATE(Humanoid) START: keep the species picker and dropdown in step, drop hair the new species lacks
+            EnforceSpeciesHair();
+            SpeciesPicker.SetSelected(newSpecies);
+            var speciesIndex = _species.FindIndex(s => s.ID == newSpecies);
+            if (speciesIndex >= 0)
+                SpeciesButton.SelectId(speciesIndex);
+            // WOLFGATE END
             OnSkinColorOnValueChanged(); // Species may have special color prefs, make sure to update it.
+            // WOLFGATE(Species) START: the new species' defaults are saved into the profile, so they can be removed
+            if (Profile != null)
+            {
+                Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithMarkings(MarkingSet.WithSpeciesDefaults(
+                    Profile.Appearance.Markings.ToList(), newSpecies, Profile.MismatchedParts,
+                    Profile.Appearance.SkinColor, Profile.Appearance.EyeColor)));
+                UpdateMarkings();
+            }
+            // WOLFGATE END
             Markings.SetSpecies(newSpecies); // Repopulate the markings tab as well.
             EnforceSpeciesTraitRestrictions();
             // In case there's job restrictions for the species
@@ -1843,14 +1984,34 @@ namespace Content.Client.Lobby.UI
             ReloadPreview();
         }
 
-        // Forge-change-start: take _EE nationality
-        private void SetNationality(string newNationality)
+        // WOLFGATE(Humanoid) START: drop hair the new species lacks
+        /// <summary>
+        /// Hair and facial hair are stored outside the marking set, so a species change has to
+        /// drop them by hand. Without this, switching to a species with no hair left the old style on the
+        /// character with no picker to remove it.
+        /// </summary>
+        private void EnforceSpeciesHair()
         {
-            Profile = Profile?.WithNationality(newNationality);
-            IsDirty = true;
-            ReloadProfilePreview();
+            if (Profile == null)
+                return;
+
+            var appearance = Profile.Appearance;
+            var hair = appearance.HairStyleId;
+            var facialHair = appearance.FacialHairStyleId;
+
+            if (!HairStyleChoices(MarkingCategories.Hair).ContainsKey(hair)) // WOLFGATE(Species)
+                hair = HairStyles.DefaultHairStyle;
+
+            if (!HairStyleChoices(MarkingCategories.FacialHair).ContainsKey(facialHair)) // WOLFGATE(Species)
+                facialHair = HairStyles.DefaultFacialHairStyle;
+
+            if (hair == appearance.HairStyleId && facialHair == appearance.FacialHairStyleId)
+                return;
+
+            Profile = Profile.WithCharacterAppearance(
+                appearance.WithHairStyleName(hair).WithFacialHairStyleName(facialHair));
         }
-        // Forge-change-end
+        // WOLFGATE END
 
         private void EnforceSpeciesTraitRestrictions()
         {
@@ -1865,7 +2026,7 @@ namespace Content.Client.Lobby.UI
                 if (!_prototypeManager.TryIndex(traitId, out TraitPrototype? trait))
                     continue;
 
-                if (trait.SpeciesBlacklist.Contains(species))
+                if (trait.SpeciesBlacklist.Contains(species) || WFBiotypeGates.TraitBlocked(trait, Profile, _prototypeManager)) // WOLFGATE(Biotype): a listed biotype drops the trait like a listed species
                     toRemove.Add(traitId);
             }
 
@@ -1894,22 +2055,6 @@ namespace Content.Client.Lobby.UI
             Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
             SetDirty();
         }
-
-        // Corvax-Frontier-Barks-start
-        private void SetBarkVoice(string newVoice)
-        {
-            Profile = Profile?.WithBarkVoice(newVoice);
-            IsDirty = true;
-        }
-        // Corvax-Frontier-Barks-end
-
-        // Corvax-TTS-Start
-        private void SetVoice(string newVoice)
-        {
-            Profile = Profile?.WithVoice(newVoice);
-            IsDirty = true;
-        }
-        // Corvax-TTS-End
 
         private void SetHeight(float newHeight)
         {
@@ -1957,10 +2102,18 @@ namespace Content.Client.Lobby.UI
 
         private void UpdateFlavorTextEdit()
         {
-            if (_flavorTextEdit != null)
+            // WOLFGATE(Humanoid) START: keep the live description status in step when the profile reloads
+            // upstream original, kept for merges:
+            // if (_flavorTextEdit != null)
+            // {
+            //     _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
+            // }
+            if (DescriptionBox.Visible)
             {
-                _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
+                DescriptionEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
+                UpdateDescriptionStatus(Profile?.FlavorText ?? "");
             }
+            // WOLFGATE END
         }
 
         private void UpdateAgeEdit()
@@ -1973,90 +2126,27 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         private void UpdateJobPriorities()
         {
-            foreach (var (job, prioritySelector) in _jobPriorities)
+            foreach (var (jobId, prioritySelector) in _jobPriorities)
             {
-                var priority = Profile?.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) ?? JobPriority.Never;
+                var priority = Profile?.JobPriorities.GetValueOrDefault(jobId, JobPriority.Never) ?? JobPriority.Never;
                 prioritySelector.Select((int) priority);
             }
         }
 
-        /// <summary>
-        /// Re-evaluates job locks when profile fields (species, sex, age, etc.) change.
-        /// </summary>
-        private void RefreshJobRequirementLocks()
-        {
-            foreach (var (job, selector) in _jobPriorities)
-            {
-                if (!_requirements.IsAllowed(job, Profile, out var reason))
-                {
-                    selector.LockRequirements(reason);
-
-                    if (Profile != null &&
-                        Profile.JobPriorities.GetValueOrDefault(job.ID, JobPriority.Never) != JobPriority.Never)
-                    {
-                        Profile = Profile.WithJobPriority(job.ID, JobPriority.Never);
-                        selector.Select((int) JobPriority.Never);
-                    }
-                }
-                else
-                {
-                    selector.UnlockRequirements();
-                }
-            }
-        }
-
-        // Forge-Change-start: company whitelist
-        private void TryApplyForcedFactionCompany(bool markDirty)
-        {
-            if (Profile == null)
-                return;
-
-            var forcedCompany = FactionCompanyResolver.GetForcedCompanyFromProfile(Profile, _prototypeManager);
-
-            if (forcedCompany != null)
-            {
-                if (Profile.Company != forcedCompany)
-                {
-                    if (!FactionCompanyResolver.IsFactionCompany(Profile.Company))
-                        _preferredNonFactionCompany = Profile.Company;
-
-                    Profile = Profile.WithCompany(forcedCompany);
-
-                    if (markDirty)
-                        SetDirty();
-                }
-
-                return;
-            }
-
-            // Highest-priority job is not faction-locked — unemployed unless the player chose a civilian company.
-            var targetCompany = FactionCompanyResolver.IsFactionCompany(_preferredNonFactionCompany)
-                ? "None"
-                : _preferredNonFactionCompany;
-
-            if (string.IsNullOrEmpty(targetCompany) || FactionCompanyResolver.IsFactionCompany(Profile.Company))
-                targetCompany = "None";
-
-            if (Profile.Company == targetCompany)
-                return;
-
-            Profile = Profile.WithCompany(targetCompany);
-
-            if (markDirty)
-                SetDirty();
-        }
-
-        private string? GetForcedFactionCompany(string jobId) =>
-            _prototypeManager.TryIndex<JobPrototype>(jobId, out var job)
-                ? FactionCompanyResolver.GetForcedCompanyForJob(job)
-                : null;
-        // Forge-Change-end: company whitelist
         private void UpdateSexControls()
         {
+            // WOLFGATE(Humanoid) START: otherwise the previous character's segments stay visible and lit
+            // upstream original, kept for merges:
+            // if (Profile == null)
+            //     return;
+            //
+            // SexButton.Clear();
             if (Profile == null)
+            {
+                SexSelector.Visible = false;
                 return;
-
-            SexButton.Clear();
+            }
+            // WOLFGATE END
 
             var sexes = new List<Sex>();
 
@@ -2073,16 +2163,28 @@ namespace Content.Client.Lobby.UI
                 sexes.Add(Sex.Unsexed);
             }
 
-            // add button for each sex
-            foreach (var sex in sexes)
-            {
-                SexButton.AddItem(Loc.GetString($"humanoid-profile-editor-sex-{sex.ToString().ToLower()}-text"), (int) sex);
-            }
+            // WOLFGATE(Humanoid) START: an icon box per sex, and a real SetSex when the new species lacks the current one
+            // The old dropdown only moved its visual selection, because OptionButton.SelectId does not raise
+            // OnItemSelected - so switching a Male character to Vox left Profile.Sex on Male while the box read
+            // "None", and the markings were never revalidated.
+            // upstream original, kept for merges:
+            // // add button for each sex
+            // foreach (var sex in sexes)
+            // {
+            //     SexButton.AddItem(Loc.GetString($"humanoid-profile-editor-sex-{sex.ToString().ToLower()}-text"), (int) sex);
+            // }
+            //
+            // if (sexes.Contains(Profile.Sex))
+            //     SexButton.SelectId((int) Profile.Sex);
+            // else
+            //     SexButton.SelectId((int) sexes[0]);
+            SexSelector.SetSexes(sexes);
 
             if (sexes.Contains(Profile.Sex))
-                SexButton.SelectId((int) Profile.Sex);
-            else
-                SexButton.SelectId((int) sexes[0]);
+                SexSelector.SetSelected(Profile.Sex);
+            else if (sexes.Count > 0)
+                SetSex(sexes[0]);
+            // WOLFGATE END
         }
 
         private void UpdateSkinColor()
@@ -2090,7 +2192,7 @@ namespace Content.Client.Lobby.UI
             if (Profile == null)
                 return;
 
-            var skin = _prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration;
+            var skin = MismatchedPartsRules.SkinColoration(_prototypeManager.Index<SpeciesPrototype>(Profile.Species).SkinColoration, Profile.MismatchedParts); // WOLFGATE(Species): any colour with Mismatched parts
 
             switch (skin)
             {
@@ -2142,20 +2244,6 @@ namespace Content.Client.Lobby.UI
 
                         break;
                     }
-                // Forge-Change-Start wega ariral
-                case HumanoidSkinColor.AriralPale:
-                {
-                    if (!Skin.Visible)
-                    {
-                        Skin.Visible = true;
-                        RgbSkinColorContainer.Visible = false;
-                    }
-
-                    Skin.Value = SkinColor.AriralSkinToneFromColor(Profile.Appearance.SkinColor);
-
-                    break;
-                }
-                // Forge-Change-End wega ariral
                 // Goobstation Section Start - Tajaran
                 case HumanoidSkinColor.AnimalFur: // Goobstation - Tajaran
                     {
@@ -2169,6 +2257,20 @@ namespace Content.Client.Lobby.UI
                         break;
                     }
                 // Goobstation Section End - Tajaran
+
+                // WOLFGATE(Species) START: ported from HardLight, unrestricted skin colour
+                case HumanoidSkinColor.AnyColour:
+                    {
+                        if (!RgbSkinColorContainer.Visible)
+                        {
+                            Skin.Visible = false;
+                            RgbSkinColorContainer.Visible = true;
+                        }
+
+                        _rgbSkinColorSelector.Color = Profile.Appearance.SkinColor;
+                        break;
+                    }
+                // WOLFGATE END
             }
 
         }
@@ -2253,7 +2355,7 @@ namespace Content.Client.Lobby.UI
             var hairMarking = Profile.Appearance.HairStyleId switch
             {
                 HairStyles.DefaultHairStyle => new List<Marking>(),
-                _ => new() { new Marking(Profile.Appearance.HairStyleId, Profile.Appearance.HairColor) } // Forge-Change Corvax-Wega-Hair-Extended
+                _ => new() { new(Profile.Appearance.HairStyleId, Profile.Appearance.HairColor) },
             };
 
             var facialHairMarking = Profile.Appearance.FacialHairStyleId switch
@@ -2265,11 +2367,14 @@ namespace Content.Client.Lobby.UI
             HairStylePicker.UpdateData(
                 hairMarking,
                 Profile.Species,
-                1);
+                1,
+                HairStyleChoices(MarkingCategories.Hair)); // WOLFGATE(Species): the styles the option allows
             FacialHairPicker.UpdateData(
                 facialHairMarking,
                 Profile.Species,
-                1);
+                1,
+                HairStyleChoices(MarkingCategories.FacialHair)); // WOLFGATE(Species): the styles the option allows
+            HairCard.Visible = HairStylePicker.Visible || FacialHairPicker.Visible; // WOLFGATE(Humanoid): no hair card for species without hair
         }
 
         private void UpdateCMarkingsHair()
@@ -2280,29 +2385,31 @@ namespace Content.Client.Lobby.UI
             }
 
             // hair color
-            // Forge-Change-Start Corvax-Wega-Hair-Extended-Edit
             List<Color>? hairColor = null;
-            if (Profile.Appearance.HairStyleId != HairStyles.DefaultHairStyle &&
-                _markingManager.Markings.TryGetValue(Profile.Appearance.HairStyleId, out var hairProto))
+            if ( Profile.Appearance.HairStyleId != HairStyles.DefaultHairStyle &&
+                _markingManager.Markings.TryGetValue(Profile.Appearance.HairStyleId, out var hairProto)
+            )
             {
                 if (_markingManager.CanBeApplied(Profile.Species, Profile.Sex, hairProto, _prototypeManager))
                 {
                     if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager))
                     {
                         hairColor = new List<Color> { Profile.Appearance.SkinColor.WithAlpha(hairAlpha) };
-                        if (Profile.Appearance.HairColor.Count > 1)
-                            hairColor.AddRange(Profile.Appearance.HairColor.Skip(1));
                     }
                     else
                     {
-                        hairColor = Profile.Appearance.HairColor.ToList();
+                        hairColor = Profile.Appearance.HairColor;
                     }
                 }
             }
-            Markings.HairMarking = hairColor != null
-                ? new Marking(Profile.Appearance.HairStyleId, hairColor)
-                : null;
-            // Forge-Change-End Corvax-Wega-Hair-Extended-Edit
+            if (hairColor != null)
+            {
+                Markings.HairMarking = new (Profile.Appearance.HairStyleId, hairColor);
+            }
+            else
+            {
+                Markings.HairMarking = null;
+            }
         }
 
         private void UpdateCMarkingsFacialHair()
@@ -2360,17 +2467,20 @@ namespace Content.Client.Lobby.UI
         private void SetPreviewRotation(Direction direction)
         {
             SpriteView.OverrideDirection = (Direction) ((int) direction % 4 * 2);
+            // WOLFGATE(Humanoid) START: the picker tiles face the same way as the preview pawn
+            HairStylePicker.PreviewDirection = SpriteView.OverrideDirection.Value;
+            FacialHairPicker.PreviewDirection = SpriteView.OverrideDirection.Value;
+            Markings.PreviewDirection = SpriteView.OverrideDirection.Value;
+            // WOLFGATE END
+            SetCustomMarkingsDirection(SpriteView.OverrideDirection.Value); // WOLFGATE(CustomMarkings): its tiles face that way too
         }
 
         private void RandomizeEverything()
         {
             var oldBank = Profile?.BankBalance ?? HumanoidCharacterProfile.DefaultBalance; // Frontier
-            var saved = _preferencesManager.Preferences?.SelectedCharacter as HumanoidCharacterProfile; // Forge-Change
             Profile = HumanoidCharacterProfile.Random().WithBankBalance(oldBank); // Frontier: add WithBankBalance(oldBank)
             SetProfile(Profile, CharacterSlot);
-            // Forge-Change
-            IsDirty = saved == null || !Profile!.MemberwiseEquals(saved);
-            UpdateSaveButton();
+            SetDirty();
         }
 
         private void RandomizeName()
@@ -2412,7 +2522,9 @@ namespace Content.Client.Lobby.UI
             {
                 var profile = _entManager.System<HumanoidAppearanceSystem>().FromStream(file, _playerManager.LocalSession!);
                 var oldProfile = Profile;
-                profile = profile.WithBankBalance(oldProfile.BankBalance); // Frontier: no free money (enforce import, don't care about import)
+                profile = profile
+                    .WithBankBalance(oldProfile.BankBalance) // Frontier: no free money (enforce import, don't care about import)
+                    .WithPersistentData(oldProfile.Flags, oldProfile.Components, oldProfile.Items); // Mono: no becoming God either
                 SetProfile(profile, CharacterSlot);
 
                 IsDirty = !profile.MemberwiseEquals(oldProfile);
@@ -2472,18 +2584,106 @@ namespace Content.Client.Lobby.UI
             ExportButton.Disabled = false;
         }
 
+        private void OnCompanyCatalogUpdated()
+        {
+            RebuildCompanyCatalog();
+            UpdateCompanyControls();
+        }
+
+        private void RebuildCompanyCatalog()
+        {
+            // Full public catalog: closed companies stay readable, join is gated separately.
+            _companyCatalog = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
+                .Where(c => !c.Disabled && !c.Hidden)
+                .OrderBy(c => c.ID == "None" ? 0 : 1)
+                .ThenBy(c => c.Name, StringComparer.Ordinal)
+                .ToList();
+
+            CompanyButton.Clear();
+            for (var i = 0; i < _companyCatalog.Count; i++)
+            {
+                var company = _companyCatalog[i];
+                var label = _companyManager.CanJoin(company.ID) || company.ID == "None"
+                    ? company.Name
+                    : Loc.GetString("company-catalog-locked-name", ("name", company.Name));
+                CompanyButton.AddItem(label, i);
+            }
+        }
+
+        private void ShowCompanyCatalogEntry(CompanyPrototype company, bool tryJoin)
+        {
+            var description = !string.IsNullOrEmpty(company.Description)
+                ? Loc.GetString(company.Description)
+                : Loc.GetString("company-none-description");
+            CompanyDescriptionLabel.SetMessage(FormattedMessage.FromMarkupPermissive(description));
+
+            var diplomacy = _companyManager.FormatDiplomacy(company.ID);
+            CompanyDiplomacyLabel.Visible = !string.IsNullOrEmpty(diplomacy);
+            if (!string.IsNullOrEmpty(diplomacy))
+                CompanyDiplomacyLabel.SetMessage(FormattedMessage.FromMarkupPermissive(diplomacy));
+
+            if (!string.IsNullOrEmpty(company.Image))
+            {
+                CompanyImage.Texture = IoCManager.Resolve<IResourceCache>()
+                    .GetResource<TextureResource>(company.Image!).Texture;
+                CompanyImage.Visible = true;
+            }
+            else
+            {
+                CompanyImage.Visible = false;
+            }
+
+            var canJoin = _companyManager.CanJoin(company.ID);
+            if (company.ID == "None")
+            {
+                CompanyJoinStatusLabel.Text = string.Empty;
+                if (tryJoin && Profile?.Company != "None")
+                {
+                    Profile = Profile?.WithCompany("None");
+                    SetDirty();
+                }
+
+                return;
+            }
+
+            if (canJoin)
+            {
+                CompanyJoinStatusLabel.Text = Loc.GetString("company-catalog-joinable");
+                if (tryJoin && Profile?.Company != company.ID)
+                {
+                    Profile = Profile?.WithCompany(company.ID);
+                    SetDirty();
+                }
+            }
+            else
+            {
+                CompanyJoinStatusLabel.Text = Loc.GetString("company-catalog-readonly");
+                // Browsing a locked company must not change the saved affiliation.
+            }
+        }
+
         private void UpdateCompanyControls()
         {
             if (Profile is null)
                 return;
 
-            // Company selection is handled by CompanyWindow now; keep this method as a
-            // lightweight validity check for any legacy callers.
-            if (!_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) ||
-                companyProto.Hidden)
+            if (_companyCatalog.Count == 0)
+                RebuildCompanyCatalog();
+
+            // Rights removed: affiliation falls back to unemployed.
+            if (Profile.Company != "None" && !_companyManager.CanJoin(Profile.Company))
             {
                 Profile = Profile.WithCompany("None");
+                SetDirty();
             }
+
+            var index = _companyCatalog.FindIndex(c => c.ID == Profile.Company);
+            if (index < 0)
+                index = 0;
+
+            CompanyButton.SelectId(index);
+            if (index < _companyCatalog.Count)
+                ShowCompanyCatalogEntry(_companyCatalog[index], tryJoin: false);
         }
     }
 }

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bench_corner",
+      "directions": 4
+    },
+    {
+      "name": "bench_left",
+      "directions": 4
+    },
+    {
+      "name": "bench_right",
+      "directions": 4
+    },
+    {
+      "name": "bench_solo",
+      "directions": 4
+    },
+    {
+      "name": "sofa_bench",
+      "directions": 4
+    }
+  ]
+}

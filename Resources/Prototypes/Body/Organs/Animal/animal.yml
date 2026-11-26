@@ -33,7 +33,7 @@
 
 - type: entity
   id: OrganAnimalLungs
-  parent: BaseAnimalOrgan
+  parent: [BaseAnimalOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed lung data (plan 9.2 group B, arachnid)
   name: lungs
   categories: [ HideSpawnMenu ]
   components:
@@ -138,7 +138,7 @@
 
 - type: entity
   id: OrganAnimalHeart
-  parent: BaseAnimalOrgan
+  parent: [BaseAnimalOrgan, WFWolfmedOrganHeart] # WOLFGATE(Wolfmed): M4: OD16 parity, the heart can arrest (plan 9.2 group B; balance change)
   name: heart
   categories: [ HideSpawnMenu ]
   components:

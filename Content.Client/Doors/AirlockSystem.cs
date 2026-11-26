@@ -9,6 +9,7 @@ namespace Content.Client.Doors;
 
 public sealed partial class AirlockSystem : SharedAirlockSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
 
     public override void Initialize()
@@ -104,14 +105,14 @@ public sealed partial class AirlockSystem : SharedAirlockSystem
         }
 
         // Preview / incomplete sprites may omit these layers — never LayerSet* without a map entry.
-        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseUnlit, out _))
-            args.Sprite.LayerSetVisible(DoorVisualLayers.BaseUnlit, unlitVisible);
-        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseBolted, out _))
-            args.Sprite.LayerSetVisible(DoorVisualLayers.BaseBolted, boltedVisible);
+        if (_sprite.LayerMapTryGet((uid, args.Sprite), DoorVisualLayers.BaseUnlit, out _, false))
+            _sprite.LayerSetVisible((uid, args.Sprite), DoorVisualLayers.BaseUnlit, unlitVisible);
+        if (_sprite.LayerMapTryGet((uid, args.Sprite), DoorVisualLayers.BaseBolted, out _, false))
+            _sprite.LayerSetVisible((uid, args.Sprite), DoorVisualLayers.BaseBolted, boltedVisible);
         if (comp.EmergencyAccessLayer
-            && args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseEmergencyAccess, out _))
+            && _sprite.LayerMapTryGet((uid, args.Sprite), DoorVisualLayers.BaseEmergencyAccess, out _, false))
         {
-            args.Sprite.LayerSetVisible(
+            _sprite.LayerSetVisible((uid, args.Sprite), 
                 DoorVisualLayers.BaseEmergencyAccess,
                     emergencyLightsVisible
                 &&  state != DoorState.Open
@@ -124,17 +125,17 @@ public sealed partial class AirlockSystem : SharedAirlockSystem
         // Idle open/closed must use static unlit states. OpeningSpriteState/ClosingSpriteState RSI entries are
         // full frame sequences — using them here loops forever (looks like "disco" / opening anim), especially
         // after reconnect when Appearance reapplies often with Forge openUnlitVisible on closed doors.
-        if (args.Sprite.LayerMapTryGet(DoorVisualLayers.BaseUnlit, out _))
+        if (_sprite.LayerMapTryGet((uid, args.Sprite), DoorVisualLayers.BaseUnlit, out _, false))
         {
             switch (state)
             {
                 case DoorState.Open:
-                    args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.OpenSpriteState);
-                    args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
+                    _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.OpenSpriteState);
+                    _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
                     break;
                 case DoorState.Closed:
-                    args.Sprite.LayerSetState(DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState);
-                    args.Sprite.LayerSetAnimationTime(DoorVisualLayers.BaseUnlit, 0);
+                    _sprite.LayerSetRsiState((uid, args.Sprite), DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState);
+                    _sprite.LayerSetAnimationTime((uid, args.Sprite), DoorVisualLayers.BaseUnlit, 0);
                     break;
             }
         }

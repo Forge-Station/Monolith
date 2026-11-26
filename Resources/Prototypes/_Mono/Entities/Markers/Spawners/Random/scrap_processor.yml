@@ -32,7 +32,11 @@
         - id: IngotGold1
         - id: IngotSilver1
         - id: SheetPlasteel1
-      - id: SheetPlastitanium1
+        # WOLFGATE(Mining) START: plastitanium is uncommon in the rare materials group (weight 0.6), so scrap doesn't undercut the crystallizer
+        - id: SheetPlastitanium1
+          weight: 0.6
+      # - id: SheetPlastitanium1
+        # WOLFGATE END
     - !type:GroupSelector
       weight: 1
       children:
@@ -268,7 +272,7 @@
     - id: ShredderMachineCircuitboard
     - id: ShuttleGunKineticCircuitboard
     - id: NFScrapProcessorCircuitboard
-    #- id: SalvageMagnetMachineCircuitboard #Forge-Change-remove
+    - id: SalvageMagnetMachineCircuitboard
     - id: MaterialSiloMachineCircuitboard
     #Lathes&Automation
     - id: AutolatheMachineCircuitboard
@@ -302,7 +306,7 @@
     - id: CryoPodMachineCircuitboard
     - id: CondenserMachineCircuitBoard
     - id: ElectrolysisUnitMachineCircuitboard
-    - id: HotplateMachineCircuitboard
+    - id: ThermobathMachineCircuitboard
     - id: ReagentGrinderMachineCircuitboard
     - id: StasisBedMachineCircuitboard
     - id: BiomassReclaimerMachineCircuitboard

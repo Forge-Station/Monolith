@@ -48,6 +48,17 @@
   id: ToolboxEmergency
   description: A bright red toolbox, stocked with emergency tools.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_red.rsi #imp edit
     state: icon
@@ -60,6 +71,17 @@
   id: ToolboxMechanical
   description: A blue box, stocked with mechanical tools.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_blue.rsi #imp edit
     state: icon
@@ -72,6 +94,17 @@
   id: ToolboxElectrical
   description: A toolbox typically stocked with electrical gear.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_yellow.rsi #imp edit
     state: icon
@@ -115,6 +148,17 @@
   id: ToolboxArtistic
   description: A toolbox typically stocked with artistic supplies.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_green.rsi #imp edit
     state: icon
@@ -127,6 +171,17 @@
   id: ToolboxSyndicate
   description: A sinister looking toolbox filled with elite syndicate tools.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_syn.rsi #imp edit
     state: icon
@@ -148,6 +203,17 @@
   id: ToolboxGolden
   description: A solid gold toolbox. A rapper would kill for this.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: _Impstation/Objects/Tools/Toolboxes/toolbox_gold.rsi #imp edit
     state: icon

@@ -1,0 +1,111 @@
+# Independent freight runs. A hauler enters the sector well out from its first stop, its captain calls its cargo
+# and route on the common channel, and it docks at two to four stations in turn before flying clear and jumping out.
+# The crew are ordinary spacers in working clothes: the hands only fight back when attacked, and an officer may have the only gun.
+- type: wfEncounter
+  id: WFEncounterFreightSmall
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 1
+  weight: 3
+  minPlayers: 0
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Plutomkii
+    - Twilight
+    - Piva
+    - Hermes
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    guards: 0
+    captain: false
+    cargo: 8
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+- type: wfEncounter
+  id: WFEncounterFreightMedium
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 2
+  weight: 2
+  minPlayers: 0
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Brute
+    - Zhuangzi
+    - Argent
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    guards: 0
+    captain: true
+    cargo: 16
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+- type: wfEncounter
+  id: WFEncounterFreightLarge
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestMedical, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury, WFManifestArms, WFManifestContraband ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Olympus
+    - Autumn
+    - Windreign
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 4
+    guards: 2
+    captain: true
+    cargo: 28
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter

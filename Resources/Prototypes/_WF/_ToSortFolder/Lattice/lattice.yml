@@ -1,0 +1,132 @@
+# The Lattice round the sector's centre. Band edges follow the drone rings (18, 24, 31 and 40 km on the default
+# worldgen); the edges here are used when the rings don't line up. Drift rates are per second, out of 100. Yield
+# multiplies asteroid ore; exotic is exotic matter shards per vein.
+- type: wfLatticeProfile
+  id: WFDefault
+  anchorCount: 6
+  anchorRadius: 3000
+  anchorAngle: 30
+  reach: 4000
+  driftMax: 100
+  # Hallucinations, each seen or heard by one player only, rolled every 20 s or so.
+  effectInterval: 20
+  effectChance: 0.15, 0.75
+  effects:
+  - kind: Whisper
+    minDrift: 5
+    weight: 3
+  - kind: Radio
+    minDrift: 10
+    weight: 2
+  - kind: Blip
+    minDrift: 15
+    weight: 3
+  - kind: Sound
+    minDrift: 25
+    weight: 3
+  - kind: Hail
+    minDrift: 35
+    weight: 1.5
+  - kind: Glimpse
+    minDrift: 45
+    weight: 2
+  - kind: Phantom
+    minDrift: 70
+    weight: 1
+  # A bad turn, rare: tunnel vision, glyphs and bass for a few seconds.
+  - kind: Pulse
+    minDrift: 40
+    weight: 0.6
+  # The Coda's hazards for a crewed ship: hunter packs board the longer it stays (from three minutes in), its structure
+  # rots unless a stabiliser runs, and thrusters, gyroscopes or power give out now and then.
+  hazardBand: 4
+  hunterMobs:
+  - WFRemadeHopper
+  - WFRemadeLeaper
+  - WFRemadeSpitter
+  - WFRemadeLurker
+  # In the Deep a ship's small animals can be taken and turn Remade, unless a stabiliser runs.
+  takeBand: 4
+  takeChance: 0.04
+  takeMaxMass: 30
+  # Each lost primary anchor makes the take half again as likely.
+  takeLostScale: 0.5
+  # Every ten minutes or so, a small chance an unwatched wreck in the Deep fills with Remade and shows as a lost ship;
+  # the chance climbs with each primary anchor lost.
+  lostShipMobs:
+  - WFRemadeHopper
+  - WFRemadeLeaper
+  - WFRemadeSpitter
+  - WFRemadeLurker
+  lostShipInterval: 600
+  lostShipChance: 0.1
+  lostShipChancePerAnchor: 0.12
+  bands:
+  - name: wf-lattice-band-moored
+    message: wf-lattice-enter-moored
+    drift: -0.5
+    chip: Info
+    color: "#60c0e0"
+  - name: wf-lattice-band-slack
+    message: wf-lattice-enter-slack
+    edge: 18000
+    drift: 0.05
+    chip: Advisory
+    color: "#e0b040"
+    yield: 1.1
+  - name: wf-lattice-band-adrift
+    message: wf-lattice-enter-adrift
+    edge: 24000
+    drift: 0.15
+    chip: Warning
+    color: "#e08030"
+    yield: 1.25
+    exotic: 0.005
+  - name: wf-lattice-band-untethered
+    message: wf-lattice-enter-untethered
+    edge: 31000
+    drift: 0.4
+    chip: Warning
+    color: "#e04030"
+    yield: 1.4
+    exotic: 0.015
+    flash: true
+    ftl: false
+  - name: wf-lattice-band-deep
+    message: wf-lattice-enter-deep
+    edge: 40000
+    drift: 1
+    driftGrowth: 4
+    garbled: true
+    chip: Warning
+    color: "#d030a0"
+    yield: 1.6
+    exotic: 0.04
+    flash: true
+    ftl: false
+
+# A primary anchor until the anchor stations are built: holds the field and nothing else.
+- type: entity
+  id: WFLatticeAnchorMarker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFLatticeAnchor
+    primary: true
+
+# A weaker anchor for admins to place by hand.
+- type: entity
+  id: WFLatticeAnchorRelayMarker
+  components:
+  - type: WFLatticeAnchor
+    strength: 0.4
+
+# The Choir's offer: using it joins the Choir.
+- type: entity
+  id: WFChoirActionAnswer
+  components:
+  - type: InstantAction
+    icon: { sprite: _WF/Remade/Interface/signal_actions.rsi, state: tracer }
+    event: !type:WFChoirAnswerEvent
+    raiseOnUser: true
+    checkCanInteract: false
+    checkConsciousness: false

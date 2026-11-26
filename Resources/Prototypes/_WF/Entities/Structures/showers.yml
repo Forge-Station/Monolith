@@ -1,0 +1,111 @@
+- type: entity
+  id: WFShower
+  name: shower
+  description: The HS-452 hygiene unit. Recycles its own water while off. Rinses off chemical burns, puts out fires and cools or warms whoever stands under it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Sprite
+    sprite: _WF/Showers/shower.rsi
+    drawdepth: OverMobs
+    layers:
+    - state: shower
+    - state: water
+      map: [ "enum.WFShowerVisualLayers.Water" ]
+      visible: false
+    - state: mist
+      map: [ "enum.WFShowerVisualLayers.Mist" ]
+      visible: false
+  - type: Appearance
+  - type: WFShower
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 200
+        reagents:
+        - ReagentId: Water
+          Quantity: 200
+  - type: RefillableSolution
+    solution: tank
+  - type: DrainableSolution
+    solution: tank
+  - type: ExaminableSolution
+    solution: tank
+  - type: AmbientSound
+    enabled: false
+    volume: -6
+    range: 6
+    sound:
+      path: /Audio/_WF/Showers/shower_loop.ogg
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+  - type: Construction
+    graph: WFShower
+    node: shower
+
+- type: entity
+  id: WFShowerFrame
+  parent: BaseStructureDynamic
+  name: shower frame
+  description: A shower head and its piping. Wrench it down to finish it.
+  components:
+  - type: Sprite
+    sprite: _WF/Showers/shower.rsi
+    state: frame
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.45,0.3,0"
+        density: 30
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+  - type: Construction
+    graph: WFShower
+    node: frame

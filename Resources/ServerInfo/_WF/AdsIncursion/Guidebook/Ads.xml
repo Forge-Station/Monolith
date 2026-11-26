@@ -1,0 +1,27 @@
+<Document>
+  # Automated Defense System
+
+  The [color=#9B4DFF]Automated Defense System[/color] (ADS) is the pre-Fracture silicon fleet whose derelict hulls drift through the sector. Some of them are awake. They are organised, they hold ground, and they follow their directives to the letter. On the sector map they are [color=#9B4DFF]purple[/color].
+
+  ## What it does
+
+  - [color=#9B4DFF]Nodes[/color] are Nebula hulls holding a cell as gun platforms. They never leave their cell. Each is crewed by bare automatons, no suits or armour, and carries ADS repair tools and energy weapons worth boarding for.
+  - [color=#9B4DFF]Sentinels[/color] circle their node. [color=#9B4DFF]Sweeps[/color] fly fixed routes through ADS space. Both give up once they are out of it.
+  - [color=#9B4DFF]Interdictors[/color] close on a crewed ship that lingers in ADS space to query it, or sail out to contest a cell another faction holds.
+  - The ADS is at war with the TSF, the Vanguard and the Ashfall Reavers. Their warships fight it on sight. A player ship is fired on only if it declares itself a threat or fires on the ADS.
+
+  ## The directives
+
+  - [bold]Disarmament.[/bold] The ADS disables, it does not kill. Its ships stop firing once yours is combat-ineffective. Nobody is hunted, boarded or chased across the sector.
+  - [bold]Asset preservation.[/bold] The ADS never claims, contests or blockades a cell that holds a station. Every station stays a safe harbour.
+
+  ## How to deal with it
+
+  1. Answer the query. An ADS ship hails every ship inside its exclusion zone and asks whether it is a threat. Answer NO and it leaves you alone. Answer YES, or fire on any ADS ship, and its guns turn on you. A ship that does not answer is asked again a few minutes later.
+  2. A ship that lingers in ADS space has an interdictor sent to query it. It holds beside you, asks, and flies on.
+  3. To break a node, put its Nebula out of the fight. Its cells go free, its sentinels lose their anchor and the bounty is paid to those who hit it.
+  4. Sentinels and sweeps are single Wyrm hulls, well crewed and armoured but alone. Destroying one frees the cell it died in and pays a bounty.
+  5. Stand off and let the machines and the Reavers bleed each other if you would rather not fight either.
+  6. At Overrun the ADS wakes a Wyvern [color=#9B4DFF]dreadnought[/color] that hunts the Reavers' strongholds; destroy it and the ADS goes dormant for the rest of the round.
+
+</Document>

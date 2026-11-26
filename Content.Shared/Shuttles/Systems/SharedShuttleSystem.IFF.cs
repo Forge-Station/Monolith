@@ -67,13 +67,9 @@ public abstract partial class SharedShuttleSystem
                 }
             }
         }
-        // Forge-Change-start
-        var labelText = string.IsNullOrEmpty(entName)
-            ? Loc.GetString("shuttle-console-unknown")
-            : Loc.TryGetString(entName, out var localizedLabel)
-                ? localizedLabel
-                : entName;
-        // Forge-Change-end
+
+        var labelText = string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
+        labelText = EntityManager.System<Content.Shared._WF.Newbie.WFNewbieSystem>().TagShipName(gridUid, labelText); // WOLFGATE(Newbie): tag a new player's ship
 
         // Add company info if available
         if (companyName != null && companyColor != null)

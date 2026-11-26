@@ -86,7 +86,10 @@
 - type: shader
   id: Stealth
   kind: source
-  path: "/Textures/Shaders/stealth.swsl"
+  # WOLFGATE(Stealth) START: z-level safe; the upstream shader read the level below.
+  # path: "/Textures/Shaders/stealth.swsl"
+  path: "/Textures/_WF/Stealth/stealth.swsl"
+  # WOLFGATE END
 
 - type: shader
   id: PaperStamp

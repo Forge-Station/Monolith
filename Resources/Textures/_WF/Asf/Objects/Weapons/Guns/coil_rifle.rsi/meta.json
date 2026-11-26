@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate, after the Star Trek Type-3B phaser rifle silhouette; shading values sampled from the Molot by kasature90.",
+  "size": {
+    "x": 48,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "mag-0"
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

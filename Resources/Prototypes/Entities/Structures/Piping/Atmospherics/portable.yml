@@ -155,6 +155,11 @@
     inHandsOnly: false
     key: enum.SpaceHeaterUiKey.Key
   - type: SpaceHeater
+  # WOLFGATE(Warmth): a running heater warms whoever stands by it, even where it can't warm the open air
+  - type: EntityRadiusHeater
+    radius: 2
+    thermalEnergy: 12000
+    limit: 311
   - type: GasThermoMachine
     temperatureTolerance: 0.2
     atmospheric: true

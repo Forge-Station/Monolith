@@ -1,4 +1,7 @@
 ﻿using Content.Client.Gameplay;
+using Content.Client.Lobby; // WOLFGATE(InRoundCreator)
+using Content.Client._WF.Roadmap; // WOLFGATE(Roadmap)
+using Content.Client._WF.SectorControl; // WOLFGATE(SectorControl)
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
@@ -68,6 +71,30 @@ public sealed partial class EscapeUIController : UIController, IOnStateEntered<G
             CloseEscapeWindow();
             _changelog.ToggleWindow();
         };
+
+        // WOLFGATE(Roadmap) START: roadmap entry in the game menu
+        _escapeWindow.RoadmapButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            UIManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
+        };
+        // WOLFGATE END
+
+        // WOLFGATE(SectorControl) START: sector map entry in the game menu
+        _escapeWindow.SectorMapButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            UIManager.GetUIController<WFSectorMapUIController>().ToggleWindow();
+        };
+        // WOLFGATE END
+
+        // WOLFGATE(InRoundCreator) START: character creator entry in the game menu
+        _escapeWindow.CharacterButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            UIManager.GetUIController<LobbyUIController>().OpenInRoundCharacterSetup();
+        };
+        // WOLFGATE END
 
         _escapeWindow.RulesButton.OnPressed += _ =>
         {

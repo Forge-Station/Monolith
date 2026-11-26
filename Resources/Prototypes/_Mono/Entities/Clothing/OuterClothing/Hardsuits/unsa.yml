@@ -4,6 +4,12 @@
   name: armored EVA suit
   description: A standard EVA suit modified by the UNSA as a cheap and nimble alternative to voidsuits for use by Vanguards.
   components:
+  # WOLFGATE(ArmorSpecialization): sealed layer.
+  - type: WFWoundWard
+    examine: wf-armor-spec-sealed-examine
+    blocks:
+    - WFWolfmedChemicalBurnWound
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/armored_eva.rsi
   - type: Item

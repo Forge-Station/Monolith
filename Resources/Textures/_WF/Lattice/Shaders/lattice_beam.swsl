@@ -1,0 +1,92 @@
+light_mode unshaded;
+
+// UV.x runs along the beam in metres from its start; UV.y runs across it, -1 to 1.
+uniform highp float beamLength;
+uniform highp float seed;
+// 0 to 1: the beam's brightness, for a gentle shimmer.
+uniform highp float shimmer;
+
+const highp vec3 Haze = vec3(0.45, 0.12, 0.70);
+const highp vec3 Body = vec3(0.80, 0.42, 1.00);
+const highp vec3 Core = vec3(0.98, 0.88, 1.00);
+
+highp float hash1(highp vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+highp float vnoise(highp vec2 p) {
+    highp vec2 i = floor(p);
+    highp vec2 f = fract(p);
+    highp vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash1(i), hash1(i + vec2(1.0, 0.0)), u.x),
+               mix(hash1(i + vec2(0.0, 1.0)), hash1(i + vec2(1.0, 1.0)), u.x), u.y);
+}
+
+highp float fbm(highp vec2 p) {
+    highp float v = 0.0;
+    highp float a = 0.5;
+    for (int i = 0; i < 3; i++) {
+        v += a * vnoise(p);
+        p = p * 2.07 + vec2(3.1, 7.7);
+        a *= 0.5;
+    }
+    return v;
+}
+
+highp float gauss(highp float x, highp float width) {
+    highp float k = x / width;
+    return exp(-k * k);
+}
+
+void fragment() {
+    highp float u = UV.x;
+    highp float v = UV.y;
+    highp float t = TIME;
+
+    // Fade in from each anchor's shield.
+    highp float ends = smoothstep(0.0, 60.0, u) * smoothstep(0.0, 60.0, beamLength - u);
+
+    // The current that carries everything along: noise streaming down the beam, bending the strands a little.
+    highp float flow = fbm(vec2(u * 0.025 - t * 0.9 + seed, v * 2.5));
+    highp float bend = (flow - 0.5) * 0.18;
+
+    // A soft haze that breathes as the flow passes through it.
+    highp float haze = gauss(v, 0.7) * (0.35 + 0.65 * flow);
+
+    // The body, narrowing and swelling in long slow waves.
+    highp float swell = 0.22 + 0.06 * sin(u * 0.012 - t * 0.7 + seed);
+    highp float body = gauss(v + bend * 0.5, swell);
+
+    // Three strands braided round the core, out of step, their twist loosening and tightening along the length.
+    highp float strands = 0.0;
+    for (int k = 0; k < 3; k++) {
+        highp float phase = float(k) * 2.0944 + seed;
+        highp float reach = 0.32 * (0.65 + 0.35 * sin(u * 0.009 + t * 0.5 + phase));
+        highp float centre = reach * sin(u * 0.07 - t * 1.8 + phase) + bend;
+        strands += gauss(v - centre, 0.045) * (0.6 + 0.4 * sin(u * 0.05 - t * 3.0 + phase * 1.7));
+    }
+
+    // Fine filaments streaming along inside the body.
+    highp float ridge = 1.0 - abs(vnoise(vec2(u * 0.06 - t * 2.4, v * 7.0 + seed)) * 2.0 - 1.0);
+    highp float filaments = pow(ridge, 6.0) * gauss(v, 0.35);
+
+    // Comets of light running the length of it, each with a fading tail.
+    highp float spacing = 260.0;
+    highp float s = fract((u + seed * 97.0 - t * 280.0) / spacing) * spacing;
+    highp float head = gauss(s - spacing * 0.5, 4.0);
+    highp float tail = smoothstep(spacing * 0.5 - 70.0, spacing * 0.5, s) * step(s, spacing * 0.5) * 0.45;
+    highp float comet = (head + tail) * gauss(v, 0.18);
+
+    // A thin bright thread at the very centre.
+    highp float core = gauss(v + bend * 0.3, 0.06);
+
+    highp vec3 colour = Haze * haze * 0.55
+        + Body * (body * 0.7 + filaments * 0.6 + strands * 0.8)
+        + Core * (core * 0.9 + comet * 1.1 + strands * 0.35);
+    highp float glow = haze * 0.3 + body * 0.55 + strands * 0.6 + filaments * 0.4 + core * 0.8 + comet;
+    highp float alpha = clamp(glow, 0.0, 1.0) * ends * (0.85 + 0.15 * shimmer);
+
+    COLOR = vec4(colour / max(glow, 0.001), alpha);
+}

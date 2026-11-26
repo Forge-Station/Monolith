@@ -6,6 +6,7 @@
   placement:
     mode: PlaceFree
   components:
+  - type: WFCockpitSeat # WOLFGATE(Cockpit): allow every seat family to host the buckled piloting HUD.
   - type: Animateable
   - type: Clickable
   - type: InteractionOutline

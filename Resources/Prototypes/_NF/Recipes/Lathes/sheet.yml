@@ -148,9 +148,10 @@
 - type: latheRecipe
   id: ScrapSheetPlasteel1
   result: SheetPlasteel1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 120 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 120 #Mono 4000 > 120
+    RawScrap: 500 #Mono 4000 > 120
 
 - type: latheRecipe
   id: ScrapSheetPlastic1
@@ -162,30 +163,34 @@
 - type: latheRecipe
   id: ScrapSheetPlasma1
   result: SheetPlasma1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 120 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 120 #Mono 3000 > 120
+    RawScrap: 500 #Mono 3000 > 120
 
 - type: latheRecipe
   id: ScrapSheetUranium1
   result: SheetUranium1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 120 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 120 #Mono 3000 > 120
+    RawScrap: 500 #Mono 3000 > 120
 
 - type: latheRecipe
   id: ScrapIngotSilver1
   result: IngotSilver1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 100 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 100 #Mono 2300 > 100
+    RawScrap: 500 #Mono 2300 > 100
 
 - type: latheRecipe
   id: ScrapIngotGold1
   result: IngotGold1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 100 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 100 #Mono 3000 > 100
+    RawScrap: 500 #Mono 3000 > 100
 
 - type: latheRecipe
   id: ScrapMaterialBananium1
@@ -246,27 +251,31 @@
 - type: latheRecipe
   id: ScrapMaterialBluespace1
   result: MaterialBluespace1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): no lathe discount, so hull-break scrap can't smelt bluespace at a profit
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
     RawScrap: 16000 #Mono 225k >> 16k
 
 - type: latheRecipe
   id: ScrapMaterialDiamond1
   result: MaterialDiamond1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): no lathe discount, so hull-break scrap can't smelt diamond at a profit
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
     RawScrap: 16000 #Mono 300k >> 16k
 
 - type: latheRecipe
   id: ScrapMaterialCopper1
   result: SheetCopper1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 100 -> 500 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 100
+    RawScrap: 500
 
 - type: latheRecipe
   id: ScrapMaterialLithium1
   result: SheetLithium1
-  parent: BaseMaterialsYesDiscountRecipe
+  # WOLFGATE(Mining): scrap smelts strategic sheets at a real cost, 100 -> 2000 raw, no discount
+  parent: BaseMaterialsNoDiscountRecipe
   materials:
-    RawScrap: 100
+    RawScrap: 2000

@@ -3,6 +3,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
+using Content.Shared._WF.EngineCompat;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 
@@ -25,12 +26,12 @@ namespace Content.Shared.Damage
 
         // These exist solely so the wiki works. Please do not touch them or use them.
         [JsonPropertyName("types")]
-        [DataField("types", customTypeSerializer: typeof(ProtoId<DamageTypePrototype>))]
+        [DataField("types", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageTypePrototype>), readOnly: true)] // WOLFGATE: DamageDict writes the types
         [UsedImplicitly]
         private Dictionary<string,FixedPoint2>? _damageTypeDictionary;
 
         [JsonPropertyName("groups")]
-        [DataField("groups", customTypeSerializer: typeof(ProtoId<DamageGroupPrototype>))]
+        [DataField("groups", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<FixedPoint2, DamageGroupPrototype>), readOnly: true)] // WOLFGATE: groups are resolved into DamageDict
         [UsedImplicitly]
         private Dictionary<string, FixedPoint2>? _damageGroupDictionary;
 
@@ -39,7 +40,7 @@ namespace Content.Shared.Damage
         /// </summary>
         [JsonIgnore]
         [ViewVariables(VVAccess.ReadWrite)]
-        [IncludeDataField(customTypeSerializer: typeof(DamageSpecifierDictionarySerializer), readOnly: true)]
+        [IncludeDataField(customTypeSerializer: typeof(DamageSpecifierDictionarySerializer))] // WOLFGATE: writable
         public Dictionary<string, FixedPoint2> DamageDict { get; set; } = new();
 
         /// <summary>
@@ -438,14 +439,22 @@ namespace Content.Shared.Damage
 
         public static DamageSpecifier operator *(FixedPoint2 factor, DamageSpecifier damageSpec) => damageSpec * factor;
 
+        // WOLFGATE: zero entries do not count, so an initialised but undamaged entity equals its
+        // prototype and map saves stay free of empty damage blocks.
         public bool Equals(DamageSpecifier? other)
         {
-            if (other == null || DamageDict.Count != other.DamageDict.Count)
+            if (other == null)
                 return false;
 
             foreach (var (key, value) in DamageDict)
             {
-                if (!other.DamageDict.TryGetValue(key, out var otherValue) || value != otherValue)
+                if (value != other.DamageDict.GetValueOrDefault(key))
+                    return false;
+            }
+
+            foreach (var (key, value) in other.DamageDict)
+            {
+                if (value != DamageDict.GetValueOrDefault(key))
                     return false;
             }
 

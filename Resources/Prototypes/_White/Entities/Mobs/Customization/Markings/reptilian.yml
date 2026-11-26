@@ -24,7 +24,7 @@
   id: LizardShoutEasternDragon
   bodyPart: Snout
   markingCategory: Snout
-  speciesRestriction: [Reptilian]
+  speciesRestriction: [Reptilian, ProtoReptile]
   sprites:
   - sprite: _White/Mobs/Customization/snouts.rsi
     state: eastern_dragon
@@ -35,7 +35,7 @@
   id: LizardShoutEasternDragonUsiki
   bodyPart: Snout
   markingCategory: Snout
-  speciesRestriction: [Reptilian]
+  speciesRestriction: [Reptilian, ProtoReptile]
   sprites:
   - sprite: _White/Mobs/Customization/snouts.rsi
     state: eastern_dragon
@@ -50,22 +50,42 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Reptilian]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    snake_large_BEHIND: TailBehind
+    snake_large_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    snake_large_BEHIND: snake_large_FRONT
+    snake_large_overlay_BEHIND: snake_large_overlay_FRONT
   sprites:
-    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
-      state: snake_large
-    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
-      state: snake_large_overlay
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - split art
+      state: snake_large_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - split art
+      state: snake_large_overlay_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - south frame on TailBehind
+      state: snake_large_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - south frame on TailBehind
+      state: snake_large_overlay_BEHIND
 
 - type: marking
   id: SnakeLargeTailAnimated
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: []
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    snake_large_wagging_BEHIND: TailBehind
+    snake_large_wagging_overlay_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    snake_large_wagging_BEHIND: snake_large_wagging_FRONT
+    snake_large_wagging_overlay_BEHIND: snake_large_wagging_overlay_FRONT
   sprites:
-    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
-      state: snake_large_wagging
-    - sprite: _White/Mobs/Customization/reptilian_64x32.rsi
-      state: snake_large_wagging_overlay
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - split art
+      state: snake_large_wagging_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - split art
+      state: snake_large_wagging_overlay_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - south frame on TailBehind
+      state: snake_large_wagging_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_White/Mobs/Customization/reptilian_64x32.rsi # WOLFGATE - south frame on TailBehind
+      state: snake_large_wagging_overlay_BEHIND
 
 # SPINE
 - type: marking

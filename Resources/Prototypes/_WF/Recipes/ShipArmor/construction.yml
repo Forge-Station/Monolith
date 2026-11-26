@@ -1,0 +1,109 @@
+# Durasteel walls come only from the drydock refit, so this graph has no recipe. Its start edges are the build cost the
+# drydock prices heals and salvage by; taking a wall down leaves a girder that only comes apart again.
+
+- type: constructionGraph
+  id: WFDurasteelWall
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: durasteelWall
+      steps:
+      - material: Steel
+        amount: 2
+      - material: Plasteel
+        amount: 6
+      - material: Plastitanium
+        amount: 6
+    - to: durasteelWallDiagonal
+      steps:
+      - material: Steel
+        amount: 2
+      - material: Plasteel
+        amount: 3
+      - material: Plastitanium
+        amount: 3
+
+  - node: girder
+    entity: Girder
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity {}
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      steps:
+      - tool: Screwing
+        doAfter: 2
+
+  - node: durasteelWallDiagonal
+    entity: WFWallDurasteelDiagonal
+    edges:
+    - to: girder
+      completed:
+      - !type:SpawnPrototype
+        prototype: ScrapSteel
+        amount: 1
+      steps:
+      - tool: Cutting
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Welding
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 1
+      - tool: Welding
+        doAfter: 10
+      - tool: Prying
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 1
+      - tool: Welding
+        doAfter: 15
+      - tool: Prying
+        doAfter: 5
+      - tool: Anchoring
+        doAfter: 1
+
+  - node: durasteelWall
+    entity: WFWallDurasteel
+    edges:
+    - to: girder
+      completed:
+      - !type:SpawnPrototype
+        prototype: ScrapSteel
+        amount: 2
+      steps:
+      - tool: Cutting
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Welding
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+      - tool: Anchoring
+        doAfter: 1
+      - tool: Welding
+        doAfter: 10
+      - tool: Prying
+        doAfter: 1
+      - tool: Screwing
+        doAfter: 1
+      - tool: Cutting
+        doAfter: 1
+      - tool: Welding
+        doAfter: 15
+      - tool: Prying
+        doAfter: 5
+      - tool: Anchoring
+        doAfter: 1

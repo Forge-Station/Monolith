@@ -16,6 +16,12 @@ public sealed partial class IconSmoothComponent : Component
     public bool Enabled = true;
 
     /// <summary>
+    /// RSI state prefix used by construction ghosts. The smoothing system itself picks states from <see cref="States"/>.
+    /// </summary>
+    [DataField("base")]
+    public string StateBase { get; set; } = string.Empty;
+
+    /// <summary>
     /// A string whitelist which is checked against an <see cref="ISpriteSmoothState.Mask"/>
     /// If the mask contains this key, then that mask can smooth with this entity.
     /// </summary>
@@ -27,4 +33,18 @@ public sealed partial class IconSmoothComponent : Component
     /// </summary>
     [DataField]
     public ISpriteSmoothState[] States { get; private set; } = [];
+
+    /// <summary>Legacy smoothing mode read by content tests. The live smoother uses <see cref="States"/>.</summary>
+    [DataField("mode")]
+    public IconSmoothingMode Mode = IconSmoothingMode.Corners;
+}
+
+public enum IconSmoothingMode : byte
+{
+    Corners,
+    CardinalFlags,
+    Diagonal,
+    NoSprite,
+    DiagonalNF,
+    Bitmask,
 }

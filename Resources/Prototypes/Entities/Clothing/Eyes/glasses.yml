@@ -232,6 +232,7 @@
   - type: Clothing
     sprite: Clothing/Eyes/Glasses/thermal.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95

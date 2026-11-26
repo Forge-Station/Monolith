@@ -1,0 +1,5 @@
+# Seamless two-second hum loops for the mining lasers, synthesised by Tools/_WF/AsteroidMining/gen_laser_hum.py.
+- files: ["mining_laser_heavy.ogg", "mining_laser_light.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Created for Wolfgate (AsteroidMining), procedurally synthesised."
+  source: "https://github.com/VanguardControl/Wolfgate"

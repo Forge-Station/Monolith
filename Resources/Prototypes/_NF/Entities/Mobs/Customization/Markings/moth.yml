@@ -3,7 +3,7 @@
   bodyPart: HeadTop
   markingCategory: HeadTop
   forcedColoring: true
-  speciesRestriction: [Moth]
+  speciesRestriction: [Moth, ProtoMoth]
   coloring:
     default:
       type:

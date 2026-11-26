@@ -1,0 +1,51 @@
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryAlienEmbryoRemoval
+  name: Alien Embryo Removal
+  description: Removal of an alien embryo from the body.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    priority: -1
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepCutLarvaRoots
+    - WFSurgeryStepRemoveLarva
+  - type: XenoLarvaSurgeryCondition
+  - type: SurgeryPartCondition
+    part: Torso
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepCutLarvaRoots
+  name: Cut larva roots
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Scalpel
+    duration: 4
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/scalpel.rsi
+    state: scalpel
+  - type: XenoLarvaCutRootsStep
+  - type: WolfmedSurgeryPainEffect
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRemoveLarva
+  name: Remove larva
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: XenoLarvaRemoveStep
+  - type: WolfmedSurgeryPainEffect
+    amount: 10
+  - type: SurgeryStepEmoteEffect

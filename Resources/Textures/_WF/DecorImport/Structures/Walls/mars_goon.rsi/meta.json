@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mars-0"
+    },
+    {
+      "name": "mars-1"
+    },
+    {
+      "name": "mars-2"
+    },
+    {
+      "name": "mars-3"
+    },
+    {
+      "name": "mars-4"
+    },
+    {
+      "name": "mars-5"
+    },
+    {
+      "name": "mars-6"
+    },
+    {
+      "name": "mars-7"
+    },
+    {
+      "name": "mars-8"
+    },
+    {
+      "name": "mars-9"
+    },
+    {
+      "name": "mars-10"
+    },
+    {
+      "name": "mars-11"
+    },
+    {
+      "name": "mars-12"
+    },
+    {
+      "name": "mars-13"
+    },
+    {
+      "name": "mars-14"
+    },
+    {
+      "name": "mars-15"
+    },
+    {
+      "name": "mars-21"
+    },
+    {
+      "name": "mars-23"
+    },
+    {
+      "name": "mars-29"
+    },
+    {
+      "name": "mars-31"
+    },
+    {
+      "name": "mars-38"
+    },
+    {
+      "name": "mars-39"
+    },
+    {
+      "name": "mars-46"
+    },
+    {
+      "name": "mars-47"
+    },
+    {
+      "name": "mars-55"
+    },
+    {
+      "name": "mars-63"
+    },
+    {
+      "name": "mars-74"
+    },
+    {
+      "name": "mars-75"
+    },
+    {
+      "name": "mars-78"
+    },
+    {
+      "name": "mars-79"
+    },
+    {
+      "name": "mars-95"
+    },
+    {
+      "name": "mars-110"
+    },
+    {
+      "name": "mars-111"
+    },
+    {
+      "name": "mars-127"
+    },
+    {
+      "name": "mars-137"
+    },
+    {
+      "name": "mars-139"
+    },
+    {
+      "name": "mars-141"
+    },
+    {
+      "name": "mars-143"
+    },
+    {
+      "name": "mars-157"
+    },
+    {
+      "name": "mars-159"
+    },
+    {
+      "name": "mars-175"
+    },
+    {
+      "name": "mars-191"
+    },
+    {
+      "name": "mars-203"
+    },
+    {
+      "name": "mars-207"
+    },
+    {
+      "name": "mars-223"
+    },
+    {
+      "name": "mars-239"
+    },
+    {
+      "name": "mars-255"
+    }
+  ]
+}

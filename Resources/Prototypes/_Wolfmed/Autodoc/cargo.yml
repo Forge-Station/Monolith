@@ -1,0 +1,98 @@
+# The four program disks are the only way to unlock the pod's advanced surgery, so they need a route that
+# does not depend on a lathe being up: one crate, one cargo row, beside the other medical products.
+
+- type: entity
+  id: WFCrateAutodocPrograms
+  parent: CrateMedical
+  name: autodoc program crate
+  description: A full set of surgical programs for an autodoc, plus the cardiac module.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WFAutodocProgramDiskTransplant
+    - id: WFAutodocProgramDiskLimb
+    - id: WFAutodocProgramDiskNeuro
+    - id: WFAutodocProgramDiskCavity
+    - id: WFAutodocDefibModule
+    - id: WFAutodocAutofixModule
+
+- type: cargoProduct
+  id: WFWolfmedAutodocPrograms
+  icon:
+    sprite: Objects/Specific/Research/researchdisk.rsi
+    state: icon
+  product: WFCrateAutodocPrograms
+  cost: 3000 # above the 2880 its contents sell for, or cargo can be milked
+  category: cargoproduct-category-name-medical
+  group: market
+
+# Lathe recipes. The board sits with the other medical machine boards; the disks are ordinary medical prints.
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: WFAutodocMachineCircuitboard
+  result: WFAutodocMachineCircuitboard
+
+- type: latheRecipe
+  id: WFAutodocProgramDiskTransplant
+  result: WFAutodocProgramDiskTransplant
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 100
+    Gold: 20
+
+- type: latheRecipe
+  id: WFAutodocProgramDiskLimb
+  result: WFAutodocProgramDiskLimb
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 100
+    Gold: 20
+
+- type: latheRecipe
+  id: WFAutodocProgramDiskNeuro
+  result: WFAutodocProgramDiskNeuro
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 100
+    Gold: 40
+
+- type: latheRecipe
+  id: WFAutodocProgramDiskCavity
+  result: WFAutodocProgramDiskCavity
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 100
+    Gold: 20
+
+- type: latheRecipe
+  id: WFAutodocDefibModule
+  result: WFAutodocDefibModule
+  completetime: 4
+  materials:
+    Steel: 150
+    Glass: 100
+    Gold: 40
+
+- type: latheRecipe
+  id: WFAutodocAutofixModule
+  result: WFAutodocAutofixModule
+  completetime: 4
+  materials:
+    Steel: 150
+    Glass: 100
+    Gold: 40
+
+- type: latheRecipePack
+  id: WFWolfmedAutodocPrograms
+  recipes:
+  - WFAutodocProgramDiskTransplant
+  - WFAutodocProgramDiskLimb
+  - WFAutodocProgramDiskNeuro
+  - WFAutodocProgramDiskCavity
+  - WFAutodocDefibModule
+  - WFAutodocAutofixModule

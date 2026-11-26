@@ -13,8 +13,8 @@ namespace Content.IntegrationTests.Tests.GameTestTests;
 [TestOf(typeof(SidedDependencyAttribute))]
 public sealed class DependencyTests : GameTest
 {
-    [SidedDependency(Side.Server)] private readonly GameTicker _sGameTicker = null!;
-    [SidedDependency(Side.Client)] private readonly GameTicker _cGameTicker = null!;
+    [SidedDependency(Side.Server)] private readonly ServerGameTicker _sGameTicker = null!;
+    [SidedDependency(Side.Client)] private readonly ServerGameTicker _cGameTicker = null!;
     [SidedDependency(Side.Server)] private readonly EntityQuery<TransformComponent> _sXformQuery = default!;
 
     [Test]

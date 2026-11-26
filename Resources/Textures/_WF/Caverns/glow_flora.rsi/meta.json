@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Recoloured for Wolfgate by Tools/_WF/Caverns/gen_flavour.py from chanterelle (vgstation13 commit 1dbcf389b0ec6b2c51b002df5fef8dd1519f8068), lingzhi, aloe, spacemans_trumpet and glasstle (tgstation commit 40d89d11ea4a5cb81d61dc1018b46f4e7d32c62a) and the flora anomaly bulb by TheShuEd (CC0-1.0)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "glowcaps"
+    },
+    {
+      "name": "glowcaps_glow"
+    },
+    {
+      "name": "ember_lichen"
+    },
+    {
+      "name": "ember_lichen_glow"
+    },
+    {
+      "name": "lamp_agave"
+    },
+    {
+      "name": "lamp_agave_glow"
+    },
+    {
+      "name": "shadow_bloom"
+    },
+    {
+      "name": "shadow_bloom_glow"
+    },
+    {
+      "name": "rime_thistle"
+    },
+    {
+      "name": "rime_thistle_glow"
+    },
+    {
+      "name": "nerve_cluster",
+      "delays": [
+        [
+          0.25625,
+          0.25625,
+          0.25625,
+          0.25625
+        ]
+      ]
+    },
+    {
+      "name": "nerve_cluster_glow",
+      "delays": [
+        [
+          0.25625,
+          0.25625,
+          0.25625,
+          0.25625
+        ]
+      ]
+    }
+  ]
+}

@@ -90,7 +90,7 @@ public sealed partial class ToggleableClothingRadialMenu : RadialMenu
             castChild.OnButtonDown += _ =>
             {
                 SendToggleClothingMessageAction?.Invoke(castChild.AttachedClothingId);
-                mainControl.DisposeAllChildren();
+                mainControl.RemoveAllChildren();
                 RefreshUI();
             };
         }

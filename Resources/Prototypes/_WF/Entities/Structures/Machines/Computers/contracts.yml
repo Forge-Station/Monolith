@@ -1,0 +1,254 @@
+# The contract board and everything its contracts put in the world.
+
+- type: entity
+  parent: BaseStructure
+  id: WFContractBoard
+  name: contract board
+  description: The sector's open contract exchange. Deliveries, hauling, supply, mining, bounties, salvage, science and escorts, posted by every station that pays.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: bounty
+      shader: unshaded
+    - state: tech_key
+      shader: unshaded
+  - type: Icon
+    sprite: Structures/Machines/computers.rsi
+    state: computer
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ActivatableUI
+    key: enum.WFContractBoardUiKey.Key
+    requireActiveHand: false
+  - type: UserInterface
+    interfaces:
+      enum.WFContractBoardUiKey.Key:
+        type: WFContractBoardBoundUserInterface
+  - type: WFContractBoard
+  - type: GuideHelp
+    guides:
+    - WFContracts
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+    lightMask: ConeSingle
+    autoRot: true
+    offset: "0, 0.4"
+    castShadows: false
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+      params:
+        volume: -1
+        variation: 0.10
+        pitch: 1.10
+
+- type: entity
+  parent: WFContractBoard
+  id: WFContractBoardTSF
+  name: TSF requisitions board
+  description: "Naval requisitions for Federation personnel and civilians: patrols, war materiel and convoys, paid in thalers and Federation credits."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: security
+      shader: unshaded
+    - state: security_key
+      shader: unshaded
+  - type: WFContractBoard
+    board: TSF
+  - type: PointLight
+    color: "#6fb6ff"
+
+# Forge-Change: ВКР board. The old USSP prototype stays so unused Camelot maps still load.
+- type: entity
+  parent: WFContractBoard
+  id: WFContractBoardRenegate
+  name: Renegate requisitions board
+  description: "Renegate requisitions: patrols, war materiel and convoys, paid in thalers and Federation credits."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: comm
+      shader: unshaded
+    - state: tech_key
+      shader: unshaded
+  - type: WFContractBoard
+    board: Renegate
+  - type: PointLight
+    color: "#6B2D2D"
+
+# Forge-Change: СИВ board. The old PDV prototype stays so unused Helios maps still load.
+- type: entity
+  parent: WFContractBoard
+  id: WFContractBoardSIV
+  name: SIV requisitions board
+  description: "SIV requisitions: patrols, war materiel and convoys, paid in thalers and Federation credits."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: syndishuttle
+      shader: unshaded
+    - state: syndie_key
+      shader: unshaded
+  - type: WFContractBoard
+    board: SIV
+  - type: PointLight
+    color: "#ab7a52"
+
+- type: entity
+  parent: WFContractBoard
+  id: WFContractBoardUSSP
+  name: Commissariat board
+  description: "The Commissariat posts the freeport's needs for its own people: rations, reactor fuel, defence of the lanes."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: comm
+      shader: unshaded
+    - state: tech_key
+      shader: unshaded
+  - type: WFContractBoard
+    board: USSP
+  - type: PointLight
+    color: "#d0573f"
+
+- type: entity
+  parent: WFContractBoard
+  id: WFContractBoardPDV
+  name: quartermaster's board
+  description: "The Dynasty Quartermaster's list of prizes, plunder and stores wanted at Helios, paid in thalers and doubloons."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: syndishuttle
+      shader: unshaded
+    - state: syndie_key
+      shader: unshaded
+  - type: WFContractBoard
+    board: PDV
+  - type: PointLight
+    color: "#d4a83a"
+
+# Devices and targets placed aboard derelicts by contracts.
+
+# Repair: weld it whole and fit a power cell. Starts damaged.
+- type: entity
+  id: WFContractNavBeacon
+  name: derelict nav beacon
+  description: A navigation beacon knocked out of service. It needs welding and a fresh power cell.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Objects/Devices/station_beacon.rsi
+    state: icon
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Repairable
+    doAfterDelay: 4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        whitelist:
+          components:
+          - PowerCell
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+
+# Download: a crewmate stands by it while it runs.
+- type: entity
+  id: WFContractDataTerminal
+  name: derelict data terminal
+  description: A terminal still holding data worth having. Stay close while it downloads; something else wants it too.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: comm_logs
+      shader: unshaded
+  - type: InteractionOutline
+  - type: Clickable
+

@@ -285,6 +285,7 @@
     - Ointment
     - Gauze
     - Bloodpack
+    - WFWolfmedSuture # WOLFGATE(Wolfmed): playtest 5: sutures found in more places.
     chance: 0.7
     offset: 0.0
     rarePrototypes:
@@ -313,6 +314,7 @@
     - Brutepack1
     - Ointment1
     - Gauze1
+    - WFWolfmedSuture1 # WOLFGATE(Wolfmed): playtest 5: sutures found in more places.
     chance: 1.0
     offset: 0.0
 

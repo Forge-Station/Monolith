@@ -1,0 +1,92 @@
+# Tail Markings
+
+#STARLIGHT START
+# - type: marking
+#   id: VulpTailFennec
+#   bodyPart: Tail
+#   markingCategory: Tail
+#   speciesRestriction: [ Vulpkanin ]
+#   sprites:
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: fennec
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: fennec-tip
+
+# - type: marking
+#   id: VulpTailFluffy
+#   bodyPart: Tail
+#   markingCategory: Tail
+#   speciesRestriction: [ Vulpkanin ]
+#   sprites:
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: fluffy
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: fluffy-tip
+
+# - type: marking
+#   id: VulpTailHusky
+#   bodyPart: Tail
+#   markingCategory: Tail
+#   speciesRestriction: [ Vulpkanin ]
+#   sprites:
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: husky
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: husky-inner
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: husky-outer
+
+# - type: marking
+#   id: VulpTailLong
+#   bodyPart: Tail
+#   markingCategory: Tail
+#   speciesRestriction: [ Vulpkanin ]
+#   sprites:
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: long
+#     - sprite: Mobs/Customization/Vulpkanin/tail_markings.rsi
+#       state: long-tip
+
+# STARLIGHT END
+# Wolfgate: ported from HardLight
+- type: marking
+  id: VulpTailVulp
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Canine]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    vulp_BEHIND: TailBehind
+    vulp-tip_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    vulp_BEHIND: vulp_FRONT
+    vulp-tip_BEHIND: vulp-tip_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - split art
+      state: vulp_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - split art
+      state: vulp-tip_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: vulp_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: vulp-tip_BEHIND
+
+- type: marking
+  id: VulpTailVulpFade
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin, Canine]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    vulp_BEHIND: TailBehind
+    vulp-fade_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    vulp_BEHIND: vulp_FRONT
+    vulp-fade_BEHIND: vulp-fade_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - split art
+      state: vulp_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - split art
+      state: vulp-fade_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: vulp_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Vulpkanin/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+      state: vulp-fade_BEHIND

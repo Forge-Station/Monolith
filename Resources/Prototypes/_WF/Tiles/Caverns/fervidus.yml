@@ -1,0 +1,18 @@
+# The Cinder Vaults' zone floors, laid inside a rim of chamber ash. Like every cavern floor each is indestructible,
+# can't be dug and has no base turf.
+
+# Obsidian galleries: near-black volcanic glass.
+- type: tile
+  id: WFCavernFloorObsidian
+  parent: RMCPlanetHybrisaShale
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+# Sulphur vents: yellow crust round the vents.
+- type: tile
+  id: WFCavernFloorSulphur
+  parent: NovaFloorGrassLavaland
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""

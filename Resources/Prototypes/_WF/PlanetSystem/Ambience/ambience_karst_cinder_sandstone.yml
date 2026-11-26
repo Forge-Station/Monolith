@@ -1,0 +1,52 @@
+# What a listener hears underground in the Underkarst, the Cinder Vaults and the Sandstone Galleries: a cave bed in
+# place of the muffled surface one, with now and then a far-off fall of rock. The beds are vanilla ambience, set
+# to sit near the surface beds' loudness. A cavern names its soundscape with `ambience`; these belong to no surface.
+
+# The Underkarst: a hollow cave bed, water running and splashing somewhere in the dark.
+- type: wfPlanetAmbience
+  id: WFCavernAmbienceAsclepiu
+  loops:
+  - path: /Audio/Ambience/ambicave.ogg
+  - path: /Audio/Ambience/ambimine.ogg
+  oneShots:
+  - path: /Audio/Effects/waterswirl.ogg
+  - path: /Audio/Ambience/Objects/drain.ogg
+  - path: /Audio/Effects/break_stone.ogg
+  loopVolume: -11
+  hullVolumeOffset: -6
+  oneShotVolume: -8
+  minInterval: 18
+  maxInterval: 50
+
+# The Cinder Vaults: the roar of lava in the tubes, with a deep rumble now and then.
+- type: wfPlanetAmbience
+  id: WFCavernAmbienceFervidus
+  loops:
+  - path: /Audio/Ambience/ambilava1.ogg
+  - path: /Audio/Ambience/ambilava3.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/o_ambience_disaster_fire1.ogg
+  oneShots:
+  - path: /Audio/_WF/LivingWorld/ambience/o_ambience_disaster_rumble1.ogg
+  - path: /Audio/Magic/rumble.ogg
+  - path: /Audio/Effects/sizzle.ogg
+  loopVolume: -12
+  hullVolumeOffset: -6
+  oneShotVolume: -9
+  minInterval: 16
+  maxInterval: 45
+
+# The Sandstone Galleries: wind through the shafts over a dry, hollow bed, and sand and stone shifting.
+- type: wfPlanetAmbience
+  id: WFCavernAmbienceMerak
+  loops:
+  - path: /Audio/_WF/LivingWorld/ambience/wind1.ogg
+  - path: /Audio/Ambience/ambimine.ogg
+  oneShots:
+  - path: /Audio/Effects/break_stone.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/wind_fall.ogg
+  - path: /Audio/Ambience/ambiruin2.ogg
+  loopVolume: -9
+  hullVolumeOffset: -6
+  oneShotVolume: -9
+  minInterval: 20
+  maxInterval: 55

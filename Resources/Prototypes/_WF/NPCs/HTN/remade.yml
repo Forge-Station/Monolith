@@ -1,0 +1,40 @@
+- type: htnCompound
+  id: WFRemadeHuntCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: MeleeCombatCompound
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFRemadeHunt
+    tasks:
+    - !type:HTNPrimitiveTask
+      # The Director owns this key and clears it when the Remade gets there. Letting the move drop it when the plan ended,
+      # which a one-task plan does at once, left a Remade that took a single step towards what it heard and then wandered.
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFRemadeHunt
+        removeKeyOnFinish: false
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+- type: htnCompound
+  id: WFRemadeInfectorCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFPickCorpseOperator
+        targetKey: WFRemadeCorpse
+        coordinatesKey: WFRemadeCorpseCoordinates
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFRemadeCorpseCoordinates
+        rangeKey: MeleeRange
+    - !type:HTNPrimitiveTask
+      operator: !type:WFReanimateOperator
+        targetKey: WFRemadeCorpse
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFRemadeHuntCompound

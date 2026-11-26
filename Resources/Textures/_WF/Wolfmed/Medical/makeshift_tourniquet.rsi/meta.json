@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Recoloured for Wolfgate (Wolfmed) from the DeltaV tourniquet (_DV/Objects/Specific/medical.rsi): sprite by PoorMansDreams (GitHub), in-hand sprites by SeamLesss (GitHub)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "tourniquet"
+        },
+        {
+            "name": "tourniquet-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "tourniquet-inhand-right",
+            "directions": 4
+        }
+    ]
+}

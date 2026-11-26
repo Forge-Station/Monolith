@@ -8,6 +8,10 @@
     snap:
     - Wall
   components:
+  # WOLFGATE(Xenonids): xeno weeds do not grow on liquid or chasm tiles
+  - type: BlockWeeds
+  # WOLFGATE(Xenonids): resin, nodes and tunnels do not go on liquid or chasm tiles
+  - type: BlockXenoConstruction
   - type: FloorOccluder
   - type: Transform
     anchored: true
@@ -73,6 +77,10 @@
     snap:
     - Wall
   components:
+  # WOLFGATE(Xenonids): xeno weeds do not grow on liquid or chasm tiles
+  - type: BlockWeeds
+  # WOLFGATE(Xenonids): resin, nodes and tunnels do not go on liquid or chasm tiles
+  - type: BlockXenoConstruction
   - type: FloorOccluder
   - type: Transform
     anchored: true
@@ -138,3 +146,5 @@
   - type: TileEntityEffect
     effects:
     - !type:ExtinguishReaction
+  # WOLFGATE(GroundCover): lakes and ponds freeze over in cold air
+  - type: WFFreezableWater

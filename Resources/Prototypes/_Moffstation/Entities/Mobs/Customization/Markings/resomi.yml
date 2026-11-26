@@ -3,7 +3,7 @@
   id: ResomiFluffHead
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_head_markings.rsi
     state: fluff_head
@@ -12,7 +12,7 @@
   id: ResomiFluffHeadUp
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_head_markings.rsi
     state: fluff_head_up
@@ -197,7 +197,7 @@
   id: ResomiFluff
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_markings.rsi
     state: fluff
@@ -328,7 +328,7 @@
   id: ResomiLArmFeathers
   bodyPart: LHand
   markingCategory: Arms
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_arm_markings.rsi
     state: l_hand_feathers
@@ -337,7 +337,7 @@
   id: ResomiRArmFeathers
   bodyPart: RHand
   markingCategory: Arms
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_arm_markings.rsi
     state: r_hand_feathers
@@ -383,7 +383,7 @@
   id: ResomiLLegFeathers
   bodyPart: LFoot
   markingCategory: Legs
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_leg_markings.rsi
     state: l_foot_feathers
@@ -392,7 +392,7 @@
   id: ResomiRLegFeathers
   bodyPart: RFoot
   markingCategory: Legs
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_leg_markings.rsi
     state: r_foot_feathers

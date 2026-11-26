@@ -1,0 +1,4 @@
+- files: ["gasp_female1.ogg", "gasp_female2.ogg", "gasp_female3.ogg", "gasp_female4.ogg", "gasp_female5.ogg", "gasp_female6.ogg", "gasp_female7.ogg", "gasp_female8.ogg", "gasp_female9.ogg", "gasp_female10.ogg", "gasp_female11.ogg", "gasp_female12.ogg", "gasp_female13.ogg", "gasp_male1.ogg", "gasp_male2.ogg", "gasp_male3.ogg", "gasp_male4.ogg", "gasp_male5.ogg", "gasp_male6.ogg", "gasp_male7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/emotes, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9. Downmixed to mono."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/emotes"

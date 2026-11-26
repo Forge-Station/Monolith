@@ -11,6 +11,7 @@
   - type: Clothing
     sprite: _NF/Clothing/Head/Hoods/Coat/acid_raincoat.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Caustic: 0.9

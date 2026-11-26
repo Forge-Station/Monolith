@@ -1,0 +1,27 @@
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: WFClothingHeadHelmetHardsuitReaver
+  name: reaver raider helmet
+  description: A death squad helmet in Ashfall red. The lenses still glow; the electronics behind them are long gone.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-vox:
+      - state: equipped-HELMET-vox
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+
+- type: entity
+  parent: ClothingHeadEVAHelmetBase
+  id: WFAsfClothingHeadEVA
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/eva.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/eva.rsi

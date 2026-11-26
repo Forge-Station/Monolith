@@ -4,14 +4,15 @@
   - ClothingNeckViperGroupMantle
   - ClothingUniformJumpsuitViperGroupUniform
   - ClothingUniformJumpsuitViperGroupTurtleneck
-  - ClothingUniformJumpsuitViperGroupTankTop # Forge-change
   - ClothingOuterHardsuitViperGroupInitiate
   - ClothingOuterHardsuitViperGroupStandard
   - ClothingOuterHardsuitViperGroupMedic
   - ClothingOuterHardsuitViperGroupJuggernaut
-  - ClothingShoesBootsMagViperGroup # Forge-change
+  - ClothingOuterHardsuitViperGroupShield
   - ShipVoucherVGWolf
-  - ShipVoucherVGLance # Forge-change
+  - ShipVoucherVGKeelback
+  - ShipVoucherVGLancehead
+  - ShipVoucherVGLeviathan
 
 - type: latheRecipePack
   id: MonoViperGroupStatic

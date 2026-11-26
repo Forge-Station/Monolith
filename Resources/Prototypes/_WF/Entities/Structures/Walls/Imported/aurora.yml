@@ -1,0 +1,115 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraBamboowood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bamboowood_aurora.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bamboowood_aurora.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraDiona
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diona_aurora.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diona_aurora.rsi
+  - type: IconSmooth
+    key: walls
+    base: diona
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraKonyang
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/konyang_aurora.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/konyang_aurora.rsi
+  - type: IconSmooth
+    key: walls
+    base: map_white
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraMarble
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/marble_aurora.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/marble_aurora.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraShuttle
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_dark.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_dark.rsi
+  - type: IconSmooth
+    key: walls
+    base: map-shuttle
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraVaurca
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/vaurca_aurora.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/vaurca_aurora.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: AuroraSupermatter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/space_aurora.rsi
+    layers:
+    - state: bluespace-n
+      shader: unshaded
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/space_aurora.rsi
+    state: bluespace-n
+  - type: PointLight
+    radius: 8
+    energy: 3
+    color: "#3366cc"

@@ -3,6 +3,7 @@ using Content.Client._Forge.JoinQueue; // Forge-Change
 using Content.Client._Forge.Sponsor; // Forge-Change
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
+using Content.Client._Common.Consent; // WOLFGATE
 using Content.Client.Chat.Managers;
 using Content.Client.Clickable;
 using Content.Client.DebugMon;
@@ -29,6 +30,7 @@ using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client._Mono.Company; // Mono
+using Content.Client._WF.GameHub;
 // using Content.Client._Mono.MonoCoins; // Forge-Change: MonoCoins disabled
 using Content.Client.Corvax.ExportSprites; // Corvax-Wiki
 
@@ -48,6 +50,7 @@ namespace Content.Client.IoC
             collection.Register<IChatManager, ChatManager>();
             collection.Register<ISharedChatManager, ChatManager>();
             collection.Register<IClientPreferencesManager, ClientPreferencesManager>();
+            collection.Register<IClientConsentManager, ClientConsentManager>(); // WOLFGATE - consent system
             collection.Register<IStylesheetManager, StylesheetManager>();
             collection.Register<IScreenshotHook, ScreenshotHook>();
             collection.Register<FullscreenHook, FullscreenHook>();
@@ -71,6 +74,7 @@ namespace Content.Client.IoC
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
             collection.Register<TitleWindowManager>();
             collection.Register<CompanyManager>(); // Mono
+            collection.Register<WFGameDataManager>(); // WOLFGATE(GameHub)
 
             // Forge-Change: register sponsor manager on client like in Frontier1
             collection.Register<JoinQueueManager>();

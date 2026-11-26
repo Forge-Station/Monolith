@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "framed0",
+      "directions": 4
+    },
+    {
+      "name": "framed1",
+      "directions": 4
+    },
+    {
+      "name": "framed2",
+      "directions": 4
+    },
+    {
+      "name": "framed3",
+      "directions": 4
+    },
+    {
+      "name": "framed4",
+      "directions": 4
+    },
+    {
+      "name": "framed5",
+      "directions": 4
+    },
+    {
+      "name": "framed6",
+      "directions": 4
+    },
+    {
+      "name": "framed7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

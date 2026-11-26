@@ -1,0 +1,11 @@
+- files:
+  - gon_breath2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/gonarch/gon_breath2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - gon_breath4.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/gonarch/gon_breath4.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

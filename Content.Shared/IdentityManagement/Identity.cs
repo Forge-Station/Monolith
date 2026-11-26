@@ -1,5 +1,7 @@
 ﻿using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement.Components;
+using Content.Shared._WF.RMCCore.IdentityManagement; // WOLFGATE(RMCCore)
+using Content.Shared.Whitelist; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.IdentityManagement;
 
@@ -23,6 +25,18 @@ public static class Identity
             return meta.EntityName; // Identity component and such will not yet have initialized and may throw NREs
 
         var uidName = meta.EntityName;
+
+        // WOLFGATE(RMCCore) START: RMC's FixedIdentity shows whitelisted viewers a fixed name instead
+        if (viewer != null &&
+            ent.TryGetComponent(uid, out FixedIdentityComponent? fixedIdentity) &&
+            fixedIdentity.Name is { } fixedNameId &&
+            ent.System<EntityWhitelistSystem>().IsWhitelistPass(fixedIdentity.Whitelist, viewer.Value))
+        {
+            var fixedEv = new RMCGetFixedIdentityEvent(Loc.GetString(fixedNameId));
+            ent.EventBus.RaiseLocalEvent(uid, ref fixedEv);
+            return fixedEv.Name;
+        }
+        // WOLFGATE END
 
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))
             return uidName;

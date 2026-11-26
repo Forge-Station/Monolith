@@ -1,0 +1,59 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2f4c415e5681333e6de474f1f027087101452d31/icons/obj/structures/barricades.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "handrail_a_0",
+            "directions": 4
+        },
+        {
+            "name": "handrail_b_0",
+            "directions": 4
+        },
+        {
+            "name": "handrail_med",
+            "directions": 4
+        },
+        {
+            "name": "handrail_strata",
+            "directions": 4
+        },
+        {
+            "name": "hr_kutjevo",
+            "directions": 4
+        },
+        {
+            "name": "wire_rail",
+            "directions": 4
+        },
+        {
+            "name": "handrail_hybrisa",
+            "directions": 4
+        },
+        {
+            "name": "plasticroadbarrierred",
+            "directions": 4
+        },
+        {
+            "name": "plasticroadbarrierblue",
+            "directions": 4
+        },
+        {
+            "name": "plasticroadbarrierblack",
+            "directions": 4
+        },
+        {
+            "name": "centerroadbarrier1",
+            "directions": 4
+        },
+        {
+            "name": "centerroadbarrier2",
+            "directions": 4
+        }
+    ]
+}

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._WF.NpcCrew;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -76,15 +77,17 @@ public sealed partial class NcContractGhostRolePerksSystem : EntitySystem
 
     private void OnDamageModify(Entity<DamageableComponent> ent, ref DamageModifyEvent args)
     {
-        if (args.Origin is not { } shooter ||
-            args.Tool is not { } tool ||
-            !TryComp(shooter, out NcContractGhostRolePerksComponent? perks) ||
-            MathHelper.CloseTo(perks.ProjectileDamageMultiplier, 1f) ||
-            !TryComp(tool, out ProjectileComponent? projectile) ||
-            !WeaponMatches(projectile.Weapon, perks.WeaponPrototypes))
-            return;
+        if (args.Origin is { } shooter &&
+            args.Tool is { } tool &&
+            TryComp(shooter, out NcContractGhostRolePerksComponent? perks) &&
+            !MathHelper.CloseTo(perks.ProjectileDamageMultiplier, 1f) &&
+            TryComp(tool, out ProjectileComponent? projectile) &&
+            WeaponMatches(projectile.Weapon, perks.WeaponPrototypes))
+            args.Damage *= perks.ProjectileDamageMultiplier;
 
-        args.Damage *= perks.ProjectileDamageMultiplier;
+        var scale = new WFCrewDamageScaleEvent(args.Origin, args.Damage);
+        RaiseLocalEvent(ent.Owner, ref scale);
+        args.Damage = scale.Damage;
     }
 
     private bool WeaponMatches(EntityUid? weapon, IReadOnlyCollection<string> allowedPrototypes)

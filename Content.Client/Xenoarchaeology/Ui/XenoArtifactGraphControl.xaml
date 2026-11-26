@@ -1,0 +1,8 @@
+<!-- WOLFGATE(Xenoarch) START: wizden's xenoarch rework -->
+<controls:XenoArtifactGraphControl
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.Xenoarchaeology.Ui"
+    HorizontalExpand="True"
+    VerticalExpand="True"
+    MouseFilter="Stop"/>
+<!-- WOLFGATE END -->

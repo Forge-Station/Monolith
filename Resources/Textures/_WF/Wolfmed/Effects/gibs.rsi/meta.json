@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Gib art from https://github.com/EscapeFromNevado/EscapeFromNevado (icons/effects/blood.dmi), split into blood and flesh greyscale masks by Tools/_WF/Wolfmed/gen_wolfmed_gibs.py for Wolfgate (Wolfmed)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "gibmid1"
+    },
+    {
+      "name": "gibmid1_flesh"
+    },
+    {
+      "name": "gib1"
+    },
+    {
+      "name": "gib1_meat"
+    },
+    {
+      "name": "gib2"
+    },
+    {
+      "name": "gib2_flesh"
+    },
+    {
+      "name": "gib2_meat"
+    },
+    {
+      "name": "gib3_0"
+    },
+    {
+      "name": "gib3_1"
+    },
+    {
+      "name": "gib3_2"
+    },
+    {
+      "name": "gib3_3"
+    },
+    {
+      "name": "gib4_0"
+    },
+    {
+      "name": "gib4_0_meat"
+    },
+    {
+      "name": "gib4_1"
+    },
+    {
+      "name": "gib4_1_meat"
+    },
+    {
+      "name": "gib4_2"
+    },
+    {
+      "name": "gib4_2_meat"
+    },
+    {
+      "name": "gib4_3"
+    },
+    {
+      "name": "gib4_3_meat"
+    },
+    {
+      "name": "gib5_0"
+    },
+    {
+      "name": "gib5_1"
+    },
+    {
+      "name": "gib5_2"
+    },
+    {
+      "name": "gib5_3"
+    },
+    {
+      "name": "gib6_0"
+    },
+    {
+      "name": "gib6_0_flesh"
+    },
+    {
+      "name": "gib6_1"
+    },
+    {
+      "name": "gib6_1_flesh"
+    },
+    {
+      "name": "gib6_2"
+    },
+    {
+      "name": "gib6_2_flesh"
+    },
+    {
+      "name": "gib6_3"
+    },
+    {
+      "name": "gib6_3_flesh"
+    }
+  ]
+}

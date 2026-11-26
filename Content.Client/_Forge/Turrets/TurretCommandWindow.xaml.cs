@@ -67,10 +67,10 @@ public sealed partial class TurretCommandWindow : FancyWindow
             _ => "turret-command-mode-neutral-hint",
         });
 
-        TurretList.DisposeAllChildren();
-        FriendlyList.DisposeAllChildren();
-        HostileList.DisposeAllChildren();
-        PresentList.DisposeAllChildren();
+        TurretList.RemoveAllChildren();
+        FriendlyList.RemoveAllChildren();
+        HostileList.RemoveAllChildren();
+        PresentList.RemoveAllChildren();
 
         if (!state.HasServer)
             return;

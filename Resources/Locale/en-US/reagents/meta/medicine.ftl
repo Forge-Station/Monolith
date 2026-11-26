@@ -15,7 +15,8 @@ reagent-desc-bicaridine = An analgesic which is highly effective at treating bru
 
 # Frontier: consistent cryogenics descriptors
 reagent-name-cryoxadone = cryoxadone
-reagent-desc-cryoxadone = A cryogenics chemical. Useful in treating asphyxiation and bloodloss, but only works in temperatures under 213K. It can treat and rejuvenate plants when applied in small doses. Works regardless of the patient being alive or dead.
+# WOLFGATE(Wolfmed): its bloodloss healing is bookkeeping on a wound host; lost blood is the blood level, which it never raises.
+reagent-desc-cryoxadone = A cryogenics chemical. Useful in treating asphyxiation, but only works in temperatures under 213K. It can treat and rejuvenate plants when applied in small doses. Works regardless of the patient being alive or dead.
 
 reagent-name-doxarubixadone = doxarubixadone
 reagent-desc-doxarubixadone = A cryogenics chemical. Heals certain types of cellular damage done by Slimes and improper use of other chemicals. Works regardless of the patient being alive or dead.
@@ -25,10 +26,12 @@ reagent-name-dermaline = dermaline
 reagent-desc-dermaline = An advanced chemical that is more effective at treating burn damage than kelotane.
 
 reagent-name-dexalin = dexalin
-reagent-desc-dexalin = Used for treating minor oxygen deprivation and bloodloss. A required reagent for dexalin plus.
+# WOLFGATE(Wolfmed): its bloodloss healing is bookkeeping on a wound host; lost blood is the blood level, which it never raises.
+reagent-desc-dexalin = Used for treating minor oxygen deprivation. It does not replace lost blood. A required reagent for dexalin plus.
 
 reagent-name-dexalin-plus = dexalin plus
-reagent-desc-dexalin-plus = Used in treatment of extreme cases of oxygen deprivation and bloodloss. Flushes heartbreaker toxin out of the blood stream.
+# WOLFGATE(Wolfmed): its bloodloss healing is bookkeeping on a wound host; lost blood is the blood level, which it never raises.
+reagent-desc-dexalin-plus = Used in treatment of extreme cases of oxygen deprivation. It does not replace lost blood. Flushes heartbreaker toxin out of the blood stream.
 
 reagent-name-epinephrine = epinephrine
 reagent-desc-epinephrine = An effective stabilizing chemical used to keep a critical person from dying to asphyxiation while patching up minor damage during crit. Flushes heartbreaker toxin out the blood stream at the cost of more epinephrine, but may add histamine. Helps reduce stun time. Commonly found in the form of emergency medipens.
@@ -77,7 +80,8 @@ reagent-name-synaptizine = synaptizine
 reagent-desc-synaptizine = A toxic chemical that halves the duration of stuns and knockdowns.
 
 reagent-name-tranexamic-acid = tranexamic acid
-reagent-desc-tranexamic-acid = A blood-clotting medicine used to prevent profuse bleeding. Causes heavier bleeding on overdose. Commonly found in small doses within emergency medipens.
+# WOLFGATE(Wolfmed): on a wound host it clots down to an artery's floor, and its overdose bloodloss is toxin load.
+reagent-desc-tranexamic-acid = A blood-clotting medicine that slows every bleed and stops the lesser ones. A severed artery it only slows. Poisonous on overdose. Commonly found in small doses within emergency medipens.
 
 reagent-name-tricordrazine = tricordrazine
 reagent-desc-tricordrazine = A wide-spectrum stimulant, originally derived from cordrazine. Treats damage of all basic health types, but is most effective on minor wounds. Best used as an additive to other chemicals.
@@ -89,7 +93,8 @@ reagent-name-omnizine = omnizine
 reagent-desc-omnizine = A soothing milky liquid with an iridescent gleam. A well known conspiracy theory says that its origins remain a mystery because revealing the secrets of its production would render most commercial pharmaceuticals obsolete.
 
 reagent-name-ultravasculine = ultravasculine
-reagent-desc-ultravasculine = A complicated anti-toxin solution that quickly flushes out toxin while causing minor stress on the body. Reacts with histamine, duplicating itself while flushing it out. Overdose causes extreme pain.
+# WOLFGATE(Wolfmed): its overdose brute is toxin load on a wound host, more than the overdose still flushes.
+reagent-desc-ultravasculine = A complicated anti-toxin solution that quickly flushes out toxin while causing minor stress on the body. Reacts with histamine, duplicating itself while flushing it out. An overdose poisons more than it cures.
 
 reagent-name-oculine = oculine
 reagent-desc-oculine = A simple saline compound used to treat the eyes via ingestion.

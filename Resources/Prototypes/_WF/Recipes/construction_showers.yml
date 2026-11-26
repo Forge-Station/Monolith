@@ -1,0 +1,63 @@
+- type: constructionGraph
+  id: WFShower
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: frame
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 2
+
+  - node: frame
+    entity: WFShowerFrame
+    edges:
+    - to: start
+      conditions:
+      - !type:EntityAnchored
+        anchored: false
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 2
+      - !type:DeleteEntity
+      steps:
+      - tool: Screwing
+        doAfter: 2
+    - to: shower
+      completed:
+      - !type:SnapToGrid
+      - !type:SetAnchor
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+
+  - node: shower
+    entity: WFShower
+    edges:
+    - to: frame
+      completed:
+      - !type:SetAnchor
+        value: false
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+
+- type: construction
+  name: shower
+  id: WFShower
+  graph: WFShower
+  startNode: start
+  targetNode: shower
+  category: construction-category-furniture
+  description: A shower head that sprays whoever stands under it. Rinses off chemical burns.
+  icon:
+    sprite: _WF/Showers/shower.rsi
+    state: shower
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  canRotate: true
+  conditions:
+  - !type:TileNotBlocked

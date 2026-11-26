@@ -1,0 +1,52 @@
+# Clearing: a nest that keeps spawning carp until destroyed.
+- type: entity
+  id: WFContractCarpNest
+  name: carp nest
+  description: A pulsing knot of anomalous energy that space carp keep crawling out of. Destroy it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    layers:
+    - sprite: Structures/Specific/carp_rift.rsi
+      state: icon
+      color: "#7fb3ff"
+      shader: unshaded
+  - type: InteractionOutline
+  - type: Clickable
+  - type: PointLight
+    color: "#366db5"
+    radius: 4.0
+    energy: 2.0
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: TimedSpawner
+    prototypes:
+    - MobCarpSalvage
+    intervalSeconds: 45
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 2

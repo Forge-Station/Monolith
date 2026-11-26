@@ -1,0 +1,92 @@
+# Snow and tundra.
+- type: tile
+  id: WFFloorThrasciasSnowRough
+  parent: GoonFloorSnowrough
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+- type: tile
+  id: WFFloorThrasciasSnowCalm
+  parent: GoonFloorSnowcalm
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Bare frozen soil; the only brown ground on the planet.
+- type: tile
+  id: WFFloorThrasciasFrozenDirt
+  parent: FloorAsteroidSand
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Dug snow rings the frozen dirt, so the brown ground fades into white instead of meeting it.
+- type: tile
+  id: WFFloorThrasciasSnowDug
+  parent: FloorSnowDug
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Pack ice and frozen lakes. Cracked ice grips; the smooth and lake ice is as slippery as the old FloorIce.
+# The clear, lake and smooth ice are FloorIce, whose sprite is slightly see-through, so the layer below shows through.
+- type: tile
+  id: WFFloorThrasciasPackIce
+  parent: RMCPlanetIce0
+  weather: true
+
+- type: tile
+  id: WFFloorThrasciasRoughIce
+  parent: GoonFloorWaterIceRough
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Clear ice that grips, where the dark ice did.
+- type: tile
+  id: WFFloorThrasciasClearIce
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 1
+  mobAcceleration: 1
+
+- type: tile
+  id: WFFloorThrasciasClearIceSmooth
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 0.05
+  mobAcceleration: 0.1
+
+# The bed of a lake (WFThrasciasLakeWater): grippy, as the water over it gives the slide while frozen.
+- type: tile
+  id: WFFloorThrasciasLakeIce
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 1
+  mobAcceleration: 1
+
+# A lake of real water that freezes by the air, like every world's. Thrascias air is far below freezing, so it reads
+# as ice; its iceFriction and iceAcceleration are the old lake tile's.
+- type: entity
+  id: WFThrasciasLakeWater
+  parent: MonoFloorWaterEntity
+  name: lake water
+  components:
+  - type: WFFreezableWater
+    iceFriction: 0.05
+    iceAcceleration: 0.1
+
+# Frozen plasma growth: the ground round every plasma pool.
+- type: tile
+  id: WFFloorThrasciasCrystalIce
+  parent: AuroraFloorExoplanetCrystal
+  weather: true
+  indestructible: true
+  isSubfloor: true

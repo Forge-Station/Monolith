@@ -10,13 +10,13 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._Forge.Clothing.EntitySystems;
 
-public sealed class ClothingStyleCyclerSystem : EntitySystem
+public sealed partial class ClothingStyleCyclerSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private ClothingSystem _clothing = default!;
-    [Dependency] private readonly SharedItemSystem _itemSys = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedItemSystem _itemSys = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

@@ -5,7 +5,7 @@ namespace Content.Shared._DV.Mail;
 /// <summary>
 /// Generic random weighting dataset to use.
 /// </summary>
-[Prototype("mailDeliveryPool")]
+[Prototype]
 public sealed partial class MailDeliveryPoolPrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;

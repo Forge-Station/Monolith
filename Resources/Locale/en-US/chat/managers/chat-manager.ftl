@@ -169,3 +169,14 @@ chat-speech-verb-name-electricity = Electricity
 chat-speech-verb-electricity-1 = crackles
 chat-speech-verb-electricity-2 = buzzes
 chat-speech-verb-electricity-3 = screeches
+
+# Wolfgate: ported from HardLight
+chat-speech-verb-name-felionoid = Felionoid
+chat-speech-verb-felionoid-1 = mews
+chat-speech-verb-felionoid-2 = purrs
+chat-speech-verb-felionoid-3 = meows
+chat-speech-verb-felionoid-4 = chirps
+
+# Wolfgate: ported from HardLight (Shadekin)
+chat-speech-verb-name-shadowkin = Shadowkin
+chat-speech-verb-shadowkin-1 = says

@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/04/2025 15:56:58
-  entityCount: 251
+  entityCount: 259
 maps: []
 grids:
 - 1
@@ -670,6 +670,11 @@ entities:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
+  - uid: 259
+    components:
+    - type: Transform
+      pos: 3.5,-0.5
+      parent: 1
 - proto: CableHV
   entities:
   - uid: 102
@@ -997,6 +1002,62 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
+- proto: ConveyorBelt
+  entities:
+  - uid: 253
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
+  - uid: 254
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
+  - uid: 255
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
+  - uid: 256
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
+  - uid: 257
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
+  - uid: 258
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,-0.5
+      parent: 1
+    - type: DeviceLinkSink
+      links:
+      - 252
 - proto: DarkCatwalkMono
   entities:
   - uid: 135
@@ -1702,6 +1763,57 @@ entities:
       rot: 3.141592653589793 rad
       pos: 0.5,-3.5
       parent: 1
+- proto: TwoWayLever
+  entities:
+  - uid: 252
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+    - type: DeviceLinkSource
+      linkedPorts:
+        253:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
+        254:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
+        255:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
+        256:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
+        257:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
+        258:
+        - - Left
+          - Forward
+        - - Right
+          - Reverse
+        - - Middle
+          - 'Off'
 - proto: WallReinforced
   entities:
   - uid: 210

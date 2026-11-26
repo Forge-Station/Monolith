@@ -1,7 +1,6 @@
 ﻿using Content.Shared.StatusIcon;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SSDIndicator;
 
@@ -9,7 +8,7 @@ namespace Content.Shared.SSDIndicator;
 ///     Shows status icon when player in SSD
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(true)] // WOLFGATE - raise AfterAutoHandleState so anatomy visuals follow disconnects
 public sealed partial class SSDIndicatorComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]

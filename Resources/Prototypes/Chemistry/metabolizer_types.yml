@@ -44,3 +44,20 @@
 - type: metabolizerType
   id: Arachnid
   name: metabolizer-type-arachnid
+
+# Wolfgate: ported from HardLight - metabolizer types for the ported species.
+- type: metabolizerType #🌟Starlight🌟
+  id: Avali
+  name: metabolizer-type-avali
+
+- type: metabolizerType #🌟Starlight🌟
+  id: Resomi
+  name: metabolizer-type-resomi
+
+- type: metabolizerType # HardLight
+  id: Synth
+  name: metabolizer-type-synth
+
+- type: metabolizerType
+  id: Thaven
+  name: metabolizer-type-thaven

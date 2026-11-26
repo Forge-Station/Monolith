@@ -8,6 +8,7 @@ namespace Content.Client.SubFloor;
 
 public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
 
@@ -75,7 +76,7 @@ public sealed partial class SubFloorHideSystem : SharedSubFloorHideSystem
         var hasVisibleLayer = false;
         foreach (var layerKey in component.VisibleLayers)
         {
-            if (!args.Sprite.LayerMapTryGet(layerKey, out var layerIndex))
+            if (!_sprite.LayerMapTryGet((uid, args.Sprite), layerKey, out var layerIndex, false))
                 continue;
 
             var layer = args.Sprite[layerIndex];

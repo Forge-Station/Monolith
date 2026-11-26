@@ -1,4 +1,4 @@
-﻿using Content.Server.Worldgen.Components.Debris;
+using Content.Server.Worldgen.Components.Debris;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -27,7 +27,7 @@ public sealed partial class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
     {
         var placeables = new List<string?>(4);
         var grid = Comp<MapGridComponent>(uid);
-        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        var enumerator = _map.GetAllTiles(uid, grid);
         while (enumerator.MoveNext(out var tile))
         {
             var coords = _map.GridTileToLocal(uid, grid, tile.Value.GridIndices);

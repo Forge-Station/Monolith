@@ -1,0 +1,24 @@
+# Client fonts for the chat fonts that had none. Default and BoxRound come from Resources/Prototypes/fonts.yml.
+
+- type: font
+  id: WFRobotoMono
+  path: /Fonts/RobotoMono/RobotoMono-Regular.ttf
+
+- type: font
+  id: WFIceberg
+  path: /Fonts/Iceberg/Iceberg-Regular.ttf
+
+- type: font
+  id: WFFondamento
+  path: /Fonts/Fondamento-Regular.ttf
+
+- type: font
+  id: WFMinecraftia
+  path: /Fonts/Minecraftia.ttf
+
+# The Automated Defense System's face: Minecraftia (already shipped under Resources/Fonts), a pixel font that reads as a
+# machine readout. The synth speech verb and the system's banners use it; size 10 sits at chat height.
+- type: font
+  id: WFAdsSynth
+  path: /Fonts/Minecraftia.ttf
+

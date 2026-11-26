@@ -134,6 +134,7 @@ namespace Content.Server.NPC.Pathfinding
             LastFrameProcessedRequests = amount;
             LastFrameCompletedRequests = 0;
 
+            WfHoldForGround(amount); // WOLFGATE(Planets): requests across unbuilt planet ground wait for it
 
             Parallel.For(0, amount, options, i =>
             {
@@ -143,6 +144,14 @@ namespace Content.Server.NPC.Pathfinding
                     results[i] = PathResult.Continuing;
                     return;
                 }
+
+                // WOLFGATE(Planets) START: held until the planet ground on its way is built
+                if (WfHeld(_pathRequests[i]))
+                {
+                    results[i] = PathResult.Continuing;
+                    return;
+                }
+                // WOLFGATE END
 
                 var request = _pathRequests[i];
 

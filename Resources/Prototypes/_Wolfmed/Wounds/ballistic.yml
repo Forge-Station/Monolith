@@ -1,0 +1,196 @@
+# Ballistic wounds (W1). All four are `ruleOnly`: the default per-damage-type pass never creates them,
+# wolfmedWoundRule prototypes in wound_rules.yml do. They still list Piercing under damageTypes, which is
+# what lets sutures and damage removal heal them afterwards.
+#
+# The two wounds that hold an object use `healingMultiplier: 0` and `clottingMultiplier: 0`: nothing closes
+# them and they never clot on their own while something is still in there. Pulling the object out removes
+# WolfmedEmbeddedObject, and from that moment they heal and clot like any other puncture.
+
+- type: wound
+  id: WFWolfmedGrazeWound
+  name: wolfmed-wound-name-graze
+  analyzerCategory: Ballistic
+  ruleOnly: true
+  damageTypes:
+    Piercing:
+      reopenMinimumDamage: 6
+      severityMultiplier: 1
+  maximumSeverity: 30
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.4
+    minSeverity: 3
+  - !type:WoundScarBehavior
+    threshold: 20
+    chance: 0.25
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.12
+        minimumSeverity: 2
+        clottingMultiplier: 0.4
+
+- type: wound
+  id: WFWolfmedGunshotWound
+  name: wolfmed-wound-name-gunshot
+  analyzerCategory: Ballistic
+  ruleOnly: true
+  damageTypes:
+    Piercing:
+      reopenMinimumDamage: 14
+      severityMultiplier: 1
+  maximumSeverity: 200
+  healingMultiplier: 0.15
+  behaviors:
+  # W5: infection risk. A bullet takes cloth and dirt in with it.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 1.6
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.8
+    minSeverity: 6
+  - !type:WoundScarBehavior
+    threshold: 12
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.25
+        minimumSeverity: 5
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.3
+        minimumSeverity: 5
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WoundFunctionalityBehavior
+        state: Impaired
+      - !type:WoundBleedingBehavior
+        rate: 0.35
+        minimumSeverity: 5
+    Critical:
+      name: wound-stage-critical
+      severity: 80
+      behaviors:
+      - !type:WoundFunctionalityBehavior
+        state: Disabled
+      - !type:WoundBleedingBehavior
+        rate: 0.4
+        minimumSeverity: 5
+
+- type: wound
+  id: WFWolfmedLodgedRoundWound
+  name: wolfmed-wound-name-lodged-round
+  analyzerCategory: Ballistic
+  ruleOnly: true
+  damageTypes:
+    Piercing:
+      reopenMinimumDamage: 14
+      severityMultiplier: 1
+  maximumSeverity: 200
+  healingMultiplier: 0
+  behaviors:
+  # With the round out it is an ordinary gunshot wound, and is treated as one.
+  - !type:WolfmedClearedWoundBehavior
+    wound: WFWolfmedGunshotWound
+  # W5: infection risk. A round still in the wound is a source of contamination, not just an object.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 2.2
+    dirty: true # playtest 5: a round left in the wound goes bad whatever covers it
+  - !type:WoundPainBehavior
+    painPerSeverity: 1.1
+    minSeverity: 4
+  - !type:WoundScarBehavior
+    threshold: 10
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.22
+        minimumSeverity: 3
+        clottingMultiplier: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.28
+        minimumSeverity: 3
+        clottingMultiplier: 0
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WoundFunctionalityBehavior
+        state: Impaired
+      - !type:WoundBleedingBehavior
+        rate: 0.34
+        minimumSeverity: 3
+        clottingMultiplier: 0
+
+- type: wound
+  id: WFWolfmedShrapnelWound
+  name: wolfmed-wound-name-shrapnel
+  analyzerCategory: Ballistic
+  ruleOnly: true
+  damageTypes:
+    Piercing:
+      reopenMinimumDamage: 8
+      severityMultiplier: 1
+  maximumSeverity: 150
+  healingMultiplier: 0
+  behaviors:
+  # With every fragment out it is a plain puncture.
+  - !type:WolfmedClearedWoundBehavior
+    wound: PiercingWound
+  # W5: infection risk. Fragments carry whatever they came off.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 2.0
+    dirty: true # playtest 5: shrapnel left in the wound goes bad whatever covers it
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.9
+    minSeverity: 3
+  - !type:WoundScarBehavior
+    threshold: 10
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.15
+        minimumSeverity: 2
+        clottingMultiplier: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.2
+        minimumSeverity: 2
+        clottingMultiplier: 0
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WoundFunctionalityBehavior
+        state: Impaired
+      - !type:WoundBleedingBehavior
+        rate: 0.25
+        minimumSeverity: 2
+        clottingMultiplier: 0

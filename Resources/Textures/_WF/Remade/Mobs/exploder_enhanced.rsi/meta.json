@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/exploder/exploder_enhanced.dmi)",
+  "size": {
+    "x": 54,
+    "y": 54
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "enhanced_exploder_chest",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_exploder_head",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_exploder_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_exploder_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_exploder_chest_lying"
+    },
+    {
+      "name": "enhanced_exploder_r_arm_lying"
+    },
+    {
+      "name": "enhanced_exploder_head_lying"
+    },
+    {
+      "name": "enhanced_exploder_l_arm_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

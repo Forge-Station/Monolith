@@ -1,0 +1,28 @@
+# A rivet-gun-style tool: feed it steel sheets by hand, point it at a deck tile, and it bolts a
+# TetherAnchorEye down after a short doafter. MaterialStorage insertion by hand works generically
+# via SharedMaterialStorageSystem's InteractUsingEvent handler - no machine needed.
+- type: entity
+  id: TetherInstaller
+  name: tether installer
+  description: A rivet gun loaded with steel that bolts tether anchor eyes to the deck.
+  components:
+  - type: Sprite
+    sprite: _WF/Tether/installer.rsi
+    state: icon
+  - type: Item
+    sprite: _WF/Tether/installer.rsi
+    size: Normal
+  - type: Clickable
+  - type: InteractionOutline
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+    materialWhiteList:
+    - Steel
+  - type: TetherInstaller
+    materialPerInstall: 200
+    range: 3
+    installDelay: 1.5
+  - type: StaticPrice
+    price: 400

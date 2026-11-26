@@ -1,0 +1,164 @@
+light_mode unshaded;
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp vec2 viewportMin;
+uniform highp vec2 viewportSize;
+uniform highp vec2 eyePos;
+// Bands out from the hold: 1 the Slack's edge, 2 Adrift, 3 Untethered, 4 the Deep, towards 5 far out in it.
+uniform highp float reach;
+
+// How much the sky's own features follow the eye; near 1 they hang still on screen like far parallax.
+const highp float SkySlowness = 0.92;
+const highp float EyeCell = 26.0;
+
+highp float hash1(highp vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+highp vec2 hash2(highp vec2 p) {
+    return vec2(hash1(p), hash1(p + vec2(17.31, 91.7)));
+}
+
+highp float vnoise(highp vec2 p) {
+    highp vec2 i = floor(p);
+    highp vec2 f = fract(p);
+    highp vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash1(i), hash1(i + vec2(1.0, 0.0)), u.x),
+               mix(hash1(i + vec2(0.0, 1.0)), hash1(i + vec2(1.0, 1.0)), u.x), u.y);
+}
+
+highp float fbm(highp vec2 p) {
+    highp float v = 0.0;
+    highp float a = 0.5;
+    for (int i = 0; i < 4; i++) {
+        v += a * vnoise(p);
+        p = p * 2.03 + vec2(1.7, 9.2);
+        a *= 0.5;
+    }
+    return v;
+}
+
+highp vec3 sampleSky(highp vec2 uv) {
+    highp vec2 safe = SCREEN_PIXEL_SIZE * 0.5;
+    return zTextureSpec(SCREEN_TEXTURE, clamp(uv, safe, vec2(1.0) - safe)).rgb;
+}
+
+// An almond eye in the dark, opening now and then and turned towards the viewer. Returns colour and cover.
+highp vec4 watcher(highp vec2 sky, highp vec2 viewer, highp float chance) {
+    highp vec2 cell = floor(sky / EyeCell);
+    highp vec2 h = hash2(cell);
+    if (h.x > chance) {
+        return vec4(0.0);
+    }
+
+    highp vec2 jitter = hash2(cell + 3.7);
+    highp vec2 centre = (cell + 0.25 + 0.5 * jitter) * EyeCell;
+    highp float size = 1.6 + 1.6 * jitter.x;
+    highp vec2 d = (sky - centre) / size;
+    if (abs(d.x) > 1.05 || abs(d.y) > 0.7) {
+        return vec4(0.0);
+    }
+
+    // Open a while, once a slow cycle, with a blink partway.
+    highp float period = 16.0 + 18.0 * h.y;
+    highp float s = fract(TIME / period + jitter.y);
+    highp float open = smoothstep(0.0, 0.07, s) * (1.0 - smoothstep(0.26, 0.34, s));
+    open *= 1.0 - (smoothstep(0.15, 0.16, s) - smoothstep(0.17, 0.185, s));
+    if (open <= 0.001) {
+        return vec4(0.0);
+    }
+
+    highp float lid = open * 0.48 * (1.0 - d.x * d.x);
+    highp float inside = (1.0 - smoothstep(lid - 0.06, lid, abs(d.y))) * (1.0 - smoothstep(0.92, 1.0, abs(d.x)));
+    if (inside <= 0.0) {
+        return vec4(0.0);
+    }
+
+    highp vec2 look = normalize(viewer - centre + vec2(0.001)) * 0.3;
+    highp vec2 iris = d - look;
+    highp float irisMask = 1.0 - smoothstep(0.34, 0.4, length(iris));
+    highp float pupil = (1.0 - smoothstep(0.05, 0.09, abs(iris.x))) * (1.0 - smoothstep(0.26, 0.32, abs(iris.y)));
+    highp vec3 sclera = vec3(0.55, 0.52, 0.38) * (0.6 + 0.4 * (1.0 - abs(d.y) / max(lid, 0.01)));
+    highp vec3 ring = mix(vec3(0.6, 0.05, 0.08), vec3(0.95, 0.35, 0.1), smoothstep(0.35, 0.05, length(iris)));
+    highp vec3 colour = mix(sclera, ring, irisMask);
+    colour = mix(colour, vec3(0.0), pupil * irisMask);
+    return vec4(colour, inside * 0.85);
+}
+
+void fragment() {
+    highp float slack = smoothstep(0.5, 1.6, reach);
+    highp float adrift = smoothstep(1.6, 2.8, reach);
+    highp float unt = smoothstep(2.6, 3.8, reach);
+    highp float deep = smoothstep(3.6, 4.5, reach);
+    highp float abyss = smoothstep(4.2, 5.0, reach);
+
+    highp vec2 world = viewportMin + UV * viewportSize;
+    highp vec2 sky = world - eyePos * SkySlowness;
+    highp vec2 viewer = eyePos * (1.0 - SkySlowness);
+    highp vec2 screenUv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+
+    // A lub-dub every three seconds.
+    highp float beatT = TIME * 2.1;
+    highp float beat = pow(max(sin(beatT), 0.0), 18.0) + 0.6 * pow(max(sin(beatT - 0.7), 0.0), 18.0);
+
+    // From Adrift the stars swim; further out they smear and split.
+    highp vec2 swim = vec2(fbm(sky * 0.05 + vec2(TIME * 0.03, 0.0)), fbm(sky * 0.05 + vec2(31.0, -TIME * 0.025))) - 0.5;
+    highp float swimPx = slack * 2.0 + adrift * 5.0 + unt * 10.0 + deep * 14.0 + deep * beat * 6.0;
+    highp vec2 uv = screenUv + swim * swimPx * SCREEN_PIXEL_SIZE;
+    highp float split = (unt * 1.5 + deep * 2.5) * SCREEN_PIXEL_SIZE.x;
+    highp vec3 col = sampleSky(uv);
+    if (split > 0.0) {
+        col.r = sampleSky(uv + vec2(split, 0.0)).r;
+        col.b = sampleSky(uv - vec2(split, 0.0)).b;
+    }
+    highp float lum = dot(col, vec3(0.299, 0.587, 0.114));
+
+    // Slack: the colour drains and cools.
+    col = mix(col, vec3(lum) * vec3(0.82, 0.95, 1.12), slack * 0.35);
+
+    // Adrift: a sick teal cast and slow drifting murk.
+    lum = dot(col, vec3(0.299, 0.587, 0.114));
+    col = mix(col, vec3(lum) * vec3(0.55, 0.92, 0.8), adrift * 0.45);
+    if (adrift > 0.0 && deep < 1.0) {
+        highp float murk = fbm(sky * 0.012 + vec2(TIME * 0.008, -TIME * 0.005));
+        col += vec3(0.03, 0.09, 0.08) * smoothstep(0.35, 0.8, murk) * adrift * (1.0 - deep);
+    }
+
+    // Untethered: rust and darkness.
+    lum = dot(col, vec3(0.299, 0.587, 0.114));
+    col = mix(col, vec3(lum) * vec3(1.05, 0.38, 0.32), unt * 0.55);
+    col *= 1.0 - unt * 0.25;
+
+    // Only the Coda pays for its veins and watchers.
+    if (deep > 0.0) {
+        // The Deep: the sky goes out in drifting patches, leaving the brightest stars as dim, wrong-coloured pinpricks.
+        lum = dot(col, vec3(0.299, 0.587, 0.114));
+        highp float keep = smoothstep(0.35, 0.8, lum);
+        highp float holes = smoothstep(0.4, 0.62, fbm(sky * 0.018 + vec2(TIME * 0.015, TIME * 0.011)));
+        highp vec3 pinprick = vec3(lum) * vec3(0.75, 0.55, 0.9) * keep * (1.0 - holes * (0.6 + 0.4 * abyss));
+        col = mix(col, pinprick * 0.6, deep * 0.9);
+
+        // Veins crawl under the dark, pulsing with the beat.
+        highp vec2 veinP = sky * 0.035 + swim * 1.5 + vec2(0.0, TIME * 0.01);
+        highp float ridge = 1.0 - abs(fbm(veinP) * 2.0 - 1.0);
+        highp float vein = pow(ridge, 10.0) * (0.55 + 0.45 * fbm(sky * 0.008 - TIME * 0.02));
+        col += vec3(0.42, 0.02, 0.16) * vein * deep * (0.5 + 0.7 * beat + 0.6 * abyss);
+
+        // Something looks back.
+        highp vec4 eye = watcher(sky, viewer, 0.06 + 0.16 * abyss);
+        col = mix(col, eye.rgb, eye.a * deep);
+    }
+
+    // The edges close in, harder on the beat.
+    highp float v = length((screenUv - 0.5) * vec2(1.0, 0.85)) * 1.45;
+    highp float vignette = smoothstep(0.35, 1.05, v) * (slack * 0.1 + adrift * 0.15 + unt * 0.3 + deep * (0.55 + beat * 0.2));
+    col = mix(col, vec3(0.06, 0.0, 0.02) * deep, clamp(vignette, 0.0, 0.95));
+
+    // Grain.
+    highp float grain = hash1(FRAGCOORD.xy + fract(TIME * 7.3) * 97.0) - 0.5;
+    col += grain * (adrift * 0.015 + deep * 0.04);
+
+    COLOR = vec4(max(col, vec3(0.0)), 1.0);
+}

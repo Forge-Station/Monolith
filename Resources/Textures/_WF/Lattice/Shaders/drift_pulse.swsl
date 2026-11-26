@@ -1,0 +1,46 @@
+light_mode unshaded;
+
+// 0 to 1: how far vision has closed.
+uniform highp float strength;
+// The heartbeat's kick, 0 at rest.
+uniform highp float beat;
+// Width over height of the area drawn.
+uniform highp float aspect;
+// Reduced motion: the rim holds still.
+uniform bool still;
+
+highp float hash1(highp vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+highp float vnoise(highp vec2 p) {
+    highp vec2 i = floor(p);
+    highp vec2 f = fract(p);
+    highp vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash1(i), hash1(i + vec2(1.0, 0.0)), u.x),
+               mix(hash1(i + vec2(0.0, 1.0)), hash1(i + vec2(1.0, 1.0)), u.x), u.y);
+}
+
+void fragment() {
+    highp vec2 p = (UV - 0.5) * vec2(aspect, 1.0);
+    highp float d = length(p) / (0.5 * max(aspect, 1.0));
+    highp float a = atan(p.y, p.x);
+
+    // A ragged edge that shifts, so the tunnel's rim crawls.
+    highp float time = still ? 0.0 : TIME;
+    highp float rag = vnoise(vec2(a * 4.0, time * 0.8)) * 0.12 + vnoise(vec2(a * 11.0, time * 1.7)) * 0.05;
+    highp float clear = mix(1.25, 0.42, strength) - 0.1 * beat * strength - rag * strength;
+    highp float dark = smoothstep(clear, clear + 0.35, d);
+
+    // A red bruise just inside the dark, flaring on the beat.
+    highp float edge = (d - clear - 0.04) / 0.09;
+    highp float rim = exp(-edge * edge) * strength * (0.35 + 0.65 * beat);
+    highp vec3 colour = mix(vec3(0.5, 0.02, 0.04) * rim / max(rim + dark, 0.001), vec3(0.02, 0.0, 0.0), dark);
+    highp float alpha = clamp(max(dark * 0.97, rim * 0.55) * strength, 0.0, 0.97);
+
+    // The whole view dims a little on each beat.
+    alpha = max(alpha, 0.18 * beat * strength);
+    COLOR = vec4(colour, alpha);
+}

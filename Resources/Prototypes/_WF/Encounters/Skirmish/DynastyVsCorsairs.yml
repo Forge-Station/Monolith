@@ -1,0 +1,173 @@
+# Two raider bands settling a score: a Dynasty pair against a RedSail corsair in a heavier hull. Either pays for help against the other.
+- type: wfEncounter
+  id: WFEncounterSkirmishBands
+  leash: 2500
+  name: wf-encounter-name-skirmish-bands
+  announcement: wf-encounter-announce-skirmish-bands
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: dynasty
+    spesos: 18000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Scallywag
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing
+
+
+# The same fight with the guard up: every ship warns off and then fires on anything that comes near, the players too, whichever
+# side they are on until they have fought for one. Two raider bands, in the smaller version of it.
+- type: wfEncounter
+  id: WFEncounterHostileSkirmishBands
+  leash: 2500
+  name: wf-encounter-name-skirmish-hostile
+  announcement: wf-encounter-announce-skirmish-hostile
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 5
+  startRadius: 1800
+  cooldown: 3600
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: dynasty
+    spesos: 20000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  - side: corsairs
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing

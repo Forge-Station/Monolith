@@ -120,7 +120,7 @@ public sealed partial class EventManagerSystem : EntitySystem
             if (eventproto.Abstract)
                 continue;
 
-            if (!eventproto.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
+            if (!eventproto.TryComp<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
                 continue;
 
             if (!availableEvents.ContainsKey(eventproto))
@@ -219,7 +219,7 @@ public sealed partial class EventManagerSystem : EntitySystem
             if (prototype.Abstract)
                 continue;
 
-            if (!prototype.TryGetComponent<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
+            if (!prototype.TryComp<StationEventComponent>(out var stationEvent, EntityManager.ComponentFactory))
                 continue;
 
             allEvents.Add(prototype, stationEvent);

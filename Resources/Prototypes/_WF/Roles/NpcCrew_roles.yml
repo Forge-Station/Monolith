@@ -1,0 +1,75 @@
+# Crew roles: the mob, the duty worked, how readily it fights and any components the role adds. The radio operator
+# stands guard at his post; radio and captain reactions run while the HTN sleeps. Gunners operate ship consoles.
+
+- type: wfCrewRole
+  id: WFCrewGunner
+  kit: WFCrewKitGunner
+  mob: WFMobCrewGunner
+  duty: Gunnery
+  engagement: WhenAttacked
+  title: wf-crew-role-gunner
+  order: 25
+
+- type: wfCrewRole
+  id: WFCrewCaptain
+  kit: WFCrewKitOfficer
+  mob: WFMobCrewOfficer
+  duty: Guard
+  engagement: WhenAttacked
+  title: wf-crew-role-captain
+  order: 0
+  components:
+  - type: WFCaptain
+  - type: WFRadioOperator
+  - type: TelecomExempt
+
+- type: wfCrewRole
+  id: WFCrewPilot
+  kit: WFCrewKitOfficer
+  mob: WFMobCrewOfficer
+  duty: Pilot
+  engagement: WhenAttacked
+  title: wf-crew-role-pilot
+  order: 10
+
+- type: wfCrewRole
+  id: WFCrewRadioOperator
+  kit: WFCrewKitOfficer
+  mob: WFMobCrewOfficer
+  duty: Guard
+  engagement: WhenAttacked
+  title: wf-crew-role-radio-operator
+  order: 20
+  components:
+  - type: WFRadioOperator
+  # His own radio set: Shortband away from any telecom server.
+  - type: TelecomExempt
+
+- type: wfCrewRole
+  id: WFCrewMarine
+  mob: WFMobCrewMarine
+  duty: Guard
+  engagement: OnSight
+  title: wf-crew-role-marine
+  order: 30
+
+# Keeps the plant fuelled from the ship's stores and switched on; a deckhand otherwise, and no fighter unless struck.
+- type: wfCrewRole
+  id: WFCrewEngineer
+  kit: WFCrewKitDeckhand
+  mob: WFMobCrewDeckhand
+  duty: Guard
+  engagement: WhenAttacked
+  title: wf-crew-role-engineer
+  order: 35
+  components:
+  - type: WFCrewEngineer
+
+- type: wfCrewRole
+  id: WFCrewDeckhand
+  kit: WFCrewKitDeckhand
+  mob: WFMobCrewDeckhand
+  duty: Guard
+  engagement: OnSight
+  title: wf-crew-role-deckhand
+  order: 40

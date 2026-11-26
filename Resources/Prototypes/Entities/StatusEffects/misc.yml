@@ -1,0 +1,34 @@
+# WOLFGATE(Wolfmed): Onyx's status effect bases, ported without its standing base or concrete effects.
+- type: entity
+  id: StatusEffectBase
+  abstract: true
+  components:
+  - type: StatusEffect
+  - type: Sprite
+    drawdepth: Effects
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: StatusEffectBase
+  id: MobStatusEffectBase
+  abstract: true
+  components:
+  - type: StatusEffect
+    whitelist:
+      components:
+      - MobState
+
+# Things that should be removed by rejuvenation should parent to this
+# Also blocks the status effect being added to godmode-ed entities.
+- type: entity
+  parent: MobStatusEffectBase
+  id: MobStatusEffectDebuff
+  abstract: true
+  components:
+  - type: RejuvenateRemovedStatusEffect
+
+# WOLFGATE(Wolfmed): Onyx's status effect bases, ported without its standing base or concrete effects.
+# MobStandStatusEffectBase and every concrete status effect entity in Onyx's file are dropped: they need the
+# KnockdownImmune tag and status-effect components Wolfgate does not have.

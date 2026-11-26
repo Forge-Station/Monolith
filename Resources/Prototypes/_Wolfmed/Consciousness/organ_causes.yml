@@ -1,0 +1,39 @@
+# M3: the causes organ damage brings (plan §3.6, §5.1). Same shape as causes.yml; the id is the WolfmedCause name.
+
+# A heavy blow to the head: a faint of wolfmed.head_knockout_seconds that nothing extends.
+- type: wolfmedConsciousnessCause
+  id: HeadBlow
+  alertOut: WFWolfmedFaintHeadBlow
+  blockerName: wolfmed-cause-head-blow
+  titleOut: wolfmed-cause-head-blow-title
+  symptom: wolfmed-cause-head-blow-symptom
+  helpOut: wolfmed-cause-head-blow-help
+  helpOutBlocked: wolfmed-cause-head-blow-help-blocked
+  helpOutTimed: wolfmed-cause-head-blow-help-timed
+  out: wolfmed-cause-head-blow-out
+  cardColour: "#e3a33c" # playtest 3: amber, a timed faint
+
+# The brain under wolfmed.consc_brain_down of its health. Downed only; only surgery lifts it.
+- type: wolfmedConsciousnessCause
+  id: Brain
+  alertDowned: WFWolfmedDownedBrain
+  blockerName: wolfmed-cause-brain
+  titleDowned: wolfmed-cause-brain-title
+  symptom: wolfmed-cause-brain-symptom
+  help: wolfmed-cause-brain-help
+  helpBlocked: wolfmed-cause-brain-help-blocked
+  down: wolfmed-cause-brain-down
+  wake: wolfmed-cause-brain-wake
+  stand: wolfmed-cause-brain-stand
+
+# A chassis's positronic core under wolfmed.consc_core_down. Downed only; never a shutdown by itself.
+- type: wolfmedConsciousnessCause
+  id: Core
+  alertDowned: WFWolfmedDownedCore
+  blockerName: wolfmed-cause-core
+  titleDowned: wolfmed-cause-core-title
+  symptom: wolfmed-cause-core-symptom
+  help: wolfmed-cause-core-help
+  down: wolfmed-cause-core-down
+  stand: wolfmed-cause-core-stand
+  syntheticHudLine: wolfmed-synthetic-cause-core

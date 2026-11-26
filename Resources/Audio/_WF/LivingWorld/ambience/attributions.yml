@@ -1,0 +1,71 @@
+- files:
+  - xen_outdoor1_mix.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/ambience/xen_outdoor1_mix.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_swamp1_mix.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/ambience/xen_swamp1_mix.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_nih_wind1_mix.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/ambience/xen_nih_wind1_mix.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - wind1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/ambience/wind1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - o_ambience_disaster_fire1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/object_ambience/o_ambience_disaster_fire1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - o_ambience_disaster_rumble1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/object_ambience/o_ambience_disaster_rumble1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - garg_xen_far01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/soundscape/garg_xen_far01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - boid_xen_medium01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/soundscape/boid_xen_medium01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - towermantas_far01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/soundscape/towermantas_far01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - hawk1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/soundscape/hawk1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - eagle1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/soundscape/eagle1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - wind_fall.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/wind_fall.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

@@ -236,8 +236,8 @@ public sealed partial class TurretControllerWindow : BaseWindow
         // Did something go wrong...?
         if (groupedAccessLevels.Count == 0)
         {
-            AccessGroupList.DisposeAllChildren();
-            AccessLevelGrid.DisposeAllChildren();
+            AccessGroupList.RemoveAllChildren();
+            AccessLevelGrid.RemoveAllChildren();
 
             return;
         }

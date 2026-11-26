@@ -27,7 +27,7 @@ public sealed partial class MagnetPickupSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private SharedItemSystem _item = default!; // Frontier
 
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
 
     private static readonly TimeSpan ScanDelay = TimeSpan.FromSeconds(1);
     private const int MaxEntitiesToInsert = 15; // Frontier

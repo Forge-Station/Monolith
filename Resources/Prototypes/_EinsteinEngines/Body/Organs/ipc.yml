@@ -14,7 +14,7 @@
     solutions:
       organ:
         reagents:
-        - ReagentId: Oil
+        - ReagentId: WFWolfmedHydraulicFluid # WOLFGATE(Wolfmed): playtest 3 IPC 2: the chassis's own fluid, not Oil
           Quantity: 10
 
 - type: entity
@@ -53,7 +53,7 @@
 
 - type: entity
   id: OrganIPCPump
-  parent: BaseIPCOrgan
+  parent: [BaseIPCOrgan, WFWolfmedOrganIpcPump] # WOLFGATE(Wolfmed): BRAIN: organ health, so the pump can be broken
   name: micro pump
   description: "A micro pump, used to circulate coolant."
   components:

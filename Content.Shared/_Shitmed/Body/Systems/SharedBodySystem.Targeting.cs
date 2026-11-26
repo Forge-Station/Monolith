@@ -6,6 +6,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared._Shitmed.Medical.Surgery.Steps.Parts;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed): Wolfmed owns part damage for wound hosts (D2/D18).
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -63,9 +64,11 @@ public partial class SharedBodySystem
     }
 
     private EntityQuery<TargetingComponent> _queryTargeting;
+    private EntityQuery<WoundHostComponent> _queryWoundHost; // WOLFGATE(Wolfmed)
     private void InitializeIntegrityQueue()
     {
         _queryTargeting = GetEntityQuery<TargetingComponent>();
+        _queryWoundHost = GetEntityQuery<WoundHostComponent>(); // WOLFGATE(Wolfmed)
         SubscribeLocalEvent<BodyComponent, TryChangePartDamageEvent>(OnTryChangePartDamage);
         SubscribeLocalEvent<BodyComponent, DamageModifyEvent>(OnBodyDamageModify);
         SubscribeLocalEvent<BodyPartComponent, DamageModifyEvent>(OnPartDamageModify);
@@ -80,6 +83,7 @@ public partial class SharedBodySystem
         var damage = damageable.TotalDamage;
 
         if (entity.Comp is { Body: { } body }
+            && !_queryWoundHost.HasComp(body) // WOLFGATE(Wolfmed): GUARD C, Wolfmed's WoundHealingSystem owns part recovery.
             && damage > entity.Comp.MinIntegrity
             && damage <= entity.Comp.IntegrityThresholds[TargetIntegrity.HeavilyWounded]
             && _queryTargeting.HasComp(body)
@@ -103,6 +107,10 @@ public partial class SharedBodySystem
             if (part.HealingTimer >= part.HealingTime)
             {
                 part.HealingTimer = 0;
+                // WOLFGATE(Wolfmed) START: GUARD C, do not burn the job queue on wound hosts.
+                if (_queryWoundHost.HasComp(part.Body))
+                    continue;
+                // WOLFGATE END
                 _integrityJobQueue.EnqueueJob(new IntegrityJob(this, (ent, part), IntegrityJobTime));
             }
         }
@@ -110,6 +118,10 @@ public partial class SharedBodySystem
 
     private void OnTryChangePartDamage(Entity<BodyComponent> ent, ref TryChangePartDamageEvent args)
     {
+        // WOLFGATE(Wolfmed): GUARD A, Wolfmed routes part damage itself for wound hosts. Component-gated, never IsServer-gated.
+        if (_queryWoundHost.HasComp(ent.Owner))
+            return;
+
         // If our target has a TargetingComponent, that means they will take limb damage
         // And if their attacker also has one, then we use that part.
         if (_queryTargeting.TryComp(ent, out var targetEnt))
@@ -224,6 +236,7 @@ public partial class SharedBodySystem
 
         if (args.CanSever
             && partEnt.Comp.CanSever
+            && !_queryWoundHost.HasComp(partEnt.Comp.Body) // WOLFGATE(Wolfmed): GUARD B, Wolfmed owns dismemberment for wound hosts.
             && partIdSlot is not null
             && delta != null
             && !HasComp<BodyPartReattachedComponent>(partEnt)
@@ -295,16 +308,20 @@ public partial class SharedBodySystem
             return;
 
         var integrity = damageable.TotalDamage;
+        // WOLFGATE(Wolfmed): playtest 2: burns never switch a wound host's limb off; its wounds slow it instead.
+        var enableIntegrity = _queryWoundHost.HasComp(partEnt.Comp.Body)
+            ? Content.Shared._WF.Wolfmed.Consciousness.WolfmedLimbIntegrity.ForEnable(damageable, Prototypes)
+            : integrity;
 
         // KILL the body part
-        if (partEnt.Comp.Enabled && integrity >= partEnt.Comp.IntegrityThresholds[TargetIntegrity.CriticallyWounded])
+        if (partEnt.Comp.Enabled && enableIntegrity >= partEnt.Comp.IntegrityThresholds[TargetIntegrity.CriticallyWounded]) // WOLFGATE(Wolfmed): playtest 2
         {
             var ev = new BodyPartEnableChangedEvent(false);
             RaiseLocalEvent(partEnt, ref ev);
         }
 
         // LIVE the body part
-        if (!partEnt.Comp.Enabled && integrity <= partEnt.Comp.IntegrityThresholds[partEnt.Comp.EnableIntegrity] && !severed)
+        if (!partEnt.Comp.Enabled && enableIntegrity <= partEnt.Comp.IntegrityThresholds[partEnt.Comp.EnableIntegrity] && !severed) // WOLFGATE(Wolfmed): playtest 2
         {
             var ev = new BodyPartEnableChangedEvent(true);
             RaiseLocalEvent(partEnt, ref ev);

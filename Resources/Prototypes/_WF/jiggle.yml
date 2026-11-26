@@ -1,0 +1,16 @@
+# Ported from Trauma Station (_Trauma/Entities/Mobs/NPCs/slime.yml).
+
+- type: entity
+  abstract: true
+  id: BaseSlimeJigglePhysics
+  components:
+  - type: JigglePhysics # wobble wobble
+    springiness: 15
+    damping: 2
+    inertiaScale: 5
+    jiggleLimit: 0.35
+    slapLimit: 2.8
+    displacementsRsi: _WF/JigglePhysics/slime_jiggle.rsi
+    displacementCount: 4
+    layers:
+    - enum.DamageStateVisualLayers.Base

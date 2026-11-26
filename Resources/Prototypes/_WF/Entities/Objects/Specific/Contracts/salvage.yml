@@ -1,0 +1,58 @@
+# Salvage finds.
+- type: entity
+  parent: BaseItem
+  id: WFContractFlightRecorder
+  name: flight recorder
+  description: A battered, bright orange flight recorder. Someone is paying to hear its last minutes.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/station_beacon.rsi
+    layers:
+    - state: icon
+      color: "#ff9a3c"
+  - type: Item
+    size: Normal
+  - type: StaticPrice
+    price: 0
+
+- type: entity
+  parent: WFContractFlightRecorder
+  id: WFContractDataCore
+  name: salvaged data core
+  description: A storage core pulled from a dead ship's server rack, still holding a charge.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/diskcases.rsi
+    layers:
+    - state: icon_base
+      color: "#d0e8ff"
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: WFContractFlightRecorder
+  id: WFContractAnomalySample
+  name: anomaly sample canister
+  description: A containment canister holding something that should not be glowing.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/artifact_fragments.rsi
+    layers:
+    - state: eldritchball3
+  - type: PointLight
+    radius: 1.5
+    energy: 1
+    color: "#a07fff"
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: WFContractFlightRecorder
+  id: WFContractCargoManifest
+  name: sealed cargo manifest
+  description: A strongbox of shipping papers and seals. Insurers want it more than the cargo.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/diskcases.rsi
+    layers:
+    - state: icon_cargo

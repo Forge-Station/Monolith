@@ -16,7 +16,8 @@
     - reagents: [Water, SpaceCleaner]
       methods: [Touch]
       effects:
-      - !type:WashReaction #Forge-Change
+      - !type:WashCreamPieReaction
+      - !type:WolfmedCoolOverheating # WOLFGATE(Wolfmed): W6: water takes heat out of an overheated chassis.
   - type: DamageOnHighSpeedImpact
     damage:
       types:
@@ -101,6 +102,7 @@
     noRot: true
     drawdepth: Mobs
     layers:
+    - map: ["enum.HumanoidVisualLayers.TailBehind"] # WOLFGATE - split tail layers, back half behind the body
     - map: ["enum.HumanoidVisualLayers.Chest"]
     - map: ["enum.HumanoidVisualLayers.Head"]
     - map: ["enum.HumanoidVisualLayers.Snout"]
@@ -147,6 +149,7 @@
     - map: ["head"]
     - map: ["pocket1"]
     - map: ["pocket2"]
+    - map: ["enum.HumanoidVisualLayers.TailOversuit"] # WOLFGATE - split tail layers, front half above clothing and cloaks
     - map: ["enum.HumanoidVisualLayers.Tail"]
     - map: ["clownedon"] # Dynamically generated
       sprite: "Effects/creampie.rsi"

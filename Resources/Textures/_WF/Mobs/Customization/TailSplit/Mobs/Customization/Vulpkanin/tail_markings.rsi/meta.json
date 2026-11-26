@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/DeltaV-Station/Delta-v/commit/65d35d0b3c20aa4e8a0e749a4de8392e53051e86. Fluffy created by Skarletto (Github). Modified by FairlySadPanda (Github/Discord) South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "vulp-fade_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "vulp-fade_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "vulp-tip_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "vulp-tip_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "vulp_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "vulp_FRONT",
+      "directions": 4
+    }
+  ]
+}

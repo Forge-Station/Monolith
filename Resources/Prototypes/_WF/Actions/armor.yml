@@ -1,0 +1,12 @@
+- type: entity
+  id: WFActionSuitThrusters
+  name: Emergency thrusters
+  description: Fires your suit's thrusters once, pushing you the way you're facing. Only works in zero gravity.
+  components:
+  - type: InstantAction
+    useDelay: 90
+    itemIconStyle: NoItem
+    icon:
+      sprite: Objects/Tanks/Jetpacks/blue.rsi
+      state: icon-on
+    event: !type:WFSuitThrustersEvent

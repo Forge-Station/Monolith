@@ -1,0 +1,10 @@
+# The burst where a rock breaks, drawn by WFAsteroidCrackOverlay.
+- type: entity
+  id: WFAsteroidCrackEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFAsteroidCrackEffect
+    duration: 2.2
+  # A little past the effect's duration, so a late state still has time to draw it out.
+  - type: TimedDespawn
+    lifetime: 2.5

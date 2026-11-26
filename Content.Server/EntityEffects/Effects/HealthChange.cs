@@ -3,6 +3,8 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Localizations;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed): HOOK 9 - treatment-capability scope
+using Content.Server._WF.Wolfmed.Medical; // WOLFGATE(Wolfmed): a metabolising reagent's damage is toxin load on a wound host
 using Content.Shared._Shitmed.Targeting; // Shitmed Change
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -36,6 +38,10 @@ namespace Content.Server.EntityEffects.Effects
         [DataField]
         [JsonPropertyName("ignoreResistances")]
         public bool IgnoreResistances = true;
+
+        // WOLFGATE(Wolfmed): HOOK 9 - which body-part materials this healing can treat on a wound host.
+        [DataField]
+        public HashSet<TreatmentCapability> TreatmentCapabilities = [TreatmentCapability.Biological];
 
         protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         {
@@ -164,9 +170,18 @@ namespace Content.Server.EntityEffects.Effects
                 }
             }
 
-            args.EntityManager.System<DamageableSystem>().TryChangeDamage(
+            // WOLFGATE(Wolfmed) START: HOOK 9, the call becomes a delegate so healing can run inside a treatment-capability scope.
+            // args.EntityManager.System<DamageableSystem>().TryChangeDamage(
+            //     args.TargetEntity,
+            //     Damage * scale,
+            var change = Damage * scale;
+            // WOLFGATE(Wolfmed): playtest 5, what a metabolising reagent deals to a wound host is toxin load, not wounds.
+            if (args is EntityEffectReagentArgs { Method: null } &&
+                args.EntityManager.HasComponent<WoundHostComponent>(args.TargetEntity))
+                change = args.EntityManager.System<WolfmedReagentDamageSystem>().ForWoundHost(args.TargetEntity, change);
+            void Apply() => args.EntityManager.System<DamageableSystem>().TryChangeDamage(
                 args.TargetEntity,
-                Damage * scale,
+                change,
                 IgnoreResistances,
                 interruptsDoAfters: false,
                 // Shitmed Change Start
@@ -174,6 +189,15 @@ namespace Content.Server.EntityEffects.Effects
                 partMultiplier: 1.00f, // Mono, 0.5f->1.00f
                 canSever: false);
             // Shitmed Change End
+
+            // WOLFGATE(Wolfmed): HOOK 9 - scope only the healing case on a wound host; everything else is unchanged (D2).
+            if (change.DamageDict.Values.Any(amount => amount < 0) &&
+                args.EntityManager.HasComponent<WoundHostComponent>(args.TargetEntity))
+                args.EntityManager.System<WoundDamageRoutingSystem>()
+                    .WithTreatmentCapabilities(args.TargetEntity, TreatmentCapabilities, Apply);
+            else
+                Apply();
+            // WOLFGATE END
         }
     }
 }

@@ -4,7 +4,6 @@ using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 using Content.Shared._EE.Contractors.Prototypes; // Forge-change
 
 namespace Content.Shared.Roles

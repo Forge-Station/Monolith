@@ -482,6 +482,11 @@ public enum LogType
     /// </summary>
     ShuttleImpact = 102,
 
+    /// <summary>
+    /// Artifact node got activated.
+    /// </summary>
+    ArtifactNode = 101, // WOLFGATE(Xenoarch): artifact node activations, from the wizden rework
+
     // <Mono>
     ShipgunFired = 150,
     // </Mono>
@@ -491,12 +496,21 @@ public enum LogType
     /// </summary>
     Instrument = 103,
 
-    // RMC14
-    RMCTelephone = 10042,
+    /// <summary>
+    /// Players changing their consent settings.
+    /// </summary>
+    // WOLFGATE - ported from HardLight; the high id avoids clashing with upstream additions.
+    Consent = 12489,
 
     /// <summary>
-    /// A player wrote on paper. Image uploads are Medium impact so they can be filtered.
+    /// Anatomy organs and settings.
     /// </summary>
+    WFAnatomy = 12490, // WOLFGATE - anatomy organs and settings
+
+    /// <summary>
+    /// A rotary phone call was started, answered or hung up.
+    /// </summary>
+    RMCTelephone = 12491,
     Paper = 300, // Forge
 
     /// <summary>

@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b.",
+  "size": {
+    "x": 32,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "plastinum_wall-0"
+    },
+    {
+      "name": "plastinum_wall-1"
+    },
+    {
+      "name": "plastinum_wall-2"
+    },
+    {
+      "name": "plastinum_wall-3"
+    },
+    {
+      "name": "plastinum_wall-4"
+    },
+    {
+      "name": "plastinum_wall-5"
+    },
+    {
+      "name": "plastinum_wall-6"
+    },
+    {
+      "name": "plastinum_wall-7"
+    },
+    {
+      "name": "plastinum_wall-8"
+    },
+    {
+      "name": "plastinum_wall-9"
+    },
+    {
+      "name": "plastinum_wall-10"
+    },
+    {
+      "name": "plastinum_wall-11"
+    },
+    {
+      "name": "plastinum_wall-12"
+    },
+    {
+      "name": "plastinum_wall-13"
+    },
+    {
+      "name": "plastinum_wall-14"
+    },
+    {
+      "name": "plastinum_wall-15"
+    },
+    {
+      "name": "plastinum_wall-21"
+    },
+    {
+      "name": "plastinum_wall-23"
+    },
+    {
+      "name": "plastinum_wall-29"
+    },
+    {
+      "name": "plastinum_wall-31"
+    },
+    {
+      "name": "plastinum_wall-38"
+    },
+    {
+      "name": "plastinum_wall-39"
+    },
+    {
+      "name": "plastinum_wall-46"
+    },
+    {
+      "name": "plastinum_wall-47"
+    },
+    {
+      "name": "plastinum_wall-55"
+    },
+    {
+      "name": "plastinum_wall-63"
+    },
+    {
+      "name": "plastinum_wall-74"
+    },
+    {
+      "name": "plastinum_wall-75"
+    },
+    {
+      "name": "plastinum_wall-78"
+    },
+    {
+      "name": "plastinum_wall-79"
+    },
+    {
+      "name": "plastinum_wall-95"
+    },
+    {
+      "name": "plastinum_wall-110"
+    },
+    {
+      "name": "plastinum_wall-111"
+    },
+    {
+      "name": "plastinum_wall-127"
+    },
+    {
+      "name": "plastinum_wall-137"
+    },
+    {
+      "name": "plastinum_wall-139"
+    },
+    {
+      "name": "plastinum_wall-141"
+    },
+    {
+      "name": "plastinum_wall-143"
+    },
+    {
+      "name": "plastinum_wall-157"
+    },
+    {
+      "name": "plastinum_wall-159"
+    },
+    {
+      "name": "plastinum_wall-175"
+    },
+    {
+      "name": "plastinum_wall-191"
+    },
+    {
+      "name": "plastinum_wall-203"
+    },
+    {
+      "name": "plastinum_wall-207"
+    },
+    {
+      "name": "plastinum_wall-223"
+    },
+    {
+      "name": "plastinum_wall-239"
+    },
+    {
+      "name": "plastinum_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+# What a squatter says to anyone who talks to him. He turns down every way of asking him to go, and nothing costs or
+# changes hands. (Shown by the strangers' dialogue window; WFShipSquatterSystem runs it.)
+
+- type: wfStrangerDialogue
+  id: WFShipSquatterDialogue
+  start: claim
+  nodes:
+    claim:
+      line: wf-ship-squatter-dialogue-claim
+      options:
+      - text: wf-ship-squatter-dialogue-ask
+        next: ask
+      - text: wf-ship-squatter-dialogue-please
+        next: please
+      - text: wf-ship-squatter-dialogue-money
+        next: money
+      - text: wf-ship-squatter-dialogue-threat
+        next: threat
+      - text: wf-ship-squatter-dialogue-who
+        next: who
+      - text: wf-ship-squatter-dialogue-bye
+    ask:
+      line: wf-ship-squatter-dialogue-ask-reply
+      options:
+      - text: wf-ship-squatter-dialogue-back
+        next: claim
+      - text: wf-ship-squatter-dialogue-bye
+    please:
+      line: wf-ship-squatter-dialogue-please-reply
+      options:
+      - text: wf-ship-squatter-dialogue-back
+        next: claim
+      - text: wf-ship-squatter-dialogue-bye
+    money:
+      line: wf-ship-squatter-dialogue-money-reply
+      options:
+      - text: wf-ship-squatter-dialogue-back
+        next: claim
+      - text: wf-ship-squatter-dialogue-bye
+    threat:
+      line: wf-ship-squatter-dialogue-threat-reply
+      options:
+      - text: wf-ship-squatter-dialogue-back
+        next: claim
+      - text: wf-ship-squatter-dialogue-bye
+    who:
+      line: wf-ship-squatter-dialogue-who-reply
+      options:
+      - text: wf-ship-squatter-dialogue-back
+        next: claim
+      - text: wf-ship-squatter-dialogue-bye

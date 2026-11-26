@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rgeneric0",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric1",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric2",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric3",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric4",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric5",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric6",
+      "directions": 4
+    },
+    {
+      "name": "rgeneric7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

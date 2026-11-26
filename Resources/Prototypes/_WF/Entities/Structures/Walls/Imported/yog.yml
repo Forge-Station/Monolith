@@ -1,0 +1,65 @@
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: YogObsidianWall
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/obsidian_yogstation.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/obsidian_yogstation.rsi
+    state: wall-0
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: YogObsidianWallHard
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/obsidian_hard_yogstation.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/obsidian_hard_yogstation.rsi
+    state: wall-0
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: YogRWallRust
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWallRust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_yogstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_yogstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: YogRust
+  components:
+  - type: Construction
+    graph: Girder
+    node: wallrust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_yogstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_yogstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall

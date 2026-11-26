@@ -18,6 +18,22 @@
       "directions": 4
     },
     {
+      "name": "off-equipped-HELMET-avali",
+      "directions": 4
+    },
+    {
+      "name": "off-equipped-HELMET-hydrakin",
+      "directions": 4
+    },
+    {
+      "name": "off-equipped-HELMET-vox",
+      "directions": 4
+    },
+    {
+      "name": "off-equipped-HELMET-vulpkanin",
+      "directions": 4
+    },
+    {
       "name": "off-inhand-left",
       "directions": 4
     },
@@ -30,15 +46,11 @@
       "directions": 4
     },
     {
-      "name": "on-inhand-left",
+      "name": "on-equipped-HELMET-avali",
       "directions": 4
     },
     {
-      "name": "on-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "off-equipped-HELMET-vox",
+      "name": "on-equipped-HELMET-hydrakin",
       "directions": 4
     },
     {
@@ -50,15 +62,11 @@
       "directions": 4
     },
     {
-      "name": "off-equipped-HELMET-vulpkanin",
+      "name": "on-inhand-left",
       "directions": 4
     },
     {
-      "name": "on-equipped-HELMET-hydrakin",
-      "directions": 4
-    },
-    {
-      "name": "off-equipped-HELMET-hydrakin",
+      "name": "on-inhand-right",
       "directions": 4
     }
   ]

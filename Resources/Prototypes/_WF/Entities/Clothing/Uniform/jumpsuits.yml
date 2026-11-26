@@ -1,0 +1,54 @@
+#region Asf
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformService
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/service.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/service.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformColonist
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/colonist.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/colonist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformResearcher
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/researcher.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/researcher.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformCasual
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/casual.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/casual.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformMedic
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/medic.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/medic.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformFormal
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/formal.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/formal.rsi

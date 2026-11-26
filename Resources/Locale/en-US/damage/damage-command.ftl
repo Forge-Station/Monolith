@@ -1,7 +1,8 @@
 ﻿## Damage command loc.
 
 damage-command-description = Add or remove damage to an entity. 
-damage-command-help = Usage: {$command} <type/group> <amount> [ignoreResistances] [uid]
+# WOLFGATE(Wolfmed): P6, optional body part.
+damage-command-help = Usage: {$command} <type/group> <amount> [ignoreResistances] [uid] [bodyPart]
 
 damage-command-arg-type = <damage type or group>
 damage-command-arg-quantity = [quantity]

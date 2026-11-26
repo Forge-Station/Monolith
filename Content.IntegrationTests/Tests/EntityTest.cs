@@ -15,12 +15,13 @@ using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
-using Robust.Shared.Spawners;
 
 namespace Content.IntegrationTests.Tests
 {
     [TestFixture]
     [TestOf(typeof(EntityUid))]
+    // WOLFGATE(Wolfmed): the spawn-all tests need about six gigabytes each; two at once go past the runner's heap limit
+    [NonParallelizable]
     public sealed class EntityTest : GameTest
     {
         private static readonly HashSet<ProtoId<EntityCategoryPrototype>> IgnoredCategories = ["Spawner", "Debug", "GameRules"];
@@ -271,6 +272,45 @@ namespace Content.IntegrationTests.Tests
             // to tick and the teardown comes back dirty.
         }
 
+        // WOLFGATE(Wolfmed) START: the slice size and the delete of the sliced spawn-all test.
+        /// <summary>Prototypes spawned per slice of the different-maps spawn-all test: about a seventh of them.</summary>
+        private const int SpawnAllSlice = 2500;
+
+        /// <summary>
+        /// Maps first, so everything on them goes parent-first, as it does when a round ends. Deleting in enumeration
+        /// order could delete a held item out of a live xenoborg's hand before its module, which
+        /// DroppableBorgModuleSystem logs as an error; the order follows prototype file order, which differs between
+        /// Windows and Linux, so it failed on CI only. Then whatever is left, and nothing may remain.
+        /// </summary>
+        private static void DeleteEverything(IEntityManager entityMan, SharedMapSystem mapSystem)
+        {
+            foreach (var mapId in mapSystem.GetAllMapIds().ToList())
+            {
+                mapSystem.DeleteMap(mapId);
+            }
+
+            var entityMetas = new List<(EntityUid, MetaDataComponent)>();
+            var query = entityMan.AllEntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var meta))
+            {
+                entityMetas.Add((uid, meta));
+            }
+
+            foreach (var (uid, meta) in entityMetas)
+            {
+                if (!meta.EntityDeleted)
+                    entityMan.DeleteEntity(uid);
+            }
+
+            Assert.That(entityMan.EntityCount, Is.Zero);
+
+            // The slice's garbage goes now, not when the next slice has already been spawned on top of it.
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        // WOLFGATE END
+
         /// <summary>
         ///     Variant of <see cref="SpawnAndDeleteAllEntitiesOnDifferentMaps"/> that also launches a client and dirties
         ///     all components on every entity.
@@ -360,7 +400,7 @@ namespace Content.IntegrationTests.Tests
         /// crude test to try catch issues like this, and possibly should just be disabled.
         /// </remarks>
         [Test]
-        [Ignore("Even wizden calls this test ass")] // Monolith - PLS MARKED THIS!! But its true, this test ass
+        [Ignore("Even wizden calls this test ass")]
         public async Task SpawnAndDeleteEntityCountTest()
         {
             var pair = Pair;
@@ -422,8 +462,6 @@ namespace Content.IntegrationTests.Tests
                     // If the entity deleted itself, check that it didn't spawn other entities
                     if (!server.EntMan.EntityExists(uid))
                     {
-                        await CleanupTransientEntities(pair, serverEntities);
-
                         Assert.That(Count(server.EntMan), Is.EqualTo(count), $"Server prototype {protoId} failed on deleting itself\n" +
                             BuildDiffString(serverEntities, Entities(server.EntMan), server.EntMan));
                         Assert.That(Count(client.EntMan), Is.EqualTo(clientCount), $"Client prototype {protoId} failed on deleting itself\n" +
@@ -443,7 +481,6 @@ namespace Content.IntegrationTests.Tests
 
                     await server.WaitPost(() => server.EntMan.DeleteEntity(uid));
                     await pair.RunTicksSync(3);
-                    await CleanupTransientEntities(pair, serverEntities);
 
                     // Check that the number of entities has gone back to the original value.
                     Assert.That(Count(server.EntMan), Is.EqualTo(count), $"Server prototype {protoId} failed on deletion: count didn't reset properly\n" +
@@ -454,33 +491,6 @@ namespace Content.IntegrationTests.Tests
                         BuildDiffString(clientEntities, Entities(client.EntMan), client.EntMan));
                 }
             });
-        }
-
-        /// <summary>
-        /// Deletes any entities with <see cref="TimedDespawnComponent"/> that were not present in the baseline snapshot.
-        /// Some entities spawn transient side-effects on deletion (e.g. explosion visuals). These side-effect entities
-        /// use TimedDespawn and would persist across test iterations, corrupting baseline entity counts and causing
-        /// cascading assertion failures.
-        /// </summary>
-        private static async Task CleanupTransientEntities(Pair.TestPair pair, HashSet<EntityUid> baselineEntities)
-        {
-            var server = pair.Server;
-            await server.WaitPost(() =>
-            {
-                var toRemove = new List<EntityUid>();
-                var query = server.EntMan.AllEntityQueryEnumerator<TimedDespawnComponent>();
-                while (query.MoveNext(out var uid, out _))
-                {
-                    if (!baselineEntities.Contains(uid))
-                        toRemove.Add(uid);
-                }
-
-                foreach (var uid in toRemove)
-                {
-                    server.EntMan.DeleteEntity(uid);
-                }
-            });
-            await pair.RunTicksSync(3);
         }
 
         private static string BuildDiffString(IEnumerable<EntityUid> oldEnts, IEnumerable<EntityUid> newEnts, IEntityManager entMan)
@@ -613,7 +623,6 @@ namespace Content.IntegrationTests.Tests
             });
         }
 
-        // Mono start - idk what this dont marked, but is Mono-creation
         private EntityUid SpawnEntity(
             IEntityManager entManager,
             string protoName,
@@ -651,6 +660,5 @@ namespace Content.IntegrationTests.Tests
 
             return EntityUid.Invalid;
         }
-        // Mono end
     }
 }

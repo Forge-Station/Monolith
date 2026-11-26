@@ -37,9 +37,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.Emag.Systems;
-using Content.Server.Popups;
-using Content.Server.Traits.Assorted;
 using Robust.Shared.Serialization.Manager;
 using Content.Shared._NF.Cloning; // Frontier
 using Content.Shared._NF.Bank.Components; // Frontier

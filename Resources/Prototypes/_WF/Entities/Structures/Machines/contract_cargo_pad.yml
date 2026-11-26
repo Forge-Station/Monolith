@@ -1,0 +1,21 @@
+# Where the boards nearby leave contract cargo; map one beside each board.
+- type: entity
+  id: WFContractCargoPad
+  name: contract pickup pad
+  description: Cargo for contracts taken at nearby boards is left here.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Decals/markings.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: delivery_greyscale
+      color: "#5fc3e4"
+  - type: Icon
+    sprite: Decals/markings.rsi
+    state: delivery_greyscale
+  - type: Clickable
+  - type: WFContractDrop

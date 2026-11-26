@@ -1,0 +1,36 @@
+# Artifact gas effects for the Goob gases, which the old artifact gas effect could also roll.
+- type: entity
+  id: WFXenoArtifactEffectCreationGasBZ
+  parent: BaseXenoArtifactEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XAECreateGas
+    gases:
+      BZ: 300
+
+- type: entity
+  id: WFXenoArtifactEffectCreationGasHealium
+  parent: BaseXenoArtifactEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XAECreateGas
+    gases:
+      Healium: 300
+
+- type: entity
+  id: WFXenoArtifactEffectCreationGasNitrium
+  parent: BaseXenoArtifactEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XAECreateGas
+    gases:
+      Nitrium: 300
+
+- type: entity
+  id: WFXenoArtifactEffectCreationGasPluoxium
+  parent: BaseXenoArtifactEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XAECreateGas
+    gases:
+      Pluoxium: 300

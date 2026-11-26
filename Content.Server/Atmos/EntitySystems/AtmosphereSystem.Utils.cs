@@ -93,7 +93,7 @@ public partial class AtmosphereSystem
     {
         var oldBlocked = tile.AirtightData.BlockedDirections;
 
-        tile.AirtightData = tile.NoGridTile
+        tile.AirtightData = tile.NoGridTile && !WfIsTerrain(uid) // WOLFGATE(Planets): bare planet ground is off the atmos grid but still carries walls
             ? default
             : GetAirtightData(uid, grid, tile.GridIndices);
 

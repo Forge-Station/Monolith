@@ -53,6 +53,13 @@ public sealed partial class OptionsUIController : UIController
         _optionsWindow.MoveToFront();
     }
 
+    /// <summary>WOLFGATE: open the options window with a given tab selected.</summary>
+    public void OpenWindow(int tab)
+    {
+        OpenWindow();
+        _optionsWindow.Tabs.CurrentTab = tab;
+    }
+
     public void ToggleWindow()
     {
         EnsureWindow();

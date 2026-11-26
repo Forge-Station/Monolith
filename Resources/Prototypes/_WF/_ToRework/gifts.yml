@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: WFMonolithShard
+  components:
+  - type: Contraband
+    severity: WFUnlawful
+  - type: Sprite
+    sprite: _WF/Remade/Objects/shard.rsi
+    layers:
+    - map: [ "base" ]
+      state: marker_shard_dormant
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFMonolithVisuals.Stage:
+        base:
+          Quiet: { state: marker_shard_dormant }
+          Hymn: { state: marker_shard_active }
+          Growth: { state: marker_shard_active }
+          Harvest: { state: marker_shard_active }
+          Rapture: { state: marker_shard_active }
+          Crescendo: { state: marker_shard_active }
+  - type: Item
+    size: Small
+  - type: Battery
+    maxCharge: 10000
+    startingCharge: 10000
+    pricePerJoule: 0
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 5000
+  - type: PowerCell
+  - type: Tag
+    tags:
+    - PowerCell
+  - type: StaticPrice
+    price: 400000
+  - type: WFCorruptionNode
+    capacity: 12
+    reach: 4
+  - type: WFMonolithShard

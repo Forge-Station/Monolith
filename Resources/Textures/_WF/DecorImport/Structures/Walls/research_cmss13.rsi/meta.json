@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "research0",
+      "directions": 4
+    },
+    {
+      "name": "research1",
+      "directions": 4
+    },
+    {
+      "name": "research2",
+      "directions": 4
+    },
+    {
+      "name": "research3",
+      "directions": 4
+    },
+    {
+      "name": "research4",
+      "directions": 4
+    },
+    {
+      "name": "research5",
+      "directions": 4
+    },
+    {
+      "name": "research6",
+      "directions": 4
+    },
+    {
+      "name": "research7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

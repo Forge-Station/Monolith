@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355, Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76, Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25, VOREStation at commit https://github.com/VOREStation/VOREStation/commit/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "clothes_rack",
+      "directions": 4
+    },
+    {
+      "name": "gunrack_steel"
+    },
+    {
+      "name": "gunrack_table"
+    },
+    {
+      "name": "rack"
+    },
+    {
+      "name": "rack_dark"
+    },
+    {
+      "name": "rack_polaris"
+    },
+    {
+      "name": "rack_table"
+    },
+    {
+      "name": "rack_table_dark"
+    },
+    {
+      "name": "rack_table_glamour"
+    },
+    {
+      "name": "rack_table_steel"
+    },
+    {
+      "name": "rack_table_wood"
+    },
+    {
+      "name": "rack_vore"
+    },
+    {
+      "name": "shelf_aurora"
+    },
+    {
+      "name": "shelf_glamour"
+    },
+    {
+      "name": "shelf_steel"
+    },
+    {
+      "name": "shelf_table"
+    },
+    {
+      "name": "shelf_vore"
+    },
+    {
+      "name": "shelf_wood"
+    }
+  ]
+}

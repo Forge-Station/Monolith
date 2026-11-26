@@ -1,0 +1,132 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralAdamantine
+  components:
+  - type: Construction
+    graph: WFDurasteelWall
+    node: durasteelWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/adamantine_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/adamantine_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: adamantine_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralBone
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bone_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bone_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: bone_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralHauntium
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hauntium_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hauntium_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: hauntium_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralMetalhydrogen
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/metal_hydrogen_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/metal_hydrogen_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: metal_hydrogen_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralMythril
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/mythril_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/mythril_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: mythril_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralRunite
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/runite_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/runite_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: runite_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaMineralSandstoneBasalt
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandbasalt_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandbasalt_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: sandbasalt_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NovaPrefabPlastic
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasticWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/prefab_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/prefab_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: prefab
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: NovaMineralStone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/stone_wall_nova.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/stone_wall_nova.rsi
+  - type: IconSmooth
+    base: wall-

@@ -349,6 +349,7 @@ public static class SkinColor
             HumanoidSkinColor.VoxFeathers => VerifyVoxFeathers(color),
             HumanoidSkinColor.AnimalFur => VerifyAnimalFur(color),
             HumanoidSkinColor.AriralPale => VerifyAriralColor(color), // Forge-Change Wega Ariral
+            HumanoidSkinColor.AnyColour => true, // WOLFGATE - ported from HardLight
             _ => false,
         };
     }
@@ -363,6 +364,7 @@ public static class SkinColor
             HumanoidSkinColor.VoxFeathers => ClosestVoxColor(color),
             HumanoidSkinColor.AnimalFur => ClosestAnimalFurColor(color),
             HumanoidSkinColor.AriralPale => AriralColor(100),
+            HumanoidSkinColor.AnyColour => color, // WOLFGATE - ported from HardLight
             _ => color
         };
     }
@@ -376,4 +378,5 @@ public enum HumanoidSkinColor : byte
     TintedHues, //This gives a color tint to a humanoid's skin (10% saturation with full hue range).
     AnimalFur, // Goob - Tajaran
     AriralPale, // Forge-Change Wega-Ariral
+    AnyColour, // WOLFGATE - ported from HardLight: unrestricted skin colour
 }

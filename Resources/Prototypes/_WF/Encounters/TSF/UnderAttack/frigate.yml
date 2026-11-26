@@ -1,0 +1,163 @@
+# A Federation frigate ship beset by a pirate pack: two raiders and four fighters, all on it at once from every side. Its
+# gunner shares the guns out among the attackers, each gun on the one nearest it. It calls for help on the common channel;
+# whoever helps beat the pirates off is paid by the Federation, well, and TSF players get military credits as well.
+- type: wfEncounter
+  id: WFEncounterFrigateUnderAttack
+  leash: 3000
+  name: wf-encounter-name-frigate
+  announcement: wf-encounter-announce-frigate
+  announceOnRadio: true
+  announcer: frigate
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 4
+  weight: 0.8
+  minPlayers: 6
+  cooldown: 3600
+  duration: 3000
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 4500
+  stationClearance: 2500
+  rewards:
+  - side: tsf
+    spesos: 90000
+    credits: 52
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: frigate
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    deckhands: 3
+    guards: 2
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, 750
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, -750
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 250
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingtwo
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, 250
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingthree
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -350
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingfour
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -350
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate

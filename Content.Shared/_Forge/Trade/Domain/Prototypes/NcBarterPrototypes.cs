@@ -59,7 +59,7 @@ public sealed partial class NcBarterReceivePoolEntry
     public float Chance { get; set; } = 1.0f;
 }
 
-[Prototype("ncBarterListing")]
+[Prototype]
 public sealed partial class NcBarterListingPrototype : IPrototype
 {
     [DataField("name")]
@@ -90,7 +90,7 @@ public sealed partial class NcBarterListingPrototype : IPrototype
     public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncBarterCategory")]
+[Prototype]
 public sealed partial class NcBarterCategoryPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -104,7 +104,7 @@ public sealed partial class NcBarterCategoryPrototype : IPrototype
     public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncBarterPreset")]
+[Prototype]
 public sealed partial class NcBarterPresetPrototype : IPrototype
 {
     [DataField("categories", required: true)]

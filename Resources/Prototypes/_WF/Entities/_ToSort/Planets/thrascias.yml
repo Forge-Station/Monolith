@@ -1,0 +1,565 @@
+# Thrascias's living world: snow and ice wildlife by region, and plants that do things.
+# Tundra: penguins and snow foxes. Pack ice: frost bears and the rare yeti. Crystal fields: crystal crabs, frost pods
+# and glowing blooms. Boreal pockets: snow spiders and whipvines. Names and descriptions are in
+# Resources/Locale/en-US/_WF/Planets/life_thrascias.ftl.
+
+# ---- Wildlife ---------------------------------------------------------------------------------------------------
+
+# The air here has no oxygen and runs far below freezing, so the air-breathing natives don't breathe it or feel the
+# cold. Each sets its own Temperature: a parent's own value would win over this one's.
+- type: entity
+  abstract: true
+  id: WFThrasciasNoBreath
+  components:
+  - type: BreathingImmunity
+
+- type: entity
+  parent: [MobPenguin, WFThrasciasNoBreath]
+  id: WFMobThrasciasPenguin
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+
+- type: entity
+  parent: [MobFox, WFThrasciasNoBreath]
+  id: WFMobThrasciasSnowFox
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Sprite
+    sprite: _WF/Planets/Life/Thrascias/snow_fox.rsi
+
+# A space bear with a white coat; it hunts on sight.
+- type: entity
+  parent: MobBearSpace
+  id: WFMobThrasciasFrostBear
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Life/Thrascias/frost_bear.rsi
+  - type: PointLight
+    radius: 1
+    energy: 1
+    color: "#cfeaff"
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 6
+        Slash: 12
+
+# Slow, strong and left alone: it only fights back.
+- type: entity
+  parent: [MobGorilla, WFThrasciasNoBreath]
+  id: WFMobThrasciasYeti
+  components:
+  - type: Temperature
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Sprite
+    scale: 1.15, 1.15
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: crawling
+      sprite: _WF/Planets/Life/Thrascias/yeti.rsi
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 2.9
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.55
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 28
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 6
+
+# An ore crab grown from frozen plasma; it drops what it is made of.
+- type: entity
+  parent: MobSilverCrab
+  id: WFMobThrasciasCrystalCrab
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Life/Thrascias/crystal_crab.rsi
+    state: crystal_crab
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 4
+        Slash: 4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardCrystalCyan:
+            min: 1
+            max: 3
+          PlasmaOre1:
+            min: 0
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# A space spider with a pale coat.
+- type: entity
+  parent: MobSpiderSpace
+  id: WFMobThrasciasSnowSpider
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Life/Thrascias/snow_spider.rsi
+  - type: PointLight
+    radius: 1
+    energy: 1
+    color: "#cfeaff"
+
+# ---- Spawner tables, one per region ------------------------------------------------------------------------------
+
+- type: entityTable
+  id: WFFaunaThrasciasTundra
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdSnowGrouse
+      weight: 3
+    - id: WFMobThrasciasPenguin
+      weight: 4
+    - id: WFMobThrasciasSnowFox
+      weight: 3
+    - id: MobArgocyteSlurva
+      weight: 2
+
+- type: entity
+  id: WFFaunaThrasciasTundra
+  parent: MarkerBase
+  name: thrascias tundra wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaThrasciasTundra
+
+- type: entityTable
+  id: WFFaunaThrasciasIce
+  table: !type:GroupSelector
+    children:
+    - id: WFMobThrasciasFrostBear
+      weight: 4
+    - id: MobArgocyteBarrier
+      weight: 2
+    - id: WFMobThrasciasYeti
+      weight: 1
+
+- type: entity
+  id: WFFaunaThrasciasIce
+  parent: MarkerBase
+  name: thrascias pack ice wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaThrasciasIce
+
+- type: entityTable
+  id: WFFaunaThrasciasCrystal
+  table: !type:GroupSelector
+    children:
+    - id: WFMobThrasciasCrystalCrab
+
+- type: entity
+  id: WFFaunaThrasciasCrystal
+  parent: MarkerBase
+  name: thrascias crystal field wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaThrasciasCrystal
+
+- type: entityTable
+  id: WFFaunaThrasciasBoreal
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdSnowGrouse
+      weight: 2
+    - id: WFMobThrasciasSnowSpider
+      weight: 4
+    - id: WFMobThrasciasSnowFox
+      weight: 1
+
+- type: entity
+  id: WFFaunaThrasciasBoreal
+  parent: MarkerBase
+  name: thrascias boreal wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaThrasciasBoreal
+
+# ---- Reagents ---------------------------------------------------------------------------------------------------
+
+# Frostbelle sap numbs the body but slows it: a few seconds of walking at three quarters speed.
+- type: reagent
+  id: WFFrostbelleChill
+  name: reagent-name-wf-frostbelle-chill
+  group: Medicine
+  desc: reagent-desc-wf-frostbelle-chill
+  physicalDesc: reagent-physical-desc-cold
+  flavor: cold
+  color: "#bfe6ff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.4
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.75
+        sprintSpeedModifier: 0.75
+
+# The warmth in fungus soup: heats a cold body back up and eases cold damage.
+- type: reagent
+  id: WFWarmBroth
+  name: reagent-name-wf-warm-broth
+  group: Foods
+  desc: reagent-desc-wf-warm-broth
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: savory
+  color: "#d9c29a"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.3
+      effects:
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          max: 308
+        amount: 4000
+      - !type:HealthChange
+        conditions:
+        - !type:Temperature
+          max: 308
+        damage:
+          types:
+            Cold: -0.5
+
+# ---- Produce ----------------------------------------------------------------------------------------------------
+
+# Eating a bloom numbs pain (Wolfmed analgesic) and slows you for a few seconds.
+- type: entity
+  parent: WFWildProduceBase
+  id: WFFrostbelleBloom
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+    color: "#bfe6ff"
+  - type: FlavorProfile
+    flavors:
+    - cold
+    - leafy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: WFWolfmedAnalgesic
+          Quantity: 4
+        - ReagentId: WFFrostbelleChill
+          Quantity: 3
+  - type: Tag
+    tags:
+    - Vegetable
+
+# Two cooked with water in a big bowl make warming fungus soup (below).
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFFrozenFungus
+  components:
+  - type: Sprite
+    color: "#cfe6ff"
+
+- type: entity
+  parent: FoodBowlBase
+  id: WFFoodSoupFrozenFungus
+  components:
+  - type: Tag
+    tags:
+    - Soup
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: Sprite
+    layers:
+    - state: bowl
+    - state: mushroom
+      color: "#cfe6ff"
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: Vitamin
+          Quantity: 4
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: WFWarmBroth
+          Quantity: 8
+
+- type: microwaveMealRecipe
+  id: RecipeWFFrozenFungusSoup
+  name: warming fungus soup recipe
+  result: WFFoodSoupFrozenFungus
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFFrozenFungus: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# ---- Plants -----------------------------------------------------------------------------------------------------
+
+# Picked by hand for blooms; the plant shrinks while it regrows.
+- type: entity
+  parent: PolarisFloraSifFrostbelle
+  id: WFFloraFrostbelle
+  components:
+  - type: Sprite
+    layers:
+    - state: frostbelle
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#9fb4c4" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 480
+    harvestTime: 1
+    table: !type:AllSelector
+      children:
+      - id: WFFrostbelleBloom
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# A frozen crystal cluster; chipped with a pickaxe or shovel for shards, and it regrows.
+- type: entity
+  parent: BaseFlora
+  id: WFFloraIceCrystal
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_rocks.rsi
+    state: bsc
+    offset: "0,0"
+    layers:
+    - state: bsc
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#7a93a8" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardCrystalCyan:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: WFRegrowingHarvest
+    tool: Digging
+    toolTags: [ Pickaxe ]
+    toolHint: wf-harvest-tool-pickaxe-or-shovel
+    harvestTime: 3
+    regrowTime: 720
+    harvestSound:
+      collection: GlassBreak
+    table: !type:AllSelector
+      children:
+      - id: ShardCrystalCyan
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+      - id: PlasmaOre1
+        prob: 0.35
+
+# Glows; pick it for a shard.
+- type: entity
+  parent: TgFloraAshFonarstolbe
+  id: WFFloraCrystalBloom
+  components:
+  - type: Sprite
+    layers:
+    - state: lamppostfruit1
+      map: ["plant"]
+  - type: PointLight
+    radius: 3
+    energy: 1.4
+    color: "#8fe3ff"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.7,0.7", color: "#8aa0b0" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    harvestTime: 1
+    regrowTime: 900
+    harvestSound:
+      collection: WFFloraLightRetract
+    table: !type:AllSelector
+      children:
+      - id: ShardCrystalCyan
+
+# Only shows where the snow has drifted; pick it and cook it.
+- type: entity
+  parent: NebulaFloraPlantMushroom
+  id: WFFloraFrozenFungus
+  components:
+  - type: Sprite
+    layers:
+    - state: mush1
+      color: "#cfe6ff"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    harvestTime: 1.5
+    regrowTime: 600
+    table: !type:AllSelector
+      children:
+      - id: WFFrozenFungus
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Lashes anything but the wildlife that walks past, for a knockdown and a little blood; cut it for fibre.
+- type: entity
+  parent: BaseFlora
+  id: WFFloraWhipvine
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    state: plantbot1
+    offset: "0,0"
+    layers:
+    - state: plantbot1
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { scale: "1,1" }
+          Armed: { scale: "1.25,1.25" }
+          Spent: { scale: "1,1" }
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { color: "#8a9a8a" }
+          False: { color: "#ffffff" }
+  - type: WFReactiveFlora
+    behaviour: Lash
+    range: 1.3
+    cooldown: 4
+    activeTime: 0.8
+    sound:
+      collection: WFFloraLash
+    popup: wf-flora-whipvine-lash
+    damage:
+      types:
+        Slash: 3
+    knockdownTime: 1.5
+    ignoreFactions: [SimpleHostile, Passive]
+  - type: WFRegrowingHarvest
+    tool: Slicing
+    harvestTime: 2
+    regrowTime: 600
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFPlantFibre
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Swells with frost; a mob that comes close is caught in a short freezing cloud.
+- type: entity
+  parent: BeeFloraAshStrange
+  id: WFFloraFrostPod
+  components:
+  - type: Sprite
+    layers:
+    - state: xpod1
+      color: "#a9ddff"
+      map: ["plant"]
+  - type: PointLight
+    radius: 1.5
+    energy: 0.8
+    color: "#9fd8ff"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { scale: "1,1", color: "#a9ddff" }
+          Armed: { scale: "1.2,1.2", color: "#ffffff" }
+          Spent: { scale: "0.8,0.8", color: "#7f97a8" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.2
+    cooldown: 30
+    activeTime: 3
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-flora-frostpod-burst
+    solution:
+      reagents:
+      - ReagentId: FrostOil
+        Quantity: 10
+    cloudDuration: 3
+    cloudSpread: 2
+    ignoreFactions: [SimpleHostile, Passive]

@@ -1,4 +1,6 @@
 using Content.Client.CombatMode;
+using Content.Client._WF.Cockpit; // WOLFGATE(Cockpit)
+using Robust.Client.UserInterface; // WOLFGATE(Cockpit)
 using Content.Client.Hands.Systems;
 using Content.Shared._RMC14.CombatMode;
 using Robust.Client.Graphics;
@@ -18,6 +20,10 @@ public sealed partial class RMCCombatModeUISystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
+        // WOLFGATE(Cockpit): let the cockpit controls own their reticle and ordinary HUD cursors.
+        if (IoCManager.Resolve<IUserInterfaceManager>().GetUIController<WFCockpitUIController>().Active)
+            return;
+
         if (_combatMode.IsInCombatMode() &&
             _hands.GetActiveHandEntity() is { } held &&
             _rmcCombatMode.GetCrosshair(held) != null)

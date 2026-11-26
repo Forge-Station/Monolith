@@ -1,0 +1,22 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                HorizontalExpand="True">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#121212"/>
+    </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" MinSize="0 36" Margin="5 3 5 3">
+        <Label Text="{Loc 'shuttle-console-camera-label'}" FontColorOverride="#00ff2a" Margin="4 0 8 0"/>
+        <Button Name="HelmButton" Text="{Loc 'shuttle-console-camera-helm'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="FrontButton" Text="{Loc 'shuttle-console-camera-front'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="RearButton" Text="{Loc 'shuttle-console-camera-rear'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="LeftButton" Text="{Loc 'shuttle-console-camera-left'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="RightButton" Text="{Loc 'shuttle-console-camera-right'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="ExternalButton" Text="{Loc 'shuttle-console-camera-external'}" ToolTip="{Loc 'shuttle-console-camera-external-tooltip'}" ToggleMode="True" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+        <Button Name="LowLightButton" Text="{Loc 'shuttle-console-camera-low-light'}" ToolTip="{Loc 'shuttle-console-camera-low-light-tooltip'}" ToggleMode="True" StyleClasses="ButtonSquare" Margin="12 0 0 0"/>
+        <Label Text="{Loc 'shuttle-console-camera-zoom'}" FontColorOverride="#00ff2a" Margin="16 0 8 0"/>
+        <Button Name="ZoomInButton" Text="-" SetWidth="36" StyleClasses="ButtonSquare"/>
+        <Slider Name="ZoomSlider" SetWidth="140" VerticalAlignment="Center" Margin="6 0 6 0"/>
+        <Button Name="ZoomOutButton" Text="+" SetWidth="36" StyleClasses="ButtonSquare"/>
+        <Label Name="ZoomLabel" MinWidth="48" Align="Right" FontColorOverride="#00ff2a" Margin="8 0 4 0"/>
+    </BoxContainer>
+</PanelContainer>

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/puker/puker.dmi)",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "preview",
+      "directions": 4
+    },
+    {
+      "name": "puker_head",
+      "directions": 4
+    },
+    {
+      "name": "puker_chest",
+      "directions": 4
+    },
+    {
+      "name": "puker_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "puker_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "puker_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "puker_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "full",
+      "directions": 4
+    }
+  ]
+}

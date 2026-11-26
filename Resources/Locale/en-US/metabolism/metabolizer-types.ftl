@@ -9,4 +9,9 @@ metabolizer-type-plant = Plant
 metabolizer-type-dwarf = Dwarf
 metabolizer-type-moth = Moth
 metabolizer-type-arachnid = Arachnid
-metabolizer-type-skrell = Skrell
+
+# Wolfgate: ported from HardLight
+metabolizer-type-avali = Avali
+metabolizer-type-resomi = Resomi
+metabolizer-type-synth = Synth
+metabolizer-type-thaven = Thaven

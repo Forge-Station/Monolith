@@ -1,0 +1,180 @@
+# Ported from Goobstation via Trauma Station (tiles.yml, stacks.yml, extract_items.yml).
+
+- type: entity
+  parent: FloorTileItemBase
+  name: fitted bluespace carpet square
+  id: FloorTileItemBluespace
+  components:
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/floors.rsi
+    state: icon-bluespace
+  - type: UserInterface
+    interfaces:
+      enum.StackCustomSplitUiKey.Key:
+        type: StackCustomSplitBoundUserInterface
+  - type: SpawnAfterInteract
+    prototype: FloorBluespaceEntity
+    removeOnInteract: true
+  - type: FloorTile
+    outputs:
+    - Plating
+  - type: Stack
+    stackType: FloorTileItemBluespace
+
+- type: entity
+  parent: FloorTileItemBluespace
+  id: FloorTileItemBluespace30
+  suffix: 30
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: FloorTileItemBase
+  name: fitted sepia carpet square
+  id: FloorTileItemSepia
+  components:
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/floors.rsi
+    state: icon-sepia
+  - type: SpawnAfterInteract
+    prototype: FloorSepiaEntity
+    removeOnInteract: true
+  - type: FloorTile
+    outputs:
+    - Plating
+  - type: Stack
+    stackType: FloorTileItemSepia
+
+- type: entity
+  parent: FloorTileItemSepia
+  id: FloorTileItemSepia30
+  suffix: 30
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  id: FloorBluespaceEntity
+  name: bluespace carpet
+  description: State of the art carpets produced in the Nanotrasen Aperture Laboratory. These ones make you faster on them!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/floors.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: bluespace
+  - type: SyncSprite
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHoverBorg
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FloorTileItemBluespace:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts:
+        - Destruction
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 1.55
+    sprintSpeedModifier: 1.55
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: -0.5,-0.5,0.5,0.5
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - Catwalk
+
+- type: entity
+  id: FloorSepiaEntity
+  name: sepia carpet
+  description: The carpet feels somehow nostalgic. So nostalgic you don't want to take a step off of it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/floors.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: sepia
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepFloor
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FloorTileItemSepia:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts:
+        - Destruction
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.45
+    sprintSpeedModifier: 0.45
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: -0.5,-0.5,0.5,0.5
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: SpawnAfterInteract
+    prototype: FloorTileItemSepia
+    doAfter: 1
+    removeOnInteract: true
+  - type: Tag
+    tags:
+    - Catwalk
+
+- type: stack
+  id: FloorTileItemBluespace
+  name: stack-bluespace-tile
+  spawn: FloorTileItemBluespace
+  maxCount: 30
+
+- type: stack
+  id: FloorTileItemSepia
+  name: stack-sepia-tile
+  spawn: FloorTileItemSepia
+  maxCount: 30

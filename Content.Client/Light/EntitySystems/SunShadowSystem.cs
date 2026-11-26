@@ -48,6 +48,11 @@ public sealed partial class SunShadowSystem : SharedSunShadowSystem
         // dynamically and we don't have to manually handle it.
         // It will lerp from each value to the next one with angle and length handled separately
         var ratio = (float) (time / entity.Comp.Duration.TotalSeconds);
+        // WOLFGATE START: at round start the time can be negative or sit exactly on the first entry, which fell through to the throw; wrap it into the last span instead.
+        ratio -= MathF.Floor(ratio);
+        if (ratio <= entity.Comp.Directions[0].Ratio)
+            ratio += 1f;
+        // WOLFGATE END
 
         for (var i = entity.Comp.Directions.Count - 1; i >= 0; i--)
         {

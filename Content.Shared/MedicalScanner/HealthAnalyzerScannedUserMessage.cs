@@ -1,5 +1,6 @@
 using Content.Shared._Shitmed.Targeting; // Shitmed Change
-using Content.Shared.Chemistry.Reagent; // Forge-Change
+using Content.Shared._Onyx.Medical; // WOLFGATE(Wolfmed): EXT 2 — Wolfmed diagnostic payload types.
+using Content.Shared.FixedPoint; // WOLFGATE(Wolfmed): EXT 2 — vital damage is FixedPoint2.
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.MedicalScanner;
@@ -19,9 +20,15 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
     public NetEntity? Part; // Shitmed Change
     public bool? Unrevivable;
     public bool? Uncloneable; // Frontier
-    public List<ReagentQuantity>? ChemicalReagents; // Forge-Change
+    public HealthAnalyzerWoundDiagnostics? WoundDiagnostics; // WOLFGATE(Wolfmed): EXT 2 — per-part wound findings, null for non-wound-hosts.
+    public List<HealthAnalyzerOrganInfo>? Organs; // WOLFGATE(Wolfmed): EXT 2 — organ health rows, null for non-wound-hosts.
+    public List<HealthAnalyzerChemicalInfo>? Chemicals; // WOLFGATE(Wolfmed): EXT 2 — bloodstream/chemical/stomach/lung contents.
+    public FixedPoint2? VitalDamage; // WOLFGATE(Wolfmed): EXT 2 — the damage figure that decides crit on a wound host.
 
-    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null, List<ReagentQuantity>? chemicalReagents = null) // Shitmed Change // Forge-Change added List&ChemicalReagents
+    // WOLFGATE(Wolfmed) START: EXT 2, the constructor takes four appended optional parameters.
+    // public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null) // Shitmed Change
+    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null, HealthAnalyzerWoundDiagnostics? woundDiagnostics = null, List<HealthAnalyzerOrganInfo>? organs = null, List<HealthAnalyzerChemicalInfo>? chemicals = null, FixedPoint2? vitalDamage = null) // Shitmed Change
+    // WOLFGATE END
     {
         TargetEntity = targetEntity;
         Temperature = temperature;
@@ -32,7 +39,12 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
         Part = part; // Shitmed Change
         Unrevivable = unrevivable;
         Uncloneable = uncloneable; // Frontier
-        ChemicalReagents = chemicalReagents; // Forge-Change
+        // WOLFGATE(Wolfmed) START: EXT 2, assigns the Wolfmed diagnostics payload.
+        WoundDiagnostics = woundDiagnostics;
+        Organs = organs;
+        Chemicals = chemicals;
+        VitalDamage = vitalDamage;
+        // WOLFGATE END
     }
 }
 

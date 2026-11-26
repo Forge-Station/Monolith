@@ -5,10 +5,12 @@
   id: MobHarpyBase
   abstract: true
   components:
+  # WOLFGATE(Planets) START: z-level flight is back on, which Monolith#4812 turned off
   - type: CEZFlyer # Mono: z-level flight
     flightSpeed: 0.5
     flightMoveSpeedModifier: 0.5
     hoverStaminaDrain: 5
+  # WOLFGATE END
   - type: CEControllableFlight
     startFlightDoAfter: 1.5
   - type: HarpySinger
@@ -41,6 +43,7 @@
   - type: Sprite
     scale: 0.9, 0.9
     layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -49,6 +52,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: [ "underpants" ]
     - map: [ "undershirt" ]
     - map: [ "socks" ]
@@ -72,6 +77,9 @@
     - map: [ "belt" ]
     - map: [ "back" ]
     - map: [ "neck" ]
+    - map: [ "neck2" ]
+    - map: [ "neck3" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -183,6 +191,7 @@
   - type: Sprite
     scale: 0.9, 0.9
     layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -191,6 +200,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: [ "underpants" ]
     - map: [ "undershirt" ]
     - map: [ "socks" ]
@@ -208,7 +219,10 @@
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "neck" ]
+    - map: [ "neck2" ]
+    - map: [ "neck3" ]
     - map: [ "back" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - split tail layers ported from HardLight/Floof
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]

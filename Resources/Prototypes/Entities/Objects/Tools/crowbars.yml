@@ -22,6 +22,9 @@
   - type: Tag
     tags:
     - Crowbar
+  - type: WolfmedHitOverlaySound # WOLFGATE(Wolfmed): playtest 4, Bob's crowbar hits over the thud on flesh
+    sound:
+      collection: WFWolfmedCrowbarHit
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
@@ -66,6 +69,17 @@
   id: Crowbar
   description: A multipurpose tool to pry open doors and fight interdimensional invaders.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     state: icon
   - type: Item
@@ -80,6 +94,17 @@
   id: CrowbarRed
   description: An emergency crowbar designed to pry open doors and firelocks during power outages.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Tag
     tags:
     - Crowbar
@@ -115,6 +140,17 @@
   id: CrowbarGreen
   description: A multipurpose tool to pry open doors and fight interdimensional invaders, printed from an autolathe.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     layers:
     - state: icon
@@ -146,6 +182,17 @@
   id: CrowbarOrange
   description: A multipurpose tool to pry open doors and fight interdimensional invaders, found in toolboxes.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     layers:
     - state: icon
@@ -177,6 +224,17 @@
   id: CrowbarYellow
   description: A multipurpose tool to pry open doors and fight interdimensional invaders, dispensed from Engineering.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     layers:
     - state: icon

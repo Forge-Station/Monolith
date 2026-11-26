@@ -1,0 +1,67 @@
+# Playtest 4, IV: tgstation's (Nova's) IV drip. Hang a Bloodpack stack, a beaker or a jug on it, put the needle in a
+# patient (a verb or drag the stand onto them) and it feeds them at its flow; take mode draws their blood into a beaker.
+- type: entity
+  parent: [BaseStructureDynamic, StructureWheeled]
+  id: WFWolfmedIvDrip
+  name: IV drip
+  description: An IV drip with an infusion pump that can both drain blood into and inject liquids from an attached container.
+  components:
+  - type: Sprite
+    sprite: _WF/Wolfmed/Medical/iv_drip.rsi
+    noRot: true
+    layers:
+    - state: iv_drip_injectidle
+      map: [ "enum.WolfmedIvDripLayers.Base" ]
+    - state: beakeridle
+      map: [ "enum.WolfmedIvDripLayers.Container" ]
+      visible: false
+    - state: reagent0
+      map: [ "enum.WolfmedIvDripLayers.Fill" ]
+      visible: false
+  - type: Icon
+    sprite: _WF/Wolfmed/Medical/iv_drip.rsi
+    state: iv_drip
+  - type: Appearance
+  - type: InteractionOutline
+  # A thin stand: nobody bumps into it, the way tg's is not dense.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 60
+        mask:
+        - TableMask
+  - type: WolfmedIvDrip
+    whitelist:
+      components:
+      - FitsInDispenser
+      - DrainableSolution
+      tags:
+      - Bloodpack
+  - type: ContainerContainer
+    containers:
+      wolfmed_iv_container: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 100

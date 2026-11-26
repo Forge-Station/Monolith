@@ -1,0 +1,12 @@
+# Wolfgate: Wolfgate's language system has no icons or obfuscation fonts, so those
+# fields are dropped.
+- type: language
+  id: Carptongue
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 2
+    replacement:
+    - glub
+    - blub
+    - bloop

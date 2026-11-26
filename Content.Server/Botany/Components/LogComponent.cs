@@ -1,6 +1,5 @@
 using Content.Server.Botany.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Botany.Components;
 // TODO: This should probably be merged with SliceableFood somehow or made into a more generic Choppable.

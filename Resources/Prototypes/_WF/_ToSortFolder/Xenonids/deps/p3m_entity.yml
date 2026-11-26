@@ -1,0 +1,167 @@
+# RMC-14: Resources/Prototypes/_RMC14/Effects/slash.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectExtraSlash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: slash
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/attack.yml
+- type: entity
+  parent: RMCBaseEffect
+  # Just fades out with no movement animation
+  id: CMEffectPunch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    state: punch
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/attack.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: headbite
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/heal.yml
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: Sprite
+    color: "#00BE6F"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/heal.yml
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/empower.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/xeno_empower.rsi
+    noRot: true
+    state: empower
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/empower.yml
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerBrown
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#574990"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/empower.yml
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: empower_custom
+    color: "#93EC78C8"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/empower.yml
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerTantrum
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: empower_custom
+    color: "#A31010C8"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  id: RMCEffectXenoTelegraphGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_telegraph.rsi
+    color: "#008000"
+    noRot: true
+    state: xeno_telegraph_base
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphRed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    color: "#A50824"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_base_small
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1

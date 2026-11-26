@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 using Content.Shared._Mono.Radar;
 
 namespace Content.Shared.Movement.Components;

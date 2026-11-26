@@ -5,7 +5,7 @@ using Content.Shared.UserInterface;
 
 namespace Content.Client.Disposal.Mailing;
 
-public sealed class MailingUnitSystem : SharedMailingUnitSystem
+public sealed partial class MailingUnitSystem : SharedMailingUnitSystem
 {
     [Dependency] private SharedUserInterfaceSystem UserInterfaceSystem = default!;
 

@@ -1,0 +1,9 @@
+wf-chat-font-label = Chat font
+wf-chat-font-tooltip = The font your character's speech is shown in, in chat and in speech bubbles. A language with its own script still uses that.
+wf-chat-font-preview = The quick brown fox jumps over the lazy dog.
+wf-chat-font-default = Default
+wf-chat-font-terminal = Terminal
+wf-chat-font-boxfont = Boxfont Round
+wf-chat-font-iceberg = Iceberg
+wf-chat-font-fondamento = Fondamento
+wf-chat-font-minecraftia = Minecraftia

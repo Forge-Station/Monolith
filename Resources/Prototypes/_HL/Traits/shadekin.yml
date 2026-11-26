@@ -1,0 +1,112 @@
+# Wolfgate: ported from HardLight, adapted to Wolfgate's TraitPrototype.
+# HardLight's `replaceComponents` and `requirements` fields do not exist here, and `NaturalRegen`
+# is not a trait in this fork, so those are dropped. The trait requirement that Dark Healing needs
+# a light-sensitivity trait is therefore not enforced automatically.
+
+# Available to all species except Shadekin (who have the mechanic natively).
+- type: trait
+  id: MildLightSensitivity
+  name: hl-trait-mild-light-sensitivity-name
+  description: hl-trait-mild-light-sensitivity-desc
+  category: Physical
+  cost: -1
+  speciesBlacklist:
+  - Shadekin
+  mutuallyExclusiveTraits:
+  - LightSensitivity
+  - ExtremeLightSensitivity
+  components:
+  - type: LightSensitivity
+    burnThreshold: 5 # Extreme
+    slowdownThreshold: 4 # High
+    speedMultiplier: 0.9
+
+- type: trait
+  id: LightSensitivity
+  name: hl-trait-light-sensitivity-name
+  description: hl-trait-light-sensitivity-desc
+  category: Physical
+  cost: -2
+  mutuallyExclusiveTraits:
+  - MildLightSensitivity
+  - ExtremeLightSensitivity
+  components:
+  - type: LightSensitivity
+    burnThreshold: 4 # High
+    slowdownThreshold: 3 # Annoying
+    speedMultiplier: 0.8
+
+- type: trait
+  id: ExtremeLightSensitivity
+  name: hl-trait-extreme-light-sensitivity-name
+  description: hl-trait-extreme-light-sensitivity-desc
+  category: Physical
+  cost: -5
+  mutuallyExclusiveTraits:
+  - MildLightSensitivity
+  - LightSensitivity
+  components:
+  - type: LightSensitivity
+    burnThreshold: 3 # Annoying
+    slowdownThreshold: 3 # Annoying
+    speedMultiplier: 0.7
+
+# Shadekin-exclusive regen traits to replace platelets.
+# These add a ShadekinRegenerationComponent (heals only in darkness), which stacks on top of the
+# shadekin's native PassiveDamage regen.
+
+- type: trait
+  id: ShadekinRegeneration
+  name: hl-trait-shadekin-regeneration-name
+  description: hl-trait-shadekin-regeneration-desc
+  category: Physical
+  cost: 2
+  whitelist:
+    components:
+    - Shadekin
+  mutuallyExclusiveTraits:
+  - ExtremeShadekinRegeneration
+  - PlateletFactories
+  components:
+  - type: ShadekinRegeneration
+    healPerSecond: 0.18
+    intervalSeconds: 1
+    critMultiplier: 0.5
+    healTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Cold
+    - Asphyxiation
+
+- type: trait
+  id: ExtremeShadekinRegeneration
+  name: hl-trait-extreme-shadekin-regeneration-name
+  description: hl-trait-extreme-shadekin-regeneration-desc
+  category: Physical
+  cost: 5
+  whitelist:
+    components:
+    - Shadekin
+  mutuallyExclusiveTraits:
+  - ShadekinRegeneration
+  - PlateletFactories
+  - LightSensitivity
+  components:
+  - type: ShadekinRegeneration
+    healPerSecond: 0.36
+    intervalSeconds: 1
+    critMultiplier: 0.5
+    healTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Cold
+    - Caustic
+    - Poison
+    - Radiation
+    - Asphyxiation

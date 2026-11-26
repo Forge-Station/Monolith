@@ -1,0 +1,20 @@
+# Wolfgate: ported from HardLight
+- type: damageModifierSet
+  id: Avali # Not as good as thick fur like the vulps, but still rather insulating.
+  coefficients:
+    Cold: 0.5
+    Heat: 1.5
+
+# Baseline damage modifier set for Shadekin.
+
+# Wolfgate: ported from HardLight
+- type: damageModifierSet
+  id: Shadekin
+  coefficients:
+    Asphyxiation: 0
+    Cold: 0.75
+    Heat: 1.2
+    Cellular: 0.15
+    Bloodloss: 1.25
+    Shock: 0.75
+    Radiation: 1.3

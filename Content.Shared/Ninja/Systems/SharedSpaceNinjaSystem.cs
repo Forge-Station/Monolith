@@ -15,7 +15,7 @@ public abstract partial class SharedSpaceNinjaSystem : EntitySystem
     [Dependency] protected SharedNinjaSuitSystem Suit = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
 
-    [Dependency] public readonly EntityQuery<SpaceNinjaComponent> NinjaQuery = default!;
+    [Dependency] public EntityQuery<SpaceNinjaComponent> NinjaQuery = default!;
 
     public override void Initialize()
     {

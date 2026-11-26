@@ -1,0 +1,233 @@
+# The two navies meeting in open space: a TSF patrol and a Dynasty patrol, each ship on its own opponent and on the next once that
+# one is beaten. They wait for a player to come within sight before they begin, and nobody here is after the players. Whoever
+# helps one side beat the other is paid by it, and the one they helped counts them an ally.
+- type: wfEncounter
+  id: WFEncounterSkirmishNavies
+  leash: 2500
+  name: wf-encounter-name-skirmish-navies
+  announcement: wf-encounter-announce-skirmish-navies
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.75
+  minPlayers: 3
+  requiresWar: true
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 28000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pdv
+    spesos: 28000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: lead
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: lead
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol
+
+
+# The guarded fight between the two navies: a TSF pair and a Dynasty pair, each warning in its own words, and the players too are
+# fired on if they come near.
+- type: wfEncounter
+  id: WFEncounterHostileSkirmishNavies
+  leash: 2500
+  name: wf-encounter-name-skirmish-hostile
+  announcement: wf-encounter-announce-skirmish-hostile
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 3
+  weight: 0.35
+  minPlayers: 6
+  requiresWar: true
+  startRadius: 1800
+  cooldown: 3600
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 30000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pdv
+    spesos: 30000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: lead
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: lead
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: Everyone
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol

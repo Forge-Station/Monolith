@@ -1,0 +1,24 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: BonemaskBeak
+  bodyPart: Head
+  markingCategory: Snout
+  sprites:
+    - sprite: _HL/Mobs/Customization/Generic/bonemask.rsi
+      state: beakBonemask-marking-head
+
+- type: marking
+  id: BonemaskFlat
+  bodyPart: Head
+  markingCategory: Snout
+  sprites:
+    - sprite: _HL/Mobs/Customization/Generic/bonemask.rsi
+      state: FlatBonemask-marking-head
+
+- type: marking
+  id: BonemaskSockets
+  bodyPart: Head
+  markingCategory: Overlay
+  sprites:
+    - sprite: _HL/Mobs/Customization/Generic/bonemask.rsi
+      state: SocketsBonemask-marking-head

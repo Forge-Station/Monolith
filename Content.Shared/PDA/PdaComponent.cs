@@ -2,7 +2,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
 using Content.Shared.Access.Components;
 using Content.Shared.Containers.ItemSlots;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.PDA
 {

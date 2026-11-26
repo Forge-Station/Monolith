@@ -1803,3 +1803,21 @@
     entries:
       Burger: XenoCutlet
       Taco: XenoCutlet
+
+# Wolfgate: ported from HardLight
+- type: entity
+  parent: FoodMeatChickenFried
+  id: FoodMeatChickenFriedMystery # HardLight: Renamed from -Vox to -Mystery.
+  name: mystery fried chicken
+  description: “Eleven secret herbs and… oh no. That’s not chicken.”"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Protein
+          Quantity: 5
+        - ReagentId: Ammonia
+          Quantity: 3

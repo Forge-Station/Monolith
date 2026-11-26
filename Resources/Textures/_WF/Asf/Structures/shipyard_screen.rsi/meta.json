@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Recoloured to ASF purple for Wolfgate from shipyard_ussp in _NF/Structures/Machines/computers.rsi (factional shipyard states edited from shipyard_security by _starch).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shipyard_asf",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          0.3,
+          1,
+          0.3
+        ],
+        [
+          1,
+          0.3,
+          1,
+          0.3
+        ],
+        [
+          1,
+          0.3,
+          1,
+          0.3
+        ],
+        [
+          1,
+          0.3,
+          1,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+- type: startingGear
+  id: WFStrangerGearSquatter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+    pocket1: KitchenKnife
+
+- type: startingGear
+  id: WFStrangerGearDealer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    outerClothing: ClothingOuterCoatBomber
+    eyes: ClothingEyesGlassesSunglasses
+    shoes: ClothingShoesColorBrown
+    pocket1: KitchenKnife
+
+- type: startingGear
+  id: WFStrangerGearMugger
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterCoatJensen
+    mask: ClothingMaskBandBlack
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+    pocket1: Machete
+
+- type: startingGear
+  id: WFStrangerGearPreacher
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChaplain
+    outerClothing: ClothingOuterHoodieChaplain
+    shoes: ClothingShoesColorBrown
+
+- type: startingGear
+  id: WFStrangerGearConspiracist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    outerClothing: ClothingOuterCoatTrench
+    head: ClothingHeadTinfoil
+    shoes: ClothingShoesColorBrown
+
+- type: startingGear
+  id: WFStrangerGearBeggar
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesFingerless
+    neck: ClothingNeckScarfStripedRed
+
+- type: startingGear
+  id: WFStrangerGearStalker
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    outerClothing: ClothingOuterCoatTrench
+    head: ClothingHeadHatFedoraBrown
+    shoes: ClothingShoesColorBrown
+    pocket1: CombatKnife

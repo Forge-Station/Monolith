@@ -1,0 +1,36 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: BaseFactionWarDeclarator
+  name: war declarator
+  # WOLFGATE(ColdWar) START: the declarator also withdraws a declaration and calls a war off
+  #description: A device used to declare hostilities within the sector. If both sides activate it, total war will be declared.
+  description: A device used to declare war within the sector. War starts if both sides activate it. Activate it again to take it back, or during a war to offer a ceasefire.
+  # WOLFGATE END
+  components:
+    - type: Sprite
+      sprite: Objects/Devices/declaration_of_war.rsi
+      layers:
+        - state: declarator
+    - type: Item
+    - type: UseDelay
+      delay: 0.5
+    - type: FactionWarDeclarator
+
+- type: entity
+  parent: BaseFactionWarDeclarator
+  id: WarDeclaratorTsf
+  name: TSFMC war declarator
+  components:
+  - type: FactionWarDeclarator
+    faction: TSF
+    warDeclarationMessage: war-declaration-tsfmc
+
+- type: entity
+  parent: BaseFactionWarDeclarator
+  id: WarDeclaratorPdv
+  name: PDV war declarator
+  components:
+  - type: FactionWarDeclarator
+    faction: PDV
+    warDeclarationMessage: war-declaration-pdv

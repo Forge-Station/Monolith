@@ -1,0 +1,10 @@
+# The chair a prisoner is strapped to. Bolted down, so nobody carries off the cell.
+- type: entity
+  parent: Chair
+  id: WFAbductCellChair
+  name: prisoner chair
+  description: A steel chair bolted to the deck, with worn straps. Someone has been kept here.
+  components:
+  - type: Transform
+    anchored: true
+  - type: WFAbductCell

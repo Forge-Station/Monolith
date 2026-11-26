@@ -1,0 +1,10 @@
+# Exotic matter: found only out past the Lattice's hold, in asteroid rock. It sells high and builds stabilisers,
+# charms and relay anchors.
+- type: material
+  id: WFExoticMatter
+  name: wf-material-exotic-matter
+  unit: materials-unit-crystal
+  icon: { sprite: /Textures/Nyanotrasen/Objects/Materials/materials.rsi, state: bluespace }
+  color: "#b040e0"
+  stackEntity: WFMaterialExoticMatter1
+  price: 30

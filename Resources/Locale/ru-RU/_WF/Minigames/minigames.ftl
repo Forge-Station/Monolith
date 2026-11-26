@@ -16,10 +16,16 @@ wf-minigame-difficulty-hard = сложный стол
 wf-minigame-offer = {$game}, {$difficulty}. Ставка {$stake}. Победа приносит {$prize}. Играете?
 wf-minigame-offer-ladder = {$game}, {$difficulty}. Ставка {$stake}. Полный заход приносит {$prize}; снятие раньше — меньше. Играете?
 wf-minigame-declined = Как хотите...
-wf-minigame-cooldown = Вы уже получили выигрыш от меня. Вернитесь через {$minutes -> [one] минуту *[other] {$minutes} минут}.
+wf-minigame-cooldown = Вы уже получили выигрыш от меня. Вернитесь через {$minutes ->
+    [one] минуту
+    *[other] {$minutes} минут
+}.
 wf-minigame-house-broke = Я выплатил всё, что мог сегодня. Попробуйте завтра.
 wf-minigame-begin = Начнем играть!
-wf-minigame-reward-item = {$count -> [one] {$item} *[other] {$count}x {$item}}
+wf-minigame-reward-item = {$count ->
+    [one] {$item}
+    *[other] {$count}x {$item}
+}
 
 ## Окно
 
@@ -69,7 +75,10 @@ wf-minigame-dice-round-won = Раунд за вами: было {$count} x {$fac
 wf-minigame-lock-rules = Угадайте код. Попадание: правильная цифра, правильное место. Близко: правильная цифра, неправильное место.
 wf-minigame-lock-placeholder = Код
 wf-minigame-lock-try = Попробовать
-wf-minigame-lock-tries = {$left -> [one] 1 попытка осталась *[other] {$left} попыток осталось}
+wf-minigame-lock-tries = {$left ->
+    [one] 1 попытка осталась
+    *[other] {$left} попыток осталось
+}
 wf-minigame-lock-code = Код был {$code}.
 wf-minigame-lock-guess = {$code}: {$hits} попаданий, {$near} близко
 wf-minigame-lock-start = Код из {$digits} цифр. У вас есть {$tries} попыток.

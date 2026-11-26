@@ -1,0 +1,28 @@
+- type: latheRecipePack
+  id: WFLatticeStatic
+  recipes:
+  - WFFlatpackLatticeStabiliser
+  - WFLatticeCharm
+  - WFFlatpackLatticeRelay
+
+- type: latheRecipe
+  id: WFFlatpackLatticeStabiliser
+  result: WFFlatpackLatticeStabiliser
+  categories:
+  - Tools
+  completetime: 12
+  materials:
+    Steel: 2000
+    Plasteel: 500
+    Gold: 300
+    WFExoticMatter: 500
+
+- type: latheRecipe
+  id: WFLatticeCharm
+  result: WFLatticeCharm
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Gold: 100
+    WFExoticMatter: 100

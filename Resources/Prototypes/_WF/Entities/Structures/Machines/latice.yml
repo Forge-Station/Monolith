@@ -1,0 +1,68 @@
+# Keeps a little anchored space round the ship it stands on while it has power.
+- type: entity
+  parent: [ BaseStructure, BaseMachinePowered ]
+  id: WFLatticeStabiliser
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Machines/Anomaly/anomaly_vessel.rsi
+    noRot: true
+    layers:
+    - state: base
+    - state: powered-2
+      shader: unshaded
+      color: "#d070ff"
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PointLight
+    radius: 2
+    energy: 1.2
+    color: "#b040e0"
+  - type: ApcPowerReceiver
+    powerLoad: 15000
+  - type: Anchorable
+    delay: 2
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          WFMaterialExoticMatter1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 6000
+  - type: WFLatticeShelter
+    shelter: 0.8
+    stopsTaking: true

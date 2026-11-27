@@ -154,6 +154,10 @@
         children:
         - id: ClothingOuterRobesCult
         - id: ClothingShoesCult
+      # WOLFGATE(WolfChem) START: neuroware sticks turn up in maintenance lockers
+      - !type:NestedSelector
+        tableId: WFNeurowareStickLoot
+      # WOLFGATE END
       # Gloves
       - !type:GroupSelector
         children:

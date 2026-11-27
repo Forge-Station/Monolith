@@ -44,6 +44,9 @@
             Asphyxiation: 2
     Narcotic:
       effects:
+      - !type:WFDose
+        profile: WFCrystal
+        perUnit: 1
       - !type:MovespeedModifier
         walkSpeedModifier: 1.25
         sprintSpeedModifier: 1.25
@@ -107,6 +110,10 @@
   metabolisms:
     Narcotic:
       effects:
+      - !type:WFDose
+        profile: WFCrystal
+        perUnit: 0.25
+        dependenceOnly: true
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
@@ -288,6 +295,9 @@
   metabolisms:
     Narcotic:
       effects:
+      - !type:WFDose
+        profile: WFCannabis
+        perUnit: 1
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
@@ -321,6 +331,9 @@
   metabolisms:
     Narcotic:
       effects:
+      - !type:WFDose
+        profile: WFNicotine
+        perUnit: 1
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie

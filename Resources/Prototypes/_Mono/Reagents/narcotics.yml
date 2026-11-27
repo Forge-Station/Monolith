@@ -34,6 +34,9 @@
     Narcotic:
       metabolismRate: 1
       effects:
+      - !type:WFDose
+        profile: WFHeroin
+        perUnit: 1.5
       - !type:MovespeedModifier
         walkSpeedModifier: 0.40
         sprintSpeedModifier: 0.40

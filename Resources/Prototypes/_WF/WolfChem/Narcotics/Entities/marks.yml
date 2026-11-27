@@ -1,0 +1,29 @@
+# What makes a thing a narcotic at the market: Class 3 contraband, a sale that moves money to the black market, and
+# a place in a ship's stock (WFNarcoticStockSystem). The ready-made products inherit it, and WFNarcoticGoodsSystem
+# copies it onto any item that holds a street drug and onto a blank stick that takes a copy. Each also carries the
+# WFNarcotic tag. Selling one heats the seller and tips off security (WFNarcoticHeatSystem).
+- type: entity
+  id: WFNarcoticMarks
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Contraband
+    severity: Class3Chem
+    turnInValues:
+      FederationMilitaryCredit: 0 # no flat reward: a hand-in pays by street value (wf.narcotics.turn_in_value)
+  - type: ItemTax
+    taxAccounts:
+      Medical: -0.05
+      nfsd: -0.1
+      BlackMarket: 0.25
+  - type: WFNarcoticStock
+
+# The radar blip of a ship's stockpile, put on its largest lot while the ship holds enough.
+- type: entity
+  id: WFNarcoticSignature
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RadarBlip
+    radarColor: "#b23ad6"
+    scale: 1.5
+    shape: hexagon
+    visibleFromOtherGrids: true

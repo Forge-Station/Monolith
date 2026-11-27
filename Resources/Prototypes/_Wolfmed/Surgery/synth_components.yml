@@ -1,0 +1,141 @@
+# Chassis component repair: a synth's or IPC's eyes and pump fixed in place with engineering tools rather than flesh
+# surgery. Unbolt the service panel, re-calibrate the part until it is whole, weld the panel shut.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairChassisEyes
+  name: Repair Optics
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepOpenServicePanel
+    - WFSurgeryStepRepairChassisEyes
+    - WFSurgeryStepCloseServicePanel
+  - type: SurgeryPartCondition
+    part: Head
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: eyes
+    mechanical: true
+    validWhile:
+    - type: WolfmedServicePanelOpen
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairChassisPump
+  name: Repair Pump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepOpenServicePanel
+    - WFSurgeryStepRepairChassisPump
+    - WFSurgeryStepCloseServicePanel
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: pump
+    mechanical: true
+    validWhile:
+    - type: WolfmedServicePanelOpen
+
+# A synth keeps its pump in the heart slot.
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairSynthPump
+  name: Repair Pump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepOpenServicePanel
+    - WFSurgeryStepRepairSynthPump
+    - WFSurgeryStepCloseServicePanel
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: heart
+    mechanical: true
+    validWhile:
+    - type: WolfmedServicePanelOpen
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepOpenServicePanel
+  name: Unbolt the service panel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullPlate
+    add:
+    - type: WolfmedServicePanelOpen
+    duration: 3
+  - type: Sprite
+    sprite: Objects/Tools/wrench.rsi
+    state: icon
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRepairChassisBase
+  name: Re-calibrate the component
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedCoreProbe
+    duration: 2
+  - type: Sprite
+    sprite: _NF/Objects/Tools/multitool.rsi
+    state: icon
+  - type: SurgeryRepeatableStep
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: WFSurgeryStepRepairChassisBase
+  id: WFSurgeryStepRepairChassisEyes
+  name: Re-calibrate the optics
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: eyes
+    amount: 5
+
+- type: entity
+  parent: WFSurgeryStepRepairChassisBase
+  id: WFSurgeryStepRepairChassisPump
+  name: Re-calibrate the pump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: pump
+    amount: 5
+
+- type: entity
+  parent: WFSurgeryStepRepairChassisBase
+  id: WFSurgeryStepRepairSynthPump
+  name: Re-calibrate the pump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: heart
+    amount: 5
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepCloseServicePanel
+  name: Weld the service panel shut
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullWeld
+    remove:
+    - type: WolfmedServicePanelOpen
+    duration: 3
+  - type: Sprite
+    sprite: Objects/Tools/welder.rsi
+    state: icon
+  - type: SurgeryStepEmoteEffect

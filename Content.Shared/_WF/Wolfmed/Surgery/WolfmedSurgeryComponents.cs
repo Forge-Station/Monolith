@@ -78,6 +78,9 @@ public sealed partial class WolfmedSurgeryOrganDamagedConditionComponent : Compo
     /// lists its open housing here, so the weld that closes it is still reachable once the core is whole.
     /// </summary>
     [DataField] public ComponentRegistry? ValidWhile;
+
+    /// <summary>Restricts organ repair to mechanical or organic parts.</summary>
+    [DataField] public bool? Mechanical;
 }
 
 /// <summary>

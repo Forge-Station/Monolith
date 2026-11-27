@@ -14,9 +14,11 @@
     speaks:
     - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
     - Machine
+    - RobotTalk
     understands:
     - TauCetiBasic
     - Machine
+    - RobotTalk
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
     sprite: _HL/Mobs/Species/Synth/parts.rsi
     state: full
@@ -81,18 +83,6 @@
   - type: Uncloneable
   - type: HumanoidAppearance
     species: Synth
-  - type: Satiation
-    satiations:
-      Hunger:
-        prototype: SynthHunger
-      Thirst:
-        prototype: NormalSatiationThirst
-  - type: SatiationSpeedModifier
-    satiations:
-      Hunger:
-        Starving: 0.75
-      Thirst:
-        Parched: 0.75
   - type: Puller
     needsHands: false
   - type: Body
@@ -170,9 +160,9 @@
     channels:
     - Trinary
   - type: Bloodstream
-    bloodReagent: SynthBlood
+    bloodReagent: WFWolfmedHydraulicFluid
     bloodMaxVolume: 300
-    bloodRefreshAmount: 0.0
+    bloodRefreshAmount: 0.5
     bloodlossDamage:
       types:
         Bloodloss: 0.5
@@ -180,25 +170,6 @@
       types:
         Bloodloss: -1
   - type: BlockInjection
-  - type: SynthBloodstream
-    minBloodLevel: 0.3
-    fullEfficiencyBloodLevel: 0.9
-    minBloodEfficiency: 0.1
-    minHunger: 50
-    hungerCostPerRepair: 1.5
-    hungerCostPerBleed: 2
-    bleedReductionAmount: 0.25
-    damage:
-      groups:
-        Brute: -2.5 # -1.25 after modifiers
-        Burn: -3 # -1.5 after modifiers
-      types:
-        Bloodloss: -0.2 # -0.1 after modifiers
-        Cellular: -0.07 # -0.035 after modifiers
-    bloodRegeneration:
-      targetBloodLevel: 1
-      bloodRefreshAmount: 0.3
-      hungerCostPerUnit: 0.5
   - type: SynthBattery
     organSlot: battery
     startingBattery: PowerCellMedium
@@ -224,8 +195,6 @@
   - type: BatteryAlert
     batteryAlert: BorgBattery
     noBatteryAlert: BorgBatteryNone
-  - type: UniversalHealModifier
-    modifier: 0.5 # reduces the effectiveness of most healing sources by 50%
   - type: ThermalRegulator
     metabolismHeat: 500
     radiatedHeat: 150
@@ -274,6 +243,7 @@
     - AnomalyHost
     - SiliconEmotes
     - Synth
+    - Humanoid # Wolfgate: permits Letoferol transformation.
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -872,6 +872,11 @@ public sealed partial class ChatUIController : UIController
                 msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
         }
 
+        // WOLFGATE(WolfChem) START: chat seen through the local player's high, before tags split the message text
+        if (_ent.EntitySysManager.TryGetEntitySystem<Content.Client._WF.WolfChem.Narcotics.WFDrugChatSystem>(out var drugChat))
+            drugChat.Distort(msg);
+        // WOLFGATE END
+
         // Color any codewords for minds that have roles that use them
         if (_player.LocalUser != null && _mindSystem != null && _roleCodewordSystem != null)
         {

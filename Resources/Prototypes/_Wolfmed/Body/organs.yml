@@ -160,6 +160,7 @@
   id: WFWolfmedOrganPositronicBrain
   abstract: true
   components:
+  - type: WFNeurowareHost
   - type: WolfmedOrgan
     # Playtest 3: a chassis keeps its core in the torso, where a rifle round reaches it twice as hard as a human
     # heart (two organs share the split, not five) and a heavy blade hits the 5-a-hit cap. At 15 a sabre killed in

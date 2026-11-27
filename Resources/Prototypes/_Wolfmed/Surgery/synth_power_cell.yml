@@ -1,0 +1,128 @@
+# A synth's power cell sits in its torso's battery slot (SynthBattery). HardLight's extract and implant surgeries, on
+# Wolfgate's opened ribcage instead of HardLight's endoskeleton chain, with the multitool where HardLight used
+# wirecutters and a cautery. The steps run HardLight's SynthSurgerySystem.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryExtractSynthPowerCell
+  name: Extract Power Cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepLocateSynthPowerCell
+    - WFSurgeryStepDisconnectSynthPowerCell
+    - WFSurgeryStepExtractSynthPowerCell
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryBodyComponentCondition
+    components:
+    - type: SynthBattery
+  - type: SynthSurgeryBatterySlotFullCondition
+    slot: battery
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    state: medium
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryImplantSynthPowerCell
+  name: Implant Power Cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepInsertSynthPowerCell
+    - WFSurgeryStepConnectSynthPowerCell
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: SurgeryBodyComponentCondition
+    components:
+    - type: SynthBattery
+  - type: SynthSurgeryBatterySlotEmptyCondition
+    slot: battery
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    state: medium
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepLocateSynthPowerCell
+  name: Locate the power cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 3
+    add:
+    - type: SynthPowerCellLocated
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    state: medium
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepDisconnectSynthPowerCell
+  name: Disconnect the power cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 5
+    tool:
+    - type: WolfmedCoreProbe
+    add:
+    - type: SynthPowerCellDisconnected
+  - type: Sprite
+    sprite: _NF/Objects/Tools/multitool.rsi
+    state: icon
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepExtractSynthPowerCell
+  name: Extract the power cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 5
+    remove:
+    - type: SynthPowerCellLocated
+    - type: SynthPowerCellDisconnected
+    - type: SynthPowerCellInserted
+  - type: SynthSurgeryStepBatteryExtract
+    slot: battery
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    state: medium
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepInsertSynthPowerCell
+  name: Insert the power cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 5
+    add:
+    - type: SynthPowerCellInserted
+  - type: SynthSurgeryStepBatteryInsert
+    slot: battery
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    state: medium
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepConnectSynthPowerCell
+  name: Connect the power cell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 5
+    tool:
+    - type: WolfmedCoreProbe
+    remove:
+    - type: SynthPowerCellInserted
+  - type: Sprite
+    sprite: _NF/Objects/Tools/multitool.rsi
+    state: icon

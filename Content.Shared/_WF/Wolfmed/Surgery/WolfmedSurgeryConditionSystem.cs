@@ -186,6 +186,12 @@ public sealed partial class WolfmedSurgeryConditionSystem : EntitySystem
 
     private void OnOrganValid(Entity<WolfmedSurgeryOrganDamagedConditionComponent> ent, ref SurgeryValidEvent args)
     {
+        if (ent.Comp.Mechanical is { } mechanical && _traits.IsMechanical(args.Part) != mechanical)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (InProgress(args.Part, ent.Owner))
             return;
 
@@ -201,7 +207,7 @@ public sealed partial class WolfmedSurgeryConditionSystem : EntitySystem
 
         // M6: a repair that has already fixed the organ stays listed until its closing step has run.
         var part = args.Part;
-        if (!treatable && !ent.Comp.Inverse && ent.Comp.ValidWhile is { } open &&
+        if (!treatable && found && !ent.Comp.Inverse && ent.Comp.ValidWhile is { } open &&
             open.Values.Any(entry => HasComp(part, entry.Component.GetType())))
             return;
 

@@ -1,3 +1,4 @@
+using Content.Server.Medical;
 using Content.Shared._Onyx.Wounds;
 using Content.Shared._Shitmed.Body.Events;
 using Content.Shared._WF.Synthetics;
@@ -8,11 +9,13 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Medical;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._WF.Synthetics;
 
@@ -30,6 +33,7 @@ public sealed partial class WFSyntheticLimbSystem : SharedWFSyntheticsSystem
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private WolfmedWoundTraitSystem _traits = default!;
     [Dependency] private WoundSystem _wounds = default!;
@@ -47,12 +51,25 @@ public sealed partial class WFSyntheticLimbSystem : SharedWFSyntheticsSystem
 
     private static readonly SoundSpecifier ReattachSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
 
+    /// <summary>The treatment pass being applied this tick: whose body, by whom. Other wound mending is not a pass.</summary>
+    private (EntityUid Body, EntityUid User, GameTick Tick)? _pass;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<WFChassisComponent, WFLimbReattachDoAfterEvent>(OnReattachDoAfter);
+        SubscribeLocalEvent<WFChassisComponent, HealingDoAfterEvent>(OnHealingPass, before: new[] { typeof(HealingSystem) });
         SubscribeLocalEvent<WolfmedWoundLifecycleEvent>(OnWoundLifecycle);
+    }
+
+    /// <summary>Notes a treatment pass on the body just before HealingSystem applies it.</summary>
+    private void OnHealingPass(Entity<WFChassisComponent> ent, ref HealingDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        _pass = (ent.Owner, args.Args.User, _timing.CurTick);
     }
 
     /// <summary>
@@ -182,7 +199,10 @@ public sealed partial class WFSyntheticLimbSystem : SharedWFSyntheticsSystem
         return true;
     }
 
-    /// <summary>Says how far each pass of cable got, and seats the limb properly once the coupling is repaired.</summary>
+    /// <summary>
+    /// Tells whoever is coiling the limb how many passes are left, and seats the limb properly once the coupling is
+    /// repaired. Passive mending (repair nanites) seats it too, but says nothing until it does.
+    /// </summary>
     private void OnWoundLifecycle(ref WolfmedWoundLifecycleEvent args)
     {
         if (args.Prototype != LooseCouplingWound || !HasComp<WFLooseLimbComponent>(args.Part))
@@ -192,11 +212,12 @@ public sealed partial class WFSyntheticLimbSystem : SharedWFSyntheticsSystem
         if (args.Kind == WolfmedWoundLifecycle.Changed)
         {
             var pass = args.OldSeverity - args.Severity;
-            if (body != null && pass > FixedPoint2.Zero && args.Severity > FixedPoint2.Zero)
+            if (body != null && pass > FixedPoint2.Zero && args.Severity > FixedPoint2.Zero &&
+                _pass is { } current && current.Body == body && current.Tick == _timing.CurTick)
             {
                 var left = (int) MathF.Ceiling(args.Severity.Float() / pass.Float());
                 _popup.PopupEntity(Loc.GetString("wf-synthetic-limb-coupling-tightened", ("limb", args.Part), ("passes", left)),
-                    body.Value, PopupType.Small);
+                    body.Value, current.User, PopupType.Small);
             }
 
             return;

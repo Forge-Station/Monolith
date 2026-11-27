@@ -19,7 +19,8 @@
 
 - type: entity
   id: OrganIPCEyes
-  parent: BaseIPCOrgan
+  # WOLFGATE(Wolfmed): Wolfmed eyes data, so the organ can be hurt, scanned and treated
+  parent: [BaseIPCOrgan, WFWolfmedOrganEyes]
   name: robotic eyes
   description: "01001001 00100000 01110011 01100101 01100101 00100000 01111001 01101111 01110101 00100001"
   components:
@@ -62,6 +63,12 @@
   - type: Organ
     slotId: pump
   - type: Heart
+  # WOLFGATE(Synthetics) START: the pump processes contaminants such as Letoferol; the chassis filter flushes all else
+  - type: Metabolizer
+    maxReagents: 2
+    groups:
+    - id: WFContaminant
+  # WOLFGATE END
   # The heart 'metabolizes' medicines and poisons that aren't filtered out by other organs.
   # This is done because these chemicals need to have some effect even if they aren't being filtered out of your body.
   # You're technically 'immune to poison' without a heart, but.. uhh, you'll have bigger problems on your hands.

@@ -1,0 +1,26 @@
+# Neuroware sticks as random loot, in maintenance and salvage treasure: mostly blanks, some street copies, now and then
+# a pristine build.
+- type: entityTable
+  id: WFNeurowareStickLoot
+  table: !type:GroupSelector
+    children:
+    - id: WFNeurowareStick
+      weight: 6
+    - !type:GroupSelector
+      weight: 3
+      children:
+      - id: WFNeurowareStickWhitelineCopy
+      - id: WFNeurowareStickNullLoopCopy
+      - id: WFNeurowareStickBurstCopy
+      - id: WFNeurowareStickIdleCopy
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: WFNeurowareStickWhiteline
+      - id: WFNeurowareStickNullLoop
+      - id: WFNeurowareStickBurst
+      - id: WFNeurowareStickRedline
+      - id: WFNeurowareStickDamper
+      - id: WFNeurowareStickChoir
+      - id: WFNeurowareStickHalo
+      - id: WFNeurowareStickIdle

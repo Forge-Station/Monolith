@@ -1,0 +1,16 @@
+// Ghost trails: blends this frame's world with the last trail frame, so anything that moves leaves fading copies.
+// The past frame is sampled a little towards the centre, so old copies drift outwards as they fade.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform sampler2D HISTORY;
+uniform highp float persistence;
+uniform highp float spread;
+
+void fragment() {
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
+    highp vec2 centre = vec2(0.5, 0.5);
+    highp vec2 pastUv = clamp(centre + (uv - centre) * (1.0 - spread), vec2(0.001), vec2(0.999));
+    highp vec3 now = zTextureSpec(SCREEN_TEXTURE, uv).rgb;
+    highp vec3 past = zTextureSpec(HISTORY, pastUv).rgb;
+    COLOR = vec4(mix(now, past, clamp(persistence, 0.0, 0.97)), 1.0);
+}

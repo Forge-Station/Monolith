@@ -14,3 +14,9 @@ wf-synthetic-line-rad-saturated = RAD COLLECTOR FULL
 wf-synthetic-advice-rad-saturated = PULL COLLECTOR TO VENT
 wf-synthetic-line-rad-missing = NO RAD COLLECTOR: CORE EXPOSED
 wf-synthetic-advice-rad-missing = FIT A RADIATION COLLECTOR
+
+metabolism-group-wf-contaminant = Contaminant
+wf-synth-contaminant-1 = Your coolant lines feel thick and sluggish.
+wf-synth-contaminant-2 = Something is growing in your joints.
+wf-synth-contaminant-3 = A diagnostic flags organic matter in the chassis.
+wf-synth-coolant-starving = Hydraulic fluid critical. The core is running dry.

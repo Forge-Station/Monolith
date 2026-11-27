@@ -117,6 +117,10 @@
       - id: BalloonCorgi
       - id: MysteryFigureBox
       - id: RubberChicken
+      # WOLFGATE(WolfChem) START: neuroware sticks turn up in maintenance
+      - !type:NestedSelector
+        tableId: WFNeurowareStickLoot
+      # WOLFGATE END
       # Cult
       - !type:AllSelector
         children:

@@ -28,11 +28,13 @@
   - type: LanguageSpeaker
   - type: LanguageKnowledge
     speaks:
-    - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
+    - TauCetiBasic # WOLFGATE(Species): HardLight's GalacticCommon is TauCetiBasic here
     - Machine
+    - RobotTalk # WOLFGATE(Synthetics): synths and IPCs understand each other
     understands:
     - TauCetiBasic
     - Machine
+    - RobotTalk # WOLFGATE(Synthetics): synths and IPCs understand each other
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/organs.rsi
     state: brain
@@ -54,7 +56,8 @@
 
 - type: entity
   id: OrganSynthEyes
-  parent: BaseSynthOrgan
+  # WOLFGATE(Wolfmed): Wolfmed eyes data, so the organ can be hurt, scanned and treated
+  parent: [BaseSynthOrgan, WFWolfmedOrganEyes]
   name: camera gimbal
   suffix: Synth
   description: "A small mechanical gimbal featuring several multi-spectrum cameras, responsible for Synth vision."
@@ -105,11 +108,15 @@
 
 - type: entity
   id: OrganSynthLungs
-  parent: BaseSynthOrgan
+  # WOLFGATE(Wolfmed): Wolfmed lungs data, so the organ can be hurt, scanned and treated
+  parent: [BaseSynthOrgan, WFWolfmedOrganLungs]
   name: synth lungs
   suffix: Synth
   description: "Synth lungs simulating organic functions for internal cooling. Not very interesting on their own."
   components:
+  # WOLFGATE(Wolfmed): a destroyed synth organ leaves mechanical damage; a chassis part takes no internal bleeding, so the organic wound left nothing
+  - type: WolfmedOrgan
+    destructionWound: IpcMechanicalDamageWound
   - type: Sprite
     state: lungs
   - type: Organ
@@ -136,14 +143,19 @@
     - id: Medicine
     - id: Poison
     - id: Narcotic
+    - id: Cryogenic # WOLFGATE(Feedback): cryoxadone drains from a Synth like it does from a human
 
 - type: entity
   id: OrganSynthStomach
-  parent: BaseSynthOrgan
+  # WOLFGATE(Wolfmed): Wolfmed stomach data, so the organ can be hurt, scanned and treated
+  parent: [BaseSynthOrgan, WFWolfmedOrganStomach]
   name: synth stomach
   suffix: Synth
   description: "A Synth stomach. It can convert minerals to nutriment and nutriment to nanites."
   components:
+  # WOLFGATE(Wolfmed): a destroyed synth organ leaves mechanical damage; a chassis part takes no internal bleeding, so the organic wound left nothing
+  - type: WolfmedOrgan
+    destructionWound: IpcMechanicalDamageWound
   - type: Sprite
     state: stomach
   - type: Organ
@@ -172,11 +184,15 @@
 
 - type: entity
   id: OrganSynthLiver
-  parent: BaseSynthOrgan
+  # WOLFGATE(Wolfmed): Wolfmed liver data, so the organ can be hurt, scanned and treated
+  parent: [BaseSynthOrgan, WFWolfmedOrganLiver]
   name: synth liver
   suffix: Synth
   description: "A Synth liver. It prevents poisoning from alcohol."
   components:
+  # WOLFGATE(Wolfmed): a destroyed synth organ leaves mechanical damage; a chassis part takes no internal bleeding, so the organic wound left nothing
+  - type: WolfmedOrgan
+    destructionWound: IpcMechanicalDamageWound
   - type: Sprite
     state: liver
     scale: 0.8, 0.8
@@ -192,11 +208,15 @@
 
 - type: entity
   id: OrganSynthKidneys
-  parent: BaseSynthOrgan
+  # WOLFGATE(Wolfmed): Wolfmed kidneys data, so the organ can be hurt, scanned and treated
+  parent: [BaseSynthOrgan, WFWolfmedOrganKidneys]
   name: energy coil
   suffix: Synth
   description: "A Synth energy coil. It doesn't seem to do anything interesting yet."
   components:
+  # WOLFGATE(Wolfmed): a destroyed synth organ leaves mechanical damage; a chassis part takes no internal bleeding, so the organic wound left nothing
+  - type: WolfmedOrgan
+    destructionWound: IpcMechanicalDamageWound
   - type: Sprite
     state: kidneys
     scale: 1.1, 1.1

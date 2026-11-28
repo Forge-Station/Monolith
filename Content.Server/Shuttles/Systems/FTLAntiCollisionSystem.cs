@@ -1,4 +1,6 @@
+using System.Linq; // Forge-Change
 using System.Numerics;
+using Content.Server._NF.PublicTransit.Components; // Forge-Change
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Maps;
@@ -76,6 +78,13 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
         // Don't process if this is a linked shuttle (those will be moved with their main shuttle)
         if (TryComp<FTLComponent>(shuttle, out var ftlComp) && ftlComp.LinkedShuttle.HasValue)
             return;
+
+        // Forge-Change-Start
+        if (_dockingSystem.GetDocks(shuttle).Any(dock => dock.Comp is { Docked: true, DockedWith: {} dockedWith } && HasComp<StationTransitComponent>(Transform(dockedWith).GridUid)))
+        {
+            return;
+        }
+        // Forge-Change-End
 
         // Get all docked ships to this shuttle to ignore them in collision checks
         var dockedShips = new HashSet<EntityUid>();

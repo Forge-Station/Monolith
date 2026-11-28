@@ -1,6 +1,11 @@
 ## UI
 
 crew-monitoring-user-interface-title = Консоль мониторинга экипажа
+crew-monitoring-user-interface-crew-tab = Экипаж
+crew-monitoring-user-interface-sos-tab = Сигналы SOS
+crew-monitoring-user-interface-no-sos = Сигналы SOS отсутствуют
+crew-monitoring-user-interface-sos-critical = Критическое
+
 crew-monitoring-user-interface-name = Имя
 crew-monitoring-user-interface-job = Должность
 crew-monitoring-user-interface-status = Статус

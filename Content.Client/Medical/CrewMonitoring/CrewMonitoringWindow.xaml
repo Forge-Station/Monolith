@@ -15,26 +15,53 @@
                     </PanelContainer>
                 </controls:StripeBack>
 
-                <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
-                          PlaceHolder="{Loc crew-monitor-filter-line-placeholder}" />
+                <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True">
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                        <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
+                                  PlaceHolder="{Loc crew-monitor-filter-line-placeholder}" />
 
-                <ScrollContainer Name="SensorScroller"
-                                 VerticalExpand="True"
-                                 SetWidth="520"
-                                 Margin="8, 8, 8, 8">
-                    <BoxContainer Name="SensorsTable"
-                                   Orientation="Vertical"
-                                   HorizontalExpand="True"
-                                   Margin="0 0 10 0">
-                        <!-- Table rows are filled by code -->
+                        <ScrollContainer Name="SensorScroller"
+                                         SetWidth="520"
+                                         VerticalExpand="True"
+                                         HorizontalExpand="True"
+                                         Margin="8, 8, 8, 8">
+                            <BoxContainer Name="SensorsTable"
+                                           Orientation="Vertical"
+                                           HorizontalExpand="True"
+                                           Margin="0 0 10 0">
+                                <!-- Table rows are filled by code -->
+                            </BoxContainer>
+                            <Label Name="NoServerLabel"
+                                   Text="{Loc 'crew-monitoring-user-interface-no-server'}"
+                                   StyleClasses="LabelHeading"
+                                   FontColorOverride="Red"
+                                   HorizontalAlignment="Center"
+                                   Visible="false"/>
+                        </ScrollContainer>
                     </BoxContainer>
-                    <Label  Name="NoServerLabel"
-                            Text="{Loc 'crew-monitoring-user-interface-no-server'}"
-                            StyleClasses="LabelHeading"
-                            FontColorOverride="Red"
-                            HorizontalAlignment="Center"
-                            Visible="false"/>
-                </ScrollContainer>
+
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+                        <LineEdit Name="SosSearchLineEdit"
+                                  HorizontalExpand="True"
+                                  PlaceHolder="{Loc crew-monitor-filter-line-placeholder}" />
+
+                        <ScrollContainer Name="SosScroller"
+                                         SetWidth="520"
+                                         VerticalExpand="True"
+                                         HorizontalExpand="True"
+                                         Margin="8, 8, 8, 8">
+                            <BoxContainer Name="SosTable"
+                                          Orientation="Vertical"
+                                          VerticalExpand="True"
+                                          HorizontalExpand="True"/>
+                            <Label Name="NoSosLabel"
+                                   Text="{Loc 'crew-monitoring-user-interface-no-sos'}"
+                                   StyleClasses="LabelHeading"
+                                   HorizontalAlignment="Center"
+                                   Visible="false"/>
+                        </ScrollContainer>
+                    </BoxContainer>
+                </TabContainer>
             </BoxContainer>
         </BoxContainer>
 

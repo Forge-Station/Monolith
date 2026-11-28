@@ -42,6 +42,7 @@ public sealed class CrewMonitoringBoundUserInterface : BoundUserInterface
             case CrewMonitoringState st:
                 EntMan.TryGetComponent<TransformComponent>(Owner, out var xform);
                 _menu?.ShowSensors(st.Sensors, Owner, xform?.Coordinates);
+                _menu?.ShowSosSignals(st.SosSignals); /// Forge-Change
                 break;
         }
     }

@@ -43,6 +43,7 @@ using Content.Shared.Roles;
 using Robust.Shared.Map.Components;
 using Content.Server._Forge.ReviveReward; // Forge-change: medical update is real??
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Medical.CrewMonitoring;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -287,13 +288,26 @@ namespace Content.Server.Explosion.EntitySystems
                         {
                             var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
                             _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
+                            /// Forge-Change-Start
+                            if (mobstate.PreviousState != MobState.Dead)
+                                RaiseLocalEvent(new CrewMonitoringSosEvent(
+                                    MetaData(implanted.ImplantedEntity.Value).EntityName,
+                                    MobState.Critical,
+                                    x,
+                                    y));
                             break;
+                            /// Forge-Change-End
                         }
                     case MobState.Dead:
                         {
                             _radioSystem.SendRadioMessage(uid, deathMessage, radioChannel, uid, null, language);
-
                             // Forge-change-start
+                            RaiseLocalEvent(new CrewMonitoringSosEvent(
+                                MetaData(implanted.ImplantedEntity.Value).EntityName,
+                                MobState.Dead,
+                                x,
+                                y));
+
                             if (TryComp<ReviveRewardComponent>(uid, out var reviveReward))
                             {
                                 reviveReward.Death = true;

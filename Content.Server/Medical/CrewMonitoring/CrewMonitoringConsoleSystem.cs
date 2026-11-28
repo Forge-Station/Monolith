@@ -23,12 +23,14 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
     private void OnRemove(EntityUid uid, CrewMonitoringConsoleComponent component, ComponentRemove args)
     {
         component.ConnectedSensors.Clear();
+        component.SosSignals.Clear(); /// Forge-Change
     }
 
     [SubscribeLocalEvent]
     private void OnSuitSensorBroadcast(Entity<CrewMonitoringConsoleComponent> ent, ref DeviceNetworkPacketEvent<BroadcastSuitSensorStatePayload> args)
     {
         ent.Comp.ConnectedSensors = args.Data.SensorStatus;
+        ent.Comp.SosSignals = args.Data.SosSignals; /// Forge-Change
         UpdateUserInterface(ent, ent.Comp);
     }
 
@@ -56,6 +58,6 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
 
         // Update all sensors info
         var allSensors = component.ConnectedSensors.Values.ToList();
-        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors));
+        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors, component.SosSignals.ToList())); /// Forge-Change
     }
 }

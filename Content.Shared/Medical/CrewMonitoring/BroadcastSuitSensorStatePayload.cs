@@ -10,4 +10,9 @@ public partial record struct BroadcastSuitSensorStatePayload : INetworkPayload
 {
     [DataField]
     public Dictionary<DeviceAddress, SuitSensorStatus> SensorStatus = new();
+    /// Forge-Change-Start
+
+    [DataField]
+    public List<CrewMonitoringSosSignal> SosSignals = new();
+    /// Forge-Change-End
 }

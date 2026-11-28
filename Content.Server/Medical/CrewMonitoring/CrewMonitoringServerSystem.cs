@@ -21,6 +21,7 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<CrewMonitoringServerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CrewMonitoringServerComponent, DeviceNetServerDisconnectedEvent>(OnDisconnected);
+        SubscribeLocalEvent<CrewMonitoringSosEvent>(OnSosSignal); /// Forge-Change
     }
 
     public override void Update(float frameTime)
@@ -65,6 +66,22 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         sensorData.Timestamp = _gameTiming.CurTime;
         ent.Comp.SensorStatus[args.SenderAddress] = sensorData;
     }
+    /// Forge-Change-Start
+
+    private void OnSosSignal(CrewMonitoringSosEvent args)
+    {
+        var servers = EntityQueryEnumerator<CrewMonitoringServerComponent>();
+        while (servers.MoveNext(out _, out var component))
+        {
+            component.SosSignals.Add(new CrewMonitoringSosSignal(
+                args.Name,
+                args.Status,
+                _gameTiming.CurTime,
+                args.X,
+                args.Y));
+        }
+    }
+    /// Forge-Change-End
 
     /// <summary>
     /// Clears the servers sensor status list
@@ -72,6 +89,7 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
     private void OnRemove(EntityUid uid, CrewMonitoringServerComponent component, ComponentRemove args)
     {
         component.SensorStatus.Clear();
+        component.SosSignals.Clear(); /// Forge-Change
     }
 
     /// <summary>
@@ -101,6 +119,7 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         var payload = new BroadcastSuitSensorStatePayload
         {
             SensorStatus = serverComponent.SensorStatus,
+            SosSignals = serverComponent.SosSignals, /// Forge-Change
         };
 
         _deviceNetworkSystem.SendPacket((uid, device), null, ref payload);

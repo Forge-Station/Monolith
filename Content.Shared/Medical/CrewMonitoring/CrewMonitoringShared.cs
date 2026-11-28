@@ -1,4 +1,5 @@
 using Content.Shared.Medical.SuitSensors;
+using Content.Shared.Mobs;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Medical.CrewMonitoring;
@@ -22,25 +23,31 @@ public sealed class CrewMonitoringState : BoundUserInterfaceState
     }
 }
 
+/// Forge-change-Start
 [Serializable, NetSerializable]
 public sealed class CrewMonitoringSosSignal
 {
-    public string Message;
+    public string Name;
+    public MobState Status;
     public TimeSpan Timestamp;
 
-    public CrewMonitoringSosSignal(string message, TimeSpan timestamp)
+    public CrewMonitoringSosSignal(string name, MobState status, TimeSpan timestamp)
     {
-        Message = message;
+        Name = name;
+        Status = status;
         Timestamp = timestamp;
     }
 }
 
 public sealed class CrewMonitoringSosEvent : EntityEventArgs
 {
-    public string Message { get; }
+    public string Name { get; }
+    public MobState Status { get; }
 
-    public CrewMonitoringSosEvent(string message)
+    public CrewMonitoringSosEvent(string name, MobState status)
     {
-        Message = message;
+        Name = name;
+        Status = status;
     }
 }
+/// Forge-Change-End

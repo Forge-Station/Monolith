@@ -1,6 +1,6 @@
 using Content.Shared.DeviceNetwork;
-using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Medical.CrewMonitoring;
+using Content.Shared.Medical.SuitSensors;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -17,7 +17,7 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     public Dictionary<DeviceAddress, SuitSensorStatus> ConnectedSensors = new();
 
     /// <summary>
-    ///     SOS signals received by this console during the current round.
+    ///     Latest SOS signals received from the crew monitoring server.
     /// </summary>
     public List<CrewMonitoringSosSignal> SosSignals = new();
 

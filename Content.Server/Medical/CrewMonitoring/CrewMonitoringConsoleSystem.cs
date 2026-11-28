@@ -5,7 +5,6 @@ using Content.Shared.Medical.CrewMonitoring;
 using Content.Shared.Pinpointer;
 using Content.Shared.PowerCell;
 using Robust.Server.GameObjects;
-using Robust.Shared.Timing;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -13,25 +12,25 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
 {
     [Dependency] private PowerCellSystem _cell = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, BoundUIOpenedEvent>(OnUIOpened);
-        SubscribeLocalEvent<CrewMonitoringSosEvent>(OnSosSignal);
     }
 
     private void OnRemove(EntityUid uid, CrewMonitoringConsoleComponent component, ComponentRemove args)
     {
         component.ConnectedSensors.Clear();
+        component.SosSignals.Clear(); /// Forge-Change
     }
 
     [SubscribeLocalEvent]
     private void OnSuitSensorBroadcast(Entity<CrewMonitoringConsoleComponent> ent, ref DeviceNetworkPacketEvent<BroadcastSuitSensorStatePayload> args)
     {
         ent.Comp.ConnectedSensors = args.Data.SensorStatus;
+        ent.Comp.SosSignals = args.Data.SosSignals; /// Forge-Change
         UpdateUserInterface(ent, ent.Comp);
     }
 
@@ -41,16 +40,6 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
             return;
 
         UpdateUserInterface(uid, component);
-    }
-
-    private void OnSosSignal(CrewMonitoringSosEvent args)
-    {
-        var consoles = EntityQueryEnumerator<CrewMonitoringConsoleComponent>();
-        while (consoles.MoveNext(out var uid, out var component))
-        {
-            component.SosSignals.Add(new CrewMonitoringSosSignal(args.Message, _gameTiming.CurTime));
-            UpdateUserInterface(uid, component);
-        }
     }
 
     private void UpdateUserInterface(EntityUid uid, CrewMonitoringConsoleComponent? component = null)

@@ -21,6 +21,7 @@
                                   PlaceHolder="{Loc crew-monitor-filter-line-placeholder}" />
 
                         <ScrollContainer Name="SensorScroller"
+                                         SetWidth="520"
                                          VerticalExpand="True"
                                          HorizontalExpand="True"
                                          Margin="8, 8, 8, 8">
@@ -40,14 +41,15 @@
                     </BoxContainer>
 
                     <ScrollContainer Name="SosScroller"
+                                     SetWidth="520"
                                      VerticalExpand="True"
                                      HorizontalExpand="True"
-                                     Margin="8">
+                                     Margin="8, 8, 8, 8">
                         <BoxContainer Name="SosTable"
                                       Orientation="Vertical"
                                       VerticalExpand="True"
                                       HorizontalExpand="True"
-                                      Margin="5"/>
+                                      Margin="0 0 10 0"/>
                         <Label Name="NoSosLabel"
                                Text="{Loc 'crew-monitoring-user-interface-no-sos'}"
                                StyleClasses="LabelHeading"

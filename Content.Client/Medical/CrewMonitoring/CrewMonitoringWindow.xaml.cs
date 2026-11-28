@@ -33,6 +33,7 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
     private NetEntity? _trackedEntity;
     private bool _tryToScrollToListFocus;
     private Texture? _blipTexture;
+    private List<CrewMonitoringSosSignal> _sosSignals = new(); /// Forge-Change
 
     public CrewMonitoringWindow()
     {
@@ -43,13 +44,14 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         _spriteSystem = _entManager.System<SpriteSystem>();
 
         NavMap.TrackedEntitySelectedAction += SetTrackedEntityFromNavMap;
+        SosSearchLineEdit.OnTextChanged += _ => ShowSosSignals(_sosSignals); /// Forge-Change
     }
 
     public void Set(string stationName, EntityUid? mapUid)
     {
         _blipTexture = _spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/NavMap/beveled_circle.png")));
-        Tabs.SetTabTitle(0, Loc.GetString("crew-monitoring-user-interface-crew-tab"));
-        Tabs.SetTabTitle(1, Loc.GetString("crew-monitoring-user-interface-sos-tab"));
+        Tabs.SetTabTitle(0, Loc.GetString("crew-monitoring-user-interface-crew-tab")); /// Forge-Change
+        Tabs.SetTabTitle(1, Loc.GetString("crew-monitoring-user-interface-sos-tab")); /// Forge-Change
 
         if (_entManager.TryGetComponent<TransformComponent>(mapUid, out var xform))
             NavMap.MapUid = xform.GridUid;
@@ -158,36 +160,72 @@ public sealed partial class CrewMonitoringWindow : FancyWindow
         }
     }
 
+    /// Forge-Change-Start
     public void ShowSosSignals(List<CrewMonitoringSosSignal> signals)
     {
+        _sosSignals = signals;
         SosTable.RemoveAllChildren();
-        NoSosLabel.Visible = signals.Count == 0;
+        var searchText = SosSearchLineEdit.Text.Trim();
+        var matchingSignals = signals.Where(signal =>
+            string.IsNullOrEmpty(searchText)
+            || signal.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase)
+            || GetSosStatusText(signal).Contains(searchText, StringComparison.CurrentCultureIgnoreCase)
+            || signal.X.ToString().Contains(searchText, StringComparison.CurrentCultureIgnoreCase)
+            || signal.Y.ToString().Contains(searchText, StringComparison.CurrentCultureIgnoreCase));
 
-        foreach (var signal in signals.OrderByDescending(signal => signal.Timestamp))
+        var orderedSignals = matchingSignals.OrderByDescending(signal => signal.Timestamp).ToList();
+        NoSosLabel.Visible = orderedSignals.Count == 0;
+
+        foreach (var signal in orderedSignals)
         {
-            /// Forge-change-Start
-            var status = signal.Status switch
-            {
-                MobState.Critical => Loc.GetString("health-analyzer-window-entity-critical-text"),
-                MobState.Dead => Loc.GetString("health-analyzer-window-entity-dead-text"),
-                _ => signal.Status.ToString(),
-            };
+            var status = GetSosStatusText(signal);
 
-            /// Forge-change-End
-            var message = new Label
+            var row = new BoxContainer
             {
-                /// Forge-Change-Start
-                Text = $"{signal.Timestamp.ToString(@"hh\:mm\:ss")}  {signal.Name}: {status}",
-                /// Forge-change-End
+                Orientation = LayoutOrientation.Horizontal,
                 HorizontalExpand = true,
-                ClipText = true,
                 Margin = new Thickness(5),
             };
 
-            SosTable.AddChild(message);
+            row.AddChild(new Label
+            {
+                Text = $"{signal.Timestamp.ToString(@"hh\:mm\:ss")}     {signal.Name}",
+                SizeFlagsStretchRatio = 2,
+                HorizontalExpand = true,
+                ClipText = true,
+            });
+
+            row.AddChild(new Label
+            {
+                Text = status,
+                SizeFlagsStretchRatio = 1,
+                HorizontalExpand = true,
+                ClipText = true,
+            });
+
+            row.AddChild(new Label
+            {
+                Text = $"{signal.X} {signal.Y}",
+                SizeFlagsStretchRatio = 1,
+                HorizontalExpand = true,
+                ClipText = true,
+            });
+
+            SosTable.AddChild(row);
         }
     }
 
+    private static string GetSosStatusText(CrewMonitoringSosSignal signal)
+    {
+        return signal.Status switch
+        {
+            MobState.Critical => Loc.GetString("crew-monitoring-user-interface-sos-critical"),
+            MobState.Dead => Loc.GetString("health-analyzer-window-entity-dead-text"),
+            _ => signal.Status.ToString(),
+        };
+    }
+
+    /// Forge-change-End
     private void PopulateDepartmentList(IEnumerable<SuitSensorStatus> departmentSensors)
     {
         // Populate departments

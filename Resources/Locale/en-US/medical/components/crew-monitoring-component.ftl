@@ -4,6 +4,7 @@ crew-monitoring-user-interface-title = Crew Monitoring Console
 crew-monitoring-user-interface-crew-tab = Crew
 crew-monitoring-user-interface-sos-tab = SOS signals
 crew-monitoring-user-interface-no-sos = No SOS signals received
+crew-monitoring-user-interface-sos-critical = Critical
 
 crew-monitor-filter-line-placeholder = Filter
 

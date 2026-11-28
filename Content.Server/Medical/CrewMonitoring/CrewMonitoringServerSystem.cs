@@ -73,7 +73,12 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         var servers = EntityQueryEnumerator<CrewMonitoringServerComponent>();
         while (servers.MoveNext(out _, out var component))
         {
-            component.SosSignals.Add(new CrewMonitoringSosSignal(args.Name, args.Status, _gameTiming.CurTime));
+            component.SosSignals.Add(new CrewMonitoringSosSignal(
+                args.Name,
+                args.Status,
+                _gameTiming.CurTime,
+                args.X,
+                args.Y));
         }
     }
     /// Forge-Change-End

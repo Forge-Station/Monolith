@@ -288,11 +288,13 @@ namespace Content.Server.Explosion.EntitySystems
                         {
                             var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
                             _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
-                            if (mobstate.PreviousState != MobState.Dead)
                             /// Forge-Change-Start
+                            if (mobstate.PreviousState != MobState.Dead)
                                 RaiseLocalEvent(new CrewMonitoringSosEvent(
                                     MetaData(implanted.ImplantedEntity.Value).EntityName,
-                                    MobState.Critical));
+                                    MobState.Critical,
+                                    x,
+                                    y));
                             break;
                             /// Forge-Change-End
                         }
@@ -302,7 +304,9 @@ namespace Content.Server.Explosion.EntitySystems
                             // Forge-change-start
                             RaiseLocalEvent(new CrewMonitoringSosEvent(
                                 MetaData(implanted.ImplantedEntity.Value).EntityName,
-                                MobState.Dead));
+                                MobState.Dead,
+                                x,
+                                y));
 
                             if (TryComp<ReviveRewardComponent>(uid, out var reviveReward))
                             {

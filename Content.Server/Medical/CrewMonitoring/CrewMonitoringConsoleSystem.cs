@@ -58,6 +58,6 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
 
         // Update all sensors info
         var allSensors = component.ConnectedSensors.Values.ToList();
-        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors, component.SosSignals.ToList()));
+        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors, component.SosSignals.ToList())); /// Forge-Change
     }
 }
